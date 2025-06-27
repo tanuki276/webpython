@@ -1,63 +1,145 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8" />
-  <title>重大な欠陥を発見</title>
-  <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      background: #111;
-      color: #eee;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      user-select: none;
-    }
-    .container {
-      font-size: 1.8rem;
-      line-height: 2.2rem;
-    }
-    .status, .wait {
-      margin: 0.5em 0;
-    }
-    .time {
-      font-weight: bold;
-      font-size: 2rem;
-      margin-top: 1em;
-      letter-spacing: 0.1em;
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <div class="status" id="status">現在<span id="statusText">〇〇</span>です。</div>
-    <div class="wait">しばらくお待ち下さい。</div>
-    <div class="time">予定時間　<span id="scheduledTime">〇〇:〇〇</span></div>
-    <div class="time">現在時刻　<span id="currentTime">--:--:--</span></div>
-  </div>
+<!DOCTYPE html>  <html lang="ja">  
+<head>  
+  <meta charset="UTF-8" />  
+  <meta name="viewport" content="width=device-width, initial-scale=1" />  
+  <title>BrawlChara API - ドキュメント</title>  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />  
+  <style>  
+    body {  
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;  
+      line-height: 1.8;  
+      margin: 20px;  
+      background-color: #f9fafb;  
+      color: #222;  
+    }  
+    .container {  
+      max-width: 900px;  
+      margin: 0 auto;  
+      background: #fff;  
+      padding: 30px;  
+      border-radius: 12px;  
+      box-shadow: 0 4px 15px rgba(0,0,0,0.07);  
+    }  
+    h1, h2 {  
+      color: #1e3a8a;  
+      border-bottom: 2px solid #e5e7eb;  
+      padding-bottom: 10px;  
+      margin-top: 30px;  
+    }  
+    code {  
+      background-color: #f3f4f6;  
+      padding: 4px 6px;  
+      border-radius: 6px;  
+      font-family: 'Consolas', 'Monaco', monospace;  
+      font-size: 0.95em;  
+      color: #111827;  
+    }  
+    pre {  
+      background-color: #f3f4f6;  
+      color: #111827;  
+      padding: 18px;  
+      border-radius: 8px;  
+      overflow-x: auto;  
+      font-size: 0.95em;  
+      font-family: 'Consolas', 'Monaco', monospace;  
+      position: relative;  
+      margin-top: 1em;  
+      border: 1px solid #d1d5db;  
+    }  
+    .copy-btn {  
+      position: absolute;  
+      top: 10px;  
+      right: 10px;  
+      background: #3b82f6;  
+      border: none;  
+      color: white;  
+      padding: 5px 12px;  
+      font-size: 0.85em;  
+      border-radius: 6px;  
+      cursor: pointer;  
+      transition: background-color 0.2s ease;  
+    }  
+    .copy-btn:hover {  
+      background-color: #2563eb;  
+    }  
+    .copy-btn.copied {  
+      background-color: #10b981;  
+    }  
+    a {  
+      color: #2563eb;  
+      text-decoration: none;  
+    }  
+    a:hover {  
+      text-decoration: underline;  
+    }  
+    .note {  
+      background-color: #fef9c3;  
+      border-left: 5px solid #facc15;  
+      padding: 12px 18px;  
+      margin: 20px 0;  
+      border-radius: 6px;  
+      color: #92400e;  
+    }  
+  </style>  
+</head>  
+<body>  
+  <div class="container">  
+    <h1><i class="fa-solid fa-puzzle-piece"></i> BrawlStars Character API - ドキュメントbeta</h1>  <h2><i class="fa-solid fa-book"></i> エンドポイント：ランダムキャラクター取得</h2>  
+<p><strong>GET</strong> <code>/api/character/random</code></p>  
 
-  <script>
-    // 変更部分
-    const statusText = "コードを復元";  // 〇〇中ですの部分
-    const scheduledTime = "不明";      // 時間帰るとこ
+<h2><i class="fa-solid fa-lock"></i> 認証</h2>  
+<p>このエンドポイントには <strong>トークンが必須</strong> です。<br>  
+  トークンは <a href="https://brawl-chara-beta.vercel.app/" target="_blank" rel="noopener noreferrer">ベータ版サイト</a> にて取得してください。</p>  
 
-    // 初期セット
-    document.getElementById('statusText').textContent = statusText + "中";
-    document.getElementById('scheduledTime').textContent = scheduledTime;
+<h2><i class="fa-solid fa-receipt"></i> パラメータ</h2>  
+<p>このAPIはトークン以外のパラメータは不要です。</p>  
+<table>  
+  <thead>  
+    <tr>  
+      <th>パラメータ</th>  
+      <th>必須</th>  
+      <th>説明</th>  
+      <th>例</th>  
+    </tr>  
+  </thead>  
+  <tbody>  
+    <tr><td><code>token</code></td><td>✅</td><td>認証用JWT</td><td><code>eyJhbGciOiJIUzI1Ni...</code></td></tr>  
+  </tbody>  
+</table>  
 
-    // 現在時刻をリアルタイム更新
-    function updateTime() {
-      const now = new Date();
-      const h = now.getHours().toString().padStart(2, '0');
-      const m = now.getMinutes().toString().padStart(2, '0');
-      const s = now.getSeconds().toString().padStart(2, '0');
-      document.getElementById('currentTime').textContent = `${h}:${m}:${s}`;
-    }
-    setInterval(updateTime, 1000);
-    updateTime();
-  </script>
-</body>
+<h2><i class="fa-solid fa-download"></i> リクエスト例</h2>  
+<pre><code>GET /api/character?token=あなたのトークン
+
+Host: brawl-chara-beta.vercel.app</code><button class="copy-btn">コピー</button></pre>
+
+<pre><code>https://brawl-chara-beta.vercel.app/api/character?token=あなたのトークン</code><button class="copy-btn">コピー</button></pre>  
+
+<h2><i class="fa-solid fa-upload"></i> レスポンス形式</h2>  
+<p>ランダムに取得した単一キャラクター情報：</p>  
+<pre><code>{
+
+"name": "キャラクター名",
+"rarity": "レア度",
+"role": "タイプ"
+}</code><button class="copy-btn">コピー</button></pre>
+
+<div class="note">  
+  <strong>注意:</strong> トークンは必ず有効なものを使用してください。  
+</div>
+
+  </div>    <script>  
+    document.querySelectorAll('.copy-btn').forEach(button => {  
+      button.addEventListener('click', () => {  
+        const code = button.previousElementSibling.innerText;  
+        navigator.clipboard.writeText(code).then(() => {  
+          button.classList.add('copied');  
+          button.textContent = 'コピー済み';  
+          setTimeout(() => {  
+            button.classList.remove('copied');  
+            button.textContent = 'コピー';  
+          }, 1500);  
+        });  
+      });  
+    });  
+  </script>  </body>  
 </html>
