@@ -1,145 +1,88 @@
-<!DOCTYPE html>  <html lang="ja">  
-<head>  
-  <meta charset="UTF-8" />  
-  <meta name="viewport" content="width=device-width, initial-scale=1" />  
-  <title>BrawlChara API - ドキュメント</title>  
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />  
-  <style>  
-    body {  
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;  
-      line-height: 1.8;  
-      margin: 20px;  
-      background-color: #f9fafb;  
-      color: #222;  
-    }  
-    .container {  
-      max-width: 900px;  
-      margin: 0 auto;  
-      background: #fff;  
-      padding: 30px;  
-      border-radius: 12px;  
-      box-shadow: 0 4px 15px rgba(0,0,0,0.07);  
-    }  
-    h1, h2 {  
-      color: #1e3a8a;  
-      border-bottom: 2px solid #e5e7eb;  
-      padding-bottom: 10px;  
-      margin-top: 30px;  
-    }  
-    code {  
-      background-color: #f3f4f6;  
-      padding: 4px 6px;  
-      border-radius: 6px;  
-      font-family: 'Consolas', 'Monaco', monospace;  
-      font-size: 0.95em;  
-      color: #111827;  
-    }  
-    pre {  
-      background-color: #f3f4f6;  
-      color: #111827;  
-      padding: 18px;  
-      border-radius: 8px;  
-      overflow-x: auto;  
-      font-size: 0.95em;  
-      font-family: 'Consolas', 'Monaco', monospace;  
-      position: relative;  
-      margin-top: 1em;  
-      border: 1px solid #d1d5db;  
-    }  
-    .copy-btn {  
-      position: absolute;  
-      top: 10px;  
-      right: 10px;  
-      background: #3b82f6;  
-      border: none;  
-      color: white;  
-      padding: 5px 12px;  
-      font-size: 0.85em;  
-      border-radius: 6px;  
-      cursor: pointer;  
-      transition: background-color 0.2s ease;  
-    }  
-    .copy-btn:hover {  
-      background-color: #2563eb;  
-    }  
-    .copy-btn.copied {  
-      background-color: #10b981;  
-    }  
-    a {  
-      color: #2563eb;  
-      text-decoration: none;  
-    }  
-    a:hover {  
-      text-decoration: underline;  
-    }  
-    .note {  
-      background-color: #fef9c3;  
-      border-left: 5px solid #facc15;  
-      padding: 12px 18px;  
-      margin: 20px 0;  
-      border-radius: 6px;  
-      color: #92400e;  
-    }  
-  </style>  
-</head>  
-<body>  
-  <div class="container">  
-    <h1><i class="fa-solid fa-puzzle-piece"></i> BrawlStars Character API - ドキュメントbeta</h1>  <h2><i class="fa-solid fa-book"></i> エンドポイント：ランダムキャラクター取得</h2>  
-<p><strong>GET</strong> <code>/api/character/random</code></p>  
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LAWE</title>
+    <style>
+        /* ブロスタ風のカラースキームとフォント設定 */
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700;900&display=swap'); /* 太字のフォントをインポート */
 
-<h2><i class="fa-solid fa-lock"></i> 認証</h2>  
-<p>このエンドポイントには <strong>トークンが必須</strong> です。<br>  
-  トークンは <a href="https://brawl-chara-beta.vercel.app/" target="_blank" rel="noopener noreferrer">ベータ版サイト</a> にて取得してください。</p>  
+        body {
+            font-family: 'Roboto', Arial, sans-serif; /* ブロスタっぽい太字フォント */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #2e1d53; /* 暗めの紫の背景 */
+            text-align: center;
+            color: white;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .container {
+            background: linear-gradient(145deg, #6c3dbf, #4a288c); /* グラデーションの背景 */
+            padding: 40px 60px;
+            border-radius: 25px; /* 大きな角丸 */
+            border: 8px solid #ffde00; /* 派手な黄色の枠 */
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5), inset 0 0 15px rgba(255, 255, 255, 0.5); /* 影と内側の光 */
+            max-width: 400px;
+            width: 90%;
+            transform: rotate(-2deg); /* 少し傾けてゲーム感UP */
+        }
+        h1 {
+            color: #ffde00; /* 明るい黄色 */
+            font-size: 2.5em;
+            text-shadow: 3px 3px 0 #5f3299; /* 濃い影 */
+            margin-bottom: 5px;
+            line-height: 1.1;
+        }
+        .fictional-note {
+            color: #cccccc;
+            font-size: 0.8em;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+        .call-to-action {
+            margin: 25px 0;
+            font-size: 1.3em;
+            font-weight: 900;
+            color: #ffe566;
+            text-shadow: 2px 2px 0 #2e1d53;
+        }
+        .login-button {
+            /* ブロスタの特徴的なボタンデザイン */
+            padding: 15px 50px;
+            font-size: 1.4em;
+            font-weight: 900;
+            color: white;
+            background: linear-gradient(to bottom, #ff7f00, #ff4500); /* オレンジのグラデーション */
+            border: 5px solid #ffa500; /* 明るいオレンジの枠 */
+            border-radius: 15px;
+            cursor: pointer;
+            box-shadow: 0 6px 0 #993000, 0 10px 15px rgba(0, 0, 0, 0.4);
+            transition: all 0.1s;
+            text-transform: uppercase;
+        }
+        /* クリック時のへこみ表現 */
+        .login-button:active {
+            box-shadow: 0 2px 0 #993000, 0 5px 10px rgba(0, 0, 0, 0.4);
+            transform: translateY(4px);
+        }
+    </style>
+</head>
+<body>
 
-<h2><i class="fa-solid fa-receipt"></i> パラメータ</h2>  
-<p>このAPIはトークン以外のパラメータは不要です。</p>  
-<table>  
-  <thead>  
-    <tr>  
-      <th>パラメータ</th>  
-      <th>必須</th>  
-      <th>説明</th>  
-      <th>例</th>  
-    </tr>  
-  </thead>  
-  <tbody>  
-    <tr><td><code>token</code></td><td>✅</td><td>認証用JWT</td><td><code>eyJhbGciOiJIUzI1Ni...</code></td></tr>  
-  </tbody>  
-</table>  
+    <div class="container">
+        <h1>LAWE</h1>
+        <p class="fictional-note">Ce site est fictif.</p>
+        
+        <p class="call-to-action">メカエドガーを入手するには下のボタンを押してログインしてください</p>
+        
+        <button class="login-button" onclick="window.location.href='https://link.brawlstars.com/de?action=voucher&code=b647c71d-41a5-42c4-a10f-8d47952d82f3'">ログイン</button>
+    </div>
 
-<h2><i class="fa-solid fa-download"></i> リクエスト例</h2>  
-<pre><code>GET /api/character?token=あなたのトークン
-
-Host: brawl-chara-beta.vercel.app</code><button class="copy-btn">コピー</button></pre>
-
-<pre><code>https://brawl-chara-beta.vercel.app/api/character?token=あなたのトークン</code><button class="copy-btn">コピー</button></pre>  
-
-<h2><i class="fa-solid fa-upload"></i> レスポンス形式</h2>  
-<p>ランダムに取得した単一キャラクター情報：</p>  
-<pre><code>{
-
-"name": "キャラクター名",
-"rarity": "レア度",
-"role": "タイプ"
-}</code><button class="copy-btn">コピー</button></pre>
-
-<div class="note">  
-  <strong>注意:</strong> トークンは必ず有効なものを使用してください。  
-</div>
-
-  </div>    <script>  
-    document.querySelectorAll('.copy-btn').forEach(button => {  
-      button.addEventListener('click', () => {  
-        const code = button.previousElementSibling.innerText;  
-        navigator.clipboard.writeText(code).then(() => {  
-          button.classList.add('copied');  
-          button.textContent = 'コピー済み';  
-          setTimeout(() => {  
-            button.classList.remove('copied');  
-            button.textContent = 'コピー';  
-          }, 1500);  
-        });  
-      });  
-    });  
-  </script>  </body>  
+</body>
 </html>
