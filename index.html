@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="ja">
+<!DOCTYPE html><html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +7,7 @@
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
-            padding: 20px;
+            padding: 20px 20px 80px 20px; 
             background-color: #f4f4f9;
             color: #333;
             text-align: center;
@@ -22,38 +21,64 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
         h1 {
-            color: #006400; /* 深緑 */
+            color: #006400;
             border-bottom: 2px solid #eee;
             padding-bottom: 10px;
             margin-bottom: 20px;
         }
         #title {
             font-size: 1.8em;
-            color: #007bff; /* 青 */
+            color: #007bff;
             margin-bottom: 15px;
         }
         #summary {
             text-align: left;
             font-size: 1.1em;
             line-height: 1.6;
-            min-height: 100px; /* ロード中に空白になりすぎないように */
+            min-height: 100px;
         }
-        button {
-            background-color: #28a745; /* 緑 */
-            color: white;
+        .fixed-footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #ffffff;
+            padding: 10px 0;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        .footer-button {
             border: none;
             padding: 10px 20px;
             text-align: center;
-            text-decoration: none;
-            display: inline-block;
             font-size: 16px;
-            margin-top: 20px;
             cursor: pointer;
             border-radius: 5px;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, opacity 0.3s ease;
+            max-width: 150px;
+            flex-grow: 1;
         }
-        button:hover {
+        #retryButton {
+            background-color: #28a745; 
+            color: white;
+        }
+        #retryButton:hover {
             background-color: #218838;
+        }
+        .length-button {
+            background-color: #e9ecef;
+            color: #333;
+        }
+        .length-button:hover {
+            background-color: #dee2e6;
+        }
+        .length-button.active {
+            background-color: #007bff;
+            color: white;
+            font-weight: bold;
         }
         .error {
             color: red;
@@ -66,75 +91,81 @@
         <h1>イタリア統一運動</h1>
         <h2 id="title">読み込んでいます...</h2>
         <div id="summary"></div>
-        <button onclick="fetchRandomArticle()">やり直し</button>
-    </div>
+    </div><div class="fixed-footer">
+    <button id="shortLength" class="footer-button length-button active" onclick="setLength('short')">短く </button>
+    <button id="longLength" class="footer-button length-button" onclick="setLength('long')">長く </button>
+    <button id="retryButton" class="footer-button" onclick="fetchRandomArticle()">やり直し</button>
+</div>
 
-    <script>
-        const API_URL = "https://ja.wikipedia.org/w/api.php";
+<script>
+    const API_URL = "https://ja.wikipedia.org/w/api.php";
+    let currentLength = 'short';
+    const LENGTH_MAP = {
+        'short': 300,
+        'long': 800
+    };
 
-        /**
-         * ランダムな記事のタイトルと導入部を取得し、ページに表示する関数
-         */
-        async function fetchRandomArticle() {
-            const titleElement = document.getElementById('title');
-            const summaryElement = document.getElementById('summary');
+    function setLength(length) {
+        if (currentLength === length) return;
+        currentLength = length;
+        document.getElementById('shortLength').classList.remove('active');
+        document.getElementById('longLength').classList.remove('active');
+        document.getElementById(length + 'Length').classList.add('active');
+        fetchRandomArticle(); 
+    }
 
-            // ロード中の表示
-            titleElement.textContent = "取得中...";
-            summaryElement.textContent = "少々お待ちください...";
-            summaryElement.classList.remove('error'); // エラー表示をリセット
+    async function fetchRandomArticle() {
+        const titleElement = document.getElementById('title');
+        const summaryElement = document.getElementById('summary');
 
-            // Wikipedia APIのパラメータ
-            const params = {
-                action: "query",
-                format: "json",
-                // Randomモジュールでランダムな記事を1つ取得 (ns=0は通常記事)
-                generator: "random", 
-                grnnamespace: 0,
-                grnlimit: 1,
-                // Extractモジュールで記事のテキストを取得
-                prop: "extracts",
-                exchars: 500, // 最初の500文字程度
-                exintro: true, // 導入部のみ
-                explaintext: true, // HTMLタグを除去しプレーンテキストとして取得
-                // CORS対応のため必須
-                origin: "*" 
-            };
+        titleElement.textContent = "取得中...";
+        summaryElement.textContent = "少々お待ちください...";
+        summaryElement.classList.remove('error');
 
-            const url = API_URL + "?" + new URLSearchParams(params).toString();
+        const params = {
+            action: "query",
+            format: "json",
+            generator: "random", 
+            grnnamespace: 0,
+            grnlimit: 1,
+            prop: "extracts",
+            exchars: LENGTH_MAP[currentLength], 
+            exintro: true, 
+            explaintext: true, 
+            origin: "*" 
+        };
 
-            try {
-                const response = await fetch(url);
-                if (!response.ok) {
-                    throw new Error(`HTTPエラー: ${response.status}`);
-                }
-                const data = await response.json();
+        const url = API_URL + "?" + new URLSearchParams(params).toString();
 
-                // 記事データへのアクセス
-                const pages = data.query.pages;
-                const pageId = Object.keys(pages)[0];
-                const article = pages[pageId];
-
-                if (article.title && article.extract) {
-                    // 表示の更新
-                    titleElement.textContent = article.title;
-                    // WikipediaのAPIの結果には改行が含まれるため、HTMLで表示されるように<br>に変換
-                    const formattedExtract = article.extract.replace(/\n/g, '<br><br>');
-                    summaryElement.innerHTML = formattedExtract;
-                } else {
-                    throw new Error("有効なデータが返されませんでした。");
-                }
-
-            } catch (error) {
-                console.error("取得エラー:", error);
-                titleElement.textContent = "エラー発生";
-                summaryElement.innerHTML = `記事の取得中に問題が発生しました。<br>（${error.message}）<br>「王政復古」ボタンを再度押してみてください。`;
-                summaryElement.classList.add('error');
+        try {
+            const response = await fetch(url);
+            if (!response.ok) {
+                throw new Error(`HTTPエラー: ${response.status}`);
             }
-        }
+            const data = await response.json();
 
-        // ページロード時に自動的に記事を取得
-        document.addEventListener('DOMContentLoaded', fetchRandomArticle);
-    </script>
+            const pages = data.query.pages;
+            const pageId = Object.keys(pages)[0];
+            const article = pages[pageId];
+
+            if (article.title && article.extract) {
+                titleElement.textContent = article.title;
+                const formattedExtract = article.extract.replace(/\n/g, '<br><br>');
+                summaryElement.innerHTML = formattedExtract;
+            } else {
+                throw new Error("有効なデータが返されませんでした。");
+            }
+
+        } catch (error) {
+            console.error("取得エラー:", error);
+            titleElement.textContent = "エラー発生";
+            summaryElement.innerHTML = `記事の取得中に問題が発生しました。<br>（${error.message}）<br>「王政復古」ボタンを再度押してみてください。`;
+            summaryElement.classList.add('error');
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', fetchRandomArticle);
+</script>
+
 </body>
 </html>
