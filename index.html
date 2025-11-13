@@ -3,86 +3,160 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LAWE</title>
+    <title>ランダム文法生成器 - 100万通り対応</title>
     <style>
-        /* ブロスタ風のカラースキームとフォント設定 */
-        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700;900&display=swap'); /* 太字のフォントをインポート */
-
-        body {
-            font-family: 'Roboto', Arial, sans-serif; /* ブロスタっぽい太字フォント */
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #2e1d53; /* 暗めの紫の背景 */
-            text-align: center;
-            color: white;
-            padding: 20px;
-            box-sizing: border-box;
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            text-align: center; 
+            padding-top: 50px; 
+            background-color: #f8f8f8;
         }
-        .container {
-            background: linear-gradient(145deg, #6c3dbf, #4a288c); /* グラデーションの背景 */
-            padding: 40px 60px;
-            border-radius: 25px; /* 大きな角丸 */
-            border: 8px solid #ffde00; /* 派手な黄色の枠 */
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5), inset 0 0 15px rgba(255, 255, 255, 0.5); /* 影と内側の光 */
-            max-width: 400px;
-            width: 90%;
-            transform: rotate(-2deg); /* 少し傾けてゲーム感UP */
+        #container {
+            width: 90%; 
+            max-width: 800px; 
+            margin: 0 auto; 
+            background-color: white; 
+            padding: 30px; 
+            border-radius: 10px; 
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
-        h1 {
-            color: #ffde00; /* 明るい黄色 */
-            font-size: 2.5em;
-            text-shadow: 3px 3px 0 #5f3299; /* 濃い影 */
-            margin-bottom: 5px;
-            line-height: 1.1;
-        }
-        .fictional-note {
-            color: #cccccc;
-            font-size: 0.8em;
-            margin-bottom: 25px;
-            font-weight: 700;
-        }
-        .call-to-action {
-            margin: 25px 0;
-            font-size: 1.3em;
-            font-weight: 900;
-            color: #ffe566;
-            text-shadow: 2px 2px 0 #2e1d53;
-        }
-        .login-button {
-            /* ブロスタの特徴的なボタンデザイン */
-            padding: 15px 50px;
-            font-size: 1.4em;
-            font-weight: 900;
-            color: white;
-            background: linear-gradient(to bottom, #ff7f00, #ff4500); /* オレンジのグラデーション */
-            border: 5px solid #ffa500; /* 明るいオレンジの枠 */
-            border-radius: 15px;
+        #generate-button {
+            padding: 15px 30px; 
+            font-size: 1.2em; 
             cursor: pointer;
-            box-shadow: 0 6px 0 #993000, 0 10px 15px rgba(0, 0, 0, 0.4);
-            transition: all 0.1s;
-            text-transform: uppercase;
+            background-color: #007bff; 
+            color: white; 
+            border: none;
+            border-radius: 5px; 
+            transition: background-color 0.3s;
+            margin-bottom: 25px;
         }
-        /* クリック時のへこみ表現 */
-        .login-button:active {
-            box-shadow: 0 2px 0 #993000, 0 5px 10px rgba(0, 0, 0, 0.4);
-            transform: translateY(4px);
+        #generate-button:hover { 
+            background-color: #0056b3; 
+        }
+        #generated-sentence {
+            font-size: 1.8em; 
+            color: #333; 
+            margin: 20px 0; 
+            padding: 20px; 
+            border: 2px dashed #007bff; 
+            background-color: #e9ecef;
+            border-radius: 5px;
+            min-height: 50px;
+        }
+        #element-breakdown {
+            font-size: 0.9em; 
+            color: #555;
+            margin-top: 15px;
+            line-height: 1.5;
+        }
+        .count-info {
+            font-size: 0.8em;
+            color: #888;
+            margin-top: -15px;
+            margin-bottom: 20px;
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <h1>LAWE</h1>
-        <p class="fictional-note">Kini nga site dili tinuod</p>
-        
-        <p class="call-to-action">メカエドガーを入手するには下のボタンを押してログインしてください</p>
-        
-        <button class="login-button" onclick="window.location.href='https://link.brawlstars.com/de?action=voucher&code=b647c71d-41a5-42c4-a10f-8d47952d82f3'">ログイン</button>
+    <div id="container">
+        <h1>ランダム文法生成器 (100万パターン)</h1>
+        <p class="count-info">主語100語 × 目的語100語 × 動詞100語 = 1,000,000通りの組み合わせ</p>
+
+        <button id="generate-button">文を生成する</button>
+
+        <p id="generated-sentence">ボタンを押して文を生成してください。</p>
+        <div id="element-breakdown"></div>
     </div>
 
+    <script>
+        // --- 1. データ定義 (各100語) ---
+        // 合計100万通り生成のために、各リストを100語に拡張しています。
+        
+        const SUBJECTS_100 = [
+            "私", "同僚", "プロジェクト", "最新のレポート", "予算", "過去のデータ", "顧客", "AIシステム", "経験", "指導者", 
+            "市場の動向", "無駄な会議", "組織の文化", "あなたの意見", "競合他社", "技術革新", "チームの士気", "古い慣習", 
+            "経営層の判断", "初期の設計", "サプライチェーン", "環境問題", "規制当局", "ユーザーの声", "失敗の本質", 
+            "成功体験", "膨大な知識", "未曾有の危機", "第三者の視点", "専門家の助言", "隠されたコスト", "無駄なルーティン", 
+            "未来の予測", "歴史の教訓", "潜在的な顧客", "製品の仕様", "サービスの品質", "個人の成長", "公的な記録", 
+            "現在の状況", "長期的な戦略", "即時のフィードバック", "既存のソリューション", "革新的なアイデア", "業界標準", 
+            "リスク要因", "従業員の満足度", "主要な競合相手", "次のステップ", "現在の課題", "最終決定", "不適切な行動", 
+            "過去の栄光", "誤った仮定", "現実の厳しさ", "限定された能力", "無限の可能性", "理論上の限界", "物理的な制約", 
+            "デジタル資産", "手書きのメモ", "主要なインフラ", "予備の部品", "緊急事態", "日常の雑務", "個人的な感情", 
+            "集団の意識", "静かなる反発", "明確な指示", "曖昧な回答", "真の目的", "表面的な事実", "本質的な価値", 
+            "無意味な議論", "重要な進展", "小さな改善", "圧倒的な証拠", "不足している情報", "迅速な対応", "遅延の原因", 
+            "最初の試み", "最後の望み", "共通の認識", "独自の視点", "普遍的な真理", "特定の専門知識", "不確実な未来", 
+            "確固たる事実", "未公開の情報", "公開された文書", "過去の失敗例", "未来の成功例", "社会的な責任", 
+            "倫理的な問題", "法的な制約", "新しい働き方", "旧式の設備", "最新のトレンド", "個人的な信念"
+        ];
+
+        const OBJECTS_100 = [
+            "薄っぺらいプライド", "貴重な時間", "明確な目標", "潜在的なリスク", "現在の計画", "誰も言わない真実", "一時の感情", 
+            "不確実性", "リソースの分配", "古い慣習", "成功への期待", "具体的なアクション", "あなたの才能", "市場のニーズ", 
+            "重要な決定", "短期的な利益", "長期的なビジョン", "根本的な原因", "表面的な解決策", "隠された意図", 
+            "継続的な改善", "顧客の信頼", "ブランド価値", "技術的負債", "既存のプロセス", "曖昧な基準", "チームの努力", 
+            "個人的な感情", "全ての可能性", "業界の常識", "競争優位性", "コスト削減", "生産性向上", "品質保証", 
+            "コミュニケーション不足", "データの正確性", "セキュリティ対策", "ビジネスモデル", "収益源", "緊急対応策", 
+            "作業の優先順位", "評価基準", "投資の判断", "過去の実績", "将来の展望", "複雑な問題", "簡単な作業", 
+            "個人の能力", "集団の知恵", "外部からの圧力", "内部の抵抗", "目標達成の障害", "進化の速度", "知識の蓄積", 
+            "モチベーション", "創造性", "論理的な構造", "直感的な理解", "文化的な違い", "世代間のギャップ", 
+            "新しいワークフロー", "古いシステムの限界", "製品の欠陥", "サービスの魅力", "最終的な結果", "最初の一歩", 
+            "根本的な疑問", "見せかけの成果", "本当の課題", "小さなチャンス", "大きな機会", "限定的な情報", 
+            "広範囲な影響", "個々の責任", "全体の責任", "倫理的な配慮", "法的な義務", "公的な声明", "内部文書", 
+            "顧客の声", "競合の動き", "市場の飽和", "ニッチな分野", "一般的な認識", "誤った期待", "現実的な目標", 
+            "非現実的な要求", "精神的な安定", "物質的な豊かさ", "自己成長の機会", "チームの協力", "独自のアイデンティティ",
+            "普遍的な価値", "歴史的な背景"
+        ];
+
+        const VERBS_100 = [
+            "浪費する", "見過ごす", "分析する", "強化する", "無視する", "提案する", "最適化する", "誤解する", 
+            "改善する", "検証する", "実行する", "議論する", "共有する", "破壊する", "評価する", 
+            "回避する", "再定義する", "統合する", "予測する", "制限する", "可視化する", "優先する", 
+            "模倣する", "再構築する", "過大評価する", "軽視する", "証明する", "調整する", "監視する", "創出する",
+            "促進する", "阻止する", "解体する", "集約する", "拡大する", "縮小する", "修正する", "適用する", 
+            "発見する", "特定する", "隠蔽する", "開示する", "維持する", "撤廃する", "導入する", "廃止する", 
+            "標準化する", "多様化する", "専門化する", "普遍化する", "分解する", "統合する", "簡素化する", 
+            "複雑化する", "交換する", "代替する", "補完する", "上書きする", "引き起こす", "解決する", 
+            "悪化させる", "好転させる", "再現する", "模索する", "追求する", "断念する", "記憶する", 
+            "忘却する", "連想する", "切り離す", "結びつける", "強調する", "弱体化させる", "定義する", 
+            "具体化する", "抽象化する", "義務付ける", "奨励する", "制約する", "解放する", "保護する", 
+            "侵害する", "吸収する", "放出する", "転用する", "利用する", "消費する", "回復する", 
+            "反駁する", "承認する", "反対する", "支持する", "伝達する", "隠す", "露出する", 
+            "獲得する", "喪失する", "保持する", "放棄する"
+        ];
+
+        // --- 2. ランダム抽出関数 ---
+        function randomElement(arr) {
+            const index = Math.floor(Math.random() * arr.length);
+            return arr[index];
+        }
+
+        // --- 3. 文生成ロジック ---
+        function generateMillionSentence() {
+            // 100語リストからランダムに抽出
+            const S = randomElement(SUBJECTS_100);
+            const O = randomElement(OBJECTS_100);
+            const V = randomElement(VERBS_100);
+            
+            // 文を結合 (助詞「は」と「を」を使用)
+            const sentence = `${S}は${O}を${V}。`;
+            
+            return {
+                sentence: sentence,
+                breakdown: { subject: S, object: O, verb: V }
+            };
+        }
+
+        // --- 4. イベントリスナーの設定 ---
+        document.getElementById('generate-button').addEventListener('click', () => {
+            const result = generateMillionSentence();
+            
+            // 表示の更新
+            document.getElementById('generated-sentence').textContent = result.sentence;
+            document.getElementById('element-breakdown').innerHTML = 
+                `**主語:** ${result.breakdown.subject} / **目的語:** ${result.breakdown.object} / **動詞:** ${result.breakdown.verb}`;
+        });
+    </script>
 </body>
 </html>
