@@ -1,162 +1,231 @@
-<!DOCTYPE html>
-<html lang="ja">
+<!DOCTYPE html><html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ランダム文法生成器 - 100万通り対応</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>占い</title>
     <style>
-        body { 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            text-align: center; 
-            padding-top: 50px; 
-            background-color: #f8f8f8;
+        :root{--bg:#0f1724;--card:#0b1220;--accent:#7c5cff;--muted:#9aa4bf;--glass:rgba(255,255,255,0.04)}
+        *{box-sizing:border-box}
+        body{
+            margin:0;min-height:100vh;font-family: "Yu Gothic UI", "Segoe UI", system-ui, -apple-system, "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
+            background: radial-gradient(1200px 600px at 10% 10%, rgba(124,92,255,0.12), transparent),
+                        radial-gradient(800px 400px at 90% 90%, rgba(0,200,150,0.06), transparent),
+                        var(--bg);color:#e6eef9;display:flex;align-items:center;justify-content:center;padding:40px;
         }
-        #container {
-            width: 90%; 
-            max-width: 800px; 
-            margin: 0 auto; 
-            background-color: white; 
-            padding: 30px; 
-            border-radius: 10px; 
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
-        #generate-button {
-            padding: 15px 30px; 
-            font-size: 1.2em; 
-            cursor: pointer;
-            background-color: #007bff; 
-            color: white; 
-            border: none;
-            border-radius: 5px; 
-            transition: background-color 0.3s;
-            margin-bottom: 25px;
-        }
-        #generate-button:hover { 
-            background-color: #0056b3; 
-        }
-        #generated-sentence {
-            font-size: 1.8em; 
-            color: #333; 
-            margin: 20px 0; 
-            padding: 20px; 
-            border: 2px dashed #007bff; 
-            background-color: #e9ecef;
-            border-radius: 5px;
-            min-height: 50px;
-        }
-        #element-breakdown {
-            font-size: 0.9em; 
-            color: #555;
-            margin-top: 15px;
-            line-height: 1.5;
-        }
-        .count-info {
-            font-size: 0.8em;
-            color: #888;
-            margin-top: -15px;
-            margin-bottom: 20px;
-        }
+        .container{width:100%;max-width:880px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:14px;padding:28px;box-shadow:0 10px 30px rgba(2,6,23,0.6);}
+        header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+        h1{font-size:1.35rem;margin:0;color:#fff}
+        p.lead{margin:0;color:var(--muted);font-size:0.95rem}
+        .controls{display:flex;gap:12px;align-items:center}
+        button#generate{background:linear-gradient(90deg,var(--accent),#3ec2b0);border:none;color:#071023;padding:12px 18px;border-radius:10px;font-weight:700;cursor:pointer;box-shadow:0 6px 18px rgba(124,92,255,0.18)}
+        button#generate:active{transform:translateY(1px)}
+        .card{margin-top:18px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:20px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);display:grid;grid-template-columns:1fr 320px;gap:16px}
+        .fortune{padding:18px;background:linear-gradient(180deg, rgba(124,92,255,0.06), rgba(124,92,255,0.02));border-radius:10px}
+        .rank{font-size:1.6rem;font-weight:800;margin:0 0 8px 0;color:#fff}
+        .sentence{font-size:1.25rem;margin:0 0 10px 0;color:#f8f6ff}
+        .advice{font-size:0.98rem;color:#e1e7ff;margin-top:6px}
+        .meta{font-size:0.9rem;color:var(--muted);margin-top:10px}
+        .aside{background:var(--card);padding:14px;border-radius:10px;border:1px solid var(--glass);}
+        .breakdown{font-size:0.95rem;color:#dbe9ff}
+        .small{font-size:0.82rem;color:var(--muted);margin-top:8px}
+        .lucky{display:flex;gap:8px;margin-top:10px}
+        .pill{background:rgba(255,255,255,0.04);padding:6px 8px;border-radius:999px;font-weight:700}
+        footer{margin-top:14px;color:var(--muted);font-size:0.82rem}
+        .hint{color:#c7d2ff;font-size:0.9rem;margin-top:8px}
+        @media (max-width:820px){.card{grid-template-columns:1fr;}.aside{order:2}}
     </style>
 </head>
 <body>
+    <div class="container">
+        <header>
+            <div>
+                <h1>占い</h1>
+                <p class="lead">占守島の戦い</p>
+            </div>
+            <div class="controls">
+                <button id="generate">今日の占い</button>
+            </div>
+        </header><div class="card">
+        <div class="fortune">
+            <p class="rank" id="rank">——</p>
+            <p class="sentence" id="sentence">ボタンを押すと今日の占いが現れます。</p>
+            <p class="advice" id="advice">結果がここに表示されます。</p>
+        </div>
+ id="interpret">解釈：—</div>
+            </div>
 
-    <div id="container">
-        <h1>ランダム文法生成器 (100万パターン)</h1>
-        <p class="count-info">主語100語 × 目的語100語 × 動詞100語 = 1,000,000通りの組み合わせ</p>
+            <div class="lucky">
+                <div class="pill">ラッキーナンバー: <span id="lucky-number">—</span></div>
+                <div class="pill">ラッキーカラー: <span id="lucky-color">—</span></div>
+            </div>
 
-        <button id="generate-button">文を生成する</button>
-
-        <p id="generated-sentence">ボタンを押して文を生成してください。</p>
-        <div id="element-breakdown"></div>
+            <div style="margin-top:12px;text-align:right">
+                <button id="copy" style="background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted);padding:8px 10px;border-radius:8px;cursor:pointer">占い文をコピー</button>
+            </div>
+        </aside>
     </div>
 
-    <script>
-        // --- 1. データ定義 (各100語) ---
-        // 合計100万通り生成のために、各リストを100語に拡張しています。
-        
-        const SUBJECTS_100 = [
-            "私", "同僚", "プロジェクト", "最新のレポート", "予算", "過去のデータ", "顧客", "AIシステム", "経験", "指導者", 
-            "市場の動向", "無駄な会議", "組織の文化", "あなたの意見", "競合他社", "技術革新", "チームの士気", "古い慣習", 
-            "経営層の判断", "初期の設計", "サプライチェーン", "環境問題", "規制当局", "ユーザーの声", "失敗の本質", 
-            "成功体験", "膨大な知識", "未曾有の危機", "第三者の視点", "専門家の助言", "隠されたコスト", "無駄なルーティン", 
-            "未来の予測", "歴史の教訓", "潜在的な顧客", "製品の仕様", "サービスの品質", "個人の成長", "公的な記録", 
-            "現在の状況", "長期的な戦略", "即時のフィードバック", "既存のソリューション", "革新的なアイデア", "業界標準", 
-            "リスク要因", "従業員の満足度", "主要な競合相手", "次のステップ", "現在の課題", "最終決定", "不適切な行動", 
-            "過去の栄光", "誤った仮定", "現実の厳しさ", "限定された能力", "無限の可能性", "理論上の限界", "物理的な制約", 
-            "デジタル資産", "手書きのメモ", "主要なインフラ", "予備の部品", "緊急事態", "日常の雑務", "個人的な感情", 
-            "集団の意識", "静かなる反発", "明確な指示", "曖昧な回答", "真の目的", "表面的な事実", "本質的な価値", 
-            "無意味な議論", "重要な進展", "小さな改善", "圧倒的な証拠", "不足している情報", "迅速な対応", "遅延の原因", 
-            "最初の試み", "最後の望み", "共通の認識", "独自の視点", "普遍的な真理", "特定の専門知識", "不確実な未来", 
-            "確固たる事実", "未公開の情報", "公開された文書", "過去の失敗例", "未来の成功例", "社会的な責任", 
-            "倫理的な問題", "法的な制約", "新しい働き方", "旧式の設備", "最新のトレンド", "個人的な信念"
-        ];
+<script>
+    // --- 元の語リスト（100語ずつ） ---
+    const SUBJECTS_100 = [
+        "私","同僚","プロジェクト","最新のレポート","予算","過去のデータ","顧客","AIシステム","経験","指導者",
+        "市場の動向","無駄な会議","組織の文化","あなたの意見","競合他社","技術革新","チームの士気","古い慣習",
+        "経営層の判断","初期の設計","サプライチェーン","環境問題","規制当局","ユーザーの声","失敗の本質",
+        "成功体験","膨大な知識","未曾有の危機","第三者の視点","専門家の助言","隠されたコスト","無駄なルーティン",
+        "未来の予測","歴史の教訓","潜在的な顧客","製品の仕様","サービスの品質","個人の成長","公的な記録",
+        "現在の状況","長期的な戦略","即時のフィードバック","既存のソリューション","革新的なアイデア","業界標準",
+        "リスク要因","従業員の満足度","主要な競合相手","次のステップ","現在の課題","最終決定","不適切な行動",
+        "過去の栄光","誤った仮定","現実の厳しさ","限定された能力","無限の可能性","理論上の限界","物理的な制約",
+        "デジタル資産","手書きのメモ","主要なインフラ","予備の部品","緊急事態","日常の雑務","個人的な感情",
+        "集団の意識","静かなる反発","明確な指示","曖昧な回答","真の目的","表面的な事実","本質的な価値",
+        "無意味な議論","重要な進展","小さな改善","圧倒的な証拠","不足している情報","迅速な対応","遅延の原因",
+        "最初の試み","最後の望み","共通の認識","独自の視点","普遍的な真理","特定の専門知識","不確実な未来",
+        "確固たる事実","未公開の情報","公開された文書","過去の失敗例","未来の成功例","社会的な責任",
+        "倫理的な問題","法的な制約","新しい働き方","旧式の設備","最新のトレンド","個人的な信念"
+    ];
 
-        const OBJECTS_100 = [
-            "薄っぺらいプライド", "貴重な時間", "明確な目標", "潜在的なリスク", "現在の計画", "誰も言わない真実", "一時の感情", 
-            "不確実性", "リソースの分配", "古い慣習", "成功への期待", "具体的なアクション", "あなたの才能", "市場のニーズ", 
-            "重要な決定", "短期的な利益", "長期的なビジョン", "根本的な原因", "表面的な解決策", "隠された意図", 
-            "継続的な改善", "顧客の信頼", "ブランド価値", "技術的負債", "既存のプロセス", "曖昧な基準", "チームの努力", 
-            "個人的な感情", "全ての可能性", "業界の常識", "競争優位性", "コスト削減", "生産性向上", "品質保証", 
-            "コミュニケーション不足", "データの正確性", "セキュリティ対策", "ビジネスモデル", "収益源", "緊急対応策", 
-            "作業の優先順位", "評価基準", "投資の判断", "過去の実績", "将来の展望", "複雑な問題", "簡単な作業", 
-            "個人の能力", "集団の知恵", "外部からの圧力", "内部の抵抗", "目標達成の障害", "進化の速度", "知識の蓄積", 
-            "モチベーション", "創造性", "論理的な構造", "直感的な理解", "文化的な違い", "世代間のギャップ", 
-            "新しいワークフロー", "古いシステムの限界", "製品の欠陥", "サービスの魅力", "最終的な結果", "最初の一歩", 
-            "根本的な疑問", "見せかけの成果", "本当の課題", "小さなチャンス", "大きな機会", "限定的な情報", 
-            "広範囲な影響", "個々の責任", "全体の責任", "倫理的な配慮", "法的な義務", "公的な声明", "内部文書", 
-            "顧客の声", "競合の動き", "市場の飽和", "ニッチな分野", "一般的な認識", "誤った期待", "現実的な目標", 
-            "非現実的な要求", "精神的な安定", "物質的な豊かさ", "自己成長の機会", "チームの協力", "独自のアイデンティティ",
-            "普遍的な価値", "歴史的な背景"
-        ];
+    const OBJECTS_100 = [
+        "薄っぺらいプライド","貴重な時間","明確な目標","潜在的なリスク","現在の計画","誰も言わない真実","一時の感情",
+        "不確実性","リソースの分配","古い慣習","成功への期待","具体的なアクション","あなたの才能","市場のニーズ",
+        "重要な決定","短期的な利益","長期的なビジョン","根本的な原因","表面的な解決策","隠された意図",
+        "継続的な改善","顧客の信頼","ブランド価値","技術的負債","既存のプロセス","曖昧な基準","チームの努力",
+        "個人的な感情","全ての可能性","業界の常識","競争優位性","コスト削減","生産性向上","品質保証",
+        "コミュニケーション不足","データの正確性","セキュリティ対策","ビジネスモデル","収益源","緊急対応策",
+        "作業の優先順位","評価基準","投資の判断","過去の実績","将来の展望","複雑な問題","簡単な作業",
+        "個人の能力","集団の知恵","外部からの圧力","内部の抵抗","目標達成の障害","進化の速度","知識の蓄積",
+        "モチベーション","創造性","論理的な構造","直感的な理解","文化的な違い","世代間のギャップ",
+        "新しいワークフロー","古いシステムの限界","製品の欠陥","サービスの魅力","最終的な結果","最初の一歩",
+        "根本的な疑問","見せかけの成果","本当の課題","小さなチャンス","大きな機会","限定的な情報",
+        "広範囲な影響","個々の責任","全体の責任","倫理的な配慮","法的な義務","公的な声明","内部文書",
+        "顧客の声","競合の動き","市場の飽和","ニッチな分野","一般的な認識","誤った期待","現実的な目標",
+        "非現実的な要求","精神的な安定","物質的な豊かさ","自己成長の機会","チームの協力","独自のアイデンティティ",
+        "普遍的な価値","歴史的な背景"
+    ];
 
-        const VERBS_100 = [
-            "浪費する", "見過ごす", "分析する", "強化する", "無視する", "提案する", "最適化する", "誤解する", 
-            "改善する", "検証する", "実行する", "議論する", "共有する", "破壊する", "評価する", 
-            "回避する", "再定義する", "統合する", "予測する", "制限する", "可視化する", "優先する", 
-            "模倣する", "再構築する", "過大評価する", "軽視する", "証明する", "調整する", "監視する", "創出する",
-            "促進する", "阻止する", "解体する", "集約する", "拡大する", "縮小する", "修正する", "適用する", 
-            "発見する", "特定する", "隠蔽する", "開示する", "維持する", "撤廃する", "導入する", "廃止する", 
-            "標準化する", "多様化する", "専門化する", "普遍化する", "分解する", "統合する", "簡素化する", 
-            "複雑化する", "交換する", "代替する", "補完する", "上書きする", "引き起こす", "解決する", 
-            "悪化させる", "好転させる", "再現する", "模索する", "追求する", "断念する", "記憶する", 
-            "忘却する", "連想する", "切り離す", "結びつける", "強調する", "弱体化させる", "定義する", 
-            "具体化する", "抽象化する", "義務付ける", "奨励する", "制約する", "解放する", "保護する", 
-            "侵害する", "吸収する", "放出する", "転用する", "利用する", "消費する", "回復する", 
-            "反駁する", "承認する", "反対する", "支持する", "伝達する", "隠す", "露出する", 
-            "獲得する", "喪失する", "保持する", "放棄する"
-        ];
+    const VERBS_100 = [
+        "浪費する","見過ごす","分析する","強化する","無視する","提案する","最適化する","誤解する",
+        "改善する","検証する","実行する","議論する","共有する","破壊する","評価する",
+        "回避する","再定義する","統合する","予測する","制限する","可視化する","優先する",
+        "模倣する","再構築する","過大評価する","軽視する","証明する","調整する","監視する","創出する",
+        "促進する","阻止する","解体する","集約する","拡大する","縮小する","修正する","適用する",
+        "発見する","特定する","隠蔽する","開示する","維持する","撤廃する","導入する","廃止する",
+        "標準化する","多様化する","専門化する","普遍化する","分解する","統合する","簡素化する",
+        "複雑化する","交換する","代替する","補完する","上書きする","引き起こす","解決する",
+        "悪化させる","好転させる","再現する","模索する","追求する","断念する","記憶する",
+        "忘却する","連想する","切り離す","結びつける","強調する","弱体化させる","定義する",
+        "具体化する","抽象化する","義務付ける","奨励する","制約する","解放する","保護する",
+        "侵害する","吸収する","放出する","転用する","利用する","消費する","回復する",
+        "反駁する","承認する","反対する","支持する","伝達する","隠す","露出する",
+        "獲得する","喪失する","保持する","放棄する"
+    ];
 
-        // --- 2. ランダム抽出関数 ---
-        function randomElement(arr) {
-            const index = Math.floor(Math.random() * arr.length);
-            return arr[index];
-        }
+    // --- ユーティリティ ---
+    function randomIndex(arr){return Math.floor(Math.random()*arr.length)}
+    function pick(arr){const i=randomIndex(arr);return {item:arr[i],index:i}}
 
-        // --- 3. 文生成ロジック ---
-        function generateMillionSentence() {
-            // 100語リストからランダムに抽出
-            const S = randomElement(SUBJECTS_100);
-            const O = randomElement(OBJECTS_100);
-            const V = randomElement(VERBS_100);
-            
-            // 文を結合 (助詞「は」と「を」を使用)
-            const sentence = `${S}は${O}を${V}。`;
-            
-            return {
-                sentence: sentence,
-                breakdown: { subject: S, object: O, verb: V }
-            };
-        }
+    const ranks = ["大吉","吉","中吉","小吉","凶"];
+    const colors = ["赤","青","緑","黄","紫","黒","白","水色","金色","銀色"];
 
-        // --- 4. イベントリスナーの設定 ---
-        document.getElementById('generate-button').addEventListener('click', () => {
-            const result = generateMillionSentence();
-            
-            // 表示の更新
-            document.getElementById('generated-sentence').textContent = result.sentence;
-            document.getElementById('element-breakdown').innerHTML = 
-                `**主語:** ${result.breakdown.subject} / **目的語:** ${result.breakdown.object} / **動詞:** ${result.breakdown.verb}`;
+    function evaluateRank(score){
+        // score: 0-99
+        if(score >= 95) return ranks[0];
+        if(score >= 75) return ranks[1];
+        if(score >= 40) return ranks[2];
+        if(score >= 10) return ranks[3];
+        return ranks[4];
+    }
+
+    function adviceFromVerb(verb, rank){
+        // 動詞に応じた短い助言（辛口気味）
+        const stern = {
+            "浪費する":"無駄をやめろ。それが習慣なら直せ。",
+            "見過ごす":"見落としは命取り。少しだけ注意を増やせ。",
+            "分析する":"分析はいいが、行動が伴わなければただの言い訳だ。",
+            "強化する":"強化は必要だが過信はダメだ。基礎を確認しろ。",
+            "無視する":"無視は楽だが、後で痛い目を見るぞ。",
+            "実行する":"よし、やれ。言い訳する暇があるならやれ。",
+            "破壊する":"壊す前に代替案を用意しろ。無謀は愚行だ。",
+            "改善する":"小さな改善を積め。継続は力なり。",
+            "放棄する":"諦めるなら理由を持て。無責任は許されない。",
+            "追求する":"やりすぎは滑稽だ。ほどほどにだが本気でやれ。"
+        };
+        for(const k in stern) if(verb.includes(k)) return stern[k];
+        // デフォルト
+        return rank === "凶" ? "今日は大人しくするのが得策だ。無理は禁物。" : "柔軟に動け。だが余計なプライドは捨てろ。";
+    }
+
+    // --- DOM ---
+    const btn = document.getElementById('generate');
+    const rankEl = document.getElementById('rank');
+    const sentenceEl = document.getElementById('sentence');
+    const adviceEl = document.getElementById('advice');
+    const metaEl = document.getElementById('meta');
+    const bSub = document.getElementById('b-sub');
+    const bObj = document.getElementById('b-obj');
+    const bVerb = document.getElementById('b-verb');
+    const interpretEl = document.getElementById('interpret');
+    const luckyNumberEl = document.getElementById('lucky-number');
+    const luckyColorEl = document.getElementById('lucky-color');
+    const copyBtn = document.getElementById('copy');
+
+    btn.addEventListener('click', ()=>{
+        const s = pick(SUBJECTS_100);
+        const o = pick(OBJECTS_100);
+        const v = pick(VERBS_100);
+
+        const sentence = `${s.item}は${o.item}を${v.item}。`;
+
+        // 簡単なスコア付け（インデックス合計を100で割った余り）
+        const score = (s.index + o.index + v.index) % 100;
+        const rank = evaluateRank(score);
+
+        // ラッキー要素
+        const luckyNumber = Math.floor(Math.random()*99)+1;
+        const luckyColor = colors[Math.floor(Math.random()*colors.length)];
+
+        // 解釈（辛口ヒント付き）
+        const interpret = (()=>{
+            // 短い解釈文を複数組み合わせて作る
+            const parts = [];
+            if(v.item.match(/浪費|放棄|無視|見過ご/)) parts.push('注意を怠ると損をする');
+            if(o.item.match(/プライド|期待|過去|古い/)) parts.push('過去や見栄に縛られている');
+            if(s.item.match(/AI|システム|デジタル|最新/)) parts.push('技術面での見直しが鍵');
+            if(parts.length===0) parts.push('今は行動よりも選択が重要');
+            return parts.join('。') + '。';
+        })();
+
+        // 助言
+        const advice = adviceFromVerb(v.item, rank);
+
+        // DOM更新
+        rankEl.textContent = `今日の運勢: ${rank}`;
+        sentenceEl.textContent = sentence;
+        adviceEl.textContent = advice;
+        metaEl.textContent = `スコア: ${score} / （インデックス合算による簡易評価）`;
+
+        bSub.textContent = s.item;
+        bObj.textContent = o.item;
+        bVerb.textContent = v.item;
+        interpretEl.textContent = `解釈：${interpret}`;
+
+        luckyNumberEl.textContent = luckyNumber;
+        luckyColorEl.textContent = luckyColor;
+    });
+
+    copyBtn.addEventListener('click', ()=>{
+        const text = `${rankEl.textContent}\n${sentenceEl.textContent}\n${adviceEl.textContent}`;
+        navigator.clipboard?.writeText(text).then(()=>{
+            copyBtn.textContent = 'コピーしました';
+            setTimeout(()=>copyBtn.textContent = '占い文をコピー',1200);
+        }).catch(()=>{
+            copyBtn.textContent = 'コピー不可';
+            setTimeout(()=>copyBtn.textContent = '占い文をコピー',1200);
         });
-    </script>
+    });
+
+    // 最初に一回生成しておく
+    document.getElementById('generate').click();
+</script>
+
 </body>
 </html>
