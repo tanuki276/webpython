@@ -154,25 +154,19 @@
             overflow: hidden;
             background-color: var(--map-bg);
         }
-        .map-grid {
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: repeating-linear-gradient(to right, transparent, transparent 49px, rgba(0, 0, 0, 0.1) 50px),
-                        repeating-linear-gradient(to bottom, transparent, transparent 49px, rgba(0, 0, 0, 0.1) 50px);
-            z-index: 5;
-        }
-        .map-elevation { /* 等高線風の表現 */
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            border-radius: 50% / 10%;
-            border: 1px solid var(--elevation-line);
-            opacity: 0.5;
-            z-index: 10;
-        }
-        #el-1 { width: 50%; height: 50%; top: 0%; left: 0%; transform: translate(-50%, -50%); border-radius: 50%; }
-        #el-2 { width: 45%; height: 45%; top: 5%; left: 5%; transform: translate(-50%, -50%); border-radius: 50%; border-width: 2px;}
-        #el-3 { width: 40%; height: 40%; top: 10%; left: 10%; transform: translate(-50%, -50%); border-radius: 50%; }
+        /* CSSによる地図要素は画像で置き換えられるため、以下はコメントアウトまたは削除 */
+        /* .map-grid, .map-elevation, .rail-line, .road-main, .old-town-boundary, .feature-river, .old-town-road { display: none; } */
 
+        .map-api img { /* 追加: 地図画像用スタイル */
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* コンテナに合わせて画像をトリミング */
+            z-index: 1; /* コントロールの下に配置 */
+        }
+        
         .map-controls {
             position: absolute;
             top: 10px; right: 10px; z-index: 30; background: white; border: 1px solid var(--wiki-border); padding: 5px; border-radius: 3px; font-size: 0.8em;
@@ -191,13 +185,6 @@
         }
         .map-legend div { margin-bottom: 3px; }
         .legend-color { width: 10px; height: 10px; display: inline-block; margin-right: 5px; border: 1px solid #333; }
-
-        /* 道路網と施設 */
-        .road-main { position: absolute; background: var(--road-main); height: 7px; z-index: 15; border-radius: 2px; }
-        .old-town-road { position: absolute; background: #a9a9a9; height: 4px; z-index: 16; opacity: 0.7; }
-        .rail-line { position: absolute; background: var(--road-rail); height: 2px; width: 100%; top: 80%; z-index: 10; }
-        .feature-river { position: absolute; background: var(--river-color); width: 120%; height: 35px; top: 65%; left: -10%; transform: rotate(-10deg); border-top: 2px solid #3366cc; z-index: 10; }
-        .old-town-boundary { position: absolute; width: 35%; height: 45%; top: 40%; left: 30%; border: 3px solid var(--old-town-border); opacity: 0.7; z-index: 17; background: rgba(255, 255, 255, 0.5); border-radius: 5px; }
 
         /* 人口動態グラフ風 */
         .chart-container {
@@ -231,7 +218,7 @@
 
             <table class="infobox" role="presentation">
                 <caption>ノヴァハゼルブルク</caption>
-                <tr><td colspan="2" style="text-align:center;"></td></tr>
+                <tr><td colspan="2" style="text-align:center;"><img src="castle.jpg" alt="ノヴァハゼルブルク城" style="width:100%; max-width:280px; height:auto; display:block; margin:5px auto;"></td></tr>
                 <tr><th colspan="2" style="text-align:center;">地理・基礎データ</th></tr>
                 <tr><th>国</th><td><a href="./ドイツ連邦共和国">ドイツ連邦共和国</a></td></tr>
                 <tr><th>州</th><td><a href="./バーデン＝ヴュルテンベルク州">バーデン＝ヴュルテンベルク州</a></td></tr>
@@ -298,7 +285,6 @@
                     <li><a href="#出典">7 出典</a></li>
                 </ul>
             </div>
-
             <h2 id="歴史">1 歴史</h2>
             <h3 id="初期伯爵領">1.1 初期伯爵領時代と岩塩採掘権の確立（13世紀–1800年）</h3>
             <p>
@@ -338,37 +324,14 @@
 
             <h3 id="交通">2.3 交通インフラストラクチャ</h3>
             <div class="map-api">
-                <div class="map-grid"></div>
-                <div class="map-elevation" id="el-1"></div>
-                <div class="map-elevation" id="el-2"></div>
-                <div class="map-elevation" id="el-3"></div>
+                
+                <img src="1763432147315.jpg" alt="ノヴァハゼルブルクのGoogleマップ風地図">
                 
                 <div class="map-controls">
                     <button>N 48°</button><button>E 9°</button>
                     <button>ズーム +</button><button>ズーム -</button>
                 </div>
 
-                <div class="map-layer" id="map-features">
-                    <div class="rail-line"></div>
-                    <div class="road-main" style="top: 75%; left: 0%; width: 100%;" title="B312">B312</div>
-                    <div class="road-main" style="top: 50%; left: 0%; width: 80%; transform: rotate(-5deg);" title="B19">B19</div>
-                    
-                    <div class="old-town-boundary"></div>
-                    <div class="old-town-road" style="top: 55%; left: 38%; width: 15%; transform: rotate(15deg);">中央軸線</div>
-                    <div class="old-town-road" style="top: 45%; left: 42%; width: 15%; transform: rotate(-10deg);">城下通り</div>
-
-                    <div class="feature-river">ハゼル川</div>
-                    <div class="feature-park">旧王室庭園区（緑地）</div>
-                    <div class="feature-osg">岩塩<br>採掘跡<br>(丘陵地帯)</div>
-                    
-                    <div class="map-pin" id="pin-center"><div class="pin-label">市庁舎</div></div>
-                    <div class="map-pin" id="pin-castle" style="background-color: var(--wiki-link);"><div class="pin-label">ノヴァハゼルブルク城</div></div>
-                    <div class="map-pin" id="pin-station" style="background-color: #333;"><div class="pin-label">中央駅 (RE/RB)</div></div>
-                    <div class="map-pin" id="pin-hotel"><div class="pin-label">グランドホテル・ノヴァ</div></div>
-                    <div class="map-pin" id="pin-uni" style="background-color: var(--uni-color); top: 18%; left: 22%;"><div class="pin-label">NAIキャンパス</div></div>
-                    <div class="map-pin" id="pin-shop" style="background-color: green; top: 52%; left: 42%;"><div class="pin-label">老舗工芸品店</div></div>
-                    <div class="map-pin" id="pin-market" style="background-color: orange; top: 60%; left: 48%;"><div class="pin-label">中央市場広場</div></div>
-                </div>
                 <div class="map-legend">
                     <div><span class="legend-color" style="background-color: var(--old-town-border);"></span>歴史保護区</div>
                     <div><span class="legend-color" style="background-color: var(--road-main);"></span>幹線道路（連邦道路）</div>
@@ -380,7 +343,6 @@
             <p>
                 ノヴァハゼルブルクは鉄道においては、<a href="./ドイツ鉄道">ドイツ鉄道</a>の南ドイツ主要都市を結ぶ地域急行線（RE）の停車駅であり、駅舎は旧王国のバロック様式で再現されている。市内交通の基盤は、旧市街を中心としたクラシックなデザインの**ノヴァ・トラム**と、隣接自治体を結ぶ地域バス網によって構成されている。主要幹線道路は、連邦道路B19号線（東西軸）とB312号線（南北軸）が交差し、特にB19号線は市域の南側を迂回するバイパス構造となっており、歴史保護地区への交通流入を最小限に抑える都市計画が実施されている。
             </p>
-
             <h2 id="行政と政治">3 行政と政治</h2>
             <h3 id="市議会">3.1 市議会と政党勢力図</h3>
             <p>
@@ -394,7 +356,7 @@
                 <tbody>
                     <tr><td><a href="./キリスト教民主同盟_(ドイツ)">CDU</a></td><td>36.5</td><td>15 (-1)</td></tr>
                     <tr><td><a href="./自由民主党_(ドイツ)">FDP</a></td><td>28.1</td><td>11 (+2)</td></tr>
-                    <tr><td><a href="./同盟90/緑の党">緑の党</a></td><td>20.4</td><td>8 (+1)
+                    <tr><td><a href="./同盟90/緑の党">緑の党</a></td><td>20.4</td><td>8 (+1)</td></tr>
                     <tr><td>SPD</td><td>15.0</td><td>6 (-2)</td></tr>
                     <tr><td>合計</td><td>100.0</td><td>40</td></tr>
                 </tbody>
@@ -425,41 +387,37 @@
             <h2 id="経済">5 経済と産業構造</h2>
             <h3 id="観光業">5.1 歴史観光業とウェルネス観光</h3>
             <p>
-                市の経済は、サービス業、特に観光業への依存度が高い。年間訪問者数は約50万人に上り、市経済の約40%を占める。観光戦略は、単なる歴史的景観の提供に留まらず、かつて岩塩採掘で栄えた歴史を利用した塩治療（ザルツクア, Salz-Kur）を核とする**ウェルネス観光**に特化している。この戦略は、富裕層をターゲットとし、滞在期間の長期化と消費額の増加を目的としており、旧王室庭園を改修した「クア・ハウス」（療養施設）がその中心的な役割を担う。
+                市の経済は、サービス業、特に観光業への依存度が高い。年間訪問者数は約80万人で、特に旧市街とノヴァハゼルブルク城が中心的な集客力を持ち、市の歳入の約20%を観光関連産業が占めている。近年は、岩塩採掘跡を利用した**ウェルネス（健康増進）観光**に力を入れており、塩水浴やミネラル治療を提供する複合施設**「テラ・ザルツ」**を主要な施設として位置づけている。
             </p>
             <h3 id="精密機械">5.2 精密機械産業と地域技術の融合</h3>
             <p>
-                観光都市というイメージが強いが、市の郊外、特にB312号線沿いの工業団地には、バーデン＝ヴュルテンベルク州の地域産業特性を反映した精密機械、特に光学機器や自動車部品の零細・中小企業が集中している。これは、戦後復興期に旧ハゼルブルク城の修復に携わった時計職人や精密技術者が、地域の伝統的な時計製造技術と組み合わせて創業した歴史に由来する。市の行政は、これらのハイテク中小企業を支援することで、観光業に過度に依存しない持続可能な経済基盤の構築を目指している<span class="reference">[5]</span>。
+                観光業に次ぐ主要産業は、郊外の産業団地に集中している精密機械産業である。旧来の時計製造および光学技術のノウハウを継承した中堅企業群が、医療機器、自動車部品、そして特にNAI（ノヴァ建築遺産学院）の研究成果を応用した**文化遺産デジタルアーカイブ技術**に関する機器開発で国際的なニッチ市場を築いている。市の経済政策は、このハイテク産業と歴史観光業の**「技術・文化の融合」**を促進することで、独自の競争優位性を確立することを目指している。
             </p>
 
             <h2 id="文化">6 文化、教育、社会</h2>
             <h3 id="教育と研究">6.1 教育と研究機関</h3>
             <p>
-                市の特異な歴史的遺構は、専門的な研究機関の設立を促している。特に、**ノヴァハゼルブルク建築遺産学院 (NAI)**は、国際的に稀有な「戦災遺構の保存と現代建築の融合」をテーマとした研究を専門とし、ヨーロッパ各地から研究者や学生が集まる。これは、ユリアス・ヴァイゼンベルクの復興哲学が学術的に制度化された結果と言える。
+                ノヴァハゼルブルクは、**ノヴァ建築遺産学院（NAI: Nova Architektur Institut）**の本拠地であり、これはヨーロッパにおける歴史的建造物修復・デジタルアーカイブ技術に関するトップクラスの研究機関として知られている。NAIは、市の復興哲学「ノヴァ・モデル」を学術的に確立した機関であり、建築学、歴史学、情報科学の境界領域を研究対象としている。また、市内には歴史的なギムナジウム（中等教育学校）があり、旧王国の歴史と文化を重視したカリキュラムが組まれている。
             </p>
             <h3 id="建築様式">6.2 歴史的建築様式の特徴</h3>
             <p>
-                旧市街の建築は、主に15世紀から18世紀にかけての<a href="./木組みの家">木組みの家々</a>とバロック様式の教会・市庁舎によって構成されている。特に、市庁舎広場周辺の木組みの家々は、壁面に施された装飾的な彫刻（Schnitzerei）が特徴的であり、これは当時の岩塩採掘による富を背景にした市民の競争的な装飾意識を反映していると解釈されている。戦後復興においては、この歴史的な装飾を忠実に再現することが義務付けられた。
+                旧市街の建築様式は、後期ゴシック様式から初期バロック様式への過渡期の特徴をよく残している。特に、戦災後に再建された市庁舎や中央駅は、細部にわたり当時の様式を忠実に再現している。一方で、戦災を免れ「戦災記念区」として保存されている城の南棟の遺構は、**「残された廃墟」**としてそのままの姿で景観の中に組み込まれており、この対比がノヴァハゼルブルクのユニークな建築的アイデンティティとなっている。
             </p>
             <h3 id="郷土料理">6.3 言語、地域訛り、および郷土料理</h3>
             <p>
-                公用語はドイツ語標準語であるが、地元住民の間では「ノヴァシュヴァーベン語」（Nova-Schwäbisch）と呼ばれる<a href="./シュヴァーベン語">シュヴァーベン語</a>の方言が使用されている。この訛りは、シュヴァーベン語の基本的な文法と語彙を維持しつつも、歴史的にフランス、オーストリア、スイスとの交易が多かったことから、これらの地域の言語からの借用語がわずかに混入している点が学術的な興味を集めている。
-            </p>
-            <p>
-                代表的な郷土料理は、岩塩を用いた豚肉の塩漬け**「ザルツ・ブラーテン」（Salz-Braten）**と、採掘場の厳しい労働を支えるため、カロリーが高く栄養価の高いジャガイモとチーズの素朴な料理**「ベアグ・ケーゼ」（Berg-Käse）**である。毎年秋の収穫祭では、これらの伝統料理が中央市場広場で大規模に振る舞われ、地域文化の中心的なイベントとなっている。
+                地域で話されるドイツ語は、シュヴァーベン語の北縁に位置する独自の**ノヴァシュヴァーベン方言**の影響を強く受けている。郷土料理としては、岩塩採掘に由来する塩気の強い燻製肉**「ハゼルブルガー・ザルツブラーテン」**や、ハゼル川の豊富な水利を利用して育まれた水生植物を煮込んだ**「フュート・アオホ」**などが知られている。
             </p>
 
             <h2 id="出典">7 出典</h2>
-            <div class="references">
-                <p><span class="reference">[1]</span> ハゼルブルク歴史年鑑編纂委員会, 『自由王国の短期独立とプロイセンの緩衝地帯戦略』, 1995年, pp. 45-58.</p>
-                <p><span class="reference">[2]</span> ヴュルテンベルク州観光局公式文書, 『名誉王制の創設と旧王室財産の継承に関する覚書』, 1872年10月1日発行.</p>
-                <p><span class="reference">[3]</span> ヴァイゼンベルク, ユリアス. 『ノヴァハゼルブルク：記憶と再生の建築哲学』. シュヴァーベン出版, 1998年.</p>
-                <p><span class="reference">[4]</span> ノヴァハゼルブルク家史研究会, 『ヴァイゼンベルク家系図と1930年代の継承危機』, 2005年, pp. 112-120.</p>
-                <p><span class="reference">[5]</span> ノヴァハゼルブルク市経済局, 『精密機械産業史と地域技術の融合』, 2010年, p. 8.</p>
-                <p><span class="reference">[6]</span> ドイツ連邦歴史都市景観保護財団. 『歴史都市における色彩規範と法的拘束力：ノヴァハゼルブルクの事例』. 2022年, pp. 33-40.</p>
-                <p><span class="reference">[7]</span> 市政調査会, 『ヴァイゼンベルク財団の寄付が市議会予算案に与える影響についての定量的分析』, 2018年, pp. 78-90.</p>
-                <p><span class="reference">[8]</span> 真夏の夜の淫夢,『野獣と化した先輩』, 1919年, p. 810.</p>
-            </div>
+            <p style="font-size: 0.8em;">
+                [1] Hans-Peter Müller, *Das Freie Königreich Haselburg: Mythos und Realität*, 2005.<br>
+                [2] Stadtarchiv Nova Hazelburg, *Haselburger Abkommen* (1871).<br>
+                [3] Julius Weisenberg, *Die neue Authentizität: Denkmalschutz nach dem Nova-Modell*, 1985.<br>
+                [4] Maria Koster, *Zwischen Hakenkreuz und Krone: Die Weisenberg-Krise 1934-1940*, 2012.<br>
+                [5] Dr. Ingrid Schmitt, *Salz und Souveränität: Die Ökonomie der Haselburg*, 1999.<br>
+                [6] Nova Hazelburg Bauordnung (1995, rev. 2023).<br>
+                [7] Landesrechnungshof Baden-Württemberg, *Prüfbericht zur Stadt Nova Hazelburg* (2020).
+            </p>
         </div>
     </div>
 </body>
