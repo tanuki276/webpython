@@ -10,14 +10,16 @@
             --wiki-border: #a2a9b1;
             --wiki-link: #0645ad;
             --wiki-header-bg: #eaecf0;
-            --map-bg: #e6e6e6; /* 地図の背景を少し濃く */
+            --map-bg: #e6e6e6; 
             --river-color: #6a95f0;
             --park-color: #c9e4c9;
             --road-main: #555;
+            --road-rail: #a0522d; /* 鉄道色 */
             --road-local: #999;
-            --old-town-border: #dc3545; /* 赤で旧市街を強調 */
+            --old-town-border: #dc3545;
             --hotel-color: #00bcd4;
             --uni-color: #ff9800;
+            --elevation-shadow: rgba(0, 0, 0, 0.1); /* 標高の影 */
         }
         body {
             font-family: 'Times New Roman', Times, serif;
@@ -42,7 +44,7 @@
             border-top: none;
             min-height: 100vh;
         }
-        /* Headers and basic styling remain the same */
+        /* Headers */
         h1 {
             font-size: 1.8em;
             font-weight: normal;
@@ -68,7 +70,7 @@
             text-decoration: underline;
         }
         
-        /* Infobox (右側の表) - Same as previous */
+        /* Infobox (右側の表) */
         .infobox {
             width: 300px;
             margin-left: 20px;
@@ -109,7 +111,7 @@
             font-style: italic;
         }
 
-        /* TOC (目次) - Same as previous */
+        /* TOC (目次) */
         #toc {
             border: 1px solid var(--wiki-border);
             background-color: #f9f9f9;
@@ -135,7 +137,7 @@
         .map-api {
             margin: 1em 0;
             border: 1px solid var(--wiki-border);
-            height: 400px; /* より大きくして詳細を表現 */
+            height: 450px; /* さらに大きく */
             position: relative;
             overflow: hidden;
             background-color: var(--map-bg);
@@ -144,11 +146,12 @@
             position: absolute;
             top: 10px;
             right: 10px;
-            z-index: 10;
+            z-index: 30;
             background: white;
             border: 1px solid var(--wiki-border);
             padding: 5px;
             border-radius: 3px;
+            font-size: 0.8em;
         }
         .map-controls button {
             background: #fff;
@@ -165,17 +168,20 @@
             height: 100%;
         }
         
-        /* 1. 地理的特徴（川・公園・採掘跡） */
-        #map-features { position: relative; }
+        /* 地理的特徴と標高 */
+        #map-features { 
+            position: relative; 
+            box-shadow: inset 0 0 10px var(--elevation-shadow); /* 標高の影 */
+        }
         .feature-river { 
             position: absolute; 
             background: var(--river-color); 
             width: 120%; 
-            height: 30px; 
-            top: 60%; 
+            height: 35px; 
+            top: 65%; 
             left: -10%;
-            transform: rotate(-8deg); /* 傾きを調整 */
-            border-top: 1px solid #3366cc;
+            transform: rotate(-10deg);
+            border-top: 2px solid #3366cc;
         }
         .feature-park {
             position: absolute;
@@ -186,52 +192,69 @@
             left: 55%;
             border: 1px solid green;
             opacity: 0.8;
+            border-radius: 5px;
         }
         .feature-osg {
             position: absolute;
             background: #ffecb3;
-            width: 15%;
-            height: 15%;
-            top: 70%;
+            width: 20%; /* 採掘跡を広く */
+            height: 25%;
+            top: 5%;
             left: 5%;
-            border: 1px dashed orange;
+            border: 2px dashed orange;
             font-size: 0.7em;
             text-align: center;
             line-height: 1.1;
             padding-top: 5px;
             opacity: 0.9;
+            box-shadow: inset 0 0 5px rgba(139, 69, 19, 0.5); /* 土壌の影 */
         }
 
-        /* 2. 道路網の表現 */
+        /* 道路網と鉄道 */
         .road-main {
             position: absolute;
             background: var(--road-main);
-            height: 5px;
-            z-index: 5;
+            height: 7px; /* 幹線道路を太く */
+            z-index: 15;
+            border-radius: 2px;
         }
         .road-local {
             position: absolute;
             background: var(--road-local);
             height: 3px;
-            z-index: 4;
+            z-index: 14;
         }
-        #road-b19 { top: 75%; left: 0%; width: 100%; } /* 東西幹線道路 */
-        #road-alt { top: 10%; left: 40%; width: 60%; transform: rotate(15deg); } /* 北東への接続道路 */
+        .old-town-road {
+            position: absolute;
+            background: #a9a9a9; /* 石畳風 */
+            height: 4px;
+            z-index: 16;
+            opacity: 0.7;
+        }
+        .rail-line {
+            position: absolute;
+            background: var(--road-rail);
+            height: 2px;
+            width: 100%;
+            top: 80%;
+            z-index: 10;
+        }
 
-        /* 3. 旧市街境界（歴史保護地区） */
+        /* 旧市街境界（歴史保護地区） */
         .old-town-boundary {
             position: absolute;
-            width: 30%;
-            height: 40%;
-            top: 45%;
+            width: 35%;
+            height: 45%;
+            top: 40%;
             left: 30%;
-            border: 2px solid var(--old-town-border);
+            border: 3px solid var(--old-town-border);
             opacity: 0.7;
-            z-index: 6;
-            background: rgba(255, 255, 255, 0.4); /* 旧市街エリアを白っぽく */
+            z-index: 17;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 5px;
         }
         
-        /* 4. ピンと施設 */
+        /* ピンと施設 */
         .map-pin {
             position: absolute;
             width: 18px;
@@ -240,7 +263,7 @@
             border: 3px solid white;
             box-shadow: 0 0 5px rgba(0,0,0,0.5);
             transform: translate(-50%, -100%);
-            z-index: 20;
+            z-index: 40;
         }
         .pin-label {
             position: absolute;
@@ -252,18 +275,13 @@
             font-weight: bold;
             color: #333;
         }
-        #pin-center { top: 60%; left: 45%; background-color: var(--old-town-border); } /* 赤: 旧市街の中心 */
-        #pin-castle { top: 50%; left: 55%; background-color: var(--wiki-link); } /* 青: 城 */
-        #pin-station { top: 76%; left: 35%; background-color: #333; } /* 黒: 駅 (幹線道路沿い) */
-        #pin-hotel { top: 50%; left: 35%; background-color: var(--hotel-color); } /* シアン: 高級ホテル */
-        #pin-uni { top: 20%; left: 20%; background-color: var(--uni-color); } /* オレンジ: NAI（大学施設） */
-        #pin-shop { top: 65%; left: 40%; background-color: green; } /* 緑: 工芸品店（旧市街内） */
-
-        /* 補助情報 (出典など) - Same as previous */
-        .references {
-            font-size: 0.8em;
-            line-height: 1.4;
-        }
+        #pin-center { top: 60%; left: 45%; background-color: var(--old-town-border); }
+        #pin-castle { top: 50%; left: 55%; background-color: var(--wiki-link); }
+        #pin-station { top: 80%; left: 35%; background-color: #333; }
+        #pin-hotel { top: 50%; left: 35%; background-color: var(--hotel-color); }
+        #pin-uni { top: 15%; left: 20%; background-color: var(--uni-color); }
+        #pin-shop { top: 55%; left: 43%; background-color: green; }
+        #pin-market { top: 63%; left: 47%; background-color: orange; } /* 市場 */
     </style>
 </head>
 <body>
@@ -280,6 +298,7 @@
                 <tr><th>州</th><td><a href="./バーデン＝ヴュルテンベルク州">バーデン＝ヴュルテンベルク州</a></td></tr>
                 <tr><th>郡</th><td>ノヴァハゼルブルク郡</td></tr>
                 <tr><th>座標</th><td><span class="coord">北緯48度15分32秒, 東経9度35分18秒</span></td></tr>
+                <tr><th>標高</th><td>平均560m（最高750m）</td></tr>
                 <tr><th colspan="2" style="text-align:center;">行政・統計</th></tr>
                 <tr><th>市長</th><td>ヨハン・マイヤー (<a href="./自由民主党_(ドイツ)">FDP</a>)</td></tr>
                 <tr><th>地位</th><td>郡都市（Große Kreisstadt）</td></tr>
@@ -290,6 +309,7 @@
                 <tr><th>市外局番</th><td>07471</td></tr>
                 <tr><th>自動車登録コード</th><td><a href="./ドイツの自動車登録コード">NHB</a></td></tr>
                 <tr><th colspan="2" style="text-align:center;">その他</th></tr>
+                <tr><th>地域訛り</th><td>ノヴァシュヴァーベン語</td></tr>
                 <tr><th>特産品</th><td>特製岩塩（治療用）、美術工芸品</td></tr>
             </table>
 
@@ -304,15 +324,36 @@
                         <ul>
                             <li><a href="#起源と独立">1.1 起源と独立 (1780年代–1871年)</a></li>
                             <li><a href="#名誉王制">1.2 ヴュルテンベルクへの編入と名誉王制</a></li>
-                            <li><a href="#戦災と伝統の断絶">1.3 戦災と伝統の断絶</a></li>
-                            <li><a href="#再命名">1.4 戦後復興と「ノヴァハゼルブルク」への再命名</a></li>
+                            <li><a href="#ヴァイゼンベルク家系">1.3 ヴァイゼンベルク家の家系と継承問題</a></li>
+                            <li><a href="#戦災と伝統の断絶">1.4 戦災と伝統の断絶</a></li>
+                            <li><a href="#再命名">1.5 戦後復興と「ノヴァハゼルブルク」への再命名</a></li>
                         </ul>
                     </li>
-                    <li><a href="#地理と交通">2 地理と交通</a></li>
-                    <li><a href="#行政と政治">3 行政と政治</a></li>
-                    <li><a href="#経済">4 経済と産業</a></li>
+                    <li><a href="#地理">2 地理</a>
+                        <ul>
+                            <li><a href="#地形と水利">2.1 地形と水利</a></li>
+                            <li><a href="#交通">2.2 交通</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#行政と政治">3 行政と政治</a>
+                        <ul>
+                            <li><a href="#市議会">3.1 市議会と政党勢力図</a></li>
+                            <li><a href="#都市計画">3.2 都市計画と景観保護</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#経済">4 経済と産業</a>
+                        <ul>
+                            <li><a href="#観光業">4.1 観光業と工芸品</a></li>
+                            <li><a href="#精密機械">4.2 精密機械産業の発展</a></li>
+                        </ul>
+                    </li>
                     <li><a href="#教育">5 教育と研究</a></li>
-                    <li><a href="#観光と文化">6 観光と文化</a></li>
+                    <li><a href="#文化">6 文化</a>
+                        <ul>
+                            <li><a href="#言語と訛り">6.1 言語と地域訛り</a></li>
+                            <li><a href="#郷土料理">6.2 郷土料理</a></li>
+                        </ul>
+                    </li>
                     <li><a href="#出典">7 出典</a></li>
                 </ul>
             </div>
@@ -326,58 +367,89 @@
             <p>
                 1871年の<a href="./ドイツ帝国">ドイツ帝国</a>成立に伴い、政治的主権の維持が不可能となり、ハゼルブルク王国はヴュルテンベルク王国に編入された。しかし、ヴァイゼンベルク家には実権のない名誉職である**「街国王」**（Stadtkönig）の称号と、ノヴァハゼルブルク城および旧王室庭園の私有財産権が特権として認められた<span class="reference">[2]</span>。
             </p>
-            <h3 id="戦災と伝統の断絶">1.3 戦災と伝統の断絶</h3>
+            <h3 id="ヴァイゼンベルク家系">1.3 ヴァイゼンベルク家の家系と継承問題</h3>
+            <p>
+                ヴァイゼンベルク家は、初代街国王レオポルドの死後、長子相続制に基づき地位を継承してきた。特筆すべきは、1930年代に家系図の正統性について一時的に議論が巻き起こった点である。これは、第3代街国王の末弟が、ナチス政権下において家族とは異なる政治的立場を取ったことに端を発するが、最終的には家門内部で解決され、継承は維持された<span class="reference">[4]</span>。
+            </p>
+            <h3 id="戦災と伝統の断絶">1.4 戦災と伝統の断絶</h3>
             <p>
                 <a href="./第二次世界大戦">後期戦争</a>（地元歴史学用語）において、ハゼルブルク街は軍需輸送線に近接していたため、激しい<a href="./空襲">空爆</a>と地上戦に巻き込まれ、市街地の約70%が破壊された。この戦災により、在位していた街国王が死亡し、ヴァイゼンベルク家による象徴的地位は一時的に途絶した。
             </p>
-            <h3 id="再命名">1.4 戦後復興と「ノヴァハゼルブルク」への再命名</h3>
+            <h3 id="再命名">1.5 戦後復興と「ノヴァハゼルブルク」への再命名</h3>
             <p>
                 戦後、復興は遅れたが、街国王の孫にあたるユリアス・ヴァイゼンベルク（1928–1998）が巨額の資金を獲得し、再建に着手。城は完全な歴史的再現ではなく、崩落遺構を**「戦災記念区」**として保存し、主要部を再建するという折衷的復元哲学を採用した。1980年代の復興完了時に、再建地区は「Nova Hazelburg」（新しいハゼルブルク）として発表され、「失われた主権を文化と歴史によって取り戻す」という精神的独立の象徴とされた<span class="reference">[3]</span>。
             </p>
             
-            <h2 id="地理と交通">2 地理と交通</h2>
+            <h2 id="地理">2 地理</h2>
+            <h3 id="地形と水利">2.1 地形と水利</h3>
+            <p>
+                ノヴァハゼルブルクは<a href="./シュヴァーベンアルプス">シュヴァーベンアルプス</a>の北縁、ドナウ川上流域に位置する。旧市街の北側はかつての岩塩採掘場であった丘陵地帯（最高標高750m）となっており、これが街の防衛と経済基盤を支えてきた。市街地の南側を流れるドナウ川の支流「ハゼル川」が水運と水力に利用されてきた。ハゼル川は市の西部でドナウ本流に合流する。
+            </p>
+            
+            <h3 id="交通">2.2 交通</h3>
             <div class="map-api">
                 <div class="map-controls">
                     <button>+</button><button>-</button>
-                    <button>衛星</button><button>地形</button><button>交通</button>
+                    <button>航空写真</button><button>地形</button><button>バス路線</button>
                 </div>
                 <div class="map-layer" id="map-features">
-                    <div class="road-main" id="road-b19">B19（幹線道路）</div>
-                    <div class="road-local" style="top: 50%; left: 10%; width: 40%; transform: rotate(-3deg);"></div>
-                    <div class="road-main" id="road-alt" style="top: 10%; left: 40%; width: 60%; transform: rotate(15deg);">B28（幹線道路）</div>
-
-                    <div class="feature-river">ドナウ川支流</div>
-                    <div class="feature-park">旧王室庭園区</div>
-                    <div class="feature-osg">岩塩<br>採掘跡</div>
-
+                    <div class="rail-line"></div>
+                    <div class="road-main" style="top: 75%; left: 0%; width: 100%;" title="B312">B312</div>
+                    <div class="road-main" style="top: 50%; left: 0%; width: 80%; transform: rotate(-5deg);" title="B19">B19</div>
+                    <div class="road-local" style="top: 35%; left: 20%; width: 45%; transform: rotate(-20deg);"></div>
+                    
                     <div class="old-town-boundary"></div>
+                    <div class="old-town-road" style="top: 55%; left: 38%; width: 15%; transform: rotate(15deg);"></div>
+                    <div class="old-town-road" style="top: 45%; left: 42%; width: 15%;"></div>
+
+                    <div class="feature-river">ハゼル川</div>
+                    <div class="feature-park">旧王室庭園区</div>
+                    <div class="feature-osg">岩塩<br>採掘跡<br>(丘陵地)</div>
                     
                     <div class="map-pin" id="pin-center"><div class="pin-label">市庁舎</div></div>
                     <div class="map-pin" id="pin-castle" style="background-color: var(--wiki-link);"><div class="pin-label">ノヴァハゼルブルク城</div></div>
                     <div class="map-pin" id="pin-station" style="background-color: #333;"><div class="pin-label">中央駅</div></div>
                     <div class="map-pin" id="pin-hotel"><div class="pin-label">グランドホテル</div></div>
                     <div class="map-pin" id="pin-uni" style="background-color: var(--uni-color);"><div class="pin-label">NAI（建築遺産学院）</div></div>
-                    <div class="map-pin" id="pin-shop" style="background-color: green; top: 55%; left: 43%;"><div class="pin-label">岩塩工芸店</div></div>
+                    <div class="map-pin" id="pin-shop" style="background-color: green;"><div class="pin-label">岩塩工芸店</div></div>
+                    <div class="map-pin" id="pin-market" style="background-color: orange;"><div class="pin-label">中央市場広場</div></div>
                 </div>
-                <p style="position:absolute; bottom:5px; left:10px; font-size:0.7em; z-index: 1;">凡例: ■歴史保護区 ■河川 ■主要道路 (地図データ: NovaGeoAPI v4.0 / 2024)</p>
+                <p style="position:absolute; bottom:5px; left:10px; font-size:0.7em; z-index: 1;">凡例: ■歴史保護区 ■河川 ■幹線道路 ■鉄道線 (地図データ: NovaGeoAPI v5.0 / 2025)</p>
             </div>
             <p>
-                ノヴァハゼルブルクは<a href="./ドナウ川">ドナウ川</a>上流域に位置し、旧市街はドナウ川の支流と岩塩採掘が行われていた丘陵地帯に挟まれている。鉄道は、南ドイツ主要都市を結ぶ地域急行線（RE）の停車駅であり、駅舎は旧王国のバロック様式で再現されている。市内交通としては、旧市街ではクラシックなデザインの**ノヴァ・トラム**が運行されている。
+                ノヴァハゼルブルクは鉄道においては、<a href="./ドイツ鉄道">ドイツ鉄道</a>の南ドイツ主要都市を結ぶ地域急行線（RE）の停車駅であり、アクセスは比較的良好である。駅舎は旧王国のバロック様式で再現されている。市内の主要幹線道路は**連邦道路B19号線**と**B312号線**が交差しており、旧市街を迂回するように設計されている。市内交通としては、旧市街ではクラシックなデザインの**ノヴァ・トラム**が運行されている。
             </p>
 
             <h2 id="行政と政治">3 行政と政治</h2>
-            <h3 id="街国王とヴァイゼンベルク財団">3.1 街国王とヴァイゼンベルク財団</h3>
+            <h3 id="市議会">3.1 市議会と政党勢力図</h3>
             <p>
-                街国王の称号は現在もヴァイゼンベルク家によって継承されているが、これは実権のない名誉職である。しかし、<a href="./財団法人">ヴァイゼンベルク財団</a>がノヴァハゼルブルク城および庭園の私有財産権を保持し、市の文化イベントや慈善事業に多額の出資を行うため、市の行政および文化政策に対して強い影響力を持つ。市は州政府から「文化・歴史都市再生憲章」のモデル都市に指定されている。
+                ノヴァハゼルブルク市議会（Stadtrat）は40議席で構成され、市長をヨハン・マイヤー（FDP）が務めている（2024年現在）。伝統的に保守とリベラルの勢力が強い地域特性が見られる。
             </p>
-            <h3 id="都市計画">3.2 都市計画</h3>
+            <table style="width:50%; border-collapse:collapse; margin:10px 0;">
+                <thead>
+                    <tr><th>政党</th><th>議席数（2023年選挙）</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><a href="./キリスト教民主同盟_(ドイツ)">CDU</a>（キリスト教民主同盟）</td><td>15</td></tr>
+                    <tr><td><a href="./自由民主党_(ドイツ)">FDP</a>（自由民主党）</td><td>11</td></tr>
+                    <tr><td><a href="./同盟90/緑の党">緑の党</a> (Die Grünen)</td><td>8</td></tr>
+                    <tr><td>SPD（ドイツ社会民主党）</td><td>6</td></tr>
+                </tbody>
+            </table>
+
+            <h3 id="都市計画">3.2 都市計画と景観保護</h3>
             <p>
-                都市計画においては、旧市街は歴史保護地区に指定されており、ユリアスの復興哲学に基づき、特に木組みの家々の景観保護が最優先されている。旧市街への自動車乗り入れは厳しく制限されており、環境と景観に配慮した交通政策が敷かれている。
+                「ノヴァ・モデル」（ユリアス・ヴァイゼンベルクの復興哲学）に基づき、都市計画は**景観調和**と**歴史的真正性**の二律背反をテーマとしている。旧市街は厳格な歴史保護地区に指定されており、建築物の高さ制限、色彩規定、屋根の素材規制が詳細に定められている。また、市は2035年までに旧市街周辺を**ゼロエミッション・ゾーン**とする計画を推進中であり、市内交通の電動化とトラム路線の拡張を主要施策としている。
             </p>
 
             <h2 id="経済">4 経済と産業</h2>
+            <h3 id="観光業">4.1 観光業と工芸品</h3>
             <p>
-                市の経済は、かつての基盤であった岩塩採掘から脱却し、観光業（市経済の約40%）、クリエイティブ産業、歴史資源工学の3分野に特化している。特産品の岩塩は、食用よりも<a href="./タラソテラピー">塩治療</a>（ザルツクア）や岩塩工芸品として**ブランド化**されている。
+                市の経済は、観光業が中心であり、総収入の約40%を占める。特に富裕層をターゲットとした高級な歴史観光と、塩治療（ザルツクア）を組み合わせたウェルネス観光に力を入れている。特産品の岩塩は、食用から治療用・工芸品へとシフトし、地域の重要なブランド「**ノヴァ・ザルツ**」として確立されている。
+            </p>
+            <h3 id="精密機械">4.2 精密機械産業の発展</h3>
+            <p>
+                観光都市というイメージが強いが、市の郊外には、バーデン＝ヴュルテンベルク州の地域産業特性を反映した精密機械、特に光学機器や自動車部品の零細・中小企業が集中している。これは、戦後復興期に旧ハゼルブルク城の修復に携わった技術者が、地域の伝統的な時計製造技術と組み合わせて創業した歴史に由来する<span class="reference">[5]</span>。
             </p>
 
             <h2 id="教育">5 教育と研究</h2>
@@ -389,28 +461,19 @@
                 <li>**ドナウ岩塩研究センター:** 鉱物学、保存技術、塩治療応用に関する研究を行う。</li>
             </ul>
 
-            <h2 id="観光と文化">6 観光と文化</h2>
-            <h3 id="名所">6.1 主要な名所</h3>
-            <ul>
-                <li>**ノヴァハゼルブルク城:** 再建された南棟と、崩落遺構がそのまま残された「戦災記念区」のコントラストが特徴。</li>
-                <li>**ヴァイゼンベルク家関連資料館:** 旧王国の公文書、プロイセンとの非公式外交記録、街国王時代の工芸品を展示。</li>
-                <li>**旧市街歴史保護地区:** 中世・近世の<a href="./木組みの家">木組みの家々</a>が集中する。</li>
-            </ul>
-            <h3 id="イベント">6.2 年間主要イベント</h3>
-            <ul>
-                <li>「塩の道」フェスティバル (Salzweg-Fest): 毎年9月開催。塩の流通をテーマにした中世市場、伝統舞踊。</li>
-                <li>ノヴァハゼルブルク国際映画祭 (IFF-NovaH): 毎年5月開催。「歴史と記憶」をテーマとしたドキュメンタリー・短編映画に特化。</li>
-                <li>街国王の誕生日祝祭: 毎年3月。ヴァイゼンベルク家当主を祝う市民パレードで、市民が「旧自由王国の民」のアイデンティティを再確認する。</li>
-            </ul>
+            <h2 id="文化">6 文化</h2>
+            <h3 id="言語と訛り">6.1 言語と地域訛り</h3>
+            <p>
+                公用語はドイツ語標準語であるが、日常的には「ノヴァシュヴァーベン語」（Nova-Schwäbisch）と呼ばれる<a href="./シュヴァーベン語">シュヴァーベン語</a>の方言が使用されている。この訛りは、標準的なシュヴァーベン語と比較して、旧ハゼルブルク王国の宮廷語であったフランス語とオーストリア南部の方言の影響をわずかに受けているとされる。
+            </p>
+            <h3 id="郷土料理">6.2 郷土料理</h3>
+            <p>
+                代表的な郷土料理は、岩塩を用いた豚肉の塩漬け**「ザルツ・ブラーテン」（Salz-Braten）**と、採掘場の厳しい労働を支えたジャガイモとチーズの素朴な料理**「ベアグ・ケーゼ」（Berg-Käse）**である。毎年秋の収穫祭では、これらの伝統料理が中央市場広場（<span class="pin-label" style="position:initial; font-weight:normal;">中央市場広場</span>）で振る舞われる。
+            </p>
 
             <h2 id="出典">7 出典</h2>
             <div class="references">
                 <p><span class="reference">[1]</span> ハゼルブルク歴史年鑑編纂委員会, 『自由王国の短期独立とプロイセンの緩衝地帯戦略』, 1995年, pp. 45-58.</p>
                 <p><span class="reference">[2]</span> ヴュルテンベルク州観光局公式文書, 『名誉王制の創設と旧王室財産の継承に関する覚書』, 1872年10月1日発行.</p>
                 <p><span class="reference">[3]</span> ヴァイゼンベルク, ユリアス. 『ノヴァハゼルブルク：記憶と再生の建築哲学』. シュヴァーベン出版, 1998年.</p>
-                <p><span class="reference">[4]</span> 真夏の夜の淫夢,『野獣と化した先輩』, 1919年, p. 810.</p>
-            </div>
-        </div>
-    </div>
-</body>
-</html>
+                <p><span class="reference">[4]</span> ノヴァハゼルブルク家史研究会, 『ヴァイゼンベルク家系図と1930年代の継承
