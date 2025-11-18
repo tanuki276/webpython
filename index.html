@@ -10,9 +10,14 @@
             --wiki-border: #a2a9b1;
             --wiki-link: #0645ad;
             --wiki-header-bg: #eaecf0;
-            --map-bg: #eceff1;
+            --map-bg: #e6e6e6; /* 地図の背景を少し濃く */
             --river-color: #6a95f0;
             --park-color: #c9e4c9;
+            --road-main: #555;
+            --road-local: #999;
+            --old-town-border: #dc3545; /* 赤で旧市街を強調 */
+            --hotel-color: #00bcd4;
+            --uni-color: #ff9800;
         }
         body {
             font-family: 'Times New Roman', Times, serif;
@@ -37,7 +42,7 @@
             border-top: none;
             min-height: 100vh;
         }
-        /* Headers */
+        /* Headers and basic styling remain the same */
         h1 {
             font-size: 1.8em;
             font-weight: normal;
@@ -63,7 +68,7 @@
             text-decoration: underline;
         }
         
-        /* Infobox (右側の表) */
+        /* Infobox (右側の表) - Same as previous */
         .infobox {
             width: 300px;
             margin-left: 20px;
@@ -104,7 +109,7 @@
             font-style: italic;
         }
 
-        /* TOC (目次) */
+        /* TOC (目次) - Same as previous */
         #toc {
             border: 1px solid var(--wiki-border);
             background-color: #f9f9f9;
@@ -130,10 +135,10 @@
         .map-api {
             margin: 1em 0;
             border: 1px solid var(--wiki-border);
-            height: 350px;
+            height: 400px; /* より大きくして詳細を表現 */
             position: relative;
             overflow: hidden;
-            background-color: #f5f5f5;
+            background-color: var(--map-bg);
         }
         .map-controls {
             position: absolute;
@@ -159,47 +164,78 @@
             width: 100%;
             height: 100%;
         }
-        /* 架空の地図レイヤー表現 */
-        #map-features { 
-            position: relative; 
-            border: 2px solid #333; 
-        }
+        
+        /* 1. 地理的特徴（川・公園・採掘跡） */
+        #map-features { position: relative; }
         .feature-river { 
             position: absolute; 
             background: var(--river-color); 
-            width: 100%; 
-            height: 20px; 
+            width: 120%; 
+            height: 30px; 
             top: 60%; 
-            transform: rotate(-5deg);
+            left: -10%;
+            transform: rotate(-8deg); /* 傾きを調整 */
+            border-top: 1px solid #3366cc;
         }
         .feature-park {
             position: absolute;
             background: var(--park-color);
-            width: 30%;
-            height: 40%;
-            top: 10%;
-            left: 60%;
+            width: 35%;
+            height: 35%;
+            top: 5%;
+            left: 55%;
             border: 1px solid green;
+            opacity: 0.8;
         }
         .feature-osg {
-            /* Old Saltworks Area */
             position: absolute;
             background: #ffecb3;
             width: 15%;
             height: 15%;
-            top: 75%;
+            top: 70%;
             left: 5%;
             border: 1px dashed orange;
             font-size: 0.7em;
             text-align: center;
             line-height: 1.1;
             padding-top: 5px;
+            opacity: 0.9;
         }
+
+        /* 2. 道路網の表現 */
+        .road-main {
+            position: absolute;
+            background: var(--road-main);
+            height: 5px;
+            z-index: 5;
+        }
+        .road-local {
+            position: absolute;
+            background: var(--road-local);
+            height: 3px;
+            z-index: 4;
+        }
+        #road-b19 { top: 75%; left: 0%; width: 100%; } /* 東西幹線道路 */
+        #road-alt { top: 10%; left: 40%; width: 60%; transform: rotate(15deg); } /* 北東への接続道路 */
+
+        /* 3. 旧市街境界（歴史保護地区） */
+        .old-town-boundary {
+            position: absolute;
+            width: 30%;
+            height: 40%;
+            top: 45%;
+            left: 30%;
+            border: 2px solid var(--old-town-border);
+            opacity: 0.7;
+            z-index: 6;
+            background: rgba(255, 255, 255, 0.4); /* 旧市街エリアを白っぽく */
+        }
+        
+        /* 4. ピンと施設 */
         .map-pin {
             position: absolute;
             width: 18px;
             height: 18px;
-            background-color: red;
             border-radius: 50%;
             border: 3px solid white;
             box-shadow: 0 0 5px rgba(0,0,0,0.5);
@@ -216,11 +252,14 @@
             font-weight: bold;
             color: #333;
         }
-        #pin-center { top: 60%; left: 45%; }
-        #pin-castle { top: 40%; left: 55%; background-color: blue; }
-        #pin-station { top: 70%; left: 40%; background-color: #333; }
-        
-        /* 補助情報 (出典など) */
+        #pin-center { top: 60%; left: 45%; background-color: var(--old-town-border); } /* 赤: 旧市街の中心 */
+        #pin-castle { top: 50%; left: 55%; background-color: var(--wiki-link); } /* 青: 城 */
+        #pin-station { top: 76%; left: 35%; background-color: #333; } /* 黒: 駅 (幹線道路沿い) */
+        #pin-hotel { top: 50%; left: 35%; background-color: var(--hotel-color); } /* シアン: 高級ホテル */
+        #pin-uni { top: 20%; left: 20%; background-color: var(--uni-color); } /* オレンジ: NAI（大学施設） */
+        #pin-shop { top: 65%; left: 40%; background-color: green; } /* 緑: 工芸品店（旧市街内） */
+
+        /* 補助情報 (出典など) - Same as previous */
         .references {
             font-size: 0.8em;
             line-height: 1.4;
@@ -303,15 +342,24 @@
                     <button>衛星</button><button>地形</button><button>交通</button>
                 </div>
                 <div class="map-layer" id="map-features">
+                    <div class="road-main" id="road-b19">B19（幹線道路）</div>
+                    <div class="road-local" style="top: 50%; left: 10%; width: 40%; transform: rotate(-3deg);"></div>
+                    <div class="road-main" id="road-alt" style="top: 10%; left: 40%; width: 60%; transform: rotate(15deg);">B28（幹線道路）</div>
+
                     <div class="feature-river">ドナウ川支流</div>
                     <div class="feature-park">旧王室庭園区</div>
                     <div class="feature-osg">岩塩<br>採掘跡</div>
+
+                    <div class="old-town-boundary"></div>
                     
-                    <div class="map-pin" id="pin-center"><div class="pin-label">旧市街</div></div>
+                    <div class="map-pin" id="pin-center"><div class="pin-label">市庁舎</div></div>
                     <div class="map-pin" id="pin-castle" style="background-color: var(--wiki-link);"><div class="pin-label">ノヴァハゼルブルク城</div></div>
-                    <div class="map-pin" id="pin-station" style="background-color: #333;"><div class="pin-label">駅</div></div>
+                    <div class="map-pin" id="pin-station" style="background-color: #333;"><div class="pin-label">中央駅</div></div>
+                    <div class="map-pin" id="pin-hotel"><div class="pin-label">グランドホテル</div></div>
+                    <div class="map-pin" id="pin-uni" style="background-color: var(--uni-color);"><div class="pin-label">NAI（建築遺産学院）</div></div>
+                    <div class="map-pin" id="pin-shop" style="background-color: green; top: 55%; left: 43%;"><div class="pin-label">岩塩工芸店</div></div>
                 </div>
-                <p style="position:absolute; bottom:5px; left:10px; font-size:0.7em; z-index: 1;">凡例: ■歴史保護区 ■河川 ■主要道路 (地図データ: NovaGeoAPI v3.0 / 2024)</p>
+                <p style="position:absolute; bottom:5px; left:10px; font-size:0.7em; z-index: 1;">凡例: ■歴史保護区 ■河川 ■主要道路 (地図データ: NovaGeoAPI v4.0 / 2024)</p>
             </div>
             <p>
                 ノヴァハゼルブルクは<a href="./ドナウ川">ドナウ川</a>上流域に位置し、旧市街はドナウ川の支流と岩塩採掘が行われていた丘陵地帯に挟まれている。鉄道は、南ドイツ主要都市を結ぶ地域急行線（RE）の停車駅であり、駅舎は旧王国のバロック様式で再現されている。市内交通としては、旧市街ではクラシックなデザインの**ノヴァ・トラム**が運行されている。
