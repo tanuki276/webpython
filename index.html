@@ -1,171 +1,301 @@
-<!DOCTYPE html><html lang="ja">
+<!DOCTYPE html>
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>占守島の戦い</title>
+    <title>ノヴァハゼルブルク - Ikipedia</title>
     <style>
+        /* Base & Layout */
+        :root {
+            --wiki-main: #f8f9fa;
+            --wiki-border: #a2a9b1;
+            --wiki-link: #0645ad;
+            --wiki-header-bg: #eaecf0;
+            --map-bg: #eceff1;
+        }
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Times New Roman', Times, serif; /* Wikipedia風のセリフ体 */
+            line-height: 1.5;
+            background-color: var(--wiki-main);
+            color: #000;
+            padding: 0;
             margin: 0;
-            padding: 20px 20px 80px 20px; 
-            background-color: #f4f4f9;
-            color: #333;
-            text-align: center;
+            font-size: 0.9em;
         }
         .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background-color: #fff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-        h1 {
-            color: #006400;
-            border-bottom: 2px solid #eee;
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-        }
-        #title {
-            font-size: 1.8em;
-            color: #007bff;
-            margin-bottom: 15px;
-        }
-        #summary {
-            text-align: left;
-            font-size: 1.1em;
-            line-height: 1.6;
-            min-height: 100px;
-        }
-        .fixed-footer {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background-color: #ffffff;
-            padding: 10px 0;
-            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
-            z-index: 1000;
+            max-width: 1280px;
             display: flex;
-            justify-content: center;
-            gap: 10px;
+            margin: 0 auto;
+            padding: 20px;
         }
-        .footer-button {
-            border: none;
-            padding: 10px 20px;
-            text-align: center;
-            font-size: 16px;
-            cursor: pointer;
-            border-radius: 5px;
-            transition: background-color 0.3s ease, opacity 0.3s ease;
-            max-width: 150px;
+        .main-content {
             flex-grow: 1;
+            background-color: white;
+            padding: 10px 30px;
+            border: 1px solid var(--wiki-border);
+            border-top: none;
+            min-height: 100vh;
         }
-        #retryButton {
-            background-color: #28a745; 
-            color: white;
+        /* Headers */
+        h1 {
+            font-size: 1.8em;
+            font-weight: normal;
+            border-bottom: 1px solid var(--wiki-border);
+            padding-bottom: 5px;
+            margin-bottom: 5px;
         }
-        #retryButton:hover {
-            background-color: #218838;
+        h2 {
+            font-size: 1.4em;
+            border-bottom: 1px solid var(--wiki-border);
+            padding-bottom: 2px;
+            margin-top: 1.5em;
         }
-        .length-button {
-            background-color: #e9ecef;
-            color: #333;
+        h3 {
+            font-size: 1.1em;
+            margin-top: 1em;
         }
-        .length-button:hover {
-            background-color: #dee2e6;
+        a {
+            color: var(--wiki-link);
+            text-decoration: none;
         }
-        .length-button.active {
-            background-color: #007bff;
-            color: white;
+        a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Infobox (右側の表) */
+        .infobox {
+            width: 300px;
+            margin-left: 20px;
+            padding: 0;
+            border: 1px solid var(--wiki-border);
+            background-color: #f9f9f9;
+            font-size: 0.9em;
+            flex-shrink: 0;
+            float: right; /* Wiki風レイアウト */
+            margin: 0 0 1em 1em;
+            clear: right;
+            border-collapse: collapse;
+        }
+        .infobox caption {
+            background-color: var(--wiki-header-bg);
+            font-size: 1.1em;
             font-weight: bold;
+            padding: 5px;
+            text-align: center;
         }
-        .error {
-            color: red;
-            font-weight: bold;
+        .infobox table {
+            width: 100%;
+            border-collapse: collapse;
         }
+        .infobox th, .infobox td {
+            padding: 4px 8px;
+            border-top: 1px solid var(--wiki-border);
+            text-align: left;
+        }
+        .infobox th {
+            width: 40%;
+            background-color: var(--wiki-header-bg);
+        }
+        .infobox tr:nth-child(2) th, .infobox tr:nth-child(2) td {
+            border-top: none;
+        }
+        .coord {
+            font-style: italic;
+        }
+
+        /* TOC (目次) */
+        #toc {
+            border: 1px solid var(--wiki-border);
+            background-color: #f9f9f9;
+            padding: 10px;
+            margin: 1em 0;
+            width: fit-content;
+        }
+        #toc ul {
+            list-style: none;
+            padding-left: 1.5em;
+        }
+        #toc ul ul {
+            padding-left: 1em;
+            margin-top: 0;
+        }
+        #toc h2 {
+            font-size: 1.1em;
+            margin: 0;
+            border-bottom: none;
+        }
+
+        /* 補助情報 (出典など) */
+        .references {
+            font-size: 0.8em;
+            line-height: 1.4;
+        }
+
+        /* 地図 API */
+        .map-api {
+            margin: 1em 0;
+            padding: 10px;
+            background-color: var(--map-bg);
+            border: 1px solid var(--wiki-border);
+            text-align: center;
+            height: 250px;
+            position: relative;
+        }
+        .map-api-legend {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 5px;
+            border-radius: 3px;
+            font-size: 0.8em;
+        }
+        .map-api-pin {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background-color: red;
+            border-radius: 50%;
+            border: 2px solid white;
+            transform: translate(-50%, -50%);
+            animation: pulse 1s infinite alternate;
+        }
+        @keyframes pulse {
+            from { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7); }
+            to { box-shadow: 0 0 0 10px rgba(255, 0, 0, 0); }
+        }
+        #map-city { top: 60%; left: 45%; }
+        #map-castle { top: 50%; left: 55%; background-color: blue;}
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>イタリア統一運動</h1>
-        <h2 id="title">読み込んでいます...</h2>
-        <div id="summary"></div>
-    </div><div class="fixed-footer">
-    <button id="shortLength" class="footer-button length-button active" onclick="setLength('short')">短く </button>
-    <button id="longLength" class="footer-button length-button" onclick="setLength('long')">長く </button>
-    <button id="retryButton" class="footer-button" onclick="fetchRandomArticle()">やり直し</button>
-</div>
+        <div class="main-content">
+            <p style="text-align:right; font-size:0.7em;"><sup>[†]</sup>fuck israel <sup>[‡]</sup>slava ukraine <sup>[§]</sup>taiwan independence</p>
+            <h1>ノヴァハゼルブルク</h1>
 
-<script>
-    const API_URL = "https://ja.wikipedia.org/w/api.php";
-    let currentLength = 'short';
-    const LENGTH_MAP = {
-        'short': 300,
-        'long': 800
-    };
+            <table class="infobox" role="presentation">
+                <caption>ノヴァハゼルブルク</caption>
+                <tr><td colspan="2" style="text-align:center;"></td></tr>
+                <tr><th colspan="2" style="text-align:center;">地理</th></tr>
+                <tr><th>国</th><td><a href="./ドイツ連邦共和国">ドイツ連邦共和国</a></td></tr>
+                <tr><th>州</th><td><a href="./バーデン＝ヴュルテンベルク州">バーデン＝ヴュルテンベルク州</a></td></tr>
+                <tr><th>地方</th><td><a href="./ドナウ上流域行政区">ドナウ上流域行政区</a></td></tr>
+                <tr><th>郡</th><td>ノヴァハゼルブルク郡</td></tr>
+                <tr><th>座標</th><td><span class="coord">北緯48度15分32秒, 東経9度35分18秒</span></td></tr>
+                <tr><th colspan="2" style="text-align:center;">行政・統計</th></tr>
+                <tr><th>市長</th><td>ヨハン・マイヤー (<a href="./自由民主党_(ドイツ)">FDP</a>)</td></tr>
+                <tr><th>地位</th><td>郡都市（Große Kreisstadt）</td></tr>
+                <tr><th>総人口</th><td>58,012人（2023年12月31日時点）</td></tr>
+                <tr><th>面積</th><td>115.8 <a href="./平方キロメートル">km²</a></td></tr>
+                <tr><th>人口密度</th><td>500人/km²</td></tr>
+                <tr><th>郵便番号</th><td>72851–72854</td></tr>
+                <tr><th>市外局番</th><td>07471</td></tr>
+                <tr><th>自動車登録コード</th><td><a href="./ドイツの自動車登録コード">NHB</a></td></tr>
+                <tr><th colspan="2" style="text-align:center;">その他</th></tr>
+                <tr><th>特産品</th><td>特製岩塩（治療用）、美術工芸品</td></tr>
+            </table>
 
-    function setLength(length) {
-        if (currentLength === length) return;
-        currentLength = length;
-        document.getElementById('shortLength').classList.remove('active');
-        document.getElementById('longLength').classList.remove('active');
-        document.getElementById(length + 'Length').classList.add('active');
-        fetchRandomArticle(); 
-    }
+            <p>
+                <b>ノヴァハゼルブルク</b>（ドイツ語: Nova Hazelburg）は、ドイツ連邦共和国バーデン＝ヴュルテンベルク州南部に位置する<a href="./郡都市">郡都市</a>（Große Kreisstadt）。行政上は<a href="./テュービンゲン行政管区">テュービンゲン行政管区</a>ドナウ上流域行政区に属する。19世紀初頭に短期間ながら<span style="font-style:italic;">自由ハゼルブルク王国</span>の首都であった歴史的経緯から、現在も「旧小王国の都」としての<span style="font-style:italic;">文化的アイデンティティ</span>を保持しており、歴史資源を核とした観光・文化戦略都市として知られる。
+            </p>
 
-    async function fetchRandomArticle() {
-        const titleElement = document.getElementById('title');
-        const summaryElement = document.getElementById('summary');
+            <div id="toc">
+                <h2>目次</h2>
+                <ul>
+                    <li><a href="#歴史">1 歴史</a>
+                        <ul>
+                            <li><a href="#起源と独立">1.1 起源と独立 (1780年代–1871年)</a></li>
+                            <li><a href="#名誉王制">1.2 ヴュルテンベルクへの編入と名誉王制</a></li>
+                            <li><a href="#戦災と伝統の断絶">1.3 戦災と伝統の断絶</a></li>
+                            <li><a href="#再命名">1.4 戦後復興と「ノヴァハゼルブルク」への再命名</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#地理と交通">2 地理と交通</a></li>
+                    <li><a href="#行政と政治">3 行政と政治</a></li>
+                    <li><a href="#経済">4 経済と産業</a></li>
+                    <li><a href="#教育">5 教育と研究</a></li>
+                    <li><a href="#観光と文化">6 観光と文化</a></li>
+                    <li><a href="#出典">7 出典</a></li>
+                </ul>
+            </div>
 
-        titleElement.textContent = "取得中...";
-        summaryElement.textContent = "少々お待ちください...";
-        summaryElement.classList.remove('error');
+            <h2 id="歴史">1 歴史</h2>
+            <h3 id="起源と独立">1.1 起源と独立 (1780年代–1871年)</h3>
+            <p>
+                ノヴァハゼルブルクの起源は、<a href="./神聖ローマ帝国">神聖ローマ帝国</a>末期の<a href="./小領邦">小領邦</a>、ハゼルブルク伯領に遡る。1811年頃、ナポレオン戦争後の混乱期、当時の当主レオポルド・カール・フォン・ヴァイゼンベルクは、周辺大国（<a href="./バイエルン王国">バイエルン</a>、<a href="./ヴュルテンベルク王国">ヴュルテンベルク</a>）の勢力争いを逆手に取り、自由ハゼルブルク王国（Freies Königreich Haselburg）としての独立を宣言した。この独立は、岩塩採掘権による財政的自立と、<a href="./プロイセン王国">プロイセン王国</a>による南ドイツにおける牽制のための「緩衝地帯」戦略という外交的保護によって維持されたとされる<span class="reference">[1]</span>。
+            </p>
+            <h3 id="名誉王制">1.2 ヴュルテンベルクへの編入と名誉王制</h3>
+            <p>
+                1871年の<a href="./ドイツ帝国">ドイツ帝国</a>成立に伴い、政治的主権の維持が不可能となり、ハゼルブルク王国はヴュルテンベルク王国に編入された。しかし、ヴァイゼンベルク家には実権のない名誉職である**「街国王」**（Stadtkönig）の称号と、ノヴァハゼルブルク城および旧王室庭園の私有財産権が特権として認められた<span class="reference">[2]</span>。
+            </p>
+            <h3 id="戦災と伝統の断絶">1.3 戦災と伝統の断絶</h3>
+            <p>
+                <a href="./第二次世界大戦">後期戦争</a>（地元歴史学用語）において、ハゼルブルク街は軍需輸送線に近接していたため、激しい<a href="./空襲">空爆</a>と地上戦に巻き込まれ、市街地の約70%が破壊された。この戦災により、在位していた街国王が死亡し、ヴァイゼンベルク家による象徴的地位は一時的に途絶した。
+            </p>
+            <h3 id="再命名">1.4 戦後復興と「ノヴァハゼルブルク」への再命名</h3>
+            <p>
+                戦後、復興は遅れたが、街国王の孫にあたるユリアス・ヴァイゼンベルク（1928–1998）が巨額の資金を獲得し、再建に着手。城は完全な歴史的再現ではなく、崩落遺構を**「戦災記念区」**として保存し、主要部を再建するという折衷的復元哲学を採用した。1980年代の復興完了時に、再建地区は「Nova Hazelburg」（新しいハゼルブルク）として発表され、「失われた主権を文化と歴史によって取り戻す」という精神的独立の象徴とされた<span class="reference">[3]</span>。
+            </p>
+            
+            <h2 id="地理と交通">2 地理と交通</h2>
+            <div class="map-api">
+                <p style="margin:0; font-size:1.1em; font-weight:bold;">地図：ノヴァハゼルブルクとその主要施設</p>
+                <div class="map-api-legend">
+                    ● 市街中心<br>
+                    ● ノヴァハゼルブルク城
+                </div>
+                <div class="map-api-pin" id="map-city" title="市街中心"></div>
+                <div class="map-api-pin" id="map-castle" title="ノヴァハゼルブルク城"></div>
+                <p style="position:absolute; bottom:5px; right:10px; font-size:0.7em;">（データ出典：NovaGeoAPI v2.1）</p>
+            </div>
+            <p>
+                ノヴァハゼルブルクは<a href="./ドナウ川">ドナウ川</a>上流域に位置し、旧市街はドナウ川の支流と岩塩採掘が行われていた丘陵地帯に挟まれている。鉄道は、南ドイツ主要都市を結ぶ地域急行線（RE）の停車駅であり、アクセスは比較的良好である。市内交通としては、旧市街ではクラシックなデザインの**ノヴァ・トラム**が運行されている。
+            </p>
 
-        const params = {
-            action: "query",
-            format: "json",
-            generator: "random", 
-            grnnamespace: 0,
-            grnlimit: 1,
-            prop: "extracts",
-            exchars: LENGTH_MAP[currentLength], 
-            exintro: true, 
-            explaintext: true, 
-            origin: "*" 
-        };
+            <h2 id="行政と政治">3 行政と政治</h2>
+            <p>
+                街国王の称号は現在もヴァイゼンベルク家によって継承されているが、これは実権のない名誉職である。しかし、<a href="./財団法人">ヴァイゼンベルク財団</a>がノヴァハゼルブルク城および庭園の私有財産権を保持し、市の文化イベントや慈善事業に多額の出資を行うため、市の行政および文化政策に対して強い影響力を持つ。市は州政府から「文化・歴史都市再生憲章」のモデル都市に指定されている。
+            </p>
+            <p>
+                都市計画においては、旧市街は歴史保護地区に指定されており、ユリアスの復興哲学に基づき、特に木組みの家々の景観保護が最優先されている。旧市街への自動車乗り入れは厳しく制限されており、環境と景観に配慮した交通政策が敷かれている。
+            </p>
 
-        const url = API_URL + "?" + new URLSearchParams(params).toString();
+            <h2 id="経済">4 経済と産業</h2>
+            <p>
+                市の経済は、かつての基盤であった岩塩採掘から脱却し、観光業（市経済の約40%）、クリエイティブ産業、歴史資源工学の3分野に特化している。特産品の岩塩は、食用よりも<a href="./タラソテラピー">塩治療</a>（ザルツクア）や岩塩工芸品として**ブランド化**されている。
+            </p>
 
-        try {
-            const response = await fetch(url);
-            if (!response.ok) {
-                throw new Error(`HTTPエラー: ${response.status}`);
-            }
-            const data = await response.json();
+            <h2 id="教育">5 教育と研究</h2>
+            <p>
+                市の特異な歴史的遺構は、専門的な研究機関の設立を促している。
+            </p>
+            <ul>
+                <li>**ノヴァハゼルブルク建築遺産学院 (NAI):** 歴史都市復元学と戦災遺構保存技術の国際的な研究拠点。</li>
+                <li>**ドナウ岩塩研究センター:** 鉱物学、保存技術、塩治療応用に関する研究を行う。</li>
+            </ul>
 
-            const pages = data.query.pages;
-            const pageId = Object.keys(pages)[0];
-            const article = pages[pageId];
+            <h2 id="観光と文化">6 観光と文化</h2>
+            <h3 id="名所">6.1 主要な名所</h3>
+            <ul>
+                <li>**ノヴァハゼルブルク城:** 再建された南棟と、崩落遺構がそのまま残された「戦災記念区」のコントラストが特徴。</li>
+                <li>**ヴァイゼンベルク家関連資料館:** 旧王国の公文書、プロイセンとの非公式外交記録、街国王時代の工芸品を展示。</li>
+                <li>**旧市街歴史保護地区:** 中世・近世の<a href="./木組みの家">木組みの家々</a>が集中する。</li>
+            </ul>
+            <h3 id="イベント">6.2 年間主要イベント</h3>
+            <ul>
+                <li>「塩の道」フェスティバル (Salzweg-Fest): 毎年9月開催。塩の流通をテーマにした中世市場、伝統舞踊。</li>
+                <li>ノヴァハゼルブルク国際映画祭 (IFF-NovaH): 毎年5月開催。「歴史と記憶」をテーマとしたドキュメンタリー・短編映画に特化。</li>
+                <li>街国王の誕生日祝祭: 毎年3月。ヴァイゼンベルク家当主を祝う市民パレードで、市民が「旧自由王国の民」のアイデンティティを再確認する。</li>
+            </ul>
 
-            if (article.title && article.extract) {
-                titleElement.textContent = article.title;
-                const formattedExtract = article.extract.replace(/\n/g, '<br><br>');
-                summaryElement.innerHTML = formattedExtract;
-            } else {
-                throw new Error("有効なデータが返されませんでした。");
-            }
-
-        } catch (error) {
-            console.error("取得エラー:", error);
-            titleElement.textContent = "エラー発生";
-            summaryElement.innerHTML = `記事の取得中に問題が発生しました。<br>（${error.message}）<br>「王政復古」ボタンを再度押してみてください。`;
-            summaryElement.classList.add('error');
-        }
-    }
-
-    document.addEventListener('DOMContentLoaded', fetchRandomArticle);
-</script>
-
+            <h2 id="出典">7 出典</h2>
+            <div class="references">
+                <p><span class="reference">[1]</span> ハゼルブルク歴史年鑑, 『自由王国の短期独立とプロイセンの緩衝地帯戦略』 1995年.</p>
+                <p><span class="reference">[2]</span> ヴュルテンベルク州観光局公式文書, 『名誉王制の創設と旧王室財産の継承に関する覚書』 1872年.</p>
+                <p><span class="reference">[3]</span> ユリアス・ヴァイゼンベルク回顧録, 『ノヴァハゼルブルク：記憶と再生の建築哲学』 1998年.</p>
+                <p><span class="reference">[4]</span> 真夏の夜の淫夢,『野獣と化した先輩』 1919年.</p>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
