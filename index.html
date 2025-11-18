@@ -67,7 +67,7 @@
         a:hover {
             text-decoration: underline;
         }
-        
+
         /* Infobox (右側の表) */
         .infobox {
             width: 300px;
@@ -166,13 +166,13 @@
             object-fit: cover; /* コンテナに合わせて画像をトリミング */
             z-index: 1; /* コントロールの下に配置 */
         }
-        
+
         .map-controls {
             position: absolute;
             top: 10px; right: 10px; z-index: 30; background: white; border: 1px solid var(--wiki-border); padding: 5px; border-radius: 3px; font-size: 0.8em;
         }
-        
-        /* 凡例ボックス */
+
+        /* 凡例ボックス - 削除のためコメントアウト
         .map-legend {
             position: absolute;
             bottom: 10px;
@@ -185,6 +185,7 @@
         }
         .map-legend div { margin-bottom: 3px; }
         .legend-color { width: 10px; height: 10px; display: inline-block; margin-right: 5px; border: 1px solid #333; }
+        */
 
         /* 人口動態グラフ風 */
         .chart-container {
@@ -282,7 +283,7 @@
                             <li><a href="#郷土料理">6.3 言語、地域訛り、および郷土料理</a></li>
                         </ul>
                     </li>
-                    <li><a href="#出典">7 出典</a></li>
+                    <li><a href="#外部リンク">7 外部リンク</a></li> <li><a href="#出典">8 出典</a></li>
                 </ul>
             </div>
             <h2 id="歴史">1 歴史</h2>
@@ -310,13 +311,13 @@
             <p>
                 戦後、復興は周辺都市と比較して遅れたが、戦災を免れた最後の直系の子孫であるユリアス・ヴァイゼンベルク（1928–1998）が、海外で得た巨額の資金を投じ、再建事業に着手した。彼の主導した復興は、単なる建築物の再建に留まらず、明確な**「ノヴァ・モデル」**という復興哲学に基づいていた。これは、城の南棟を完全に歴史的に再現するのではなく、崩落した遺構をあえて**「戦災記念区」**として保存し、過去の傷跡を未来へ継承するという、ドイツの戦後処理における新しいアプローチを採用した点に特徴がある。1980年代の主要な再建完了時に、市は正式に「Nova Hazelburg」（新しいハゼルブルク）へと改名され、この改名は「失われた主権を文化と歴史によって取り戻す」という、市民の精神的独立の象徴と位置づけられた<span class="reference">[3]</span>。
             </p>
-            
+
             <h2 id="地理">2 地理と気候</h2>
             <h3 id="地形と水利">2.1 地形、地質学的特徴、および水利</h3>
             <p>
                 ノヴァハゼルブルクは<a href="./シュヴァーベンアルプス">シュヴァーベンアルプス</a>の北縁、標高480mから750mの間に広がる丘陵地帯に位置している。地質学的には、ジュラ紀の石灰岩層と、その上に堆積した岩塩層が特徴であり、この岩塩層の存在が都市の歴史的・経済的な発展を決定づけた。市街地の南側を流れるドナウ川の支流「ハゼル川」が主要な水利資源であり、中世から水車動力や飲料水、そして岩塩の精製（塩水化）に利用されてきた。市街中心部の平均標高は560mであり、旧市街はその高低差を利用した要塞的な立地を形成している。
             </p>
-            
+
             <h3 id="行政区画">2.2 行政区画と隣接自治体</h3>
             <p>
                 ノヴァハゼルブルクは、中心市街地と、周辺に点在する5つの歴史的な村落（アルトザルツ、ヴェストハウゼン、ケラータールなど）を統合した行政区画を持つ。特筆すべきは、ノヴァハゼルブルク郡の一部でありながら、市域から数キロ離れた場所に、旧王室の狩猟地であった**「フォレスト・ハゼルブルク」**という名の市域の飛び地が存在する点である。隣接する主要自治体としては、北東に<a href="./シュヴェービッシュ・アルプ郡">シュヴェービッシュ・アルプ郡</a>の都市と接している。
@@ -324,19 +325,12 @@
 
             <h3 id="交通">2.3 交通インフラストラクチャ</h3>
             <div class="map-api">
-                
+
                 <img src="1763432147315.jpg" alt="ノヴァハゼルブルク地図表">
-                
+
                 <div class="map-controls">
                     <button>N 48°</button><button>E 9°</button>
                     <button>ズーム +</button><button>ズーム -</button>
-                </div>
-
-                <div class="map-legend">
-                    <div><span class="legend-color" style="background-color: var(--old-town-border);"></span>歴史保護区</div>
-                    <div><span class="legend-color" style="background-color: var(--road-main);"></span>幹線道路（連邦道路）</div>
-                    <div><span class="legend-color" style="background-color: var(--road-rail);"></span>鉄道路線（非電化）</div>
-                    <div>--- 等高線（20m間隔推定）</div>
                 </div>
                 <p style="position:absolute; bottom:5px; left:10px; font-size:0.7em; z-index: 1;">（出典：NovaGeoAPI v5.2 / ドナウ上流郡測量局データ統合 2025年）</p>
             </div>
@@ -401,24 +395,4 @@
             </p>
             <h3 id="建築様式">6.2 歴史的建築様式の特徴</h3>
             <p>
-                旧市街の建築様式は、後期ゴシック様式から初期バロック様式への過渡期の特徴をよく残している。特に、戦災後に再建された市庁舎や中央駅は、細部にわたり当時の様式を忠実に再現している。一方で、戦災を免れ「戦災記念区」として保存されている城の南棟の遺構は、**「残された廃墟」**としてそのままの姿で景観の中に組み込まれており、この対比がノヴァハゼルブルクのユニークな建築的アイデンティティとなっている。
-            </p>
-            <h3 id="郷土料理">6.3 言語、地域訛り、および郷土料理</h3>
-            <p>
-                地域で話されるドイツ語は、シュヴァーベン語の北縁に位置する独自の**ノヴァシュヴァーベン方言**の影響を強く受けている。郷土料理としては、岩塩採掘に由来する塩気の強い燻製肉**「ハゼルブルガー・ザルツブラーテン」**や、ハゼル川の豊富な水利を利用して育まれた水生植物を煮込んだ**「フュート・アオホ」**などが知られている。
-            </p>
-
-            <h2 id="出典">7 出典</h2>
-            <p style="font-size: 0.8em;">
-                [1] Hans-Peter Müller, *Das Freie Königreich Haselburg: Mythos und Realität*, 2005.<br>
-                [2] Stadtarchiv Nova Hazelburg, *Haselburger Abkommen* (1871).<br>
-                [3] Julius Weisenberg, *Die neue Authentizität: Denkmalschutz nach dem Nova-Modell*, 1985.<br>
-                [4] Maria Koster, *Zwischen Hakenkreuz und Krone: Die Weisenberg-Krise 1934-1940*, 2012.<br>
-                [5] Dr. Ingrid Schmitt, *Salz und Souveränität: Die Ökonomie der Haselburg*, 1999.<br>
-                [6] Nova Hazelburg Bauordnung (1995, rev. 2023).<br>
-                [7] Landesrechnungshof Baden-Württemberg, *Prüfbericht zur Stadt Nova Hazelburg* (2020).
-            </p>
-        </div>
-    </div>
-</body>
-</html>
+                旧市街の建築様式は、後期ゴシック様式から初期バロック様式への過渡期の特徴をよく残している。特に、戦災後に再建された市庁舎や中央駅は、細部にわたり当時の様式を忠実に再現している。一方で、戦災を免れ「戦災記念区」として保存されて
