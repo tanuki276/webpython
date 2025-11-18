@@ -11,9 +11,11 @@
             --wiki-link: #0645ad;
             --wiki-header-bg: #eaecf0;
             --map-bg: #eceff1;
+            --river-color: #6a95f0;
+            --park-color: #c9e4c9;
         }
         body {
-            font-family: 'Times New Roman', Times, serif; /* Wikipedia風のセリフ体 */
+            font-family: 'Times New Roman', Times, serif;
             line-height: 1.5;
             background-color: var(--wiki-main);
             color: #000;
@@ -70,7 +72,7 @@
             background-color: #f9f9f9;
             font-size: 0.9em;
             flex-shrink: 0;
-            float: right; /* Wiki風レイアウト */
+            float: right;
             margin: 0 0 1em 1em;
             clear: right;
             border-collapse: collapse;
@@ -124,47 +126,105 @@
             border-bottom: none;
         }
 
+        /* 地図 API風セクションの強化 */
+        .map-api {
+            margin: 1em 0;
+            border: 1px solid var(--wiki-border);
+            height: 350px;
+            position: relative;
+            overflow: hidden;
+            background-color: #f5f5f5;
+        }
+        .map-controls {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 10;
+            background: white;
+            border: 1px solid var(--wiki-border);
+            padding: 5px;
+            border-radius: 3px;
+        }
+        .map-controls button {
+            background: #fff;
+            border: 1px solid var(--wiki-border);
+            cursor: pointer;
+            padding: 2px 5px;
+            margin: 1px;
+        }
+        .map-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        /* 架空の地図レイヤー表現 */
+        #map-features { 
+            position: relative; 
+            border: 2px solid #333; 
+        }
+        .feature-river { 
+            position: absolute; 
+            background: var(--river-color); 
+            width: 100%; 
+            height: 20px; 
+            top: 60%; 
+            transform: rotate(-5deg);
+        }
+        .feature-park {
+            position: absolute;
+            background: var(--park-color);
+            width: 30%;
+            height: 40%;
+            top: 10%;
+            left: 60%;
+            border: 1px solid green;
+        }
+        .feature-osg {
+            /* Old Saltworks Area */
+            position: absolute;
+            background: #ffecb3;
+            width: 15%;
+            height: 15%;
+            top: 75%;
+            left: 5%;
+            border: 1px dashed orange;
+            font-size: 0.7em;
+            text-align: center;
+            line-height: 1.1;
+            padding-top: 5px;
+        }
+        .map-pin {
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            background-color: red;
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 5px rgba(0,0,0,0.5);
+            transform: translate(-50%, -100%);
+            z-index: 20;
+        }
+        .pin-label {
+            position: absolute;
+            top: 18px;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+            font-size: 0.8em;
+            font-weight: bold;
+            color: #333;
+        }
+        #pin-center { top: 60%; left: 45%; }
+        #pin-castle { top: 40%; left: 55%; background-color: blue; }
+        #pin-station { top: 70%; left: 40%; background-color: #333; }
+        
         /* 補助情報 (出典など) */
         .references {
             font-size: 0.8em;
             line-height: 1.4;
         }
-
-        /* 地図 API */
-        .map-api {
-            margin: 1em 0;
-            padding: 10px;
-            background-color: var(--map-bg);
-            border: 1px solid var(--wiki-border);
-            text-align: center;
-            height: 250px;
-            position: relative;
-        }
-        .map-api-legend {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            background: rgba(255, 255, 255, 0.8);
-            padding: 5px;
-            border-radius: 3px;
-            font-size: 0.8em;
-        }
-        .map-api-pin {
-            position: absolute;
-            width: 15px;
-            height: 15px;
-            background-color: red;
-            border-radius: 50%;
-            border: 2px solid white;
-            transform: translate(-50%, -50%);
-            animation: pulse 1s infinite alternate;
-        }
-        @keyframes pulse {
-            from { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7); }
-            to { box-shadow: 0 0 0 10px rgba(255, 0, 0, 0); }
-        }
-        #map-city { top: 60%; left: 45%; }
-        #map-castle { top: 50%; left: 55%; background-color: blue;}
     </style>
 </head>
 <body>
@@ -179,7 +239,6 @@
                 <tr><th colspan="2" style="text-align:center;">地理</th></tr>
                 <tr><th>国</th><td><a href="./ドイツ連邦共和国">ドイツ連邦共和国</a></td></tr>
                 <tr><th>州</th><td><a href="./バーデン＝ヴュルテンベルク州">バーデン＝ヴュルテンベルク州</a></td></tr>
-                <tr><th>地方</th><td><a href="./ドナウ上流域行政区">ドナウ上流域行政区</a></td></tr>
                 <tr><th>郡</th><td>ノヴァハゼルブルク郡</td></tr>
                 <tr><th>座標</th><td><span class="coord">北緯48度15分32秒, 東経9度35分18秒</span></td></tr>
                 <tr><th colspan="2" style="text-align:center;">行政・統計</th></tr>
@@ -222,7 +281,7 @@
             <h2 id="歴史">1 歴史</h2>
             <h3 id="起源と独立">1.1 起源と独立 (1780年代–1871年)</h3>
             <p>
-                ノヴァハゼルブルクの起源は、<a href="./神聖ローマ帝国">神聖ローマ帝国</a>末期の<a href="./小領邦">小領邦</a>、ハゼルブルク伯領に遡る。1811年頃、ナポレオン戦争後の混乱期、当時の当主レオポルド・カール・フォン・ヴァイゼンベルクは、周辺大国（<a href="./バイエルン王国">バイエルン</a>、<a href="./ヴュルテンベルク王国">ヴュルテンベルク</a>）の勢力争いを逆手に取り、自由ハゼルブルク王国（Freies Königreich Haselburg）としての独立を宣言した。この独立は、岩塩採掘権による財政的自立と、<a href="./プロイセン王国">プロイセン王国</a>による南ドイツにおける牽制のための「緩衝地帯」戦略という外交的保護によって維持されたとされる<span class="reference">[1]</span>。
+                ノヴァハゼルブルクの起源は、<a href="./神聖ローマ帝国">神聖ローマ帝国</a>末期の<a href="./小領邦">小領邦</a>、ハゼルブルク伯領に遡る。この地は、ハプスブルク家分家筋のレオポルド・カール・フォン・ヴァイゼンベルクに相続された。1811年頃、ナポレオン戦争後の混乱期、当時の当主レオポルド・カール・フォン・ヴァイゼンベルクは、周辺大国（<a href="./バイエルン王国">バイエルン</a>、<a href="./ヴュルテンベルク王国">ヴュルテンベルク</a>）の勢力争いを逆手に取り、自由ハゼルブルク王国（Freies Königreich Haselburg）としての独立を宣言した。この独立は、岩塩採掘権による財政的自立と、<a href="./プロイセン王国">プロイセン王国</a>による南ドイツにおける牽制のための「緩衝地帯」戦略という外交的保護によって維持されたとされる<span class="reference">[1]</span>。
             </p>
             <h3 id="名誉王制">1.2 ヴュルテンベルクへの編入と名誉王制</h3>
             <p>
@@ -239,23 +298,31 @@
             
             <h2 id="地理と交通">2 地理と交通</h2>
             <div class="map-api">
-                <p style="margin:0; font-size:1.1em; font-weight:bold;">地図：ノヴァハゼルブルクとその主要施設</p>
-                <div class="map-api-legend">
-                    ● 市街中心<br>
-                    ● ノヴァハゼルブルク城
+                <div class="map-controls">
+                    <button>+</button><button>-</button>
+                    <button>衛星</button><button>地形</button><button>交通</button>
                 </div>
-                <div class="map-api-pin" id="map-city" title="市街中心"></div>
-                <div class="map-api-pin" id="map-castle" title="ノヴァハゼルブルク城"></div>
-                <p style="position:absolute; bottom:5px; right:10px; font-size:0.7em;">（データ出典：NovaGeoAPI v2.1）</p>
+                <div class="map-layer" id="map-features">
+                    <div class="feature-river">ドナウ川支流</div>
+                    <div class="feature-park">旧王室庭園区</div>
+                    <div class="feature-osg">岩塩<br>採掘跡</div>
+                    
+                    <div class="map-pin" id="pin-center"><div class="pin-label">旧市街</div></div>
+                    <div class="map-pin" id="pin-castle" style="background-color: var(--wiki-link);"><div class="pin-label">ノヴァハゼルブルク城</div></div>
+                    <div class="map-pin" id="pin-station" style="background-color: #333;"><div class="pin-label">駅</div></div>
+                </div>
+                <p style="position:absolute; bottom:5px; left:10px; font-size:0.7em; z-index: 1;">凡例: ■歴史保護区 ■河川 ■主要道路 (地図データ: NovaGeoAPI v3.0 / 2024)</p>
             </div>
             <p>
-                ノヴァハゼルブルクは<a href="./ドナウ川">ドナウ川</a>上流域に位置し、旧市街はドナウ川の支流と岩塩採掘が行われていた丘陵地帯に挟まれている。鉄道は、南ドイツ主要都市を結ぶ地域急行線（RE）の停車駅であり、アクセスは比較的良好である。市内交通としては、旧市街ではクラシックなデザインの**ノヴァ・トラム**が運行されている。
+                ノヴァハゼルブルクは<a href="./ドナウ川">ドナウ川</a>上流域に位置し、旧市街はドナウ川の支流と岩塩採掘が行われていた丘陵地帯に挟まれている。鉄道は、南ドイツ主要都市を結ぶ地域急行線（RE）の停車駅であり、駅舎は旧王国のバロック様式で再現されている。市内交通としては、旧市街ではクラシックなデザインの**ノヴァ・トラム**が運行されている。
             </p>
 
             <h2 id="行政と政治">3 行政と政治</h2>
+            <h3 id="街国王とヴァイゼンベルク財団">3.1 街国王とヴァイゼンベルク財団</h3>
             <p>
                 街国王の称号は現在もヴァイゼンベルク家によって継承されているが、これは実権のない名誉職である。しかし、<a href="./財団法人">ヴァイゼンベルク財団</a>がノヴァハゼルブルク城および庭園の私有財産権を保持し、市の文化イベントや慈善事業に多額の出資を行うため、市の行政および文化政策に対して強い影響力を持つ。市は州政府から「文化・歴史都市再生憲章」のモデル都市に指定されている。
             </p>
+            <h3 id="都市計画">3.2 都市計画</h3>
             <p>
                 都市計画においては、旧市街は歴史保護地区に指定されており、ユリアスの復興哲学に基づき、特に木組みの家々の景観保護が最優先されている。旧市街への自動車乗り入れは厳しく制限されており、環境と景観に配慮した交通政策が敷かれている。
             </p>
@@ -290,10 +357,10 @@
 
             <h2 id="出典">7 出典</h2>
             <div class="references">
-                <p><span class="reference">[1]</span> ハゼルブルク歴史年鑑, 『自由王国の短期独立とプロイセンの緩衝地帯戦略』 1995年.</p>
-                <p><span class="reference">[2]</span> ヴュルテンベルク州観光局公式文書, 『名誉王制の創設と旧王室財産の継承に関する覚書』 1872年.</p>
-                <p><span class="reference">[3]</span> ユリアス・ヴァイゼンベルク回顧録, 『ノヴァハゼルブルク：記憶と再生の建築哲学』 1998年.</p>
-                <p><span class="reference">[4]</span> 真夏の夜の淫夢,『野獣と化した先輩』 2025年.</p>
+                <p><span class="reference">[1]</span> ハゼルブルク歴史年鑑編纂委員会, 『自由王国の短期独立とプロイセンの緩衝地帯戦略』, 1995年, pp. 45-58.</p>
+                <p><span class="reference">[2]</span> ヴュルテンベルク州観光局公式文書, 『名誉王制の創設と旧王室財産の継承に関する覚書』, 1872年10月1日発行.</p>
+                <p><span class="reference">[3]</span> ヴァイゼンベルク, ユリアス. 『ノヴァハゼルブルク：記憶と再生の建築哲学』. シュヴァーベン出版, 1998年.</p>
+                <p><span class="reference">[4]</span> 真夏の夜の淫夢,『野獣と化した先輩』, 1919年, p. 810.</p>
             </div>
         </div>
     </div>
