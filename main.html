@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="pageTitle">読み込み中...</title>
+    <style>
+        :root {
+            --wiki-main: #f8f9fa;
+            --wiki-border: #a2a9b1;
+            --wiki-link: #0645ad;
+            --wiki-header-bg: #eaecf0;
+        }
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            line-height: 1.5;
+            background-color: var(--wiki-main);
+            color: #000;
+            padding: 0;
+            margin: 0;
+            font-size: 0.9em;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 20px auto;
+            padding: 10px 30px;
+            background-color: white;
+            border: 1px solid var(--wiki-border);
+            min-height: 80vh;
+        }
+        h1 {
+            font-size: 1.8em;
+            font-weight: normal;
+            border-bottom: 1px solid var(--wiki-border);
+            padding-bottom: 5px;
+            margin-bottom: 5px;
+        }
+        p {
+            margin-bottom: 1em;
+        }
+        a {
+            color: var(--wiki-link);
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .error-message {
+            color: #cc0000;
+            font-weight: bold;
+            padding: 10px;
+            border: 1px solid #ffdddd;
+            background-color: #ffeeee;
+        }
+        .loading-message {
+            text-align: center;
+            padding: 50px;
+            font-size: 1.2em;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 id="articleTitle">記事を読み込んでいます...</h1>
+        
+        <div id="articleContent">
+            <p class="loading-message">情報を取得中です。しばらくお待ちください。</p>
+        </div>
+
+        <p style="margin-top: 30px;"><a href="index.html">記事に戻る</a></p>
+    </div>
+
+    <script>
+        /**
+         * Wikipedia APIから情報を取得し、ページに表示するロジック (script.jsの機能)
+         */
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // URLからクエリパラメータ（開かれた文字）を取得
+            const urlParams = new URLSearchParams(window.location.search);
+            const query = urlParams.get('query');
+
+            const titleElement = document.getElementById('articleTitle');
+            const contentElement = document.getElementById('articleContent');
+            const pageTitleElement = document.getElementById('pageTitle');
+
+            if (!query) {
+                // クエリがない場合
+                pageTitleElement.textContent = 'エラー';
+                titleElement.textContent = 'エラー: 検索クエリがありません';
+                contentElement.innerHTML = '<p class="error-message">index.htmlから正しくリンクが渡されていません。</p>';
+                return;
+            }
+
+            // ページタイトルと記事タイトルをクエリで更新
+            titleElement.textContent = query;
+            pageTitleElement.textContent = `${query} - Ikipedia参照`;
+            
+            // Wikipedia APIのURLを構築 (日本語Wikipediaのサマリー取得API)
+            const apiUrl = `https://ja.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(query)}`;
+
+            // APIからデータを取得
+            fetch(apiUrl)
+                .then(response => {
+                    if (!response.ok) {
+                        // 404 Not Found など、HTTPエラーの場合
+                        throw new Error('APIからの応答エラー: ' + response.status);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.type === 'disambiguation' || data.type === 'redirect' || !data.extract) {
+                        // 曖昧さ回避ページ、リダイレクト、または要約がない場合
+                        throw new Error('指定された記事の要約が見つからないか、曖昧さ回避ページです。');
+                    }
+
+                    // 成功：要約テキストを表示
+                    contentElement.innerHTML = `
+                        ${data.thumbnail ? `<img src="${data.thumbnail.source}" style="float:right; margin: 0 0 10px 20px; max-width: 300px; height: auto; border: 1px solid var(--wiki-border);">` : ''}
+                        <p>${data.extract_html.replace(/<\/?a[^>]*>/g, "")}</p> 
+                        <p style="clear: both; margin-top: 20px;">
+                            <a href="${data.content_urls.desktop.page}" target="_blank">→ 詳細を見る</a>
+                        </p>
+                    `;
+                    
+                    // リンクを元のWikipedia URLに張り替えて表示することも可能だが、
+                    // この例では要約のみを取得し、リンクは元の記事への外部リンクとしています。
+
+                })
+                .catch(error => {
+                    // 取得失敗時のエラー表示
+                    console.error('API Error:', error);
+                    titleElement.textContent = `${query} (記事が見つかりません)`;
+                    contentElement.innerHTML = `
+                        <p class="error-message">
+                            <strong>エラーが発生しました。</strong><br>
+                            ${query} に関するWikipediaの記事が見つからないか、APIからの情報取得に失敗しました。<br>
+                            詳細: ${error.message}
+                        </p>
+                        <p>検索語句を確認するか、元のページに戻ってください。</p>
+                    `;
+                });
+        });
+    </script>
+</body>
+</html>
