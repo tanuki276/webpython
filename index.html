@@ -2,7 +2,8 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>ノヴァハゼルブルク - Ikipedia</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>ノヴァハゼルブルク - Ikipedia</title>
     <style>
         /* Base & Layout */
         :root {
@@ -11,13 +12,7 @@
             --wiki-link: #0645ad;
             --wiki-header-bg: #eaecf0;
             --map-bg: #e6e6e6; 
-            --river-color: #6a95f0;
-            --park-color: #c9e4c9;
-            --road-main: #555;
-            --road-rail: #a0522d; 
-            --road-local: #999;
             --old-town-border: #dc3545;
-            --elevation-line: #a0a0a0;
         }
         body {
             font-family: 'Times New Roman', Times, serif;
@@ -42,7 +37,7 @@
             border-top: none;
             min-height: 100vh;
         }
-        /* Headers */
+        /* Headers & Links */
         h1 {
             font-size: 1.8em;
             font-weight: normal;
@@ -102,27 +97,7 @@
             width: 40%;
             background-color: var(--wiki-header-bg);
         }
-        .infobox tr:nth-child(2) th, .infobox tr:nth-child(2) td {
-            border-top: none;
-        }
-        .coord {
-            font-style: italic;
-        }
-        .wikitable { /* 統計表用 */
-            width: 95%;
-            margin: 1em auto;
-            border: 1px solid var(--wiki-border);
-            border-collapse: collapse;
-        }
-        .wikitable th, .wikitable td {
-            border: 1px solid var(--wiki-border);
-            padding: 5px;
-            text-align: center;
-        }
-        .wikitable th {
-            background-color: var(--wiki-header-bg);
-        }
-
+        
         /* TOC (目次) */
         #toc {
             border: 1px solid var(--wiki-border);
@@ -131,65 +106,27 @@
             margin: 1em 0;
             width: fit-content;
         }
-        #toc ul {
-            list-style: none;
-            padding-left: 1.5em;
-        }
-        #toc ul ul {
-            padding-left: 1em;
-            margin-top: 0;
-        }
         #toc h2 {
             font-size: 1.1em;
             margin: 0;
             border-bottom: none;
         }
-
-        /* 地図 API風セクション */
-        .map-api {
-            margin: 1em 0;
+        
+        /* 統計表 */
+        .wikitable { 
+            width: 95%;
+            margin: 1em auto;
             border: 1px solid var(--wiki-border);
-            height: 500px;
-            position: relative;
-            overflow: hidden;
-            background-color: var(--map-bg);
+            border-collapse: collapse;
         }
-        .map-api img {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: 1;
+        .wikitable th {
+            background-color: var(--wiki-header-bg);
         }
-
-        .map-controls {
-            position: absolute;
-            top: 10px; right: 10px; z-index: 30; background: white; border: 1px solid var(--wiki-border); padding: 5px; border-radius: 3px; font-size: 0.8em;
-        }
-
-        /* 人口動態グラフ風 */
-        .chart-container {
-            width: 100%;
-            height: 150px;
+        .wikitable th, .wikitable td {
             border: 1px solid var(--wiki-border);
-            margin: 1em 0;
-            position: relative;
-            background: #f9f9f9;
+            padding: 5px;
+            text-align: center;
         }
-        .chart-bar {
-            position: absolute;
-            bottom: 0;
-            background-color: var(--wiki-link);
-            width: 4%;
-        }
-        /* 架空の人口データ（高さ調整） */
-        #bar-1871 { left: 5%; height: 50%; }
-        #bar-1900 { left: 15%; height: 60%; }
-        #bar-1945 { left: 35%; height: 25%; background-color: var(--old-town-border); }
-        #bar-1980 { left: 55%; height: 75%; }
-        #bar-2023 { left: 85%; height: 90%; }
 
         /* 気候表の追加スタイル */
         .climate-table {
@@ -199,16 +136,43 @@
             font-size: 0.8em;
             margin: 1em 0;
         }
-        .climate-table th, .climate-table td {
-            border: 1px solid var(--wiki-border);
-            padding: 3px;
-            text-align: center;
-        }
         .climate-table thead th {
             background-color: var(--wiki-header-bg);
         }
+        /* 地図 */
+        .map-api {
+            margin: 1em 0;
+            height: 500px;
+            position: relative;
+            overflow: hidden;
+            background-color: var(--map-bg);
+        }
 
-        /* ============== レスポンシブ対応の修正 ============= */
+        /* 上に戻るボタンのスタイル (新規追加) */
+        #backToTop {
+            display: none; /* 初期は非表示 */
+            position: fixed;
+            bottom: 20px;
+            right: 30px;
+            z-index: 99;
+            border: none;
+            outline: none;
+            background-color: rgba(6, 69, 173, 0.7); /* wiki-linkの半透明 */
+            color: white;
+            cursor: pointer;
+            padding: 12px 18px;
+            border-radius: 5px;
+            font-size: 20px;
+            line-height: 1;
+            font-family: Arial, sans-serif; 
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        #backToTop:hover {
+            background-color: var(--wiki-link);
+        }
+
+
+        /* ============== レスポンシブ対応の修正 (モバイル) ============= */
         @media (max-width: 600px) {
             .container {
                 padding: 10px;
@@ -225,7 +189,7 @@
             /* 気候表のフォントをさらに縮小して横スクロールを避ける */
             .climate-table {
                 font-size: 0.7em;
-                table-layout: fixed; /* テーブルレイアウトを固定 */
+                table-layout: fixed; 
                 width: 100%;
             }
             /* TOCは幅いっぱいに */
@@ -233,7 +197,6 @@
                 width: 95%;
             }
         }
-        /* ============================================== */
     </style>
 </head>
 <body>
@@ -244,30 +207,30 @@
 
             <table class="infobox" role="presentation">
                 <caption>ノヴァハゼルブルク</caption>
-                <tr><td colspan="2" style="text-align:center;"><img src="coat_of_arms.jpg" alt="ノヴァハゼルブルク市紋章" style="width:35%; max-width:80px; height:auto; display:inline-block; margin:5px 10px;">
-<img src="castle.jpg" alt="ノヴァハゼルブルク城" style="width:50%; max-width:180px; height:auto; display:inline-block; margin:5px auto;"></td></tr>
+                <tr><td colspan="2" style="text-align:center;"><img src="images/coat_of_arms.jpg" alt="ノヴァハゼルブルク市紋章" style="width:35%; max-width:80px; height:auto; display:inline-block; margin:5px 10px;">
+<img src="images/castle.jpg" alt="ノヴァハゼルブルク城" style="width:50%; max-width:180px; height:auto; display:inline-block; margin:5px auto;"></td></tr>
                 <tr><th>都市の標語</th><td>「塩と王冠の街」 (Stadt von Salz und Krone)</td></tr>
                 <tr><th colspan="2" style="text-align:center;">地理・基礎データ</th></tr>
-                <tr><th>国</th><td><a href="./ドイツ連邦共和国">ドイツ連邦共和国</a></td></tr>
-                <tr><th>州</th><td><a href="./バーデン＝ヴュルテンベルク州">バーデン＝ヴュルテンベルク州</a></td></tr>
+                <tr><th>国</th><td><a href="main.html?query=ドイツ連邦共和国">ドイツ連邦共和国</a></td></tr>
+                <tr><th>州</th><td><a href="main.html?query=バーデン＝ヴュルテンベルク州">バーデン＝ヴュルテンベルク州</a></td></tr>
                 <tr><th>郡</th><td>ノヴァハゼルブルク郡</td></tr>
                 <tr><th>座標</th><td><span class="coord">北緯48度15分32秒, 東経9度35分18秒</span></td></tr>
                 <tr><th>建都年</th><td>1950年（都市権再承認）</td></tr> <tr><th>標高</th><td>平均560m（最高点750m、最低点480m）</td></tr>
                 <tr><th>総面積</th><td>78.5 km²</td></tr> <tr><th colspan="2" style="text-align:center;">行政・統計</th></tr>
-                <tr><th>市長</th><td>ヨハン・マイヤー (<a href="./自由民主党_(ドイツ)">FDP</a>)</td></tr>
+                <tr><th>市長</th><td>ヨハン・マイヤー (<a href="main.html?query=自由民主党_(ドイツ)">FDP</a>)</td></tr>
                 <tr><th>名誉街国王</th><td>フィリップ・フォン・ヴァイゼンベルク (第6代)</td></tr>
                 <tr><th>地位</th><td>郡都市（Große Kreisstadt）</td></tr>
                 <tr><th>総人口</th><td>58,012人（2023年12月31日時点）</td></tr>
                 <tr><th>人口密度</th><td>739人/km²</td></tr> <tr><th>市外局番</th><td>07471</td></tr>
-                <tr><th>自動車登録コード</th><td><a href="./ドイツの自動車登録コード">NHB</a></td></tr>
+                <tr><th>自動車登録コード</th><td><a href="main.html?query=ドイツの自動車登録コード">NHB</a></td></tr>
                 <tr><th colspan="2" style="text-align:center;">友好提携</th></tr>
-                <tr><th>姉妹都市</th><td><a href="./フランスの都市">オルレアン</a>（フランス、1975年）</td></tr>
-                <tr><th>学術協定都市</th><td><a href="./イギリスの都市">ケンブリッジ</a>（イギリス、2001年）</td></tr>
+                <tr><th>姉妹都市</th><td><a href="main.html?query=オルレアン">オルレアン</a>（フランス、1975年）</td></tr>
+                <tr><th>学術協定都市</th><td><a href="main.html?query=ケンブリッジ">ケンブリッジ</a>（イギリス、2001年）</td></tr>
                 <tr><th>名誉市民</th><td>ユリアス・ヴァイゼンベルク（1988年授与）</td></tr>
             </table>
 
             <p>
-                <b>ノヴァハゼルブルク</b>（ドイツ語: **Nova Hazelburg**, <a href="./シュヴァーベン語">ノヴァシュヴァーベン語</a>: Naia Hoslberg）は、ドイツ連邦共和国バーデン＝ヴュルテンベルク州南部に位置する<a href="./郡都市">郡都市</a>（Große Kreisstadt）である。その歴史的起源は、神聖ローマ帝国末期のハプスブルク家分家が統治した小領邦、ハゼルブルク伯領にまで遡ることができ、特に19世紀初頭の短期間、ナポレオン戦争後の国際政治の空白期を利用して**自由ハゼルブルク王国**（Freies Königreich Haselburg）として独立を宣言した特異な経緯を持つ。現在、行政上は<a href="./テュービンゲン行政管区">テュービンゲン行政管区</a>ドナウ上流域行政区に属し、地域の行政・文化の中心機能を担っているが、その都市のアイデンティティは、**「旧小王国の都」**としての文化的・精神的独立性に強く根差している。歴史資源、特に戦災から復興したノヴァハゼルブルク城および旧市街景観を核とした観光・文化戦略は、本市の持続可能な発展の基盤であり、ドイツ国内における歴史都市復興のモデルケースとして頻繁に学術的な議論の対象となっている<span class="reference">[1]</span>。
+                <b>ノヴァハゼルブルク</b>（ドイツ語: **Nova Hazelburg**, <a href="main.html?query=シュヴァーベン語">ノヴァシュヴァーベン語</a>: Naia Hoslberg）は、ドイツ連邦共和国バーデン＝ヴュルテンベルク州南部に位置する<a href="main.html?query=郡都市">郡都市</a>（Große Kreisstadt）である。その歴史的起源は、神聖ローマ帝国末期のハプスブルク家分家が統治した小領邦、ハゼルブルク伯領にまで遡ることができ、特に19世紀初頭の短期間、ナポレオン戦争後の国際政治の空白期を利用して**自由ハゼルブルク王国**（Freies Königreich Haselburg）として独立を宣言した特異な経緯を持つ。現在、行政上は<a href="main.html?query=テュービンゲン行政管区">テュービンゲン行政管区</a>ドナウ上流域行政区に属し、地域の行政・文化の中心機能を担っているが、その都市のアイデンティティは、**「旧小王国の都」**としての文化的・精神的独立性に強く根差している。歴史資源、特に戦災から復興したノヴァハゼルブルク城および旧市街景観を核とした観光・文化戦略は、本市の持続可能な発展の基盤であり、ドイツ国内における歴史都市復興のモデルケースとして頻繁に学術的な議論の対象となっている<span class="reference">[1]</span>。
             </p>
 
             <div id="toc">
@@ -329,23 +292,23 @@
             <h2 id="歴史">1 歴史</h2>
             <h3 id="初期伯爵領">1.1 初期伯爵領時代と岩塩採掘権の確立（13世紀–1800年）</h3>
             <p>
-                ノヴァハゼルブルク周辺の地域は、中世初期にはシュヴァーベン公領の一部であったが、13世紀に<a href="./帝国直轄領">帝国直轄領</a>としてハゼルブルク伯爵家（後にヴァイゼンベルク家が継承）に封ぜられた。この領邦の初期の経済的基盤は農業であったが、15世紀後半に北側の丘陵地帯で質の高い岩塩鉱床が発見されたことにより、その経済的・政治的地位は一変した。16世紀には、岩塩採掘権が伯爵家の独占的な特権となり、その収益は小領邦ながらも豊かな宮廷生活と、周辺大国に対する外交資金源となった。この採掘技術と経営ノウハウは、後の都市の技術産業の土壌形成に間接的に寄与したという研究がある<span class="reference">[5]</span>。
+                ノヴァハゼルブルク周辺の地域は、中世初期にはシュヴァーベン公領の一部であったが、13世紀に<a href="main.html?query=帝国直轄領">帝国直轄領</a>としてハゼルブルク伯爵家（後にヴァイゼンベルク家が継承）に封ぜられた。この領邦の初期の経済的基盤は農業であったが、15世紀後半に北側の丘陵地帯で質の高い岩塩鉱床が発見されたことにより、その経済的・政治的地位は一変した。16世紀には、岩塩採掘権が伯爵家の独占的な特権となり、その収益は小領邦ながらも豊かな宮廷生活と、周辺大国に対する外交資金源となった。この採掘技術と経営ノウハウは、後の都市の技術産業の土壌形成に間接的に寄与したという研究がある<span class="reference">[5]</span>。
             </p>
             <h3 id="独立宣言">1.2 自由ハゼルブルク王国の独立宣言と外交的地位の確定（1811年–1871年）</h3>
             <p>
-                1803年の<a href="./帝国代表者会議主要決議">帝国代表者会議主要決議</a>（Reichsdeputationshauptschluss）以降、南ドイツの小領邦は激動の時代を迎えたが、ハゼルブルク伯領は、当時の当主レオポルド・カール・フォン・ヴァイゼンベルクの巧みな外交戦略により、ザルツブルク選帝侯領など、より大きな領邦が世俗化される混乱を逃れた。1811年、レオポルドは、ナポレオンによる<a href="./ライン同盟">ライン同盟</a>の解体と、それに伴うヨーロッパの勢力均衡の再構築の時期を捉え、プロイセン王国の黙認とオーストリア帝国の非公式な支持を得て、自らを「国王」とする**自由ハゼルブルク王国**（Freies Königreich Haselburg）の独立を一方的に宣言した。この独立は、プロイセンにとって南ドイツにおける緩衝地帯を確保するという戦略的意図に基づいており、王国の実質的な主権は限定的であったが、国際法上の地位は1815年の<a href="./ウィーン会議">ウィーン会議</a>で一定程度承認された<span class="reference">[1]</span>。
+                1803年の<a href="main.html?query=帝国代表者会議主要決議">帝国代表者会議主要決議</a>（Reichsdeputationshauptschluss）以降、南ドイツの小領邦は激動の時代を迎えたが、ハゼルブルク伯領は、当時の当主レオポルド・カール・フォン・ヴァイゼンベルクの巧みな外交戦略により、ザルツブルク選帝侯領など、より大きな領邦が世俗化される混乱を逃れた。1811年、レオポルドは、ナポレオンによる<a href="main.html?query=ライン同盟">ライン同盟</a>の解体と、それに伴うヨーロッパの勢力均衡の再構築の時期を捉え、プロイセン王国の黙認とオーストリア帝国の非公式な支持を得て、自らを「国王」とする**自由ハゼルブルク王国**（Freies Königreich Haselburg）の独立を一方的に宣言した。この独立は、プロイセンにとって南ドイツにおける緩衝地帯を確保するという戦略的意図に基づいており、王国の実質的な主権は限定的であったが、国際法上の地位は1815年の<a href="main.html?query=ウィーン会議">ウィーン会議</a>で一定程度承認された<span class="reference">[1]</span>。
             </p>
             <h3 id="名誉王制">1.3 ヴュルテンベルクへの編入と名誉王制の創設</h3>
             <p>
-                1871年の<a href="./ドイツ帝国">ドイツ帝国</a>成立に伴い、独立王国の維持は不可能となり、ハゼルブルク王国は、隣接するヴュルテンベルク王国に編入された。この編入に際し、ヴァイゼンベルク家とヴュルテンベルク王室との間で、**「ハゼルブルク協定」**と呼ばれる特別な合意が結ばれた。これにより、ヴァイゼンベルク家は政治的実権を失う代わりに、**「街国王」**（Stadtkönig, 都市の名誉君主）という称号、ノヴァハゼルブルク城および旧王室庭園の絶対的な私有財産権、そして市議会における無議決権の名誉議席を永続的に保証された<span class="reference">[2]</span>。この名誉王制は、ドイツ帝国下の地方自治体としては極めて異例の制度として知られている。
+                1871年の<a href="main.html?query=ドイツ帝国">ドイツ帝国</a>成立に伴い、独立王国の維持は不可能となり、ハゼルブルク王国は、隣接するヴュルテンベルク王国に編入された。この編入に際し、ヴァイゼンベルク家とヴュルテンベルク王室との間で、**「ハゼルブルク協定」**と呼ばれる特別な合意が結ばれた。これにより、ヴァイゼンベルク家は政治的実権を失う代わりに、**「街国王」**（Stadtkönig, 都市の名誉君主）という称号、ノヴァハゼルブルク城および旧王室庭園の絶対的な私有財産権、そして市議会における無議決権の名誉議席を永続的に保証された<span class="reference">[2]</span>。この名誉王制は、ドイツ帝国下の地方自治体としては極めて異例の制度として知られている。
             </p>
             <h3 id="ヴァイゼンベルク家系">1.4 ヴァイゼンベルク家の家系と20世紀初頭の継承問題</h3>
             <p>
-                街国王の称号は、協定に基づきヴァイゼンベルク家によって長子相続制で継承されてきた。特筆すべきは、1930年代の<a href="./ナチス・ドイツ">ナチス政権</a>下の時期であり、当時の当主（第4代街国王）が政権に協力的であったのに対し、その弟が反体制運動に参加したことにより、家系図の正統性と次期継承者について一時的に激しい議論が巻き起こった。この継承危機は、地元の有力な教会指導者の仲介により、第4代街国王の直系子孫への継承権を維持することで辛うじて内部解決されたが、この家門内の対立の記録は、市のアーカイブに詳細に保管されており、歴史学の研究対象となっている<span class="reference">[4]</span>。
+                街国王の称号は、協定に基づきヴァイゼンベルク家によって長子相続制で継承されてきた。特筆すべきは、1930年代の<a href="main.html?query=ナチス・ドイツ">ナチス政権</a>下の時期であり、当時の当主（第4代街国王）が政権に協力的であったのに対し、その弟が反体制運動に参加したことにより、家系図の正統性と次期継承者について一時的に激しい議論が巻き起こった。この継承危機は、地元の有力な教会指導者の仲介により、第4代街国王の直系子孫への継承権を維持することで辛うじて内部解決されたが、この家門内の対立の記録は、市のアーカイブに詳細に保管されており、歴史学の研究対象となっている<span class="reference">[4]</span>。
             </p>
             <h3 id="戦災と伝統の断絶">1.5 後期戦争（第二次世界大戦）による戦災と伝統の断絶</h3>
             <p>
-                <a href="./第二次世界大戦">後期戦争</a>（地元歴史学用語）において、ハゼルブルク街は軍需工場と鉄道輸送線に近接していたため、連合国による戦略的な<a href="./空襲">空爆</a>の主要な標的となった。1945年4月の激しい空爆とそれに続く地上戦により、市街地の歴史的建造物の約70%が完全に破壊され、旧市街の木組みの家々の大部分と、ノヴァハゼルブルク城の南棟が崩落した。この戦災により、在位していた街国王一家が死亡し、ヴァイゼンベルク家による象徴的地位は一時的に途絶する形となった。この物理的・精神的な「断絶」の時期は、ノヴァハゼルブルクの歴史において最も暗い時期として語り継がれている。
+                <a href="main.html?query=第二次世界大戦">後期戦争</a>（地元歴史学用語）において、ハゼルブルク街は軍需工場と鉄道輸送線に近接していたため、連合国による戦略的な<a href="main.html?query=空襲">空爆</a>の主要な標的となった。1945年4月の激しい空爆とそれに続く地上戦により、市街地の歴史的建造物の約70%が完全に破壊され、旧市街の木組みの家々の大部分と、ノヴァハゼルブルク城の南棟が崩落した。この戦災により、在位していた街国王一家が死亡し、ヴァイゼンベルク家による象徴的地位は一時的に途絶する形となった。この物理的・精神的な「断絶」の時期は、ノヴァハゼルブルクの歴史において最も暗い時期として語り継がれている。
             </p>
             <h3 id="再命名">1.6 戦後復興と「ノヴァハゼルブルク」への再命名、および復興哲学</h3>
             <p>
@@ -354,7 +317,7 @@
 <h2 id="地理">2 地理と気候</h2>
             <h3 id="地形と水利">2.1 地形、地質学的特徴、および水利</h3>
             <p>
-                ノヴァハゼルブルクは<a href="./シュヴァーベンアルプス">シュヴァーベンアルプス</a>の北縁、標高480mから750mの間に広がる丘陵地帯に位置している。地質学的には、ジュラ紀の石灰岩層と、その上に堆積した岩塩層が特徴であり、この岩塩層の存在が都市の歴史的・経済的な発展を決定づけた。市街地の南側を流れるドナウ川の支流「ハゼル川」が主要な水利資源であり、中世から水車動力や飲料水、そして岩塩の精製（塩水化）に利用されてきた。市街中心部の平均標高は560mであり、旧市街はその高低差を利用した要塞的な立地を形成している。市の水道は、旧伯爵領時代から管理されてきたアルトザルツ地区の地下水脈に依存しており、その水質は極めて良好である<span class="reference">[8]</span>。
+                ノヴァハゼルブルクは<a href="main.html?query=シュヴァーベンアルプス">シュヴァーベンアルプス</a>の北縁、標高480mから750mの間に広がる丘陵地帯に位置している。地質学的には、ジュラ紀の石灰岩層と、その上に堆積した岩塩層が特徴であり、この岩塩層の存在が都市の歴史的・経済的な発展を決定づけた。市街地の南側を流れるドナウ川の支流「ハゼル川」が主要な水利資源であり、中世から水車動力や飲料水、そして岩塩の精製（塩水化）に利用されてきた。市街中心部の平均標高は560mであり、旧市街はその高低差を利用した要塞的な立地を形成している。市の水道は、旧伯爵領時代から管理されてきたアルトザルツ地区の地下水脈に依存しており、その水質は極めて良好である<span class="reference">[8]</span>。
             </p>
             <h3 id="気候">2.2 気候</h3>
             <p>
@@ -382,12 +345,12 @@
 
             <h3 id="行政区画">2.3 行政区画と隣接自治体</h3>
             <p>
-                ノヴァハゼルブルクは、中心市街地と、周辺に点在する5つの歴史的な村落（アルトザルツ、ヴェストハウゼン、ケラータールなど）を統合した行政区画を持つ。特筆すべきは、ノヴァハゼルブルク郡の一部でありながら、市域から数キロ離れた場所に、旧王室の狩猟地であった**「フォレスト・ハゼルブルク」**という名の市域の飛び地が存在する点である。隣接する主要自治体としては、北東に<a href="./シュヴェービッシュ・アルプ郡">シュヴェービッシュ・アルプ郡</a>の都市と接している。市の行政区画は、歴史的境界と現代の都市計画を尊重した複雑な構造となっており、住民からはしばしば「王国の継承」と呼ばれている。
+                ノヴァハゼルブルクは、中心市街地と、周辺に点在する5つの歴史的な村落（アルトザルツ、ヴェストハウゼン、ケラータールなど）を統合した行政区画を持つ。特筆すべきは、ノヴァハゼルブルク郡の一部でありながら、市域から数キロ離れた場所に、旧王室の狩猟地であった**「フォレスト・ハゼルブルク」**という名の市域の飛び地が存在する点である。隣接する主要自治体としては、北東に<a href="main.html?query=シュヴェービッシュ・アルプ郡">シュヴェービッシュ・アルプ郡</a>の都市と接している。市の行政区画は、歴史的境界と現代の都市計画を尊重した複雑な構造となっており、住民からはしばしば「王国の継承」と呼ばれている。
             </p>
 
             <h3 id="交通">2.4 交通インフラストラクチャ</h3>
             <div class="map-api">
-                <img src="1763432147315.jpg" alt="ノヴァハゼルブルク地図表">
+                <img src="images/city_map_infrastructure.jpg" alt="ノヴァハゼルブルクの都市インフラ地図。鉄道と主要道路の配置を示す。" style="width: 100%; height: 100%; object-fit: cover;">
                 <div class="map-controls">
                     <button>N 48°</button><button>E 9°</button>
                     <button>ズーム +</button><button>ズーム -</button>
@@ -395,13 +358,13 @@
                 <p style="position:absolute; bottom:5px; left:10px; font-size:0.7em; z-index: 1;">（出典：NovaGeoAPI v5.2 / ドナウ上流郡測量局データ統合 2025年）</p>
             </div>
             <p>
-                ノヴァハゼルブルクは鉄道においては、<a href="./ドイツ鉄道">ドイツ鉄道</a>の南ドイツ主要都市を結ぶ地域急行線（RE）の停車駅であり、駅舎は旧王国のバロック様式で再現されている。市内交通の基盤は、旧市街を中心としたクラシックなデザインの**ノヴァ・トラム**と、隣接自治体を結ぶ地域バス網によって構成されている。ノヴァ・トラムは、歴史景観を維持するため、旧市街中心部では<a href="./架線">架線</a>レス技術（バッテリー駆動）を採用しており、この技術はNAI（ノヴァ建築遺産学院）との共同研究によるものである<span class="reference">[10]</span>。主要幹線道路は、連邦道路B19号線（東西軸）とB312号線（南北軸）が交差し、特にB19号線は市域の南側を迂回するバイパス構造となっており、歴史保護地区への交通流入を最小限に抑える都市計画が実施されている。最寄りの国際空港は、約100km離れた**シュトゥットガルト国際空港**である。
+                ノヴァハゼルブルクは鉄道においては、<a href="main.html?query=ドイツ鉄道">ドイツ鉄道</a>の南ドイツ主要都市を結ぶ地域急行線（RE）の停車駅であり、駅舎は旧王国のバロック様式で再現されている。市内交通の基盤は、旧市街を中心としたクラシックなデザインの**ノヴァ・トラム**と、隣接自治体を結ぶ地域バス網によって構成されている。ノヴァ・トラムは、歴史景観を維持するため、旧市街中心部では<a href="main.html?query=架線">架線</a>レス技術（バッテリー駆動）を採用しており、この技術はNAI（ノヴァ建築遺産学院）との共同研究によるものである<span class="reference">[10]</span>。主要幹線道路は、連邦道路B19号線（東西軸）とB312号線（南北軸）が交差し、特にB19号線は市域の南側を迂回するバイパス構造となっており、歴史保護地区への交通流入を最小限に抑える都市計画が実施されている。最寄りの国際空港は、約100km離れた**<a href="main.html?query=シュトゥットガルト国際空港">シュトゥットガルト国際空港</a>**である。
             </p>
 
             <h2 id="行政と政治">3 行政と政治</h2>
             <h3 id="市議会">3.1 市議会と政党勢力図</h3>
             <p>
-                ノヴァハゼルブルク市議会（Stadtrat）は40議席で構成され、任期は5年である。市長をヨハン・マイヤー（FDP）が務めている（2024年現在）。市議会の勢力図は、伝統的な保守勢力（CDU）が最大会派であるが、過去10年間で環境政党（緑の党）が大きく議席を伸ばしており、景観保護と環境政策に関する議論が市議会の主要な論点となっている。
+                ノヴァハゼルブルク市議会（Stadtrat）は40議席で構成され、任期は5年である。市長をヨハン・マイヤー（FDP）が務めている（2024年現在）。市議会の勢力図は、伝統的な保守勢力（<a href="main.html?query=キリスト教民主同盟_(ドイツ)">CDU</a>）が最大会派であるが、過去10年間で環境政党（<a href="main.html?query=同盟90/緑の党">緑の党</a>）が大きく議席を伸ばしており、景観保護と環境政策に関する議論が市議会の主要な論点となっている。
             </p>
             <table class="wikitable">
                 <caption>ノヴァハゼルブルク市議会政党別議席数（2023年選挙）</caption>
@@ -409,9 +372,9 @@
                     <tr><th>政党</th><th>得票率 (%)</th><th>議席数（±増減）</th></tr>
                 </thead>
                 <tbody>
-                    <tr><td><a href="./キリスト教民主同盟_(ドイツ)">CDU</a></td><td>36.5</td><td>15 (-1)</td></tr>
-                    <tr><td><a href="./自由民主党_(ドイツ)">FDP</a></td><td>28.1</td><td>11 (+2)</td></tr>
-                    <tr><td><a href="./同盟90/緑の党">緑の党</a></td><td>20.4</td><td>8 (+1)</td></tr>
+                    <tr><td><a href="main.html?query=キリスト教民主同盟_(ドイツ)">CDU</a></td><td>36.5</td><td>15 (-1)</td></tr>
+                    <tr><td><a href="main.html?query=自由民主党_(ドイツ)">FDP</a></td><td>28.1</td><td>11 (+2)</td></tr>
+                    <tr><td><a href="main.html?query=同盟90/緑の党">緑の党</a></td><td>20.4</td><td>8 (+1)</td></tr>
                     <tr><td>SPD</td><td>15.0</td><td>6 (-2)</td></tr>
                     <tr><td>合計</td><td>100.0</td><td>40</td></tr>
                 </tbody>
@@ -430,11 +393,11 @@
             <h3 id="宗教">4.1 宗教</h3>
             <h3 id="外国人コミュニティ">4.2 外国人コミュニティ</h3>
             <div class="chart-container">
-                <div class="chart-bar" id="bar-1871" title="1871年: 32,200人"></div>
-                <div class="chart-bar" id="bar-1900" title="1900年: 38,000人"></div>
-                <div class="chart-bar" id="bar-1945" title="1945年: 15,500人"></div>
-                <div class="chart-bar" id="bar-1980" title="1980年: 48,000人"></div>
-                <div class="chart-bar" id="bar-2023" title="2023年: 58,012人"></div>
+                <div class="chart-bar" id="bar-1871" title="1871年: 32,200人" style="position: absolute; bottom: 0; background-color: var(--wiki-link); width: 4%; left: 5%; height: 50%;"></div>
+                <div class="chart-bar" id="bar-1900" title="1900年: 38,000人" style="position: absolute; bottom: 0; background-color: var(--wiki-link); width: 4%; left: 15%; height: 60%;"></div>
+                <div class="chart-bar" id="bar-1945" title="1945年: 15,500人" style="position: absolute; bottom: 0; background-color: var(--old-town-border); width: 4%; left: 35%; height: 25%;"></div>
+                <div class="chart-bar" id="bar-1980" title="1980年: 48,000人" style="position: absolute; bottom: 0; background-color: var(--wiki-link); width: 4%; left: 55%; height: 75%;"></div>
+                <div class="chart-bar" id="bar-2023" title="2023年: 58,012人" style="position: absolute; bottom: 0; background-color: var(--wiki-link); width: 4%; left: 85%; height: 90%;"></div>
             </div>
             <h2 id="経済">5 経済と産業構造</h2>
             <h3 id="観光業">5.1 歴史観光業とウェルネス観光</h3>
@@ -470,13 +433,13 @@
 
             <h2 id="外部リンク">7 外部リンク</h2>
             <ul>
-                <li><a href="[https://www.novahazelburg.de/](https://www.novahazelburg.de/)" target="_blank">ノヴァハゼルブルク市 公式ウェブサイト</a> (行政・議会情報)</li>
-                <li><a href="[https://www.tourismus-nhb.de/](https://www.tourismus-nhb.de/)" target="_blank">ノヴァハゼルブルク観光局</a> (公式観光ポータル)</li>
-                <li><a href="[https://www.novainstitut.eu/naidb](https://www.novainstitut.eu/naidb)" target="_blank">ノヴァ建築遺産学院 (NAI) 公式サイト・研究データベース</a></li>
-                <li><a href="[https://x.com/NovaHazelburg_official](https://x.com/NovaHazelburg_official)" target="_blank">公式X (旧Twitter) アカウント</a> (@NovaHazelburg_official)</li>
-                <li><a href="[https://www.instagram.com/terrasalz_nhb/](https://www.instagram.com/terrasalz_nhb/)" target="_blank">テラ・ザルツ（ウェルネス施設）公式Instagram</a></li>
-                <li><a href="[https://www.haselburger-spar.de/](https://www.haselburger-spar.de/)" target="_blank">ノヴァハゼルブルガー・シュパークセ (NHBS)</a> (地元貯蓄銀行)</li>
-                <li><a href="[https://www.swr.de/swr-aktuell/nova-hazelburg-restoration](https://www.swr.de/swr-aktuell/nova-hazelburg-restoration)" target="_blank">SWR報道：「ノヴァ・モデルの真実と挑戦」</a> (南西ドイツ放送の報道記事)</li>
+                <li><a href="main.html?query=ノヴァハゼルブルク市 公式ウェブサイト" target="_blank">ノヴァハゼルブルク市 公式ウェブサイト</a> (行政・議会情報)</li>
+                <li><a href="main.html?query=ノヴァハゼルブルク観光局" target="_blank">ノヴァハゼルブルク観光局</a> (公式観光ポータル)</li>
+                <li><a href="main.html?query=ノヴァ建築遺産学院" target="_blank">ノヴァ建築遺産学院 (NAI) 公式サイト・研究データベース</a></li>
+                <li><a href="main.html?query=ノヴァハゼルブルク_公式X" target="_blank">公式X (旧Twitter) アカウント</a> (@NovaHazelburg_official)</li>
+                <li><a href="main.html?query=テラ・ザルツ_公式Instagram" target="_blank">テラ・ザルツ（ウェルネス施設）公式Instagram</a></li>
+                <li><a href="main.html?query=ノヴァハゼルブルガー・シュパークセ" target="_blank">ノヴァハゼルブルガー・シュパークセ (NHBS)</a> (地元貯蓄銀行)</li>
+                <li><a href="main.html?query=SWR報道_ノヴァ・モデルの真実" target="_blank">SWR報道：「ノヴァ・モデルの真実と挑戦」</a> (南西ドイツ放送の報道記事)</li>
             </ul>
 
             <h2 id="出典">8 出典</h2>
@@ -498,5 +461,56 @@
             </p>
         </div>
     </div>
+    
+    <button onclick="topFunction()" id="backToTop" title="トップに戻る">$\uparrow$</button>
+
+    <script>
+        // 上に戻るボタンの表示・非表示を制御するJS
+        let mybutton = document.getElementById("backToTop");
+
+        // ページをスクロールするたびにこの関数が実行される
+        window.onscroll = function() {scrollFunction()};
+
+        function scrollFunction() {
+            // スクロール量が200pxを超えたらボタンを表示する
+            if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+                mybutton.style.display = "block";
+            } else {
+                mybutton.style.display = "none";
+            }
+        }
+
+        // クリック時にページの最上部へスムーズにスクロールする
+        function topFunction() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // **重要**: リンクを動的サイト用に修正するJS（冗長な手動修正を防ぐため）
+        document.addEventListener('DOMContentLoaded', function() {
+            const externalLinks = [
+                "https://www.novahazelburg.de/", 
+                "https://www.tourismus-nhb.de/",
+                "https://www.novainstitut.eu/naidb",
+                "https://x.com/NovaHazelburg_official",
+                "https://www.instagram.com/terrasalz_nhb/",
+                "https://www.haselburger-spar.de/",
+                "https://www.swr.de/swr-aktuell/nova-hazelburg-restoration"
+            ];
+            
+            // 外部リンクのURLを main.html?query= の形式に変換する処理
+            document.querySelectorAll('a[target="_blank"]').forEach(a => {
+                const href = a.getAttribute('href');
+                if (externalLinks.includes(href)) {
+                    const text = a.textContent.trim();
+                    // 外部URLではなく、テキストをクエリとしてmain.htmlに渡す
+                    a.setAttribute('href', `main.html?query=${encodeURIComponent(text)}`);
+                    a.removeAttribute('target'); // target="_blank"を削除し、内部遷移とする
+                }
+            });
+        });
+    </script>
 </body>
 </html>
