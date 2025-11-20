@@ -135,10 +135,19 @@
         }
         .map-api {
             margin: 1em 0;
-            height: 300px; /* ウィキペディアの地図の標準的な高さに調整 */
+            height: 350px; /* ウィキペディアの地図の標準的な高さに調整 */
             position: relative;
             overflow: hidden;
             background-color: var(--map-bg);
+            text-align: center; /* 追加 */
+        }
+        /* マップ画像用のスタイル */
+        .map-api img {
+             max-width: 48%; /* 2枚並べるために調整 */
+             max-height: 100%;
+             height: auto;
+             display: inline-block;
+             margin: 0 1%; /* 画像間のスペース */
         }
         /* レスポンシブ対応の修正 (モバイル) */
         @media (max-width: 600px) {
@@ -155,6 +164,12 @@
             }
              #toc {
                 width: 95%;
+            }
+            /* モバイルでは画像を縦に並べる */
+            .map-api img {
+                 max-width: 95%; 
+                 margin: 5px auto;
+                 display: block;
             }
         }
     </style>
@@ -290,7 +305,8 @@
                 島の東部には、かつて孫族が追いやられた険しいチェフォン山脈が南北に連なり、最高峰は凌山（りょうざん、標高2,100m）である。この山脈の高地地域（古くは絶海と呼ばれた）は、現在も手つかずの自然が残る。最大の河川は、島の中央部を横断し西の海に注ぐ丹江（たんこう）である。地質学的には、古代の農耕民が着目した良質な火山灰土壌と、鉄器時代（仔の時代）に発見された鉄鉱石の豊富な鉱床が特徴である。生態系としては、巨大な羽を持つ固有種の「晴幸蝶（せいこうちょう）」が知られており、国の象徴の一つとなっている。
             </p>
             <div class="map-api" style="height:350px;">
-                <p style="text-align:center; padding:1em;"></p>
+                <img src="/3/chizu1.jpg" alt="ハレジア島の地図1" />
+                <img src="/3/chizu2.jpg" alt="ハレジア島の地図2" />
             </div>
 
             <hr>
