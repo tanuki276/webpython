@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>古裂漢族説（これつかんぞくせつ） - Ikipedia</title>
+    <style>
+        /* Base & Layout */
+        :root {
+            --wiki-main: #f8f9fa;
+            --wiki-border: #a2a9b1;
+            --wiki-link: #0645ad;
+            --wiki-header-bg: #eaecf0;
+            --map-bg: #e6e6e6; 
+            --old-town-border: #dc3545;
+            --speculation-color: #990000; /* 憶測を示すための赤色 */
+        }
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            line-height: 1.5;
+            background-color: var(--wiki-main);
+            color: #000;
+            padding: 0;
+            margin: 0;
+            font-size: 0.9em;
+        }
+        .container {
+            max-width: 1280px;
+            display: flex;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .main-content {
+            flex-grow: 1;
+            background-color: white;
+            padding: 10px 30px;
+            border: 1px solid var(--wiki-border);
+            border-top: none;
+            min-height: 100vh;
+        }
+        /* Headers & Links */
+        h1 {
+            font-size: 1.8em;
+            font-weight: normal;
+            border-bottom: 1px solid var(--wiki-border);
+            padding-bottom: 5px;
+            margin-bottom: 5px;
+        }
+        h2 {
+            font-size: 1.4em;
+            border-bottom: 1px solid var(--wiki-border);
+            padding-bottom: 2px;
+            margin-top: 1.5em;
+        }
+        h3 {
+            font-size: 1.1em;
+            margin-top: 1em;
+        }
+        a {
+            color: var(--wiki-link);
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Infobox (右側の表) */
+        .infobox {
+            width: 300px;
+            margin-left: 20px;
+            padding: 0;
+            border: 1px solid var(--wiki-border);
+            background-color: #f9f9f9;
+            font-size: 0.9em;
+            flex-shrink: 0;
+            float: right;
+            margin: 0 0 1em 1em;
+            clear: right;
+            border-collapse: collapse;
+        }
+        .infobox caption {
+            background-color: var(--wiki-header-bg);
+            font-size: 1.1em;
+            font-weight: bold;
+            padding: 5px;
+            text-align: center;
+        }
+        .infobox table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .infobox th, .infobox td {
+            padding: 4px 8px;
+            border-top: 1px solid var(--wiki-border);
+            text-align: left;
+        }
+        .infobox th {
+            width: 40%;
+            background-color: var(--wiki-header-bg);
+        }
+
+        /* TOC (目次) */
+        #toc {
+            border: 1px solid var(--wiki-border);
+            background-color: #f9f9f9;
+            padding: 10px;
+            margin: 1em 0;
+            width: fit-content;
+        }
+        #toc h2 {
+            font-size: 1.1em;
+            margin: 0;
+            border-bottom: none;
+        }
+
+        /* 記事本文内の注釈スタイル */
+        .speculation-note {
+            color: var(--speculation-color);
+            font-weight: bold;
+        }
+
+        /* 上に戻るボタンのスタイル (ノヴァハゼルブルクから継承) */
+        #backToTop {
+            display: none; 
+            position: fixed;
+            bottom: 20px;
+            right: 30px;
+            z-index: 99;
+            border: none;
+            outline: none;
+            background-color: rgba(6, 69, 173, 0.7); 
+            color: white;
+            cursor: pointer;
+            padding: 12px 18px;
+            border-radius: 5px;
+            font-size: 20px;
+            line-height: 1;
+            font-family: Arial, sans-serif; 
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        #backToTop:hover {
+            background-color: var(--wiki-link);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="main-content">
+            <p style="text-align:right; font-size:0.7em;"><sup>[†]</sup>fuck israel <sup>[‡]</sup>slava ukraine <sup>[§]</sup>taiwan independence</p>
+            
+            <h1>古裂漢族説（これつかんぞくせつ）</h1>
+
+            <table class="infobox" role="presentation">
+                <caption>古裂漢族（これつかんぞく）の概要</caption>
+                <tr><td colspan="2" style="text-align:center;"><img src="/3/reconstruction.jpg" alt="古裂漢族の想像図" style="width:90%; max-width:250px; height:auto; display:inline-block; margin:5px auto;"></td></tr>
+                <tr><th>提唱者</th><td>不明 (漢王朝時代の史家が命名に関与)</td></tr>
+                <tr><th>提唱時期</th><td>紀元前1世紀頃（名称の定着）</td></tr>
+                <tr><th>対象民族</th><td>紀元前7世紀頃のシベリア・中央アジアの遊牧民</td></tr>
+                <tr><th>分類</th><td><a href="main.html?query=疑似科学">疑似科学</a>/<a href="main.html?query=民間伝承">民間伝承</a>（主流学術界の評価）</td></tr>
+                <tr><th>主要な主張</th><td>大和民族とキルギス人の共通祖先説</td></tr>
+                <tr><th colspan="2" style="text-align:center;">古裂漢族の活動期</th></tr>
+                <tr><th>活動開始</th><td>紀元前7世紀頃</td></tr>
+                <tr><th>東方移動</th><td>紀元前4〜3世紀頃（東古裂漢族）</td></tr>
+            </table>
+
+            <p>
+                **古裂漢族説**（これつかんぞくせつ）は、主に**東アジアと中央アジアの民族起源に関する仮説**の一つである。この説の中核となる**古裂漢族**とは、紀元前7世紀頃に主に<a href="main.html?query=シベリア">シベリア南部</a>および近辺の<a href="main.html?query=中央アジア">中央アジア</a>辺りで生活していたとされる架空の<a href="main.html?query=遊牧民族">遊牧民族</a>の総称である。この民族は、その名称に反して**漢族との血縁関係はない**と、この説自体の中で設定されている。
+            </p>
+            <p>
+                この仮説は、**科学的な根拠を一切有していない**ため、歴史学、人類学、言語学の主流な学会からは**疑似科学**もしくは**民間伝承**として扱われている<span class="reference">[1]</span>。しかし、一部の民間研究者や地域の民族的アイデンティティに関心を持つ人々の間で、現在も根強く語り継がれている伝説的な学説である<span class="reference">[2]</span>。
+            </p>
+
+            <div id="toc">
+                <h2>目次</h2>
+                <ul>
+                    <li><a href="#概要">1 古裂漢族の概要</a>
+                        <ul>
+                            <li><a href="#東西分裂">1.1 東西への分裂と移動</a></li>
+                            <li><a href="#名称の由来">1.2 「古裂漢族」という名称の由来</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#現代の学説">2 現代の学説における位置づけ</a>
+                        <ul>
+                            <li><a href="#子孫説">2.1 大和民族・キルギス人祖先説</a></li>
+                            <li><a href="#民間での評価">2.2 民間での流布と評価</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#関連する仮説">3 関連する架空の仮説</a></li>
+                    <li><a href="#出典">4 出典</a></li>
+                </ul>
+            </div>
+
+            <h2 id="概要">1 古裂漢族の概要</h2>
+            <h3 id="東西分裂">1.1 東西への分裂と移動</h3>
+            <p>
+                古裂漢族は、紀元前6世紀後期ごろに民族間の内部対立を主な原因として**東古裂漢族**と**西古裂漢族**に分裂したとされる。この分裂以降、両派は異なる進路を辿った。
+            </p>
+            <ul>
+                <li>**東古裂漢族**: 東へ移動し、現<a href="main.html?query=中国">中国</a>、<a href="main.html?query=朝鮮半島">朝鮮半島</a>に一時滞在した後、紀元前4〜3世紀頃に<a href="main.html?query=日本列島">日本列島</a>へ渡ったと仮定されている。この渡来が、日本における<a href="main.html?query=弥生時代">弥生時代</a>の開始に影響を与えた可能性を示唆する説もあるが、<span class="speculation-note">すべて憶測の域を出ない</span>。</li>
+                <li>**西古裂漢族**: シベリア南部及び近辺の<a href="main.html?query=中央アジア">中央アジア</a>あたりで、分裂前と同じく遊牧民族として活動を継続していたとされる。</li>
+            </ul>
+
+            <h3 id="名称の由来">1.2 「古裂漢族」という名称の由来</h3>
+            <p>
+                この説によれば、「古裂漢族」という名称は、主に<a href="main.html?query=漢王朝">漢王朝</a>時代の史家による誤認に由来する。当時、一部の史家は日本列島に渡った東古裂漢族を、かつて古代に分裂して東方へ移動した**「（古い時代に）分裂した漢民族」**と見誤り、**古裂漢族**（古代の、裂けた、漢族）という誤った名前を付けた。この誤った命名が後に定着し、紀元前7世紀頃に活動し東西に分裂した遊牧民族全体を指すようになった。
+            </p>
+            <p>
+                この**「古裂漢族伝説の始まり」**こそが、この説のロマン性を高める重要な要素とされている<span class="reference">[3]</span>。
+            </p>
+
+            <h2 id="現代の学説">2 現代の学説における位置づけ</h2>
+            <h3 id="子孫説">2.1 大和民族・キルギス人祖先説</h3>
+            <p>
+                古裂漢族説の最も有名な主張の一つは、東古裂漢族が現代の**<a href="main.html?query=大和民族">大和民族</a>**（日本人）に、西古裂漢族が現代の**<a href="main.html?query=キルギス人">キルギス人</a>**になったという仮説である。
+            </p>
+            <p>
+                この主張は、**科学的根拠は全くない**ことが人類遺伝学や考古学の専門家によって繰り返し指摘されている<span class="reference">[1]</span>。
+            </p>
+            <h3 id="民間での評価">2.2 民間での流布と評価</h3>
+            <p>
+                主流な学術界からの否定にもかかわらず、一部の中国、特にキルギス人のルーツに関心を持つ研究者や一般市民の間では、この説が熱心に研究されている。彼らの間では、「キルギス人と日本人は顔が似ている」「日本の<a href="main.html?query=戦国時代_(日本)">戦国時代</a>には弓馬を操る文化があった」といった、極めて断片的な文化的・身体的特徴の類似性を根拠に、「何らかの関係性があるのかも」と噂されている。
+            </p>
+            <p>
+                この説は、特に中央アジアと東アジアの間の**想像上の絆**を強調したい民族的ロマンティシズムを背景に、SNSや一部の地域文化誌で流布している。
+            </p>
+
+            <h2 id="関連する仮説">3 関連する架空の仮説</h2>
+            <ul>
+                <li><a href="main.html?query=ノヴァハゼルブルク">ノヴァハゼルブルク</a>: 東古裂漢族が日本へ渡る前に、この架空国家の礎を築いたとする、さらなる**派生仮説**が存在する。</li>
+                <li><a href="main.html?query=日本民主主義連邦共和国">日本民主主義連邦共和国（北日本）</a>: 東古裂漢族の末裔がソ連の影響下で建国した国家であるという、<span class="speculation-note">政治的なロマンティシズムに基づく関連説</span>が一部で唱えられている。</li>
+            </ul>
+
+            <h2 id="出典">4 出典</h2>
+            <p style="font-size: 0.8em;">
+                [1] Dr. Kenjiro Tanaka, *Genetic Analysis of East and Central Asian Populations* (2018). [査読付き論文]<br>
+                [2] Aibek Sultanov, *The Silk Road Echoes: Oral Traditions in the Tian Shan Mountains*, Bishkek University Press (2020). [民間伝承研究]<br>
+                [3] 王 黎明, *漢代史料における辺境民族の誤認問題*, 2001. [非主流歴史研究誌]
+            </p>
+        </div>
+    </div>
+
+    <button onclick="topFunction()" id="backToTop" title="トップに戻る">↑</button>
+
+    <script>
+        // 上に戻るボタンの表示・非表示を制御するJS
+        let mybutton = document.getElementById("backToTop");
+
+        // ページをスクロールするたびにこの関数が実行される
+        window.onscroll = function() {scrollFunction()};
+
+        function scrollFunction() {
+            // スクロール量が200pxを超えたらボタンを表示する
+            if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+                mybutton.style.display = "block";
+            } else {
+                mybutton.style.display = "none";
+            }
+        }
+
+        // クリック時にページの最上部へスムーズにスクロールする
+        function topFunction() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+    </script>
+</body>
+</html>
