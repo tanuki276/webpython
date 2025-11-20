@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="ja">
+<!DOCTYPE html>
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -60,106 +61,304 @@
         }
         a:hover {
             text-decoration: underline;
-        }/* Infobox */
-    .infobox {
-        width: 300px;
-        float: right; 
-        margin: 5px 0 1em 1em; 
-        clear: right;
-        padding: 0;
-        border: 1px solid var(--wiki-border);
-        background-color: #f9f9f9;
-        font-size: 0.9em;
-        flex-shrink: 0;
-        border-collapse: collapse;
-    }
-    .infobox caption {
-        background-color: var(--wiki-header-bg);
-        font-size: 1.2em;
-        font-weight: bold;
-        padding: 5px;
-        text-align: center;
-    }
-    .infobox table {
-        width: 100%;
-        border-collapse: collapse;
-    }
-    .infobox th, .infobox td {
-        padding: 4px 8px;
-        border-top: none; 
-        border-bottom: 1px solid var(--wiki-border); 
-        text-align: left;
-    }
-    .infobox tr:last-child th, .infobox tr:last-child td {
-         border-bottom: none;
-    }
-    .infobox th {
-        width: 40%;
-        background-color: var(--wiki-header-bg);
-    }
-    .infobox th[colspan="2"] {
-        background-color: var(--wiki-header-bg);
-        text-align: center;
-    }
+        }
 
-    /* TOC */
-    #toc {
-        border: 1px solid var(--wiki-border);
-        background-color: #f9f9f9;
-        padding: 10px;
-        margin: 1em 0;
-        width: fit-content;
-    }
-    #toc h2 {
-        font-size: 1.1em;
-        margin: 0;
-        border-bottom: none;
-    }
-    /* Wikitable (統計表) */
-    .wikitable { 
-        width: 95%;
-        margin: 1em auto;
-        border: 1px solid var(--wiki-border);
-        border-collapse: collapse;
-    }
-    .wikitable th {
-        background-color: var(--wiki-header-bg);
-    }
-    .wikitable th, .wikitable td {
-        border: 1px solid var(--wiki-border);
-        padding: 5px;
-        text-align: center;
-    }
-    .map-api {
-        margin: 1em 0;
-        height: 300px;
-        position: relative;
-        overflow: hidden;
-        background-color: var(--map-bg);
-    }
-    @media (max-width: 600px) {
-        .container {
-            padding: 10px;
-        }
-        .main-content {
-            padding: 10px 15px;
-        }
+        /* Infobox */
         .infobox {
+            width: 300px;
+            float: right; 
+            margin: 5px 0 1em 1em; 
+            clear: right;
+            padding: 0;
+            border: 1px solid var(--wiki-border);
+            background-color: #f9f9f9;
+            font-size: 0.9em;
+            flex-shrink: 0;
+            border-collapse: collapse;
+        }
+        .infobox caption {
+            background-color: var(--wiki-header-bg);
+            font-size: 1.2em;
+            font-weight: bold;
+            padding: 5px;
+            text-align: center;
+        }
+        .infobox table {
             width: 100%;
-            margin: 0.5em 0;
-            float: none;
+            border-collapse: collapse;
         }
-         #toc {
-            width: 95%;
+        .infobox th, .infobox td {
+            padding: 4px 8px;
+            border-top: none; 
+            border-bottom: 1px solid var(--wiki-border); 
+            text-align: left;
         }
-    }
-</style>
+        .infobox tr:last-child th, .infobox tr:last-child td {
+             border-bottom: none;
+        }
+        .infobox th {
+            width: 40%;
+            background-color: var(--wiki-header-bg);
+        }
+        .infobox th[colspan="2"] {
+            background-color: var(--wiki-header-bg);
+            text-align: center;
+        }
 
+        /* TOC */
+        #toc {
+            border: 1px solid var(--wiki-border);
+            background-color: #f9f9f9;
+            padding: 10px;
+            margin: 1em 0;
+            width: fit-content;
+        }
+        #toc h2 {
+            font-size: 1.1em;
+            margin: 0;
+            border-bottom: none;
+        }
+        /* Wikitable (統計表) */
+        .wikitable { 
+            width: 95%;
+            margin: 1em auto;
+            border: 1px solid var(--wiki-border);
+            border-collapse: collapse;
+        }
+        .wikitable th {
+            background-color: var(--wiki-header-bg);
+        }
+        .wikitable th, .wikitable td {
+            border: 1px solid var(--wiki-border);
+            padding: 5px;
+            text-align: center;
+        }
+        .map-api {
+            margin: 1em 0;
+            height: 300px; /* ウィキペディアの地図の標準的な高さに調整 */
+            position: relative;
+            overflow: hidden;
+            background-color: var(--map-bg);
+        }
+        /* レスポンシブ対応の修正 (モバイル) */
+        @media (max-width: 600px) {
+            .container {
+                padding: 10px;
+            }
+            .main-content {
+                padding: 10px 15px;
+            }
+            .infobox {
+                width: 100%;
+                margin: 0.5em 0;
+                float: none;
+            }
+             #toc {
+                width: 95%;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="container">
         <div class="main-content">
-            <!-- Content omitted for brevity since only ** removal requested; full content already given -->
+            <p style="text-align:right; font-size:0.7em;"><sup>[†]</sup>fuck israel <sup>[‡]</sup>slava ukraine <sup>[§]</sup>taiwan independence</p>
+
+            <h1>ハレジア独立共和国（ハレジアどくりつきょうわこく）</h1>
+
+            <table class="infobox" role="presentation">
+                <caption>ハレジア独立共和国</caption>
+                <tr><th colspan="2" style="text-align:center;">
+                    <span style="font-size:1.1em; display:block;">harejia zeyu wakowku （盛語）</span>
+                    <span style="font-size:1.1em; display:block;">Halezia Independent Republic （英語）</span>
+                </th></tr>
+                <tr><td colspan="2" style="text-align:center;">
+                    <img src="/3/harejiakkoki" alt="ハレジア国旗" style="width:45%; max-width:130px; height:auto; display:inline-block; margin:5px 10px;">
+                    <img src="/3/harejiakokusyou" alt="ハレジア国章" style="width:40%; max-width:110px; height:auto; display:inline-block; margin:5px auto;">
+                </td></tr>
+                <tr><th>国の標語</th><td>団結は戦乱の果てに（Unio post bellum）</td></tr>
+                <tr><th>国歌</th><td><a href="#文化">ハレジア独立讃歌</a></td></tr>
+                <tr><th colspan="2" style="text-align:center; background-color:var(--wiki-header-bg);">地理</th></tr>
+                <tr><th>位置</th><td>東南アジア</td></tr>
+                <tr><th>首都</th><td><a href="#地方行政区分">新省地区</a>（政庁所在地）</td></tr>
+                <tr><th>最大の都市</th><td><a href="#地方行政区分">新省地区</a></td></tr>
+                <tr><th>総面積</th><td>15,000 km²</td></tr>
+                <tr><th>主要な島</th><td>ハレジア島全域</td></tr>
+                <tr><th colspan="2" style="text-align:center; background-color:var(--wiki-header-bg);">人口</th></tr>
+                <tr><th>総計（2025年）</th><td>3,500,000人</td></tr>
+                <tr><th>人口密度</th><td>約233人/km²</td></tr>
+                <tr><th colspan="2" style="text-align:center; background-color:var(--wiki-header-bg);">経済（2025年予測）</th></tr>
+                <tr><th>GDP（PPP）合計</th><td>20,000百万ドル</td></tr>
+                <tr><th>GDP（PPP）1人あたり</th><td>5,714ドル</td></tr>
+                <tr><th>通貨</th><td>ハレジア・フラン（HAF）</td></tr>
+                <tr><th>為替政策</th><td><a href="/main.html?query=日本円">日本円</a>に連動（<a href="/main.html?query=ペッグ制">ペッグ制</a>）</td></tr>
+                <tr><th colspan="2" style="text-align:center; background-color:var(--wiki-header-bg);">体制</th></tr>
+                <tr><th>公用語</th><td><a href="#民族・言語">盛語</a></td></tr>
+                <tr><th>経済協力言語</th><td><a href="#民族・言語">日本語</a></td></tr>
+                <tr><th>独立</th><td>南方諸島総督府から1945年</td></tr>
+                <tr><th>国際電話番号</th><td>+674</td></tr>
+                <tr><th colspan="2" style="text-align:center; background-color:var(--wiki-header-bg);">軍事</th></tr>
+                <tr><th>軍隊</th><td><a href="#安全保障">ハレジア独立防衛軍</a></td></tr>
+            </table>
+
+            <p>
+                ハレジア独立共和国（ハレジアどくりつきょうわこく）、通称ハレジアは、<a href="#地理">東南アジア</a>の南シナ海またはナトゥナ海域に位置する<a href="#地理">ハレジア島</a>全域を領土とする共和国である。紀元前6000年頃の古代農耕民（黄河流域系）と先住民（カハ族）の混交に端を発し、孫族、巍族、明族の三大民族のルーツが形成されたとされる。その歴史は「古晴幸時代」に始まる激しい民族間対立と、統一王朝「丹」の興亡、約1,000年に及ぶ「戦国時代」といった戦乱の歴史を特徴とする。
+            </p>
+            <p>
+                1250年からの<a href="/main.html?query=シュリーヴィジャヤ王国">シュリーヴィジャヤ王国</a>などによる約700年にわたる外国支配を経て、1945年に独立を達成した。国土面積は15,000 km²程度。独立後の復興期に<a href="/main.html?query=日本">日本</a>からの経済支援と資源投資を積極的に受け入れた経緯から、親日派が非常に多く、<a href="#経済">日本語が経済面の主要言語</a>として広く機能している点が、周辺国と比較して特異である<span class="reference">[1]</span>。
+            </p>
+
+            <div id="toc">
+                <h2>目次</h2>
+                <ul>
+                    <li><a href="#歴史">1 歴史</a>
+                        <ul>
+                            <li><a href="#古代の形成と戦乱期">1.1 古代の形成と戦乱期（BC6000頃〜AD1250）</a></li>
+                            <li><a href="#戊国時代と泥沼の戦乱">1.2 戊国時代と泥沼の戦乱（1312年〜1676年）</a></li>
+                            <li><a href="#植民地時代と独立">1.3 植民地時代と独立（1676年〜1945年）</a></li>
+                            <li><a href="#戦後復興と現代">1.4 戦後復興と現代（1945年〜現在）</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#地理">2 地理と環境</a></li>
+                    <li><a href="#地方行政区分">3 地方行政区分</a></li>
+                    <li><a href="#民族・言語">4 民族・言語</a>
+                        <ul>
+                            <li><a href="#三大民族">4.1 民族構成</a></li>
+                            <li><a href="#公用語">4.2 言語</a></li>
+                            <li><a href="#日本語教育">4.3 日本語と教育</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#経済">5 経済と産業構造</a></li>
+                    <li><a href="#文化">6 文化・社会</a>
+                        <ul>
+                            <li><a href="#宗教と食文化">6.1 宗教と食文化</a></li>
+                            <li><a href="#歴史遺産と祭り">6.2 歴史遺産と祭り</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#安全保障">7 安全保障</a></li>
+                </ul>
+            </div>
+
+            <h2 id="歴史">1 歴史</h2>
+            <p>
+                ハレジアの歴史は、そのほぼ全てが「統一と分裂、民族の闘争」の繰り返しであり、<a href="/main.html?query=アイデンティティ">アイデンティティ</a>の形成に深く影響を与えている。
+            </p>
+
+            <h3 id="古代の形成と戦乱期">1.1 古代の形成と戦乱期（BC6000頃〜AD1250）</h3>
+            <p>
+                紀元前6000年頃、黄河流域の古代農耕民が壊滅的な洪水から逃れるため、多数の筏で島へ向かい、北、東、西の地点に上陸した。彼らは以前から航海していたオーストロネシア語族以前の先住民カハ族（伽騁族）と混交し、後の三大民族のルーツを形成した。この時代、彼らはまだ孫族、巍族、明族という概念を持たず、東族（孫族）、北族（明族）、西族（巍族）と呼ばれていた。
+            </p>
+            <p>
+                この時代の初期、東族が建国した半ば伝説的な古孫（京）から西族の陳保（盛）までの時代を古晴幸時代と通称し、公用語の祖である盛語や独自文化が発展した。しかし、陳保の時代には、東族は正統を示す「嘉」の紋を強制され、紋を持たない者は叛徒として処刑された。東族は最東端のチェフォン山脈へ追いやられ、西族、北族から「化猿」と呼ばれて集落の排斥や激しい虐殺・強制労働が行われた。
+            </p>
+            <p>
+                中期になり差別を重大視した東族が嘉紋を廃止し、武装した凌軍（孫族連合）として陳保を倒し、丹を建国した（丹戦争）。丹は盛語を共通語として統一を推進したが、皮肉にも孫族優遇社会となり、豪族の不満が残った。この孫族中心主義に反発した勢力が安と仁を建国し、島は甲三国時代（安・丹・仁）へと突入。通婚制度の導入などにより古代だが比較的安定した。
+            </p>
+            <p>
+                安定した甲三国時代は、大洪水と安で起きた農民反乱（拙模の乱）を機に仁が安・丹を裏切り統一し前孫を樹立。その後、<a href="#地理">鉄器</a>を背景に仔が勢力を拡大して島を再統一し後孫となる。新皇帝の霍卯による急進的な「大陸文化輸入政策」が富を富豪層に集中させた結果、強い不満を呼んだ国民らが斂刻革命を起こし慶を建国した。慶（後の前満）の崩壊から<a href="/main.html?query=シュリーヴィジャヤ王国">シュリーヴィジャヤ</a>統治までの約1000年間は、春夏戦国時代と呼ばれ、北満、典、前春、後仙といった三大民族を基盤とする王朝が乱立・分裂を繰り返す群政の内乱が続いた泥沼の戦乱期となった。
+            </p>
+
+            <h3 id="戊国時代と泥沼の戦乱">1.2 戊国時代と泥沼の戦乱（1312年〜1676年）</h3>
+            <p>
+                戦乱で疲弊した島は1250年に<a href="/main.html?query=シュリーヴィジャヤ王国">シュリーヴィジャヤ王国</a>の植民地（シュリーヴィジャヤ統治時代）となり、一時的に戦乱は終結する。しかし、統治権の衰退に伴い、稜、秉、原、亳阜、後春の五大国家が独立し、戊国時代（ごこくじだい）が開幕。平和協定「五国寧道の書」により150年ほど平和が続いたが、1423年、後春が稜へ侵攻したことで秋冬戦国時代が始まり、終戦まで240年以上にわたる泥沼の戦いが続いた。この長期にわたる戦乱の中で、現地勢力はアイデンティティを守るため、民族名称を孫族、巍族、明族として正式に確定させた。
+            </p>
+
+            <h3 id="植民地時代と独立">1.3 植民地時代と独立（1676年〜1945年）</h3>
+            <p>
+                長期にわたる戦乱で疲弊した島は1676年に<a href="/main.html?query=オランダ">和蘭</a>領レッデン島として<a href="/main.html?query=オランダ">オランダ</a>の植民地となる。その後、1842年には<a href="/main.html?query=フランス">仏</a>領ラファイア島として<a href="/main.html?query=フランス">フランス</a>領へ移行。フランス統治時代には強制労働が課され、国内は混乱した。
+            </p>
+            <ul>
+                <li>抵抗政権の出現: フランスの介入が困難だった東南部では、陞（後邨）がゲリラ戦を展開し抵抗を続け、後に南陞として独立した。</li>
+                <li>繁連合の抵抗: 1887年頃から、島の豪族・政権が団結し繁連合を結成。長期の襲撃により、1910年にフランス軍が撤退。</li>
+                <li>短命な近代政権: フランス撤退後、ラファイア連合臨時政府政権が急進的な近代化を遂げるが、巍国（民主主義政権）、大ラファイア帝国（長大な正式名称と、労働者問題改善府による反政府労働者弾圧）と短期間で政権が目まぐるしく交代した。</li>
+                <li>社会主義政権: 労働者待遇の悪化と弾圧を契機に労働者が蜂起し、<a href="/main.html?query=ソ連">ソ連</a>の一部支援を受けた大ラファイア統一社会主義共和国政権が樹立された。</li>
+                <li>南方諸島総督府時代: 1942年、島は<a href="/main.html?query=大日本帝国">大日本帝国</a>南方諸島総督府の統治下に入る。<a href="/main.html?query=日本">日本</a>は混乱した治安を回復させ、インフラ整備と復旧作業を行った（現地民は労働力として提供）。この時期の整備が、後の親日派形成の大きな要因となる。</li>
+                <li>独立: 1945年、<a href="/main.html?query=第二次世界大戦">第二次世界大戦</a>の終結に伴い、ハレジア独立共和国として独立を達成した。</li>
+            </ul>
+
+            <h3 id="戦後復興と現代">1.4 戦後復興と現代（1945年〜現在）</h3>
+            <p>
+                独立後のハレジアは、社会主義政権と戦乱によるインフラの壊滅状態から復興するため、<a href="/main.html?query=日本">日本</a>からの経済・技術支援を全面的に受け入れた。この復興過程で、<a href="/main.html?query=日本語">日本語</a>が経済取引における主要言語として定着し、現在に至る。
+            </p>
+
+            <hr>
+
+            <h2 id="地理">2 地理と環境</h2>
+            <p>
+                ハレジア独立共和国はハレジア島全域を領土とし、面積は15,000 km²程度である。地理的には<a href="/main.html?query=東南アジア">東南アジア</a>の<a href="/main.html?query=リアウ諸島">リアウ諸島</a>東方の<a href="/main.html?query=南シナ海">南シナ海</a>または<a href="/main.html?query=ナトゥナ海域">ナトゥナ海域</a>に位置する。気候は年間を通して高温多湿な熱帯モンスーン気候に属する。
+            </p>
+            <p>
+                島の東部には、かつて孫族が追いやられた険しいチェフォン山脈が南北に連なり、最高峰は凌山（りょうざん、標高2,100m）である。この山脈の高地地域（古くは絶海と呼ばれた）は、現在も手つかずの自然が残る。最大の河川は、島の中央部を横断し西の海に注ぐ丹江（たんこう）である。地質学的には、古代の農耕民が着目した良質な火山灰土壌と、鉄器時代（仔の時代）に発見された鉄鉱石の豊富な鉱床が特徴である。生態系としては、巨大な羽を持つ固有種の「晴幸蝶（せいこうちょう）」が知られており、国の象徴の一つとなっている。
+            </p>
+            <div class="map-api" style="height:350px;">
+                <p style="text-align:center; padding:1em;"></p>
+            </div>
+
+            <hr>
+
+            <h2 id="地方行政区分">3 地方行政区分</h2>
+            <p>
+                長年の民族対立を乗り越えた融和政策を反映し、国内は淡和地区(北)、斉邦地区(西北)、港印地区(東北)、保本地区(西南)、綜海地区(東南)、そして中央の新省地区と中南部の衛波地区で構成される
+            </p>
+
+            <hr>
+
+            <h2 id="民族・言語">4 民族・言語</h2>
+            <h3 id="三大民族">4.1 民族構成</h3>
+            <p>
+                国民は、歴史的なルーツを持つ孫族、巍族、明族の混血が大半を占める。長年にわたる内戦と植民地支配への共同抵抗の歴史により、現代では三大民族という意識は極めて希薄化しており、外見的な判別も困難になっている。
+            </p>
+            <h3 id="公用語">4.2 言語</h3>
+            <p>
+                公用語は盛語。これは古代の古孫の時代に起源を持ち、丹の時代に共通語として確立された言語である。文字は、古代中国の漢字の影響を強く受けた独自の表意文字「盛字（せじ）」を使用する。
+            </p>
+            <h3 id="日本語教育">4.3 日本語と教育</h3>
+            <p>
+                経済的な結びつきから、<a href="/main.html?query=日本語">日本語</a>が貿易、金融、技術開発の主要言語として広く利用されている。中等教育（中学校）からは日本語が必修科目となっており、特に高校では「国際経済コース」を選択する生徒は、高度なビジネス日本語と<a href="/main.html?query=日本">日本</a>の商習慣を専門的に学ぶ。これは、<a href="/main.html?query=日本">日本</a>への経済的依存を維持・発展させるための国策の一つである。
+            </p>
+
+            <hr>
+
+            <h2 id="経済">5 経済と産業構造</h2>
+            <p>
+                2025年予測のGDP（PPP）一人あたり5,714ドルであり、低中所得国水準にある。
+            </p>
+            <h3 id="国際関係と金融">5.1 国際関係と金融</h3>
+            <p>
+                親日派が多い背景には、戦後の<a href="/main.html?query=日本">日本</a>による大規模なインフラ投資と技術供与がある。しかし、復興過程で、豊富な鉄鉱石が「ハレジアの白いダイヤ」と呼ばれ、日本や西側諸国への輸出によって国家財政を一時的に潤した（鉄鉱石バブル）。このバブル期に公共投資が乱立したが、無計画な採掘によって鉱床は急速に枯渇。その後、経済は停滞し、国家運営に必要な資金と技術を<a href="/main.html?query=日本">日本</a>に完全に依存せざるを得ない状況となった。通貨であるハレジア・フラン（HAF）を<a href="/main.html?query=日本円">日本円</a>（JPY）に連動させる<a href="/main.html?query=ペッグ制">ペッグ制</a>の採用は、この経済的失敗を覆い隠し、日本の経済保護下に入るための事実上の処置である。主要な輸出品は、もはや基盤資源ではないが、残された機械部品の製造と、高品質な農産物である。
+            </p>
+
+            <hr>
+
+            <h2 id="文化">6 文化・社会</h2>
+            <p>
+                文化的な基盤は古代の盛語文化にあり、特に戦乱の歴史の中で発展した統一の精神が強い。国民性は、歴史的な迫害と戦乱を乗り越えた「団結の精神」を持つ一方で、資源バブル崩壊後の現状に対する「自嘲的なユーモア」と「諦観」を併せ持つとされる。
+            </p>
+            <h3 id="宗教と食文化">6.1 宗教と食文化</h3>
+            <p>
+                国民の大多数が特定の宗教を持たない無宗教である。これは、古来の土着信仰が長期にわたる戦乱や社会主義政権によって衰退した結果とされる。一部に、シュリーヴィジャヤや古代中国からの影響を受けた上座部仏教と、土着の自然崇拝が混交した信仰体系が残るが、社会生活への影響は限定的である。
+            </p>
+            <p>
+                食文化は、米を主食とし、豊富な魚介類と熱帯野菜を中心とする。特に丹の魚醤（たんのぎょしょう）は、古代の丹王朝の製法を受け継いでいるとされる国民的な調味料である。また、国民食として「北文（ほくもん）」が知られている。これは魚のすりつぶしを香辛料と混ぜて発酵させ、米と一緒に食べる伝統的な料理であり、栄養源として歴史的に重要な役割を果たしてきた。
+            </p>
+            <h3 id="歴史遺産と祭り">6.2 歴史遺産と祭り</h3>
+            <ul>
+                <li>界天（かいてん）: 後孫、そして慶の時代に建設された巨大な城塞（城郭）。長年の戦乱を耐え抜き、民族和解会議の場として使用された経緯から、国の最大歴史的建造物であると同時に民族融和の象徴として知られる。</li>
+                <li>ハレジア独立讃歌: 独立の象徴として国の歴史の重みを表現している。</li>
+                <li>塩水湧出祭: 古代、チェフォン山脈で虐げられた孫族が、苦難の末に清らかな水源（塩水ではないが、神聖視された源泉）を発見した故事に由来する祭りで、毎年春に開催され、民族の「自由と浄化」を祝う。</li>
+            </ul>
+
+            <hr>
+
+            <h2 id="安全保障">7 安全保障</h2>
+            <p>
+                ハレジア独立共和国の国防は、ハレジア独立防衛軍が一手に担っている。これは、旧社会主義政権の軍事組織を再編・縮小し、独立時に発足した組織である。
+            </p>
+            <p>
+                長期にわたる戦乱の歴史と、資源枯渇後の経済的脆弱性を背景に、防衛軍の装備や訓練は、主要な経済協力国である<a href="/main.html?query=日本">日本</a>からの技術・資金援助に大きく依存している。主な任務は、領海の警備と、国内の治安維持（特に旧社会主義勢力や民族主義的過激派の監視）である。近隣大国の海軍力に対抗できる装備は持っておらず、実質的には日本との二国間安全保障関係によって国家の独立が維持されていると見なされている。
+            </p>
+            <p style="text-align: right; font-size: 0.9em; margin-top: 5px;">
+            </p>
         </div>
     </div>
 </body>
