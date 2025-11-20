@@ -141,55 +141,6 @@
         #backToTop:hover {
             background-color: var(--wiki-link);
         }
-        
-        /* 地図コンテナのスタイル */
-        .map-container {
-            position: relative;
-            width: 100%;
-            height: 350px; /* 地図の高さ調整 */
-            margin: 1.5em 0;
-            border: 1px solid var(--wiki-border);
-            overflow: hidden;
-            background-color: #eaf3f8; /* 薄い青で海域を表現 */
-        }
-        /* 地図の背景画像 - ユーラシア大陸の地理的な図を想定 */
-        .map-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.7; /* 地図の上に線を見やすくするため薄くする */
-        }
-        .map-label {
-            position: absolute;
-            font-size: 0.8em;
-            font-weight: bold;
-            color: #333;
-            padding: 2px 4px;
-            border-radius: 3px;
-            background-color: rgba(255, 255, 255, 0.8);
-            border: 1px solid #ccc;
-            z-index: 20; /* ラベルを線の上に表示 */
-        }
-
-        /* 東古裂漢族ルート (赤色の実線) - シベリアから日本へ */
-        .route-east {
-            position: absolute;
-            height: 3px;
-            background-color: #dc3545; /* 赤 */
-            transform-origin: top left;
-            z-index: 10;
-            /* width, top, left, transform: rotateZ() はインラインで設定 */
-        }
-
-        /* 西古裂漢族ルート (青色の破線) - シベリアから中央アジアへ */
-        .route-west {
-            position: absolute;
-            height: 3px;
-            border-top: 3px dashed #0645ad; /* 青色の破線 */
-            transform-origin: top left;
-            z-index: 10;
-            /* width, top, left, transform: rotateZ() はインラインで設定 */
-        }
     </style>
 </head>
 <body>
@@ -201,8 +152,7 @@
 
             <table class="infobox" role="presentation">
                 <caption>古裂漢族（これつかんぞく）の概要</caption>
-                <tr><td colspan="2" style="text-align:center;"><img src="/3/reconstruction.jpg" alt="古裂漢族の想像図" style="width:90%; max-width:250px; height:auto; display:inline-block; margin:5px auto;"></td></tr>
-                <tr><th>提唱者</th><td>不明 (漢王朝時代の史家)</td></tr>
+                <tr><th>提唱</th><td>不明・漢王朝の史家とされる</td></tr>
                 <tr><th>提唱時期</th><td>紀元前1世紀頃</td></tr>
                 <tr><th>対象民族</th><td>紀元前7世紀頃のシベリア・中央アジアの遊牧民</td></tr>
                 <tr><th>分類</th><td><a href="/main.html?query=疑似科学">疑似科学</a>/<a href="/main.html?query=民間伝承">民間伝承</a>（主流学術界の評価）</td></tr>
@@ -224,7 +174,6 @@
                 <ul>
                     <li><a href="#概要">1 古裂漢族の概要</a>
                         <ul>
-                            <li><a href="#移動ルートの地図">1.0 移動ルートの地図</a></li>
                             <li><a href="#東西分裂">1.1 東西への分裂と移動</a></li>
                             <li><a href="#名称の由来">1.2 「古裂漢族」という名称の由来</a></li>
                         </ul>
@@ -240,25 +189,6 @@
             </div>
             
             <h2 id="概要">1 古裂漢族の概要</h2>
-            <h3 id="移動ルートの地図">1.0 移動ルートの地図</h3>
-
-            <div class="map-container" role="img" aria-label="古裂漢族説に基づくユーラシア大陸の想像上の移動ルート図">
-                
-
-                <span class="map-label" style="top: 80px; left: 200px; background-color: #f9f9f9;">⚫ 始点: シベリア南部 (紀元前7世紀頃)</span>
-                
-                <span class="map-label" style="top: 150px; left: 350px;">分岐点</span>
-                <div class="route-east" style="width: 250px; top: 120px; left: 220px; transform: rotateZ(-10deg);"></div>
-                <div class="route-east" style="width: 200px; top: 165px; left: 450px; transform: rotateZ(30deg);"></div>
-                <span class="map-label" style="top: 250px; left: 600px; background-color: #fff0f0;">終点: 日本列島 (東古裂漢族)</span>
-
-                <div class="route-west" style="width: 200px; top: 100px; left: 220px; transform: rotateZ(5deg);"></div>
-                <span class="map-label" style="top: 120px; left: 50px; background-color: #f0f8ff;">終点: 中央アジア (西古裂漢族)</span>
-
-                <p style="position:absolute; bottom:5px; right:10px; font-size:0.7em; z-index: 20;">（図：古裂漢族説における想像上の民族移動ルート）</p>
-            </div>
-            
-
             <h3 id="東西分裂">1.1 東西への分裂と移動</h3>
             <p>
                 古裂漢族は、紀元前6世紀後期ごろに民族間の内部対立を主な原因として東古裂漢族と西古裂漢族に分裂したとされる。この分裂以降、両派は異なる進路を辿った。
