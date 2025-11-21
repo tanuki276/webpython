@@ -141,13 +141,14 @@
             background-color: var(--map-bg);
             text-align: center; /* 追加 */
         }
-        /* マップ画像用のスタイル */
-        .map-api img {
-             max-width: 33%; /* 2枚並べるために調整 */
-             max-height: 100%;
-             height: auto;
-             display: inline-block;
-             margin: 0 1%; /* 画像間のスペース */
+       　/* 修正案 */
+.map-api img {
+     max-width: 32%; /* 33%ではなく32%程度に少し下げる */
+     max-height: 100%;
+     height: auto;
+     display: inline-block;
+     margin: 0 0.5%; /* 左右のマージンを0.5%に縮小 (合計32% + 1% + 32% + 1% + 32% + 1% = 99%) */
+}
         }
         /* レスポンシブ対応の修正 (モバイル) */
         @media (max-width: 600px) {
