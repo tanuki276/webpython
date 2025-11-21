@@ -564,11 +564,7 @@
                 behavior: 'smooth'
             });
         }
-        // ↑ ここでトップに戻るためのJavaScript関数が閉じられていませんでした。
-        //   クッキーコードを結合する際に、この閉じ括弧とクッキーコードの開始を連結します。
-    </script> 
-    
-    <style>
+      <style>
     /* クッキー通知用のスタイル - 汎用性のためHTML内に記述 */
     #genericCookieNotice {
         position: fixed;
@@ -603,48 +599,42 @@
     #genericCookieNotice button:hover {
         background-color: #043685;
     }
-    </style>
+</style>
 
-    <div id="genericCookieNotice">
-        このサイトでは、サイトの利用状況を分析し、より良いサービスを提供するためにCookieを使用しています。
-        <a href="/ak/index.html" target="_blank">詳細はこちら</a>
-        <button onclick="acceptCookieConsent()">同意する</button>
-    </div>
+<div id="genericCookieNotice">
+    このサイトでは、サイトの利用状況を分析し、より良いサービスを提供するためにCookieを使用しています。
+    <a href="/ak/index.html" target="_blank">詳細はこちら</a>
+    <button onclick="acceptConsent()">同意する</button> 
+</div>
 
-    <script>
-    // JavaScriptロジック: クッキーの読み書きとバナーの表示/非表示を制御
-    function getCookie(name) {
-        const value = `; ${document.cookie}`;
-        const parts = value.split(`; ${name}=`);
-        if (parts.length === 2) return parts.pop().split(';').shift();
+<script>
+// JavaScriptロジック: ローカルストレージの読み書きとバナーの表示/非表示を制御
+const CONSENT_KEY = 'consent-local-storage'; // ローカルストレージのキー
+
+function showConsentNotice() {
+    const notice = document.getElementById('genericCookieNotice');
+    if (notice) {
+        notice.style.display = 'block';
     }
-    function setCookie(name, value, days) {
-        let expires = "";
-        if (days) {
-            const date = new Date();
-            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-            expires = "; expires=" + date.toUTCString();
-        }
-        document.cookie = name + "=" + (value || "")  + expires + "; path=/; SameSite=Lax";
+}
+
+// 修正: Cookieではなくローカルストレージに同意状態を保存
+function acceptConsent() {
+    // ローカルストレージに同意状態を保存 (期限なし)
+    localStorage.setItem(CONSENT_KEY, 'accepted'); 
+    
+    const notice = document.getElementById('genericCookieNotice');
+    if (notice) {
+        notice.style.display = 'none';
     }
-    function showCookieNotice() {
-        const notice = document.getElementById('genericCookieNotice');
-        if (notice) {
-            notice.style.display = 'block';
-        }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    // 修正: ローカルストレージから同意記録をチェック
+    if (localStorage.getItem(CONSENT_KEY) !== 'accepted') {
+        showConsentNotice();
     }
-    function acceptCookieConsent() {
-        setCookie('cookie-consent', 'accepted', 365);
-        const notice = document.getElementById('genericCookieNotice');
-        if (notice) {
-            notice.style.display = 'none';
-        }
-    }
-    document.addEventListener('DOMContentLoaded', () => {
-        if (getCookie('cookie-consent') !== 'accepted') {
-            showCookieNotice();
-        }
-    });
-    </script>
+});
+</script>
 </body>
 </html>
