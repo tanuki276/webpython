@@ -1,11 +1,11 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ハレジア独立共和国 - Wikipedia</title>
+    <title>ハレジア独立共和国 - wikipedia</title>
     <style>
-        /* ノヴァハゼルブルクのCSSをベースに適用 */
+        /* ノヴァハゼルブルクのcssをベースに適用 */
         :root {
             --wiki-main: #f8f9fa;
             --wiki-border: #a2a9b1;
@@ -16,7 +16,7 @@
             --speculation-color: #990000; 
         }
         body {
-            font-family: 'Times New Roman', Times, serif;
+            font-family: 'times new roman', times, serif;
             line-height: 1.5;
             background-color: var(--wiki-main);
             color: #000;
@@ -63,7 +63,7 @@
             text-decoration: underline;
         }
 
-        /* Infobox */
+        /* infobox */
         .infobox {
             width: 300px;
             float: right; 
@@ -105,7 +105,7 @@
             text-align: center;
         }
 
-        /* TOC */
+        /* toc */
         #toc {
             border: 1px solid var(--wiki-border);
             background-color: #f9f9f9;
@@ -118,7 +118,7 @@
             margin: 0;
             border-bottom: none;
         }
-        /* Wikitable (統計表) */
+        /* wikitable (統計表) */
         .wikitable { 
             width: 95%;
             margin: 1em auto;
@@ -135,23 +135,29 @@
         }
         .map-api {
             margin: 1em 0;
-            height: 350px; /* ウィキペディアの地図の標準的な高さに調整 */
+            /* height: 350px; /* ウィキペディアの地図の標準的な高さに調整 - 画像を均等にするためコメントアウト */
+            height: auto; /* 高さを自動調整 */
             position: relative;
             overflow: hidden;
             background-color: var(--map-bg);
-            text-align: center; /* 追加 */
+            text-align: center; /* 画像を中央揃えにする */
+            display: flex; /* flexboxを使って画像を並べる */
+            justify-content: center; /* 中央に寄せる */
+            align-items: flex-start; /* 上端を揃える */
+            flex-wrap: wrap; /* 必要に応じて画像を折り返す */
         }
-       　/* 修正案 */
-.map-api img {
-     max-width: 32%; /* 33%ではなく32%程度に少し下げる */
-     max-height: 100%;
-     height: auto;
-     display: inline-block;
-     margin: 0 0.5%; /* 左右のマージンを0.5%に縮小 (合計32% + 1% + 32% + 1% + 32% + 1% = 99%) */
-}
+       /* map-api内の画像スタイル */
+        .map-api img {
+             max-width: 32%; /* 3枚の画像とマージンを考慮して調整 */
+             max-height: 100%; /* 親の高さに合わせて調整される */
+             height: auto;
+             display: block; /* flexアイテムとして扱うためblockに変更 */
+             margin: 0.5%; /* 画像間のマージン */
+             object-fit: contain; /* 画像全体が表示されるように調整 */
         }
+
         /* レスポンシブ対応の修正 (モバイル) */
-        @media (max-width: 600px) {
+        @media (max-width: 600px) { /* @media を追加 */
             .container {
                 padding: 10px;
             }
@@ -186,12 +192,12 @@
                 <caption>ハレジア独立共和国</caption>
                 <tr><th colspan="2" style="text-align:center;">
                     <span style="font-size:1.1em; display:block;">harejia zeyu wakowku （盛語）</span>
-                    <span style="font-size:1.1em; display:block;">Halezia Independent Republic （英語）</span>
+                    <span style="font-size:1.1em; display:block;">halezia independent republic （英語）</span>
                 </th></tr>
                 <tr><td colspan="2" style="text-align:center;">
                     <img src="/3/harejiakkoki.jpg" alt="ハレジア国旗" style="width:45%; max-width:130px; height:auto; display:inline-block; margin:5px 10px;">
                 </td></tr>
-                <tr><th>国の標語</th><td>団結は戦乱の果てに（Unio post bellum）</td></tr>
+                <tr><th>国の標語</th><td>団結は戦乱の果てに（unio post bellum）</td></tr>
                 <tr><th>国歌</th><td><a href="#文化">ハレジア独立讃歌</a></td></tr>
                 <tr><th colspan="2" style="text-align:center; background-color:var(--wiki-header-bg);">地理</th></tr>
                 <tr><th>位置</th><td>東南アジア</td></tr>
@@ -203,14 +209,16 @@
                 <tr><th>総計（2025年）</th><td>3,500,000人</td></tr>
                 <tr><th>人口密度</th><td>約233人/km²</td></tr>
                 <tr><th colspan="2" style="text-align:center; background-color:var(--wiki-header-bg);">経済（2025年予測）</th></tr>
-                <tr><th>GDP（PPP）合計</th><td>20,000百万ドル</td></tr>
-                <tr><th>GDP（PPP）1人あたり</th><td>5,714ドル</td></tr>
-                <tr><th>通貨</th><td>ハレジア・フラン（HAF）</td></tr>
+                <tr><th>gdp（ppp）合計</th><td>20,000百万ドル</td></tr>
+                <tr><th>gdp（ppp）1人あたり</th><td>5,714ドル</td></tr>
+                <tr><th>通貨</th><td>ハレジア・フラン（haf）</td></tr>
                 <tr><th>為替政策</th><td><a href="/main.html?query=日本円">日本円</a>に連動（<a href="/main.html?query=ペッグ制">ペッグ制</a>）</td></tr>
                 <tr><th colspan="2" style="text-align:center; background-color:var(--wiki-header-bg);">体制</th></tr>
                 <tr><th>公用語</th><td><a href="#民族・言語">盛語</a></td></tr>
                 <tr><th>経済協力言語</th><td><a href="#民族・言語">日本語</a></td></tr>
                 <tr><th>独立</th><td>南方諸島総督府から1945年</td></tr>
+                <tr><th>議席数</th><td>ハレジア国民党 80席<br>ハレジア共和党 60席<br>ハレジア自由党 30席</td></tr>
+                <tr><th>大統領</th><td>保平 (10年連続在任中)</td></tr>
                 <tr><th>国際電話番号</th><td>+674</td></tr>
                 <tr><th colspan="2" style="text-align:center; background-color:var(--wiki-header-bg);">軍事</th></tr>
                 <tr><th>軍隊</th><td><a href="#安全保障">ハレジア独立防衛軍</a></td></tr>
@@ -228,7 +236,7 @@
                 <ul>
                     <li><a href="#歴史">1 歴史</a>
                         <ul>
-                            <li><a href="#古代の形成と戦乱期">1.1 古代の形成と戦乱期（BC6000頃〜AD1250）</a></li>
+                            <li><a href="#古代の形成と戦乱期">1.1 古代の形成と戦乱期（bc6000頃〜ad1250）</a></li>
                             <li><a href="#戊国時代と泥沼の戦乱">1.2 戊国時代と泥沼の戦乱（1312年〜1676年）</a></li>
                             <li><a href="#植民地時代と独立">1.3 植民地時代と独立（1676年〜1945年）</a></li>
                             <li><a href="#戦後復興と現代">1.4 戦後復興と現代（1945年〜現在）</a></li>
@@ -260,7 +268,7 @@
                 **詳細なハレジア史は<a href="https://webpython-seven.vercel.app/3/halezia.txt">こちら</a>を参照。**
             </p>
 
-            <h3 id="古代の形成と戦乱期">1.1 古代の形成と戦乱期（BC6000頃〜AD1250）</h3>
+            <h3 id="古代の形成と戦乱期">1.1 古代の形成と戦乱期（bc6000頃〜ad1250）</h3>
             <p>
                 紀元前6000年頃、黄河流域の古代農耕民が壊滅的な洪水から逃れるため、多数の筏で島へ向かい、北、東、西の地点に上陸した。彼らは以前から航海していたオーストロネシア語族以前の先住民カハ族（伽騁族）と混交し、後の三大民族のルーツを形成した。この時代、彼らはまだ孫族、巍族、明族という概念を持たず、東族（孫族）、北族（明族）、西族（巍族）と呼ばれていた。
             </p>
@@ -306,8 +314,7 @@
             <p>
                 島の東部には、かつて孫族が追いやられた険しいチェフォン山脈が南北に連なり、最高峰は凛山（りんざん、標高2,100m）である。この山脈の高地地域（古くは絶海と呼ばれた）は、現在も手つかずの自然が残る。地質学的には、古代の農耕民が着目した良質な火山灰土壌と、鉄器時代（仔の時代）に発見された鉄鉱石の豊富な鉱床が特徴である。生態系としては、巨大な羽を持つ固有種の「津濃蝶（しんこちょう）」が知られており、国の象徴の一つとなっている。
             </p>
-            <div class="map-api" style="height:350px;">
-                <img src="/3/chizu1.jpg" alt="ハレジア島の行政区分" />
+            <div class="map-api"> <img src="/3/chizu1.jpg" alt="ハレジア島の行政区分" />
                 <img src="/3/chizu2.png" alt="ハレジア島の場所" />
 　　　　　　　　　 <img src="/3/chizu3.jpg" alt="ハレジア島の地理" />
             </div>
@@ -339,11 +346,11 @@
 
             <h2 id="経済">5 経済と産業構造</h2>
             <p>
-                2025年予測のGDP（PPP）一人あたり5,714ドルであり、低中所得国水準にある。
+                2025年予測のgdp（ppp）一人あたり5,714ドルであり、低中所得国水準にある。
             </p>
             <h3 id="国際関係と金融">5.1 国際関係と金融</h3>
             <p>
-                親日派が多い背景には、戦後の<a href="/main.html?query=日本">日本</a>による大規模なインフラ投資と技術供与がある。しかし、復興過程で、豊富な鉄鉱石が「ハレジアの白いダイヤ」と呼ばれ、日本や西側諸国への輸出によって国家財政を一時的に潤した（鉄鉱石バブル）。このバブル期に公共投資が乱立したが、無計画な採掘によって鉱床は急速に枯渇。その後、経済は停滞し、国家運営に必要な資金と技術を<a href="/main.html?query=日本">日本</a>に完全に依存せざるを得ない状況となった。通貨であるハレジア・フラン（HAF）を<a href="/main.html?query=日本円">日本円</a>（JPY）に連動させる<a href="/main.html?query=ペッグ制">ペッグ制</a>の採用は、この経済的失敗を覆い隠し、日本の経済保護下に入るための事実上の処置である。主要な輸出品は、もはや基盤資源ではないが、残された機械部品の製造と、高品質な農産物である。
+                親日派が多い背景には、戦後の<a href="/main.html?query=日本">日本</a>による大規模なインフラ投資と技術供与がある。しかし、復興過程で、豊富な鉄鉱石が「ハレジアの白いダイヤ」と呼ばれ、日本や西側諸国への輸出によって国家財政を一時的に潤した（鉄鉱石バブル）。このバブル期に公共投資が乱立したが、無計画な採掘によって鉱床は急速に枯渇。その後、経済は停滞し、国家運営に必要な資金と技術を<a href="/main.html?query=日本">日本</a>に完全に依存せざるを得ない状況となった。通貨であるハレジア・フラン（haf）を<a href="/main.html?query=日本円">日本円</a>（jpy）に連動させる<a href="/main.html?query=ペッグ制">ペッグ制</a>の採用は、この経済的失敗を覆い隠し、日本の経済保護下に入るための事実上の処置である。主要な輸出品は、もはや基盤資源ではないが、残された機械部品の製造と、高品質な農産物である。
             </p>
 
             <hr>
@@ -377,14 +384,14 @@
             </p>
 <h2 id="出典">8 出典</h2>
 <p style="font-size: 0.8em;">
-    [1] Halezia Economic Review. "Economic Dependency and the JPY Peg: A Post-Bubble Analysis." Vol. 3, Issue 2 (2025).<br>
-    [2] Halezia Ministry of Education. *Curriculum Guidelines for Secondary Education (2020 Revision)*.<br>
-    [3] Prof. Junichi Tanaka. *The Role of Japanese Investment in Post-War Halezia Reconstruction*. Tokyo University Press, 1998.<br>
-    [4] The Halezia Times. "Ling Mountain Ascended: The History of the Sun-Clan and Chephon Range." 2023-01-15. [Web Article]<br>
-    [5] Dr. Anya Sharma. *The Dissolution of Identity: War, Colonization, and the Three Halezia Tribes*. Southeast Asia History Journal, Vol. 12 (2018).<br>
-    [6] Halezia National Defense Force Act (1945, last amended 2001).<br>
-    [7] Department of Culture and Heritage. *The Rituals of Salt Water Eruption Festival*. Annual Report (2024).<br>
-    [8] Halezia Bureau of Statistics. *2025 Population Census Interim Report*.
+    [1] halezia economic review. "economic dependency and the jpy peg: a post-bubble analysis." vol. 3, issue 2 (2025).<br>
+    [2] halezia ministry of education. *curriculum guidelines for secondary education (2020 revision)*.<br>
+    [3] prof. junichi tanaka. *the role of japanese investment in post-war halezia reconstruction*. tokyo university press, 1998.<br>
+    [4] the halezia times. "ling mountain ascended: the history of the sun-clan and chephon range." 2023-01-15. [web article]<br>
+    [5] dr. anya sharma. *the dissolution of identity: war, colonization, and the three halezia tribes*. southeast asia history journal, vol. 12 (2018).<br>
+    [6] halezia national defense force act (1945, last amended 2001).<br>
+    [7] department of culture and heritage. *the rituals of salt water eruption festival*. annual report (2024).<br>
+    [8] halezia bureau of statistics. *2025 population census interim report*.
 </p>
 
             <p style="text-align: right; font-size: 0.9em; margin-top: 5px;">
