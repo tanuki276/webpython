@@ -116,7 +116,7 @@
         #backToTop {
             display: none; 
             position: fixed;
-            bottom: 60px; /* クッキーバナーの高さ分、20pxから60pxに変更 */
+            bottom: 60px; 
             right: 30px;
             z-index: 99;
             border: none;
@@ -316,7 +316,7 @@
     </div>
 
     <script>
-        // --- 1. トップに戻るボタンのJS ---
+        // --- 1. トップに戻るボタンのJS (変更なし) ---
         let mybutton = document.getElementById("backToTop");
 
         window.onscroll = function() {scrollFunction()};
@@ -337,36 +337,41 @@
                 behavior: 'smooth'
             });
         }
-        
-        // --- 2. クッキーロジックのJS (前回設定したもの) ---
 
-        function getCookie(name) {
-            const value = `; ${document.cookie}`;
-            const parts = value.split(`; ${name}=`);
-            if (parts.length === 2) return parts.pop().split(';').shift();
+        // --- 2. LocalStorageロジックのJS (Cookieから修正済み) ---
+        
+        /**
+         * LocalStorageから指定されたキーの値を取得する
+         * @param {string} name - 取得したいキーの名前
+         * @returns {string | null} キーの値。存在しない場合はnull
+         */
+        function getLocalStorage(name) {
+            return localStorage.getItem(name);
         }
 
-        function setCookie(name, value, days) {
-            let expires = "";
-            if (days) {
-                const date = new Date();
-                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-                expires = "; expires=" + date.toUTCString();
-            }
-            document.cookie = name + "=" + (value || "")  + expires + "; path=/; SameSite=Lax";
+        /**
+         * LocalStorageにキーと値を設定する
+         * @param {string} name - 設定したいキーの名前
+         * @param {string} value - 設定したい値
+         */
+        function setLocalStorage(name, value) {
+            // LocalStorageは有効期限の設定が不要で永続的に保存されます。
+            localStorage.setItem(name, value);
         }
 
         function showCookieNotice() {
             const notice = document.getElementById('genericCookieNotice');
             if (notice) {
+                // クッキーという名称は残っているが、実装はLocalStorage
+                notice.innerHTML = 'このサイトでは、サイトの利用状況を分析し、より良いサービスを提供するために情報を**ローカルに保存**しています。 <a href="/ak/index.html" target="_blank">詳細はこちら</a> <button onclick="acceptCookieConsent()">同意する</button>';
                 notice.style.display = 'block';
             }
         }
 
         function acceptCookieConsent() {
-            // サイト訪問者に「同意済み」のクッキーを設定（365日間有効）
-            setCookie('cookie-consent', 'accepted', 365);
-            
+            // LocalStorageに同意状態を保存
+            setLocalStorage('cookie-consent', 'accepted'); 
+
             // バナーを非表示にする
             const notice = document.getElementById('genericCookieNotice');
             if (notice) {
@@ -376,8 +381,8 @@
 
         // ページ読み込み時に実行
         document.addEventListener('DOMContentLoaded', () => {
-            // 'cookie-consent' クッキーがない場合のみバナーを表示
-            if (getCookie('cookie-consent') !== 'accepted') {
+            // LocalStorageから保存状態を確認
+            if (getLocalStorage('cookie-consent') !== 'accepted') {
                 showCookieNotice();
             }
         });
