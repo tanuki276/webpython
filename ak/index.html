@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>プライバシーポリシー - Ak</title>
+    <style>
+        :root {
+            --primary-color: #0645ad;
+            --secondary-bg: #f8f8f8;
+            --border-color: #ddd;
+            --line-color: #06C755; /* LINEカラーを追加 */
+        }
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 20px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+        h1 {
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--primary-color);
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+            font-size: 1.8em;
+        }
+        h2 {
+            font-size: 1.4em;
+            margin-top: 30px;
+            color: #555;
+        }
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        
+        /* アコーディオンスタイル */
+        .accordion-item {
+            border: 1px solid var(--border-color);
+            margin-bottom: 10px;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .accordion-header {
+            background-color: var(--secondary-bg);
+            color: #333;
+            cursor: pointer;
+            padding: 15px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 1.1em;
+            transition: background-color 0.3s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+        }
+        .accordion-header:hover {
+            background-color: #eee;
+        }
+        .accordion-content {
+            padding: 0 15px;
+            background-color: white;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out;
+        }
+        .accordion-content p {
+            padding: 15px 0;
+            border-top: 1px dashed var(--border-color);
+            margin: 0;
+        }
+        .icon::after {
+            content: '+';
+            font-size: 1.5em;
+            transition: transform 0.3s;
+        }
+        .accordion-header.active .icon::after {
+            content: '−';
+            transform: rotate(45deg);
+        }
+
+        /* LINEボタンのスタイル (お問い合わせセクション用) */
+        .line-button {
+            display: inline-flex;
+            align-items: center;
+            padding: 10px 15px;
+            background-color: var(--line-color); 
+            color: white !important;
+            font-weight: bold;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s;
+        }
+        .line-button:hover {
+            background-color: #05b44a;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>プライバシーポリシー (Ak)</h1>
+        <p>本ウェブサイト（以下、「当サイト」といいます）は、お客様の個人情報保護の重要性について認識し、個人情報の保護に関する法律（以下、「個人情報保護法」といいます）を遵守するとともに、以下のプライバシーポリシー（以下、「本ポリシー」といいます）に従い、適切な取扱い及び保護に努めます。</p>
+
+        <div class="accordion-item">
+            <button class="accordion-header">
+                1. 収集する情報および収集方法 <span class="icon"></span>
+            </button>
+            <div class="accordion-content">
+                <p>
+                    当サイトでは、ユーザーが「同意する」ボタンをクリックした場合、以下の情報をCookieを通じて収集します。
+                    <ul>
+                        <li>端末情報（IPアドレス、ブラウザ種別、OS情報など）</li>
+                        <li>アクセスログ（訪問日時、閲覧したページ、リファラ情報など）</li>
+                    </ul>
+                    これらの情報は、サイトの利便性向上および統計的な分析にのみ使用されます。
+                </p>
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <button class="accordion-header">
+                2. 情報の利用目的 <span class="icon"></span>
+            </button>
+            <div class="accordion-content">
+                <p>
+                    当サイトで収集した情報は、以下の目的で利用します。
+                    <ul>
+                        <li>サイトの保守・改善、およびシステム障害対応のため。</li>
+                        <li>トラフィック分析、およびユーザー体験の最適化のため。</li>
+                    </ul>
+                </p>
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <button class="accordion-header">
+                3. 第三者提供 <span class="icon"></span>
+            </button>
+            <div class="accordion-content">
+                <p>
+                    当サイトは、法令に基づき開示が許容される場合を除き、ご本人の同意を得ずに個人情報を第三者に提供することはありません。
+                </p>
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <button class="accordion-header">
+                4. Cookie（クッキー）について <span class="icon"></span>
+            </button>
+            <div class="accordion-content">
+                <p>
+                    当サイトは、サイトの円滑な運営のためにCookieを使用しております。Cookieは、お客様のブラウザ内に情報を保存する仕組みであり、お客様のプライバシーを侵害するものではありません。Cookieを無効にしたい場合は、お使いのブラウザの設定をご自身で変更してください。
+                </p>
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <button class="accordion-header">
+                5. お問い合わせ先 <span class="icon"></span>
+            </button>
+            <div class="accordion-content">
+                <p>
+                    本ポリシーに関するお問い合わせは、以下のLINE公式アカウントよりご連絡ください。
+                    <br>
+                    <a href="https://lin.ee/NrCpUtH" target="_blank" class="line-button">
+                        [attachment_0](attachment) LINEでお問い合わせ
+                    </a>
+                </p>
+            </div>
+        </div>
+
+        <div style="margin-top: 40px; text-align: right; font-size: 0.85em; color: #777;">
+            <p>制定日: 2025年11月21日</p>
+        </div>
+    </div>
+
+    <script>
+        const headers = document.querySelectorAll('.accordion-header');
+
+        headers.forEach(header => {
+            header.addEventListener('click', () => {
+                const content = header.nextElementSibling;
+                
+                // 現在アクティブな要素でない場合は、開く
+                if (!header.classList.contains('active')) {
+                    // 他の開いているアコーディオンを閉じる
+                    document.querySelectorAll('.accordion-header.active').forEach(activeHeader => {
+                        activeHeader.classList.remove('active');
+                        activeHeader.nextElementSibling.style.maxHeight = null;
+                    });
+
+                    // クリックした要素を開く
+                    header.classList.add('active');
+                    content.style.maxHeight = content.scrollHeight + "px";
+                } else {
+                    // すでにアクティブな場合は閉じる
+                    header.classList.remove('active');
+                    content.style.maxHeight = null;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
