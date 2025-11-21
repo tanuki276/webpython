@@ -1,1 +1,303 @@
-kar 21
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KAR-21- Ikipedia</title>
+    <style>
+        /* Base & Layout */
+        :root {
+            --wiki-main: #f8f9fa;
+            --wiki-border: #a2a9b1;
+            --wiki-link: #0645ad;
+            --wiki-header-bg: #eaecf0;
+            --map-bg: #e6e6e6; 
+            --old-town-border: #dc3545;
+        }
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            line-height: 1.5;
+            background-color: var(--wiki-main);
+            color: #000;
+            padding: 0;
+            margin: 0;
+            font-size: 0.9em;
+        }
+        .container {
+            max-width: 1280px;
+            display: flex;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .main-content {
+            flex-grow: 1;
+            background-color: white;
+            padding: 10px 30px;
+            border: 1px solid var(--wiki-border);
+            border-top: none;
+            min-height: 100vh;
+        }
+        /* Headers & Links */
+        h1 {
+            font-size: 1.8em;
+            font-weight: normal;
+            border-bottom: 1px solid var(--wiki-border);
+            padding-bottom: 5px;
+            margin-bottom: 5px;
+        }
+        h2 {
+            font-size: 1.4em;
+            border-bottom: 1px solid var(--wiki-border);
+            padding-bottom: 2px;
+            margin-top: 1.5em;
+        }
+        h3 {
+            font-size: 1.1em;
+            margin-top: 1em;
+        }
+        a {
+            color: var(--wiki-link);
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Infobox (右側の表) */
+        .infobox {
+            width: 300px;
+            margin-left: 20px;
+            padding: 0;
+            border: 1px solid var(--wiki-border);
+            background-color: #f9f9f9;
+            font-size: 0.9em;
+            flex-shrink: 0;
+            float: right;
+            margin: 0 0 1em 1em;
+            clear: right;
+            border-collapse: collapse;
+        }
+        .infobox caption {
+            background-color: var(--wiki-header-bg);
+            font-size: 1.1em;
+            font-weight: bold;
+            padding: 5px;
+            text-align: center;
+        }
+        .infobox table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .infobox th, .infobox td {
+            padding: 4px 8px;
+            border-top: 1px solid var(--wiki-border);
+            text-align: left;
+        }
+        .infobox th {
+            width: 40%;
+            background-color: var(--wiki-header-bg);
+        }
+
+        /* TOC (目次) */
+        #toc {
+            border: 1px solid var(--wiki-border);
+            background-color: #f9f9f9;
+            padding: 10px;
+            margin: 1em 0;
+            width: fit-content;
+        }
+        #toc h2 {
+            font-size: 1.1em;
+            margin: 0;
+            border-bottom: none;
+        }
+
+        /* 上に戻るボタンのスタイル */
+        #backToTop {
+            display: none; 
+            position: fixed;
+            bottom: 20px;
+            right: 30px;
+            z-index: 99;
+            border: none;
+            outline: none;
+            background-color: rgba(6, 69, 173, 0.7);
+            color: white;
+            cursor: pointer;
+            padding: 12px 18px;
+            border-radius: 5px;
+            font-size: 20px;
+            line-height: 1;
+            font-family: Arial, sans-serif; 
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        #backToTop:hover {
+            background-color: var(--wiki-link);
+        }
+
+
+        /* ============== レスポンシブ対応の修正 (モバイル) ============= */
+        @media (max-width: 600px) {
+            .container {
+                padding: 10px;
+            }
+            .main-content {
+                padding: 10px 15px;
+            }
+            /* Infoboxを画面幅いっぱいに広げ、floatを解除 */
+            .infobox {
+                width: 100%;
+                margin: 0.5em 0;
+                float: none;
+            }
+            /* TOCは幅いっぱいに */
+             #toc {
+                width: 95%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="main-content">
+            <p style="text-align:right; font-size:0.7em;"><sup>[†]</sup>no border <sup>[‡]</sup>restore old vienna <sup>[§]</sup>fuck the system</p>
+            
+            <h1>30-mm-Panzerbüchse 45-K（KAR-21）</h1>
+
+            <table class="infobox" role="presentation">
+                <caption>PzB 45-K (KAR-21)</caption>
+                <tr><td colspan="2" style="text-align:center;"><img src="/5/zu.png" alt="PzB 45-K 図" style="width:90%; height:auto; display:inline-block; margin:5px auto;"></td></tr>
+                <tr><th>名称</th><td>PzB 45-K</td></tr>
+                <tr><th>愛称</th><td>ヒトラーの音痴歌 (独：Hitlers Quatschgesang)</td></tr>
+                <tr><th colspan="2" style="text-align:center;">基礎データ</th></tr>
+                <tr><th>種類</th><td><a href="/main.html?query=対戦車ライフル">対戦車ライフル</a>（超重型）</td></tr>
+                <tr><th>製造国</th><td><a href="/main.html?query=ナチス・ドイツ">ナチス・ドイツ</a></td></tr>
+                <tr><th>設計年</th><td>1945年1月（試作完了）</td></tr>
+                <tr><th>生産数</th><td>約450丁（推計）</td></tr>
+                <tr><th>運用期間</th><td>1945年4月 – 1945年5月</td></tr>
+                <tr><th colspan="2" style="text-align:center;">性能</th></tr>
+                <tr><th>重量</th><td>19.8 kg（乾燥重量）</td></tr>
+                <tr><th>全長</th><td>1850 mm</td></tr>
+                <tr><th>使用弾薬</th><td><a href="/main.html?query=30×92mm_KEP">30 × 92 mm Kurz KEP</a></td></tr>
+                <tr><th>作動方式</th><td>ガス圧作動式（ディレイドブローバック）</td></tr>
+                <tr><th>銃口初速</th><td>約980 m/s</td></tr>
+                <tr><th>有効射程</th><td>300 m（徹甲能力維持）</td></tr>
+                <tr><th>装弾数</th><td>単発手動装填</td></tr>
+            </table>
+
+            <p>
+                30-mm-Panzerbüchse 45-K (略称: <b>PzB 45-K</b>、非公式名称: <b>KAR-21</b>) は、<a href="/main.html?query=第二次世界大戦">第二次世界大戦</a>の終局期にあたる1945年春、<a href="/main.html?query=ナチス・ドイツ国防軍">ドイツ国防軍</a>の要求に基づき、技術の極限をもって開発が強行された対戦車兵器である。その設計思想は、単独の歩兵に<a href="/main.html?query=中口径対戦車砲">中口径対戦車砲</a>に匹敵する貫通力を持たせるという、極度に<a href="/main.html?query=非人道的">非人道的な</a>ものであり、<b>兵器の倫理的・実用的な境界を逸脱</b>した、破局的な戦局を象徴する存在として Ikipedia の研究対象となっている<span class="reference">[1]</span>。
+            </p>
+
+            <div id="toc">
+                <h2>目次</h2>
+                <ul>
+                    <li><a href="#名称と由来">1 名称と由来（KAR-21）</a></li>
+                    <li><a href="#開発背景">2 開発背景と設計哲学</a></li>
+                    <li><a href="#構造と特性">3 構造と実戦における特性</a>
+                        <ul>
+                            <li><a href="#反動と射手の犠牲">3.1 反動と射手の身体的犠牲</a></li>
+                            <li><a href="#弾薬と貫通力">3.2 特殊弾薬（30×92mm KEP）と貫通力</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#運用と戦場の記録">4 運用と戦場の記録</a></li>
+                    <li><a href="#歴史的意義">5 歴史的意義と戦後の情報散逸</a></li>
+                </ul>
+            </div>
+
+            <h2 id="名称と由来">1 名称と由来（KAR-21）</h2>
+            <p>
+                正式な制式名称は「30-mm-Panzerbüchse 45-K」であり、これは「30mm対戦車銃 1945年型・短（Kurz）」を意味する。しかし、この兵器は、開発局の内部文書において、既存の<a href="/main.html?query=Karabiner">Karabiner</a>（騎兵銃）シリーズの系譜を引き継ぐものとして「Karabiner 21. Gen（第21世代カービン）」、略して<b>KAR-21</b>という非公式な開発コードが用いられていた<span class="reference">[2]</span>。
+            </p>
+            <p>
+                「第21世代」という呼称は、その前身とされる <b>Karabiner 98k</b>（第98型カービン）などとの直接的な技術的関連性を示すものではなく、むしろ「21世紀にすら間に合わない、未来への絶望的な技術投資」という皮肉的な意味合いが開発責任者グループ内に存在したと推測されている<span class="reference">[3]</span>。この名称が、戦後の混乱期に一部の連合軍情報将校によって誤って「正式名称」として記録された結果、現在に至るまで非公式な通称として定着している。
+            </p>
+
+            <h2 id="開発背景">2 開発背景と設計哲学</h2>
+            <p>
+                PzB 45-K の開発は、<a href="/main.html?query=東部戦線">東部戦線</a>で圧倒的な防御力を誇ったソ連の <a href="/main.html?query=IS-2重戦車">IS-2重戦車</a>や、改良型の <a href="/main.html?query=T-34/85戦車">T-34/85戦車</a>への対抗を目的として、1944年後半に始まった。既存の対戦車ライフルである <a href="/main.html?query=PzB39">PzB 39</a> では貫通力が不足していたため、既存の<a href="/main.html?query=機関砲">機関砲</a>弾（例えば <a href="/main.html?query=MK103機関砲">MK 103</a> の 30mm 弾）の火薬量を意図的に減装し、短く太い薬莢に収めた特殊弾薬を開発することが決定された。
+            </p>
+            <p>
+                この銃の設計哲学は、<b>「個々の兵士の消耗を前提とした一撃離脱」</b>であり、射手の安全や運用快適性は完全に無視された。兵器設計の主要な目標は、いかにして反動を射手に全て押し付けた上で、銃自体が一度の射撃で爆発・分解しない強度を確保するか、という一点に絞られていた。この設計思想から、PzB 45-K は、ドイツ技術の極限を示すと同時に、軍部の<b>絶望的な戦況認識</b>を体現する遺産として評価されている。
+            </p>
+
+            <h2 id="構造と特性">3 構造と実戦における特性</h2>
+            <h3 id="反動と射手の犠牲">3.1 反動と射手の身体的犠牲</h3>
+            <p>
+                PzB 45-K の最大の技術的特徴は、銃口に装着された<b>巨大な多孔式マズルブレーキ</b>である。このブレーキは、発射ガスを効率的に分散・後方へ噴射することで反動を部分的に相殺するように設計された。しかし、その効果は限定的であり、射手は依然として、通常の小銃の<b>数十倍</b>に及ぶ強烈な反動エネルギーを受け止める必要があった。
+            </p>
+            <p>
+                そのため、銃床にはスプリングと油圧ダンパーを内蔵した衝撃吸収パッドが組み込まれていたが、短期間でこれが破損・機能不全を起こすことが多く、結果的に<b>射手の鎖骨、肩甲骨、肋骨への深刻な損傷</b>を引き起こした。さらに、射撃時の<b>爆音は 180 デシベル</b>を超え、聴覚保護具なしでの射撃は<b>鼓膜の損傷</b>を招く。運用マニュアルには「射撃中は<b>聴覚保護具</b>（未配備の場合、厚い布を耳に詰めること）を着用すべし」という、戦況下のリアリティに欠けた指示が記載されていた。
+            </p>
+
+            <h3 id="弾薬と貫通力">3.2 特殊弾薬（30×92mm KEP）と貫通力</h3>
+            <p>
+                PzB 45-K 専用に開発された <b>30 × 92 mm Kurz KEP</b>（短薬莢式運動エネルギー弾）は、徹甲弾の運動エネルギーを最大化するために、特殊なタングステン合金の弾芯が採用された。この弾薬は、至近距離（100 m 以内）であれば、<a href="/main.html?query=T-34/85戦車">T-34/85戦車</a>の車体側部装甲、あるいは <a href="/main.html?query=パンター戦車">パンター戦車</a>の後部装甲を<b>確実に貫通</b>することが可能であった。
+            </p>
+            <p>
+                しかし、弾薬の製造コストが非常に高く、また薬莢の素材に耐久性の低いアルミニウム合金が使用されていたため、装填・排莢の際に変形・破損が多発し、戦場での<b>致命的な作動不良</b>を引き起こしたという報告が残っている<span class="reference">[4]</span>。
+            </p>
+
+            <h2 id="運用と戦場の記録">4 運用と戦場の記録</h2>
+            <p>
+                PzB 45-K は、1945年4月の <a href="/main.html?query=ベルリン防衛戦">ベルリン防衛戦</a>、および<a href="/main.html?query=オーデル・ナイセの戦い">オーデル・ナイセの戦い</a>における限定的な防衛作戦で実戦投入された。配備されたのは、軍事的な専門知識の浅い <a href="/main.html?query=国民突撃隊">国民突撃隊</a>や、<a href="/main.html?query=武装親衛隊">武装親衛隊</a>の最終防衛部隊が中心であった。これは、熟練した兵士たちが、この兵器の持つ欠陥と非人道性を理由に運用を拒否したためとされる。
+            </p>
+            <p>
+                ソ連軍の間では、この兵器の異様な轟音と、それに伴う<b>「射手が直後に倒れ込む」</b>という特異な運用形態が注目された。その轟音は、恐怖の対象というよりは、ドイツ軍の戦線が崩壊寸前であることを示す<b>「負け犬の吠え声」</b>として認識され、<b>「ヒトラーの音痴歌（Hitlers Quatschgesang）」</b>という蔑称で呼ばれた<span class="reference">[5]</span>。最終的に、戦争の終結により大半の試作銃はソ連軍によって鹵獲されるか、破壊され、歴史の闇に葬られた。
+            </p>
+
+            <h2 id="歴史的意義">5 歴史的意義と戦後の情報散逸</h2>
+            <p>
+                PzB 45-K の歴史的意義は、兵器としての有効性よりも、それが<b>ナチス軍の絶望的な技術投資と、兵士の命を消耗品と見なす倫理観の崩壊</b>を象徴している点にある。戦後、連合国側は、この兵器の存在を<b>「敗戦国による誇張されたプロパガンダ」</b>として懐疑的に捉えたため、初期の軍事史研究ではその詳細が意図的に無視された。
+            </p>
+            <p>
+                現在、この銃に関する信頼できる資料は、<a href="/main.html?query=モスクワ中央軍事博物館">モスクワ中央軍事博物館</a>に保管されている数丁の試作銃と、ドイツの地方アーカイブに残された極めて断片的な製造記録、そして元ソ連軍兵士の証言のみである。PzB 45-K は、<b>「技術の暴走」と「人命の軽視」がもたらした最悪の成果</b>として、軍事倫理学の分野で再評価が進められている<span class="reference">[1]</span>。
+            </p>
+
+            <h2 id="外部リンク">6 外部リンク</h2>
+            <ul>
+                <li><a href="https://ikipedia.net/main.html?query=Panzerbüchse" target="_blank">Ikipedia: 対戦車ライフル全般</a></li>
+                <li><a href="https://ikipedia.net/main.html?query=Deutsche_Wunderwaffen" target="_blank">Ikipedia: 狂気の最終兵器 (Wunderwaffen)</a></li>
+                <li><a href="https://museumsarchiv.ru/30mm_pzB45k_report" target="_blank">モスクワ中央軍事博物館: PzB 45-K 鹵獲報告書（デジタル化記録）</a></li>
+            </ul>
+
+            <h2 id="出典">7 出典</h2>
+            <p style="font-size: 0.8em;">
+                [1] Dr. Hans G. Steiner, <i>Waffen des Untergangs: Ethik und Technologie in den letzten Tagen des Dritten Reiches</i>, 2018.<br>
+                [2] Bundesarchiv Koblenz, <i>Projekt Akte Gewehr-A-Z (1944-1945)</i>. [機密解除文書]<br>
+                [3] Kurt Vogel, <i>Meine Zeit in der Heereswaffenamt: Eine persönliche Abrechnung</i>, 1970.<br>
+                [4] Sowjetisches Militärarchiv, <i>Bericht über die Munitionsanalyse PzB 45-K</i> (1945).<br>
+                [5] Dimitri P. Volkov, <i>Die Stimmen der Front: Das Ende der Wehrmacht</i>, 1995.
+            </p>
+        </div>
+    </div>
+
+    <button onclick="topFunction()" id="backToTop" title="トップに戻る">↑</button>
+
+    <script>
+        // 上に戻るボタンの表示・非表示を制御するJS
+        let mybutton = document.getElementById("backToTop");
+
+        // ページをスクロールするたびにこの関数が実行される
+        window.onscroll = function() {scrollFunction()};
+
+        function scrollFunction() {
+            // スクロール量が200pxを超えたらボタンを表示する
+            if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+                mybutton.style.display = "block";
+            } else {
+                mybutton.style.display = "none";
+            }
+        }
+
+        // クリック時にページの最上部へスムーズにスクロールする
+        function topFunction() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+    </script>
+</body>
+</html>
+
