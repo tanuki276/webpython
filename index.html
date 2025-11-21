@@ -3,215 +3,158 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="google-site-verification" content="ch_Aq0Ib50NQ8MD2HZI-fa-jl2xc1gH26Ae3PIAA_Lo" />
-    <title>Liefantidia - Index</title>
+    <title>Liefantidia - 架空設定の知識殿堂</title>
     <style>
-        /* Base & Layout */
+        /* 現代の標準的なウィキスタイル */
         :root {
-            --wiki-main: #f8f9fa;
-            --wiki-border: #a2a9b1;
+            --wiki-bg: #f8f9fa; /* 背景色 */
+            --wiki-content-bg: #ffffff;
+            --wiki-border: #a2a9b1; /* メインボーダー */
             --wiki-link: #0645ad;
+            --wiki-heading-border: #eaecf0; /* 見出し下の細線 */
         }
         body {
-            font-family: 'Times New Roman', Times, serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
             line-height: 1.6;
-            background-color: var(--wiki-main);
+            background-color: var(--wiki-bg);
             color: #202122;
             margin: 0;
             padding: 0;
+            display: flex; 
+            justify-content: center;
         }
-        .container {
-            max-width: 700px;
-            margin: 50px auto;
-            padding: 40px;
-            background-color: #ffffff;
-            border: 1px solid var(--wiki-border); 
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
+        .main-content {
+            width: 90%;
+            max-width: 1000px; /* 幅を広く設定 */
+            margin: 20px auto;
+            padding: 30px;
+            background-color: var(--wiki-content-bg);
+            /* シャドウは控えめに、Wikipediaを意識してあまり使わない */
+        }
+        #site-logo {
+            display: block;
+            margin: 0 0 10px 0;
+            max-width: 150px;
+            height: auto;
         }
         h1 {
-            font-size: 2.5em;
+            font-size: 1.8em; 
             font-weight: normal;
-            border-bottom: 3px solid var(--wiki-border);
-            padding-bottom: 10px;
-            margin-bottom: 30px;
+            border-bottom: 1px solid var(--wiki-border);
+            padding-bottom: 4px;
+            margin-bottom: 0.5em;
         }
+        /* Wikipedia風H2: 左右いっぱいに薄い線 */
         h2 {
-            margin-top: 2em;
+            font-size: 1.4em;
+            font-weight: normal;
+            border-bottom: 1px solid var(--wiki-heading-border);
+            padding: 0.5em 0 0.2em 0;
+            margin-top: 1.5em;
         }
-        .explanation {
-            margin-bottom: 40px;
-            padding: 15px;
+        /* UI改善: Infoboxの模擬配置 */
+        .infobox {
+            float: right;
+            border: 1px solid var(--wiki-border);
             background-color: #f9f9f9;
-            border: 1px solid #ddd;
-        }
-        .link-section {
-            padding: 10px 0;
-        }
-        .link-section a {
-            font-size: 1.5em;
-            color: var(--wiki-link); 
-            text-decoration: none;
-            display: block;
-            padding: 10px 0;
-            border-bottom: 1px solid #eee;
-        }
-        .link-section a:hover {
-            text-decoration: underline;
-            background-color: #f0f0f0;
-        }
-        .link-section p {
+            padding: 10px;
+            margin: 0 0 10px 15px;
+            width: 280px;
             font-size: 0.9em;
-            color: #777;
-            margin-top: 5px;
+            clear: right;
+            line-height: 1.4;
+        }
+        .infobox h3 {
+            font-size: 1.1em;
+            text-align: center;
+            background-color: #ebf0f7; /* Infoboxのヘッダー色 */
+            margin: -10px -10px 10px -10px;
+            padding: 8px;
+            border-bottom: 1px solid var(--wiki-border);
+        }
+        .intro-explanation {
+            margin-bottom: 20px;
+            font-size: 1em;
         }
 
-        /* フッター・外部サイトリンクセクション */
-        .footer-links {
-            margin-top: 50px;
-            padding-top: 20px;
-            border-top: 1px dashed var(--wiki-border);
-            font-size: 0.9em;
+        /* 項目一覧をシンプルなリストに */
+        .article-list {
+            /* floatをクリア */
+            clear: both; 
         }
-        .footer-links h3 {
-            font-size: 1.2em;
-            margin-bottom: 10px;
+        .article-list ul {
+            list-style-type: square; /* 項目符号を少し強調 */
+            padding-left: 20px;
         }
-        .footer-links ul {
-            list-style: none;
-            padding: 0;
-            margin: 10px 0;
-        }
-        .footer-links li {
+        .article-list li {
             margin-bottom: 5px;
         }
-        .footer-links a {
-            color: #555;
+        .article-list a {
+            color: var(--wiki-link);
+            text-decoration: none;
+            font-size: 1.1em;
         }
-        .footer-links a:hover {
+        .article-list a:hover {
+            text-decoration: underline;
+        }
+
+        /* 愚策を排除したシンプルなフッター */
+        .footer-base {
+            margin-top: 40px;
+            padding-top: 15px;
+            border-top: 1px solid var(--wiki-heading-border);
+            font-size: 0.8em;
+            color: #777;
+            text-align: left;
+        }
+        .footer-base a {
             color: var(--wiki-link);
         }
-        
-        /* クッキー通知用のスタイル */
-        #genericCookieNotice {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background-color: rgba(34, 34, 34, 0.95); /* 濃いグレー */
-            color: #fff;
-            padding: 15px 20px;
-            text-align: center;
-            font-size: 0.9em;
-            z-index: 9999;
-            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
-            display: none; /* 初期は非表示 */
-        }
-        #genericCookieNotice a {
-            color: #add8e6;
-            text-decoration: underline;
-            margin: 0 5px;
-        }
-        #genericCookieNotice button {
-            background-color: var(--wiki-link); /* #0645ad */
-            color: #fff;
-            border: none;
-            padding: 8px 20px;
-            cursor: pointer;
-            margin-left: 20px;
-            border-radius: 4px;
-            font-weight: bold;
-            transition: background-color 0.3s;
-        }
-        #genericCookieNotice button:hover {
-            background-color: #043685;
-        }
+
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="main-content">
+        <img src="/logo.jpg" alt="Liefantidia ロゴ" id="site-logo">
+
         <h1>Liefantidia</h1>
 
-        <div class="explanation">
+        <div class="infobox">
+            <h3>Liefantidia（リーファンティディア）</h3>
+            <p><strong>分類:</strong> 独自知識集積プロジェクト</p>
+            <p><strong>検証可能性:</strong> ゼロ（純粋フィクション）</p>
+            <p><strong>編集方針:</strong> 現実との完全な乖離</p>
+            <p><strong>設立年:</strong> 不明</p>
+        </div>
+
+        <div class="intro-explanation">
             <p>
-                Liefantidia は、現実の検証可能性に基づかない、個人的な夢想や架空の世界の設定を文書化することを目的とした、独自の知識の殿堂です。
+                Liefantidia（リーファンティディア）は、現実世界における検証可能性や学術的な根拠を一切求めず、架空の世界観を細部を永続的に文書化することを目的として設立されたサイトです。その運営方針は、一般的な百科事典の「信頼できる情報源に基づく情報の提供」とは根本的に異なります。
             </p>
             <p>
-                ここに記載されている全ての記事はフィクションであり、現実の歴史、地理、出来事とは一切関係ありません。
+                本サイトに収録されている全ての記事、用語、固有名詞、地理、歴史、人物などは、作者個人の脳内においてのみ存在する純粋なフィクションであり、現実の出来事、地理、歴史などとはいかなる関係性も持たないことが原則とされる。本サイトの全ての記事は、外部情報ではなく、作者が設定した世界内における論理的な整合性のみを基に執筆され、その検証は現実世界の事柄に対しては行われません。
             </p>
         </div>
 
+        <h2>現在の掲載記事</h2>
 
-        <h2>項目一覧</h2>
-
-<div class="link-section">
-    <a href="1/index.html">ノヴァハゼルブルク</a>
-</div>
-
-<div class="link-section">
-    <a href="2/index.html">古裂漢族説</a>
-</div>
-
-<div class="link-section">
-    <a href="3/index.html">ハレジア独立共和国</a>
-</div>
-
-<div class="link-section">
-    <a href="4/index.html">𣑥(猫)</a>
-</div>
-
-<div class="link-section">
-    <a href="5/index.html">KAR 21</a>
-</div>
-
-        <div class="footer-links">
-            <p><a href="/ak/index.html">プライバシーポリシー</a></p>
-
-            <h3>当社の他サイト</h3>
+        <div class="article-list">
             <ul>
-                <li><a href="https://test-teas-projects-8736b808.vercel.app/" target="_blank">日本の戦闘歴史年表</a></li>
-                <li><a href="https://othello-five-sable.vercel.app/" target="_blank">オセロ</a></li>
+                <li><a href="1/index.html">ノヴァハゼルブルク</a></li>
+                <li><a href="2/index.html">古裂漢族説</a></li>
+                <li><a href="3/index.html">ハレジア独立共和国</a></li>
+                <li><a href="4/index.html">𣑥(猫)</a></li>
+                <li><a href="5/index.html">KAR 21</a></li>
             </ul>
         </div>
+        
+        <div class="footer-base">
+            <p>
+                <a href="/ak/index.html">プライバシーポリシーはこちら</a> | 
+                本サイトの内容は全てフィクションです。
+            </p>
+        </div>
 
     </div>
-
-    <div id="genericCookieNotice">
-        このサイトでは、サイトの利用状況を分析し、より良いサービスを提供するためにクッキーを取得しています。。
-        <a href="/ak/index.html" target="_blank">詳細はこちら</a>
-        <button onclick="acceptConsent()">同意する</button>
-    </div>
-
-    <script>
-        // --- LocalStorage対応の同意ロジック ---
-
-        const CONSENT_KEY = 'consent-local-storage'; // ローカルストレージのキー
-
-        function showConsentNotice() {
-            const notice = document.getElementById('genericCookieNotice');
-            if (notice) {
-                // バナーを表示
-                notice.style.display = 'block'; 
-            }
-        }
-
-        function acceptConsent() {
-            // ローカルストレージに同意状態を保存 (永続)
-            localStorage.setItem(CONSENT_KEY, 'accepted');
-
-            // バナーを非表示にする
-            const notice = document.getElementById('genericCookieNotice');
-            if (notice) {
-                notice.style.display = 'none';
-            }
-        }
-
-        // ページ読み込み時に実行
-        document.addEventListener('DOMContentLoaded', () => {
-            // ローカルストレージに同意記録がない場合のみバナーを表示
-            if (localStorage.getItem(CONSENT_KEY) !== 'accepted') {
-                showConsentNotice();
-            }
-        });
-    </script>
 </body>
 </html>
