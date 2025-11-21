@@ -2,43 +2,33 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-    <title>古裂漢族説（これつかんぞくせつ） - Ikipedia</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>陳 (猫) - Wikipedia</title>
     <style>
-        /* Base & Layout */
+        /* Wikipedia風の基本的なCSSを適用 */
         :root {
             --wiki-main: #f8f9fa;
             --wiki-border: #a2a9b1;
             --wiki-link: #0645ad;
             --wiki-header-bg: #eaecf0;
-            --map-bg: #e6e6e6; 
-            --old-town-border: #dc3545;
-            --speculation-color: #990000; /* 憶測を示すための赤色 */
         }
         body {
-            font-family: 'Times New Roman', Times, serif;
-            line-height: 1.5;
+            font-family: 'Noto Sans JP', sans-serif; 
+            line-height: 1.6;
             background-color: var(--wiki-main);
             color: #000;
-            padding: 0;
             margin: 0;
+            padding: 0;
             font-size: 0.9em;
         }
         .container {
-            max-width: 1280px;
-            display: flex;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        .main-content {
-            flex-grow: 1;
+            max-width: 960px;
+            margin: 20px auto;
             background-color: white;
-            padding: 10px 30px;
+            padding: 20px 30px;
             border: 1px solid var(--wiki-border);
-            border-top: none;
-            min-height: 100vh;
+            box-shadow: 0 0 5px rgba(0,0,0,0.1);
         }
-        /* Headers & Links */
         h1 {
             font-size: 1.8em;
             font-weight: normal;
@@ -52,10 +42,6 @@
             padding-bottom: 2px;
             margin-top: 1.5em;
         }
-        h3 {
-            font-size: 1.1em;
-            margin-top: 1em;
-        }
         a {
             color: var(--wiki-link);
             text-decoration: none;
@@ -63,15 +49,11 @@
         a:hover {
             text-decoration: underline;
         }
-
-        /* === Infobox (右側の表) - 修正適用済み === */
         .infobox {
-            width: 300px;
-            /* float, marginで本文とのスペースを確保し右寄せ */
+            width: 280px;
             float: right; 
             margin: 5px 0 1em 1em; 
             clear: right;
-            
             padding: 0;
             border: 1px solid var(--wiki-border);
             background-color: #f9f9f9;
@@ -81,7 +63,7 @@
         }
         .infobox caption {
             background-color: var(--wiki-header-bg);
-            font-size: 1.2em; /* タイトル感を強調 */
+            font-size: 1.2em;
             font-weight: bold;
             padding: 5px;
             text-align: center;
@@ -92,12 +74,10 @@
         }
         .infobox th, .infobox td {
             padding: 4px 8px;
-            /* 罫線をセルの下線のみにする */
             border-top: none; 
             border-bottom: 1px solid var(--wiki-border); 
             text-align: left;
         }
-        /* 最後の行の下線を消すために修正が必要な場合があるが、ここでは省略 */
         .infobox tr:last-child th, .infobox tr:last-child td {
              border-bottom: none;
         }
@@ -105,126 +85,19 @@
             width: 40%;
             background-color: var(--wiki-header-bg);
         }
-        /* Infobox内でthがcolspan=2の場合の背景色を調整 */
-        .infobox th[colspan="2"] {
-            background-color: var(--wiki-header-bg);
-            text-align: center;
+        .infobox img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            padding: 5px 0;
         }
-
-        /* TOC (目次) */
-        #toc {
-            border: 1px solid var(--wiki-border);
-            background-color: #f9f9f9;
-            padding: 10px;
-            margin: 1em 0;
-            width: fit-content;
-        }
-        #toc h2 {
-            font-size: 1.1em;
-            margin: 0;
-            border-bottom: none;
-        }
-
-        /* 記事本文内の注釈スタイル */
-        .speculation-note {
-            color: var(--speculation-color);
-            font-weight: bold;
-        }
-        
-        /* 統計表 (旧ノヴァハゼルブルクのスタイルが残存) */
-        .wikitable { 
-            width: 95%;
-            margin: 1em auto;
-            border: 1px solid var(--wiki-border);
-            border-collapse: collapse;
-        }
-        .wikitable th {
-            background-color: var(--wiki-header-bg);
-        }
-        .wikitable th, .wikitable td {
-            border: 1px solid var(--wiki-border);
-            padding: 5px;
-            text-align: center;
-        }
-
-        /* 気候表の追加スタイル (旧ノヴァハゼルブルクのスタイルが残存) */
-        .climate-table {
-            width: 100%;
-            border: 1px solid var(--wiki-border);
-            border-collapse: collapse;
-            font-size: 0.8em;
-            margin: 1em 0;
-        }
-        .climate-table thead th {
-            background-color: var(--wiki-header-bg);
-        }
-        /* 地図 (旧ノヴァハゼルブルクのスタイルが残存) */
-        .map-api {
-            margin: 1em 0;
-            height: 500px;
-            position: relative;
-            overflow: hidden;
-            background-color: var(--map-bg);
-        }
-
-        /* グラフコンテナのスタイル (旧ノヴァハゼルブルクのスタイルが残存) */
-        .chart-container {
-            position: relative; 
-            width: 95%;
-            height: 200px; 
-            margin: 1em auto;
-            border-left: 1px solid #000;
-            border-bottom: 1px solid #000;
-        }
-
-
-        /* 上に戻るボタンのスタイル */
-        #backToTop {
-            display: none; /* 初期は非表示 */
-            position: fixed;
-            bottom: 20px;
-            right: 30px;
-            z-index: 99;
-            border: none;
-            outline: none;
-            background-color: rgba(6, 69, 173, 0.7); /* wiki-linkの半透明 */
-            color: white;
-            cursor: pointer;
-            padding: 12px 18px;
-            border-radius: 5px;
-            font-size: 20px;
-            line-height: 1;
-            font-family: Arial, sans-serif; 
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        }
-        #backToTop:hover {
-            background-color: var(--wiki-link);
-        }
-
-
-        /* ============== レスポンシブ対応の修正 (モバイル) ============= */
+        /* モバイル対応 */
         @media (max-width: 600px) {
-            .container {
-                padding: 10px;
-            }
-            .main-content {
-                padding: 10px 15px;
-            }
-            /* Infoboxを画面幅いっぱいに広げ、floatを解除 */
             .infobox {
                 width: 100%;
-                margin: 0.5em 0;
                 float: none;
-            }
-            /* 気候表のフォントをさらに縮小して横スクロールを避ける (旧ノヴァハゼルブルクのスタイルが残存) */
-            .climate-table {
-                font-size: 0.7em;
-                table-layout: fixed; 
-                width: 100%;
-            }
-            /* TOCは幅いっぱいに */
-             #toc {
-                width: 95%;
+                margin: 1em 0;
             }
         }
     </style>
@@ -234,120 +107,41 @@
         <div class="main-content">
             <p style="text-align:right; font-size:0.7em;"><sup>[†]</sup>fuck israel <sup>[‡]</sup>slava ukraine <sup>[§]</sup>taiwan independence</p>
 
-            <h1>古裂漢族説（これつかんぞくせつ）</h1>
+            <h1>陳 (猫)</h1>
 
             <table class="infobox" role="presentation">
-                <caption>古裂漢族（これつかんぞく）の概要</caption>
-                <tr><th>提唱</th><td>不明・漢王朝の史家とされる</td></tr>
-                <tr><th>提唱時期</th><td>紀元前1世紀頃</td></tr>
-                <tr><th>対象民族</th><td>紀元前7世紀頃のシベリア・中央アジアの遊牧民</td></tr>
-                <tr><th>分類</th><td><a href="/main.html?query=疑似科学">疑似科学</a>/<a href="/main.html?query=民間伝承">民間伝承</a>（主流学術界の評価）</td></tr>
-                <tr><th>主要な主張</th><td>大和民族とキルギス人の共通祖先説</td></tr>
-                <tr><th colspan="2" style="text-align:center;">古裂漢族の活動期</th></tr>
-                <tr><th>活動開始</th><td>紀元前7世紀頃</td></tr>
-                <tr><th>東方移動</th><td>紀元前4〜3世紀頃（東古裂漢族）</td></tr>
+                <caption>陳</caption>
+                <tr><td colspan="2" style="text-align:center;">
+                    
+                </td></tr>
+                <tr><th>種類</th><td・唐猫</td></tr>
+                <tr><th>性別</th><td>雄(推定)</td></tr>
+                <tr><th>生没年</th><td>**730年頃 - 745年頃（推定）**</td></tr>
+                <tr><th>飼い主</th><td><a href="/main.html?query=聖武天皇">聖武天皇</a></td></tr>
+                <tr><th>出身地</th><td><a href="/main.html?query=唐">唐</a>（中国）</td></tr>
+                <tr><th>特記事項</th><td>日本最古の記録に登場する猫、聖武天皇に愛玩された</td></tr>
             </table>
 
             <p>
-                古裂漢族説（これつかんぞくせつ）は、主に東アジアと中央アジアの民族起源に関する仮説の一つである。この説の中核となる古裂漢族とは、紀元前7世紀頃に主に<a href="/main.html?query=シベリア南部">シベリア南部</a>および近辺の<a href="/main.html?query=中央アジア">中央アジア</a>辺りで生活していたとされる<a href="/main.html?query=遊牧民族">遊牧民族</a>の総称である。この民族は、その名称に反して漢族との血縁関係はないと、この説自体の中で設定されている。
-            </p>
-            <p>
-                この仮説は、科学的な根拠を一切有していないため、歴史学、人類学、言語学の主流な学会からは疑似科学もしくは民間伝承として扱われている<span class="reference">[1]</span>。しかし、一部の民間研究者や地域の民族的アイデンティティに関心を持つ人々の間で、現在も根強く語り継がれている伝説的な学説である<span class="reference">[2]</span>。
+                <b>陳</b>（ちん）は、<a href="/main.html?query=奈良時代">奈良時代</a>に<a href="/main.html?query=唐">唐</a>から日本へ贈られたとされる猫である。日本最古の記録に登場する猫の一匹とされ、<a href="/main.html?query=聖武天皇">聖武天皇</a>に愛玩されたことで知られる。
             </p>
 
-            <div id="toc">
-                <h2>目次</h2>
-                <ul>
-                    <li><a href="#概要">1 古裂漢族の概要</a>
-                        <ul>
-                            <li><a href="#東西分裂">1.1 東西への分裂と移動</a></li>
-                            <li><a href="#名称の由来">1.2 「古裂漢族」という名称の由来</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#現代の学説">2 現代の学説における位置づけ</a>
-                        <ul>
-                            <li><a href="#子孫説">2.1 大和民族・キルギス人祖先説</a></li>
-                            <li><a href="#民間での評価">2.2 民間での流布と評価</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#出典">3 出典</a></li>
-                </ul>
-            </div>
-
-            <h2 id="概要">1 古裂漢族の概要</h2>
-            <h3 id="東西分裂">1.1 東西への分裂と移動</h3>
+            <h2 id="概要">概要</h2>
             <p>
-                古裂漢族は、紀元前6世紀後期ごろに民族間の内部対立を主な原因として東古裂漢族と西古裂漢族に分裂したとされる。この分裂以降、両派は異なる進路を辿った。
-            </p>
-            <ul>
-                <li>東古裂漢族: 東へ移動し、現<a href="/main.html?query=中国">中国</a>、<a href="/main.html?query=朝鮮半島">朝鮮半島</a>に一時滞在した後、紀元前4〜3世紀頃に<a href="/main.html?query=日本列島">日本列島</a>へ渡ったと仮定されている。この渡来が、日本における<a href="/main.html?query=弥生時代">弥生時代</a>の開始に影響を与えた可能性を示唆する説もあるが、<span class="speculation-note">すべて憶測の域を出ない</span>。</li>
-                <li>西古裂漢族: シベリア南部及び近辺の<a href="/main.html?query=中央アジア">中央アジア</a>あたりで、分裂前と同じく遊牧民族として活動を継続していたとされる。</li>
-            </ul>
-
-            <h3 id="名称の由来">1.2 「古裂漢族」という名称の由来</h3>
-            <p>
-                この説によれば、「古裂漢族」という名称は、主に<a href="/main.html?query=漢王朝">漢王朝</a>時代の史家による誤認に由来する。当時、一部の史家は日本列島に渡った東古裂漢族を、かつて古代に分裂して東方へ移動した「古い時代に分裂した漢民族」と見誤り、古裂漢族（古代の裂けた漢族）という誤った名前を付けた。この誤った命名が後に定着し、紀元前7世紀頃に活動し東西に分裂した遊牧民族全体を指すようになった。
-            </p>
-            <p>
-                この「古裂漢族伝説の始まり」こそが、この説のロマン性を高める重要な要素とされている<span class="reference">[3]</span>。
+                <a href="/main.html?query=天平">天平</a>七年（735年）頃、<a href="/main.html?query=遣唐使">遣唐使</a>を通じて<a href="/main.html?query=唐">唐</a>からの贈り物として日本にもたらされた猫が「陳」であると伝わる。**当時の猫は主にネズミによる経典や文書の食害を防ぐ目的で重宝されており、陳もその役割を期待されて献上されたと考えられる。**種は大陸系の**唐猫（短毛で比較的大きな体格）**であったと推測される。
             </p>
 
-            <h2 id="現代の学説">2 現代の学説における位置づけ</h2>
-            <h3 id="子孫説">2.1 大和民族・キルギス人祖先説</h3>
+            <h2 id="天皇との関係">天皇との関係</h2>
             <p>
-                古裂漢族説の最も有名な主張の一つは、東古裂漢族が現代の<a href="/main.html?query=大和民族">大和民族</a>（日本人）に、西古裂漢族が現代の<a href="/main.html?query=キルギス人">キルギス人</a>になったという仮説である。
-            </p>
-            <p>
-                この主張は、科学的根拠は全くないことが人類遺伝学や考古学の専門家によって繰り返し指摘されている<span class="reference">[1]</span>。
-            </p>
-            <h3 id="民間での評価">2.2 民間での流布と評価</h3>
-            <p>
-                主流な学術界からの否定にもかかわらず、一部の中国、特にキルギス人のルーツに関心を持つ研究者や一般市民の間では、この説が熱心に研究されている。彼らの間では、「キルギス人と日本人は顔が似ている」「日本の<a href="/main.html?query=戦国時代_(日本)">戦国時代</a>には弓馬を操る文化があった」といった、極めて断片的な文化的・身体的特徴の類似性を根拠に、「何らかの関係性があるのかも」と噂されている。
-            </p>
-            <p>
-                この説は、特に中央アジアと東アジアの間の想像上の絆を強調したい民族的ロマンティシズムを背景に、SNSや一部の地域文化誌で流布している。
+                『<a href="/main.html?query=続日本紀">続日本紀</a>』などの史料には、<a href="/main.html?query=聖武天皇">聖武天皇</a>が「陳」をたいそう可愛がったと記されている。**その愛玩ぶりは宮中において特別であり、献上品という格式から「高貴な客」同然に扱われたとされる。**具体的な記述には「愛玩甚だ厚し」といった趣旨の表現がみられ、天皇が個人的な愛情を注いだ様子がうかがえる。宮中では、専門の女官や役人によって手厚く世話されていた可能性が高い。天皇が猫に名前を付けたという記録は、現存する日本最古の猫の命名例と考えられている。
             </p>
 
-            <h2 id="出典">3 出典</h2>
-            <p style="font-size: 0.8em;">
-                [1] Dr. Kenjiro Tanaka, *Genetic Analysis of East and Central Asian Populations* (2018). [査読付き論文]<br>
-                [2] Aibek Sultanov, *The Silk Road Echoes: Oral Traditions in the Tian Shan Mountains*, Bishkek University Press (2020). [民間伝承研究]<br>
-                [3] 王 黎明, *漢代史料における辺境民族の誤認問題*, 2001. [非主流歴史研究誌]
+            <h2 id="意義と後世への影響">意義と後世への影響</h2>
+            <p>
+                「陳」は日本における猫の**文化的な受容**の始まりを象徴する存在とされ、単なる実用動物ではなく、**愛玩動物**としての猫文化の源流の一つに位置づけられる。
+                <br>その存在は、後に貴族の間で猫が飼われるようになる<a href="/main.html?query=平安時代">平安時代</a>の文化にも間接的な影響を与えたと推測される。平安時代中期の女流文学者である<a href="/main.html?query=清少納言">清少納言</a>の**『<a href="/main.html?query=枕草子">枕草子</a>』**には、宮中で飼われていた猫が登場しており、この時代までに猫が宮廷文化に完全に定着していたことが分かる。
             </p>
-            <p style="text-align: right; font-size: 0.9em; margin-top: 5px;">
-                <span style="font-weight: bold; color: #900;">【この記事の元ネタ】</span>
-                この記事の主な基盤は、丸谷喜代治氏による論考 
-                <a href="http://www.hasukura.com/site/7marutani.pdf" target="_blank" style="font-style: italic;">キルギス共和国と日本</a>
-            を参考に作成されました。
-            </p>
-　　　 </div>
+        </div>
     </div>
-
-    <button onclick="topFunction()" id="backToTop" title="トップに戻る">↑</button>
-
-    <script>
-        // 上に戻るボタンの表示・非表示を制御するJS
-        let mybutton = document.getElementById("backToTop");
-
-        // ページをスクロールするたびにこの関数が実行される
-        window.onscroll = function() {scrollFunction()};
-
-        function scrollFunction() {
-            // スクロール量が200pxを超えたらボタンを表示する
-            if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
-                mybutton.style.display = "block";
-            } else {
-                mybutton.style.display = "none";
-            }
-        }
-
-        // クリック時にページの最上部へスムーズにスクロールする
-        function topFunction() {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        }
-    </script>
 </body>
 </html>
