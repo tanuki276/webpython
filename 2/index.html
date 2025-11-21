@@ -139,7 +139,7 @@
         #backToTop:hover {
             background-color: var(--wiki-link);
         }
-        
+
         /* クッキー通知用のスタイル - 汎用性のためHTML内に記述 */
         #genericCookieNotice {
             position: fixed;
@@ -299,23 +299,19 @@
                 behavior: 'smooth'
             });
         }
-        
-        // --- 2. クッキーロジックのJS ---
 
-        function getCookie(name) {
-            const value = `; ${document.cookie}`;
-            const parts = value.split(`; ${name}=`);
-            if (parts.length === 2) return parts.pop().split(';').shift();
+        // --- 2. LocalStorageロジックのJS (修正箇所) ---
+        // LocalStorageに値を設定/取得する関数に置き換えました。
+
+        function getLocalStorage(name) {
+            // LocalStorageから値を取得
+            return localStorage.getItem(name);
         }
 
-        function setCookie(name, value, days) {
-            let expires = "";
-            if (days) {
-                const date = new Date();
-                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-                expires = "; expires=" + date.toUTCString();
-            }
-            document.cookie = name + "=" + (value || "")  + expires + "; path=/; SameSite=Lax";
+        function setLocalStorage(name, value) {
+            // LocalStorageに値を設定
+            // LocalStorageは有効期限の設定が不要で永続的に保存されます。
+            localStorage.setItem(name, value);
         }
 
         function showCookieNotice() {
@@ -326,9 +322,9 @@
         }
 
         function acceptCookieConsent() {
-            // サイト訪問者に「同意済み」のクッキーを設定（365日間有効）
-            setCookie('cookie-consent', 'accepted', 365);
-            
+            // setCookieを setLocalStorage に変更し、同意状態を保存
+            setLocalStorage('cookie-consent', 'accepted'); 
+
             // バナーを非表示にする
             const notice = document.getElementById('genericCookieNotice');
             if (notice) {
@@ -338,8 +334,8 @@
 
         // ページ読み込み時に実行
         document.addEventListener('DOMContentLoaded', () => {
-            // 'cookie-consent' クッキーがない場合のみバナーを表示
-            if (getCookie('cookie-consent') !== 'accepted') {
+            // getCookieを getLocalStorage に変更し、保存状態を確認
+            if (getLocalStorage('cookie-consent') !== 'accepted') {
                 showCookieNotice();
             }
         });
