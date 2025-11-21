@@ -135,33 +135,32 @@
         }
         .map-api {
             margin: 1em 0;
-            /* height: 350px; /* ウィキペディアの地図の標準的な高さに調整 - 画像を均等にするためコメントアウト */
-            height: auto; /* 高さを自動調整 */
+            height: auto; 
             position: relative;
             overflow: hidden;
             background-color: var(--map-bg);
-            text-align: center; /* 画像を中央揃えにする */
-            display: flex; /* flexboxを使って画像を並べる */
-            justify-content: center; /* 中央に寄せる */
-            align-items: flex-start; /* 上端を揃える */
-            flex-wrap: wrap; /* 必要に応じて画像を折り返す */
+            text-align: center; 
+            display: flex; 
+            justify-content: center; 
+            align-items: flex-start; 
+            flex-wrap: wrap; 
         }
        /* map-api内の画像スタイル */
         .map-api img {
-             max-width: 32%; /* 3枚の画像とマージンを考慮して調整 */
-             max-height: 100%; /* 親の高さに合わせて調整される */
+             max-width: 32%; 
+             max-height: 100%; 
              height: auto;
-             display: block; /* flexアイテムとして扱うためblockに変更 */
-             margin: 0.5%; /* 画像間のマージン */
-             object-fit: contain; /* 画像全体が表示されるように調整 */
+             display: block; 
+             margin: 0.5%; 
+             object-fit: contain; 
         }
-        
+
         /* 歴史セクションのボタン用スタイル */
         .history-link-button {
             display: inline-block;
             padding: 8px 15px;
             margin: 10px 0;
-            background-color: #0645ad; /* Wikipediaのリンクカラーに近付ける */
+            background-color: #0645ad; 
             color: white;
             border-radius: 5px;
             font-weight: bold;
@@ -171,12 +170,70 @@
             transition: background-color 0.2s;
         }
         .history-link-button:hover {
-            background-color: #033075; /* ホバーで少し暗く */
-            text-decoration: none; /* ホバー時に下線が出ないように */
+            background-color: #033075; 
+            text-decoration: none; 
         }
 
+        /* 上に戻るボタンのスタイル */
+        #backToTop {
+            display: none; 
+            position: fixed;
+            bottom: 60px; /* クッキーバナーを考慮して60pxに設定 */
+            right: 30px;
+            z-index: 999;
+            border: none;
+            outline: none;
+            background-color: rgba(6, 69, 173, 0.7); 
+            color: white;
+            cursor: pointer;
+            padding: 12px 18px;
+            border-radius: 5px;
+            font-size: 20px;
+            line-height: 1;
+            font-family: Arial, sans-serif; 
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        #backToTop:hover {
+            background-color: var(--wiki-link);
+        }
+        
+        /* クッキー通知用のスタイル (汎用コードから移植) */
+        #genericCookieNotice {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(34, 34, 34, 0.95); /* 濃いグレー */
+            color: #fff;
+            padding: 15px 20px;
+            text-align: center;
+            font-size: 0.9em;
+            z-index: 9999;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+            display: none; /* 初期状態ではJavaScriptで表示を制御 */
+        }
+        #genericCookieNotice a {
+            color: #add8e6;
+            text-decoration: underline;
+            margin: 0 5px;
+        }
+        #genericCookieNotice button {
+            background-color: #0645ad;
+            color: #fff;
+            border: none;
+            padding: 8px 20px;
+            cursor: pointer;
+            margin-left: 20px;
+            border-radius: 4px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        #genericCookieNotice button:hover {
+            background-color: #043685;
+        }
+        
         /* レスポンシブ対応の修正 (モバイル) */
-        @media (max-width: 600px) { /* @media を追加 */
+        @media (max-width: 600px) { 
             .container {
                 padding: 10px;
             }
@@ -308,8 +365,8 @@
 
             <h3 id="戊国時代と泥沼の戦乱">1.2 戊国時代と泥沼の戦乱（1312年〜1676年）</h3>
             <p>
-                戦乱で疲弊した島は1250年に<a href="/main.html?query=シュリーヴィジャヤ王国">シュリーヴィジャヤ王国</a>の植民地（シュリーヴィジャヤ統治時代）となり、一時的に戦乱は終結する。しかし、統治権の衰退に伴い、稜、秉、原、亳阜、後春の五大国家が独立し、戊国時代（ごこくじだい）が開幕。平和協定「五国寧道の書」により150年ほど平和が続いたが、1423年、後春が稜へ侵攻したことで秋冬戦国時代が始まり、終戦まで240年以上にわたる泥沼の戦いが続いた。この長期にわたる戦乱の中で、現地勢力はアイデンティティを守るため、民族名称を孫族、巍族、明族として正式に確定させた。
-            </p>
+                戦乱で疲弊した島は1250年に<a href="/main.html?query=シュリーヴィジャヤ王国">シュリーヴィジャヤ王国</a>の植民地（シュリーヴィジャヤ統治時代）となり、一時的に戦乱は終結する。しかし、統治権の衰退に伴い、稜、秉、原、亳阜、後春の五大国家が独立し、戊国時代（ごこくじだい）が開幕。平和協定「五国寧道の書」により150年ほど平和が続いたが、1423年、後春が稜へ侵攻したことで秋冬戦国時代が始まり、終戦まで240年以上にわたる泥沼の戦いが続いた。この長期にわたる戦乱の中で、現地勢力はアイデンティティを守るため、民族名称を孫族、巍族、明族として正式に確定させた。         
+ </p>
 
             <h3 id="植民地時代と独立">1.3 植民地時代と独立（1676年〜1945年）</h3>
             <p>
@@ -423,6 +480,79 @@
             </p>
         </div>
     </div>
+    
+    <button onclick="topFunction()" id="backToTop" title="トップに戻る">↑</button>
+
+    <div id="genericCookieNotice">
+        このサイトでは、サイトの利用状況を分析し、より良いサービスを提供するためにCookieを使用しています。
+        <a href="/ak/index.html" target="_blank">詳細はこちら</a>
+        <button onclick="acceptCookieConsent()">同意する</button>
+    </div>
+
+    <script>
+        // --- 1. トップに戻るボタンのJS ---
+        let mybutton = document.getElementById("backToTop");
+        window.onscroll = function() {scrollFunction()};
+
+        function scrollFunction() {
+            // スクロール量が200pxを超えたらボタンを表示する
+            if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+                mybutton.style.display = "block";
+            } else {
+                mybutton.style.display = "none";
+            }
+        }
+
+        function topFunction() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+        
+        // --- 2. クッキーロジックのJS ---
+
+        function getCookie(name) {
+            const value = `; ${document.cookie}`;
+            const parts = value.split(`; ${name}=`);
+            if (parts.length === 2) return parts.pop().split(';').shift();
+        }
+
+        function setCookie(name, value, days) {
+            let expires = "";
+            if (days) {
+                const date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                expires = "; expires=" + date.toUTCString();
+            }
+            document.cookie = name + "=" + (value || "")  + expires + "; path=/; SameSite=Lax";
+        }
+
+        function showCookieNotice() {
+            const notice = document.getElementById('genericCookieNotice');
+            if (notice) {
+                notice.style.display = 'block';
+            }
+        }
+
+        function acceptCookieConsent() {
+            // サイト訪問者に「同意済み」のクッキーを設定（365日間有効）
+            setCookie('cookie-consent', 'accepted', 365);
+            
+            // バナーを非表示にする
+            const notice = document.getElementById('genericCookieNotice');
+            if (notice) {
+                notice.style.display = 'none';
+            }
+        }
+
+        // ページ読み込み時に実行
+        document.addEventListener('DOMContentLoaded', () => {
+            // 'cookie-consent' クッキーがない場合のみバナーを表示
+            if (getCookie('cookie-consent') !== 'accepted') {
+                showCookieNotice();
+            }
+        });
+    </script>
 </body>
 </html>
-
