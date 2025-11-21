@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Liefantidia</title>
     <style>
-        /* 現代の標準的なウィキスタイル */
+        /* 現代の標準的なウィキスタイル (CSSは前回から変更なし) */
         :root {
-            --wiki-bg: #f8f9fa; /* 背景色 */
+            --wiki-bg: #f8f9fa;
             --wiki-content-bg: #ffffff;
-            --wiki-border: #a2a9b1; /* メインボーダー */
+            --wiki-border: #a2a9b1;
             --wiki-link: #0645ad;
-            --wiki-heading-border: #eaecf0; /* 見出し下の細線 */
+            --wiki-heading-border: #eaecf0;
         }
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
@@ -25,11 +25,10 @@
         }
         .main-content {
             width: 90%;
-            max-width: 1000px; /* 幅を広く設定 */
+            max-width: 1000px;
             margin: 20px auto;
             padding: 30px;
             background-color: var(--wiki-content-bg);
-            /* シャドウは控えめに、Wikipediaを意識してあまり使わない */
         }
         #site-logo {
             display: block;
@@ -44,7 +43,6 @@
             padding-bottom: 4px;
             margin-bottom: 0.5em;
         }
-        /* Wikipedia風H2: 左右いっぱいに薄い線 */
         h2 {
             font-size: 1.4em;
             font-weight: normal;
@@ -52,7 +50,6 @@
             padding: 0.5em 0 0.2em 0;
             margin-top: 1.5em;
         }
-        /* UI改善: Infoboxの模擬配置 */
         .infobox {
             float: right;
             border: 1px solid var(--wiki-border);
@@ -67,7 +64,7 @@
         .infobox h3 {
             font-size: 1.1em;
             text-align: center;
-            background-color: #ebf0f7; /* Infoboxのヘッダー色 */
+            background-color: #ebf0f7;
             margin: -10px -10px 10px -10px;
             padding: 8px;
             border-bottom: 1px solid var(--wiki-border);
@@ -76,14 +73,11 @@
             margin-bottom: 20px;
             font-size: 1em;
         }
-
-        /* 項目一覧をシンプルなリストに */
         .article-list {
-            /* floatをクリア */
             clear: both; 
         }
         .article-list ul {
-            list-style-type: square; /* 項目符号を少し強調 */
+            list-style-type: square;
             padding-left: 20px;
         }
         .article-list li {
@@ -98,7 +92,7 @@
             text-decoration: underline;
         }
 
-        /* シンプルなフッター */
+        /* 復元されたフッターのためのスタイル */
         .footer-base {
             margin-top: 40px;
             padding-top: 15px;
@@ -106,11 +100,61 @@
             font-size: 0.8em;
             color: #777;
             text-align: left;
+            display: flex; /* フッターリンクを横並びにするため */
+            justify-content: space-between;
         }
         .footer-base a {
             color: var(--wiki-link);
         }
+        .footer-links-restored h4 {
+            font-size: 1em;
+            margin-top: 0;
+            margin-bottom: 5px;
+            color: #202122;
+        }
+        .footer-links-restored ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .footer-links-restored li {
+            margin-bottom: 2px;
+        }
 
+        /* クッキー通知用のスタイル (オリジナルから復元) */
+        #genericCookieNotice {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(34, 34, 34, 0.95);
+            color: #fff;
+            padding: 15px 20px;
+            text-align: center;
+            font-size: 0.9em;
+            z-index: 9999;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+            display: none; /* 初期は非表示 */
+        }
+        #genericCookieNotice a {
+            color: #add8e6;
+            text-decoration: underline;
+            margin: 0 5px;
+        }
+        #genericCookieNotice button {
+            background-color: var(--wiki-link);
+            color: #fff;
+            border: none;
+            padding: 8px 20px;
+            cursor: pointer;
+            margin-left: 20px;
+            border-radius: 4px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        #genericCookieNotice button:hover {
+            background-color: #043685;
+        }
     </style>
 </head>
 <body>
@@ -121,15 +165,14 @@
 
         <div class="infobox">
             <h3>Liefantidia（リーファンティディア）</h3>
-           <p style="color: red; font-size: 3em; font-weight: bold; text-align: center;">
-    ※このサイトはフィクションです
-　　　　　</p>
-　　　　　<div class="intro-explanation">
+　　　<bidy>
+        <div class="intro-explanation">
             <p>
-                Liefantidia（リーファンティディア）は、現実世界における検証可能性や学術的な根拠を一切求めず、架空の世界観を細部を永続的に文書化することを目的として設立されたサイトです。その運営方針は、一般的な百科事典の「信頼できる情報源に基づく情報の提供」とは根本的に異なります。
+                Liefantidia（リーファンティディア）に記載されている全ての記事はフィクションであり、現実の歴史、地理、出来事とは一切関係ありません。
             </p>
             <p>
-                本サイトに収録されている全ての記事、用語、固有名詞、地理、歴史、人物などは、作者個人の脳内においてのみ存在する純粋なフィクションであり、現実の出来事、地理、歴史などとはいかなる関係性も持たないことが原則とされる。本サイトの全ての記事は、外部情報ではなく、作者が設定した世界内における論理的な整合性のみを基に執筆され、その検証は現実世界の事柄に対しては行われません。
+               Liefantidia は、現実の検証可能性に基づかない、個人的な夢想や架空の世界の設定を文書化することを目的とした、独自の知識の殿堂です。
+
             </p>
         </div>
 
@@ -146,12 +189,54 @@
         </div>
         
         <div class="footer-base">
-            <p>
-                <a href="/ak/index.html">プライバシーポリシーはこちら</a> | 
-                本サイトの内容は全てフィクションです。
-            </p>
+            <div>
+                <p>
+                    <a href="/ak/index.html">プライバシーポリシー</a> | 
+※本サイトはフィクションです
+                </p>
+            </div>
+            
+            <div class="footer-links-restored">
+                <h4>当社の他のサイト</h4>
+                <ul>
+                    <li><a href="https://test-teas-projects-8736b808.vercel.app/" target="_blank">日本の戦闘歴史年表</a></li>
+                    <li><a href="https://othello-five-sable.vercel.app/" target="_blank">オセロ</a></li>
+                </ul>
+            </div>
         </div>
 
     </div>
+
+    <div id="genericCookieNotice">
+        このサイトでは、サイトの利用状況を分析し、より良いサービスを提供するためにクッキーを取得しています。。
+        <a href="/ak/index.html" target="_blank">詳細はこちら</a>
+        <button onclick="acceptConsent()">同意する</button>
+    </div>
+
+    <script>
+        // --- LocalStorage対応の同意ロジック (オリジナルから復元) ---
+        const CONSENT_KEY = 'consent-local-storage';
+
+        function showConsentNotice() {
+            const notice = document.getElementById('genericCookieNotice');
+            if (notice) {
+                notice.style.display = 'block'; 
+            }
+        }
+
+        function acceptConsent() {
+            localStorage.setItem(CONSENT_KEY, 'accepted');
+            const notice = document.getElementById('genericCookieNotice');
+            if (notice) {
+                notice.style.display = 'none';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            if (localStorage.getItem(CONSENT_KEY) !== 'accepted') {
+                showConsentNotice();
+            }
+        });
+    </script>
 </body>
 </html>
