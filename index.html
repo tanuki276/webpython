@@ -56,6 +56,32 @@
             color: #777;
             margin-top: 5px;
         }
+        /* クッキー通知用のスタイルを追加 */
+        .cookie-notice {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #333;
+            color: #fff;
+            padding: 15px 0;
+            text-align: center;
+            font-size: 0.9em;
+            z-index: 1000;
+        }
+        .cookie-notice a {
+            color: #add8e6;
+            text-decoration: underline;
+            margin: 0 5px;
+        }
+        .cookie-notice button {
+            background-color: #0645ad;
+            color: #fff;
+            border: none;
+            padding: 5px 15px;
+            cursor: pointer;
+            margin-left: 15px;
+        }
     </style>
 </head>
 <body>
@@ -71,7 +97,7 @@
             </p>
         </div>
 
-        
+
         <h2>項目一覧</h2>
 
 <div class="link-section">
@@ -93,6 +119,14 @@
 <div class="link-section">
     <a href="5/index.html">KAR 21</a>
 </div>
+
+    </div>
+
+    <div class="cookie-notice" id="cookieNotice">
+        このサイトでは、サイトの利用状況を分析し、より良いサービスを提供するためにCookieを使用しています。
+        <a href="#privacy-policy">詳細はこちら</a>
+        <button onclick="document.getElementById('cookieNotice').style.display='none'">同意する</button>
+    </div>
 
 </body>
 </html>
