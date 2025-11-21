@@ -155,6 +155,25 @@
              margin: 0.5%; /* 画像間のマージン */
              object-fit: contain; /* 画像全体が表示されるように調整 */
         }
+        
+        /* 歴史セクションのボタン用スタイル */
+        .history-link-button {
+            display: inline-block;
+            padding: 8px 15px;
+            margin: 10px 0;
+            background-color: #0645ad; /* Wikipediaのリンクカラーに近付ける */
+            color: white;
+            border-radius: 5px;
+            font-weight: bold;
+            text-align: center;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.2s;
+        }
+        .history-link-button:hover {
+            background-color: #033075; /* ホバーで少し暗く */
+            text-decoration: none; /* ホバー時に下線が出ないように */
+        }
 
         /* レスポンシブ対応の修正 (モバイル) */
         @media (max-width: 600px) { /* @media を追加 */
@@ -177,6 +196,12 @@
                  max-width: 95%; 
                  margin: 5px auto;
                  display: block;
+            }
+            /* モバイルではボタンを幅いっぱいにする */
+            .history-link-button {
+                display: block;
+                width: 100%;
+                box-sizing: border-box;
             }
         }
     </style>
@@ -265,8 +290,15 @@
             <h2 id="歴史">1 歴史</h2>
             <p>
                 ハレジアの歴史は、そのほぼ全てが「統一と分裂、民族の闘争」の繰り返しであり、<a href="/main.html?query=アイデンティティ">アイデンティティ</a>の形成に深く影響を与えている。
-                **詳細なハレジア史は<a href="https://webpython-seven.vercel.app/3/halezia.txt">こちら</a>を参照。**
             </p>
+            <!-- ユーザー要望に基づき、歴史詳細へのリンクをボタンとして追加 -->
+            <div style="text-align: center; margin-bottom: 20px;">
+                <a href="https://webpython-seven.vercel.app/3/halezia.txt" class="history-link-button" target="_blank">
+                    詳細なハレジア史
+                </a>
+            </div>
+            <!-- /ユーザー要望 -->
+
 
             <h3 id="古代の形成と戦乱期">1.1 古代の形成と戦乱期（bc6000頃〜ad1250）</h3>
             <p>
@@ -391,7 +423,8 @@
     [5] dr. anya sharma. *the dissolution of identity: war, colonization, and the three halezia tribes*. southeast asia history journal, vol. 12 (2018).<br>
     [6] halezia national defense force act (1945, last amended 2001).<br>
     [7] department of culture and heritage. *the rituals of salt water eruption festival*. annual report (2024).<br>
-    [8] halezia bureau of statistics. *2025 population census interim report*.
+    [8] halezia bureau of statistics. *2025 population census interim report*.<br>
+    [9] 晴幸歴史資料編纂委員会. "ハレジア独立共和国の全史資料." (2025).  (<a href="https://webpython-seven.vercel.app/3/halezia.txt" target="_blank">こちら</a>)
 </p>
 
             <p style="text-align: right; font-size: 0.9em; margin-top: 5px;">
@@ -400,3 +433,4 @@
     </div>
 </body>
 </html>
+
