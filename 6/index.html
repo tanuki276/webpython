@@ -765,41 +765,45 @@
             </p>
         </div>
     </div>
-        <button onclick="topFunction()" id="backToTop" title="トップに戻る">↑</button> 
-
-        <script>
-        // 上に戻るボタンの表示・非表示を制御するJS
-        let mybutton = document.getElementById("backToTop");
-
-        // ページをスクロールするたびにこの関数が実行される
-        window.onscroll = function() {scrollFunction()};
-
-        function scrollFunction() {
-            // スクロール量が200pxを超えたらボタンを表示する
-            if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
-                mybutton.style.display = "block";
-            } else {
-                mybutton.style.display = "none";
-            }
-        }
-
-        // クリック時にページの最上部へスムーズにスクロールする
-        function topFunction() {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        }
-        </script> 
+                <button onclick="topFunction()" id="backToTop" title="トップに戻る">↑</button> 
 
         <style>
+        /* ====================================================================== */
+        /* カムバックボタン (#backToTop) のスタイル定義 */
+        /* ====================================================================== */
+        #backToTop {
+            display: none; /* 初期状態では非表示（JSでスクロール時に表示） */
+            position: fixed; /* 画面固定 */
+            bottom: 20px;
+            right: 20px;
+            z-index: 999; /* クッキー通知より手前に */
+            
+            /* 装飾スタイル */
+            background-color: var(--sml-color); /* #dc3545 (サンマル線の赤) */
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 1.5em;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            line-height: 50px; /* 垂直方向の中央揃え */
+            text-align: center;
+        }
+        #backToTop:hover {
+            background-color: #c82333;
+        }
+
+        /* ====================================================================== */
         /* クッキー通知用のスタイル - 汎用性のためHTML内に記述 */
+        /* ====================================================================== */
         #genericCookieNotice {
             position: fixed;
             bottom: 0;
             left: 0;
             width: 100%;
-            background-color: rgba(34, 34, 34, 0.95); /* 濃いグレー */
+            background-color: rgba(34, 34, 34, 0.95);
             color: #fff;
             padding: 15px 20px;
             text-align: center;
@@ -836,7 +840,41 @@
         </div>
 
         <script>
-        // JavaScriptロジック: ローカルストレージの読み書きとバナーの表示/非表示を制御
+        // ======================================================================
+        // トップに戻るボタン (backToTop) の機能
+        // ======================================================================
+        // document.addEventListener('DOMContentLoaded', ... の前に配置することで、
+        // 確実に要素を取得できるようにしています。
+        let mybutton = document.getElementById("backToTop");
+
+        // ページをスクロールするたびにこの関数が実行される
+        window.onscroll = function() {scrollFunction()};
+
+        function scrollFunction() {
+            // スクロール量が200pxを超えたらボタンを表示する
+            // document.body.scrollTopは古いブラウザ向け、document.documentElement.scrollTopはモダンブラウザ向け
+            if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+                if (mybutton) {
+                    mybutton.style.display = "block";
+                }
+            } else {
+                if (mybutton) {
+                    mybutton.style.display = "none";
+                }
+            }
+        }
+
+        // クリック時にページの最上部へスムーズにスクロールする
+        function topFunction() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // ======================================================================
+        // クッキー通知 (genericCookieNotice) の機能
+        // ======================================================================
         const CONSENT_KEY = 'consent-local-storage'; // ローカルストレージのキー
 
         function showConsentNotice() {
@@ -847,7 +885,7 @@
             }
         }
 
-        // Cookieではなくローカルストレージに同意状態を保存
+        // ローカルストレージに同意状態を保存
         function acceptConsent() {
             // ローカルストレージに同意状態を保存 (期限なし)
             localStorage.setItem(CONSENT_KEY, 'accepted'); 
