@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>サンマル線 - SML</title>
+    <title>サンマル線 - SML (咲仲都市高速鉄道)</title>
     <style>
         /* Base & Layout */
         :root {
@@ -115,6 +115,31 @@
             border-bottom: none;
         }
 
+        /* 新規追加: 観光魅力セクションのスタイル */
+        .attraction-box {
+            border: 2px solid var(--sml-color);
+            padding: 15px;
+            margin: 1.5em 0;
+            background-color: #fff0f0;
+            border-radius: 5px;
+        }
+        .attraction-box h2 {
+            border-bottom: 2px dashed var(--sml-color);
+            color: var(--sml-color);
+            padding-bottom: 5px;
+            margin-top: 0;
+        }
+        .attraction-list li {
+            margin-bottom: 8px;
+            list-style: none; /* リストマークを消す */
+            padding-left: 1.5em;
+            text-indent: -1.5em;
+        }
+        .attraction-list li::before {
+            content: "✨"; /* 絵文字をリストマーク代わりに使用 */
+            margin-right: 0.5em;
+        }
+        /* ------------------------------------------- */
         /* 路線表のスタイル (詳細表含む) */
         .route-table { 
             width: 100%;
@@ -170,68 +195,6 @@
             background-color: var(--wiki-header-bg);
         }
 
-        /* ------------------------------------------- */
-        /* UI/UX要素: トップに戻るボタン */
-        /* ------------------------------------------- */
-        #backToTop {
-            display: none; 
-            position: fixed;
-            bottom: 60px; /* クッキーバナーを考慮 */
-            right: 30px;
-            z-index: 99;
-            border: none;
-            outline: none;
-            background-color: rgba(6, 69, 173, 0.7);
-            color: white;
-            cursor: pointer;
-            padding: 12px 18px;
-            border-radius: 5px;
-            font-size: 20px;
-            line-height: 1;
-            font-family: Arial, sans-serif; 
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        }
-        #backToTop:hover {
-            background-color: var(--wiki-link);
-        }
-
-        /* ------------------------------------------- */
-        /* UI/UX要素: クッキー通知 */
-        /* ------------------------------------------- */
-        #genericCookieNotice {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background-color: rgba(34, 34, 34, 0.95); 
-            color: #fff;
-            padding: 15px 20px;
-            text-align: center;
-            font-size: 0.9em;
-            z-index: 9999;
-            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
-            display: none; /* 初期状態では非表示にし、JSで同意がない場合のみ表示する */
-        }
-        #genericCookieNotice a {
-            color: #add8e6;
-            text-decoration: underline;
-            margin: 0 5px;
-        }
-        #genericCookieNotice button {
-            background-color: #0645ad;
-            color: #fff;
-            border: none;
-            padding: 8px 20px;
-            cursor: pointer;
-            margin-left: 20px;
-            border-radius: 4px;
-            font-weight: bold;
-            transition: background-color 0.3s;
-        }
-        #genericCookieNotice button:hover {
-            background-color: #043685;
-        }
-        
         /* ============== グラフ表示（CSSのみで実現）のスタイル ============== */
         .chart-container {
             margin: 2em auto;
@@ -431,6 +394,12 @@
                 right: -40px;
                 font-size: 0.8em;
              }
+             .attraction-box {
+                padding: 10px;
+             }
+             .attraction-list li {
+                font-size: 0.85em;
+             }
         }
         @media (max-width: 600px) {
             /* 600px以下の追加調整 */
@@ -461,10 +430,11 @@
                 <tr><th>種別</th><td>地下鉄・通勤路線</td></tr>
                 <tr><th>路線距離</th><td>65.8 km (東端: SML01 - 西端: SML30)</td></tr>
                 <tr><th>駅数</th><td>30駅</td></tr>
+                <tr><th>地理的設定</th><td>徳島県 鳴門町高島（北部）- 島田島（南部）間</td></tr>
                 <tr><th>軌間</th><td>1,067 mm (狭軌)</td></tr>
                 <tr><th>電化方式</th><td>直流 1,500 V</td></tr>
                 <tr><th>最高速度</th><td>120 km/h (LT区間)</td></tr>
-                <tr><th>運行頻度</th><td>ピーク時 最大25本/時 (島咲都心タワー)</td></tr>
+                <tr><th>運行頻度</th><td>ピーク時 最大25本/時 (咲仲都心タワー)</td></tr>
                 <tr><th>開業</th><td>1985年3月14日 (都心タワー - 仲富車庫前)</td></tr>
                 <tr><th colspan="2" style="text-align:center;">運行系統</th></tr>
                 <tr><th>東部エリア</th><td><span style="color: var(--sml-green);">緑ライン (郊外・住宅地)</span></td></tr>
@@ -472,47 +442,60 @@
             </table>
 
             <p>
-                サンマル線（サンマルせん、SML: SanMaru Line）は、咲仲都市高速鉄道として<a href="/main.html?query=首都圏交通公社">首都圏交通公社 (SCT)</a>が運営する主要な通勤・観光鉄道路線の一つである。都心ビジネスエリアの島咲都心タワー駅（SML20）を境に、東部の広大なベッドタウンと、西部の山間リゾートエリアを結ぶ二面性を持つ大動脈として機能している。正式な路線番号は M03 であり、ラインカラーは情熱的な<span style="color: var(--sml-color); font-weight: bold;">赤</span>が採用されている。路線距離は65.8kmに及び、そのうち都心部は地下区間、東西の両端は高架および地上区間となっている。
+                サンマル線（サンマルせん、SML: SanMaru Line）は、咲仲都市高速鉄道として<a href="/main.html?query=首都圏交通公社">首都圏交通公社 (SCT)</a>が運営する主要な通勤・観光鉄道路線の一つである。本路線は、地理的に徳島県 鳴門町高島（北部）と島田島（南部）の間に位置する巨大都市圏を貫いている。都心ビジネスエリアの咲仲都心タワー駅（SML20）を境に、東部の広大なベッドタウンと、西部の山間リゾートエリアを結ぶ二面性を持つ大動脈として機能している。正式な路線番号は M03 であり、ラインカラーは情熱的な<span style="color: var(--sml-color); font-weight: bold;">赤</span>が採用されている。
             </p>
             <p>
-                本路線は、東部の膨大な通勤需要と西部の季節変動の激しい観光需要という、相反する要求を満たすために、複雑で多岐にわたる運行種別とダイヤパターンを採用している点が特徴であり、その戦略的なダイヤ構成は鉄道マニアの間で高く評価されている。
+                本路線は、東部の膨大な通勤需要と西部の季節変動の激しい観光需要という、相反する要求を満たすために、複雑で多岐にわたる運行種別とダイヤパターンを採用している点が特徴であり、その戦略的なダイヤ構成は鉄道マニアの間で高く評価されている一方で、「東西連鎖遅延」の脆弱性を抱えるという批評も多い。
             </p>
 
-            <h2 id="路線図">1 路線図</h2>
+            <h2 id="観光と魅力">1 沿線の観光と魅力</h2>
+
+            <div class="attraction-box">
+                <h2>サンマル線で巡る！咲仲都市圏の東西魅力ハイライト</h2>
+                <ul class="attraction-list">
+                    <li>西部エリア：究極のリトリート SML30 華湖畔は、徳島特有の雄大な湖畔に広がる高級リゾート地の玄関口。LT（リゾート特急）の車窓からは、別荘地（SML22 木島台）を抜ける自然のパノラマと、SML29 郷ノ山温泉への幻想的な山並みが楽しめる。</li>
+                    <li>東部エリア：サブカル・グルメの聖地 SML08 春原は、都心タワーに匹敵する賑わいのサブカルチャーの聖地。「咲仲アニメ・アイドル文化」の発信地であり、古書店街（SML10 鯉沢）と合わせて文化的な深度が楽しめる。</li>
+                    <li>食の回廊：産業と直売 SML13 西海工業団地は経済の要である一方、SML05 石船には新鮮な地方直売所があり、SML23 咲仲国営農園では「咲仲苺狩り」が観光資源となっている。多岐にわたる「食」の魅力をL（各停）で細かく巡ることが可能。</li>
+                    <li>自然と歴史のコントラスト SML16 桜彩公園前の広大な桜の名所、SML14 鶴見口の鶴の飛来地など、東部にも癒やしスポットが存在。西部ではSML25 大河原の雄大な鉄橋からの絶景や、SML27 笹原の妖怪「がしゃまる」伝承など、東西で全く異なる自然・歴史・文化のコントラストがこの路線の醍醐味。</li>
+                </ul>
+            </div>
+            
+            <h2 id="路線図">2 路線図</h2>
             <p>
-                
+                （徳島県の島田島と鳴門町高島の間を通る、東西に延びる路線図を想定）
             </p>
 
             <div id="toc">
                 <h2>目次</h2>
                 <ul>
-                    <li><a href="#路線図">1 路線図</a></li>
-                    <li><a href="#運行形態と種別">2 運行形態と種別</a></li>
-                    <li><a href="#運行ダイヤの課題">3 運行ダイヤの課題</a></li>
-                    <li><a href="#停車駅と地域特性">4 停車駅と地域特性</a>
+                    <li><a href="#観光と魅力">1 沿線の観光と魅力</a></li>
+                    <li><a href="#路線図">2 路線図</a></li>
+                    <li><a href="#運行形態と種別">3 運行形態と種別</a></li>
+                    <li><a href="#運行ダイヤの課題">4 運行ダイヤの課題</a></li>
+                    <li><a href="#停車駅と地域特性">5 停車駅と地域特性</a>
                         <ul>
-                            <li><a href="#東部エリア">4.1 東部エリア：郊外・住宅地 (SML 01 - 19)</a></li>
-                            <li><a href="#都心ターミナル">4.2 都心ターミナル (SML 20)</a></li>
-                            <li><a href="#リゾートエリア">4.3 郊外リゾートエリア：山間・湖畔・温泉地 (SML 21 - 30)</a></li>
+                            <li><a href="#東部エリア">5.1 東部エリア：郊外・住宅地 (SML 01 - 19)</a></li>
+                            <li><a href="#都心ターミナル">5.2 都心ターミナル (SML 20)</a></li>
+                            <li><a href="#リゾートエリア">5.3 郊外リゾートエリア：山間・湖畔・温泉地 (SML 21 - 30)</a></li>
                         </ul>
                     </li>
-                    <li><a href="#路線規格">5 路線規格と施設</a></li>
-                    <li><a href="#車両">6 車両</a></li>
-                    <li><a href="#乗降客数データ">7 乗降客数データ</a></li>
-                    <li><a href="#運行本数の比較">8 運行本数の比較</a></li>
-                    <li><a href="#歴史と路線形成の背景">9 歴史と路線形成の背景</a></li>
-                    <li><a href="#運行上の挑戦と対策">10 運行上の挑戦と対策</a></li>
-                    <li><a href="#将来構想">11 将来構想</a></li>
-                    <li><a href="#外部リンク">12 外部リンク</a></li>
-                    <li><a href="#出典">13 出典</a></li>
+                    <li><a href="#路線規格">6 路線規格と施設</a></li>
+                    <li><a href="#車両">7 車両</a></li>
+                    <li><a href="#乗降客数データ">8 乗降客数データ</a></li>
+                    <li><a href="#運行本数の比較">9 運行本数の比較</a></li>
+                    <li><a href="#歴史と路線形成の背景">10 歴史と路線形成の背景</a></li>
+                    <li><a href="#運行上の挑戦と対策">11 運行上の挑戦と対策</a></li>
+                    <li><a href="#将来構想">12 将来構想</a></li>
+                    <li><a href="#外部リンク">13 外部リンク</a></li>
+                    <li><a href="#出典">14 出典</a></li>
                 </ul>
             </div>
-
-            <h2 id="運行形態と種別">2 運行形態と種別</h2>
+            
+            <h2 id="運行形態と種別">3 運行形態と種別</h2>
             <p>
-                当路線は4種類の運行種別を持つ。都心タワー（SML20）を境に、東部区間は主に通勤・通学、西部区間は観光・レジャーに特化しており、列車系統の多くはSML20で分断または接続される。
+                当路線は4種類の運行種別を持つ。咲仲都心タワー（SML20）を境に、東部区間は主に通勤・通学、西部区間は観光・レジャーに特化しており、列車系統の多くはSML20で分断または接続される。
             </p>
-            <table class="data-table">
+<table class="data-table">
                 <caption>運行種別と役割</caption>
                 <thead>
                     <tr>
@@ -526,31 +509,31 @@
                 <tbody>
                     <tr><td>各停</td><td>L</td><td>全駅に停車。地域住民の日常利用と各エリアの需要を維持。</td><td>全駅停車</td><td>全区間</td></tr>
                     <tr><td>区間快速</td><td>SR</td><td>東西を跨ぐ中距離列車。通勤需要と一般観光需要のバランスを取る。</td><td>主要接続駅・高需要駅に停車。</td><td>晋ヶ丘 (SML01) - 華湖畔 (SML30)</td></tr>
-                    <tr><td>通勤快速</td><td>CR</td><td>東部エリアの通勤時間帯の速達性を極限まで高めるための優等列車。</td><td>東部郊外の基幹駅のみ停車。</td><td>晋ヶ丘 (SML01) - 島咲都心タワー (SML20)</td></tr>
-                    <tr><td>リゾート特急</td><td>LT</td><td>都心と西部リゾートエリアを直結する観光特急。快適な移動を提供。</td><td>東部では春原、桜彩公園前など観光拠点に臨時停車。</td><td>島咲都心タワー (SML20) - 華湖畔 (SML30)</td></tr>
+                    <tr><td>通勤快速</td><td>CR</td><td>東部エリアの通勤時間帯の速達性を極限まで高めるための優等列車。</td><td>東部郊外の基幹駅のみ停車。</td><td>晋ヶ丘 (SML01) - 咲仲都心タワー (SML20)</td></tr>
+                    <tr><td>リゾート特急</td><td>LT</td><td>都心と西部リゾートエリアを直結する観光特急。快適な移動を提供。</td><td>東部では春原、桜彩公園前など観光拠点に臨時停車。</td><td>咲仲都心タワー (SML20) - 華湖畔 (SML30)</td></tr>
                 </tbody>
             </table>
-            <h3 id="区間快速">2.1 区間快速（SR）の戦略的運用</h3>
+            <h3 id="区間快速">3.1 区間快速（SR）の戦略的運用</h3>
             <p>
                 SRは、東部エリアの通勤利用と西部リゾートエリアへの観光客輸送という二つの顔を持つ、最も重要な「つなぎ役」である。特に、CRが運行されない日中時間帯においては、SRが東部の速達輸送の役割を一部担うこととなり、その停車駅選定（例えば相古 SML11）は、地域経済の活性化に直結している。
             </p>
 
-            <h2 id="運行ダイヤの課題">3 運行ダイヤの課題</h2>
+            <h2 id="運行ダイヤの課題">4 運行ダイヤの課題</h2>
             <p>
-                サンマル線は単線区間（西部）と複線区間（東部・都心）が混在しているため、ダイヤの安定性確保が恒常的な課題となっている。特に西部エリアのリゾート特急（LT）が遅延した場合、その影響は都心タワー駅（SML20）を経由して東部区間の通勤快速（CR）の定時運行にも波及する「東西連鎖遅延」が懸念されている。
+                サンマル線は単線区間（西部）と複線区間（東部・都心）が混在しているため、ダイヤの安定性確保が恒常的な課題となっている。特に西部エリアのリゾート特急（LT）が遅延した場合、その影響は咲仲都心タワー駅（SML20）を経由して東部区間の通勤快速（CR）の定時運行にも波及する「東西連鎖遅延」が懸念されている。
             </p>
             <ul>
-                <li>**都心タワー駅での折返し処理**: SML20駅では、東西方面で多数の乗務員交代や列車併結・分離が行われるため、作業の円滑化がダイヤ安定の鍵となる。</li>
-                <li>**観光需要の季節変動**: 夏期や年末年始などのハイシーズンには、臨時列車が多数設定され、柔軟な対応が求められる。</li>
-                <li>**待避設備不足**: 西部エリアでは、優等列車が各停を追い抜くための待避線が限定的であり、ダイヤ乱れ発生時の回復力の強化が求められている。</li>
+                <li>都心タワー駅での折返し処理: SML20駅では、東西方面で多数の乗務員交代や列車併結・分離が行われるため、作業の円滑化がダイヤ安定の鍵となる。</li>
+                <li>観光需要の季節変動: 夏期や年末年始などのハイシーズンには、臨時列車が多数設定され、柔軟な対応が求められる。</li>
+                <li>待避設備不足: 西部エリアでは、優等列車が各停を追い抜くための待避線が限定的であり、ダイヤ乱れ発生時の回復力の強化が求められている。</li>
             </ul>
 
-            <h2 id="停車駅と地域特性">4 停車駅と地域特性</h2>
+            <h2 id="停車駅と地域特性">5 停車駅と地域特性</h2>
             <p>
                 ※凡例: L（各停）、SR（区間快速）、CR（通勤快速）、LT（リゾート特急）
             </p>
 
-            <h3 id="東部エリア">4.1 東部エリア：郊外・住宅地 (SML 01 - 19)</h3>
+            <h3 id="東部エリア">5.1 東部エリア：郊外・住宅地 (SML 01 - 19)</h3>
             <p>
                 都心への通勤・通学を主眼としたエリア。速達性を確保するためのCRの停車駅絞り込みと、地域住民の生活圏（SML02）や文教地区（SML06）へのLの細やかなサービスが運行の基本戦略である。
             </p>
@@ -589,7 +572,7 @@
                     <tr class="key-stop"><td>19</td><td>高ノ台</td><td>●</td><td>●</td><td>●</td><td>｜</td><td>地盤が固く眺望に優れた高台の住宅地。高い速達性要求に応えるため、CRを停車。SRも広域利便性確保のため停車。</td></tr>
                 </tbody>
             </table>
-            <h3 id="都心ターミナル">4.2 都心ターミナル (SML 20)</h3>
+<h3 id="都心ターミナル">5.2 都心ターミナル (SML 20)</h3>
             <table class="route-table">
                 <caption>II. 都心ターミナル 停車駅一覧</caption>
                 <thead>
@@ -604,11 +587,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="key-stop" style="background-color: #fce0e0;"><td>20</td><td>島咲都心タワー</td><td>●</td><td>●</td><td>●</td><td>●</td><td>【都心ビジネス・商業の中心】超高層オフィスビル、大型商業施設が林立。東西の運行系統を分断・接続する重要な結節点。全列車が停車・接続し、乗務員交代も頻繁に行われる。</td></tr>
+                    <tr class="key-stop" style="background-color: #fce0e0;"><td>20</td><td>咲仲都心タワー</td><td>●</td><td>●</td><td>●</td><td>●</td><td>【都心ビジネス・商業の中心】超高層オフィスビル、大型商業施設が林立。東西の運行系統を分断・接続する重要な結節点。全列車が停車・接続し、乗務員交代も頻繁に行われる。</td></tr>
                 </tbody>
             </table>
 
-            <h3 id="リゾートエリア">4.3 郊外リゾートエリア：山間・湖畔・温泉地 (SML 21 - 30)</h3>
+            <h3 id="リゾートエリア">5.3 郊外リゾートエリア：山間・湖畔・温泉地 (SML 21 - 30)</h3>
             <p>
                 西部エリアは、リゾート特急（LT）を中心とした観光輸送が主軸となる。美しい自然景観と高級リゾート地へのアクセスを重視し、観光客の利便性を最大限に高める戦略的な停車パターンが組まれている。
             </p>
@@ -628,29 +611,29 @@
                 <tbody>
                     <tr class="l-stop"><td>21</td><td>日中峠（ひなかとうげ）</td><td>●</td><td>｜</td><td>｜</td><td>｜</td><td>都心から山間部に入る最初の集落。長大トンネルに入る直前。ローカル輸送を担うLのみ運行。</td></tr>
                     <tr class="resort-stop"><td>22</td><td>木島台</td><td>●</td><td>｜</td><td>｜</td><td>▲</td><td>新しい別荘地・高級戸建エリア。夏場の避暑客が増加。LTは季節・臨時停車を設定し、利用者の多様なニーズに応える。</td></tr>
-                    <tr class="l-stop"><td>23</td><td>島咲国営農園</td><td>●</td><td>｜</td><td>｜</td><td>｜</td><td>国営の果樹試験場や広大な農園。「島咲苺狩り」は観光資源。Lのみ停車。</td></tr>
+                    <tr class="l-stop"><td>23</td><td>咲仲国営農園</td><td>●</td><td>｜</td><td>｜</td><td>｜</td><td>国営の果樹試験場や広大な農園。「咲仲苺狩り」は観光資源。Lのみ停車。</td></tr>
                     <tr class="resort-stop"><td>24</td><td>七里（しちり）</td><td>●</td><td>●</td><td>｜</td><td>●</td><td>かつての宿場町の名残を残すエリア。滞在型観光需要に応えるLT停車。地元住民の都心アクセス改善のためSRも停車。</td></tr>
                     <tr class="l-stop"><td>25</td><td>大河原（おおかわら）</td><td>●</td><td>｜</td><td>｜</td><td>｜</td><td>雄大な川に架かる鉄橋のたもと。駅ホームからの景観が有名。Lのみ停車。</td></tr>
                     <tr class="l-stop"><td>26</td><td>南吹ノ台</td><td>●</td><td>｜</td><td>｜</td><td>｜</td><td>田畑が広がるのどかな雰囲気。名物「キング・ザリガニ」（8m人工物）。Lのみ停車。</td></tr>
                     <tr class="l-stop"><td>27</td><td>笹原</td><td>●</td><td>｜</td><td>｜</td><td>｜</td><td>当路線唯一の無人駅。妖怪「がしゃまる」の伝承。地元住民の意向を尊重し、優等列車は通過。</td></tr>
                     <tr class="resort-stop"><td>28</td><td>浦鳴（うらなり）</td><td>●</td><td>●</td><td>｜</td><td>●</td><td>海水浴場やマリーナへの玄関口。夏場はレジャー客で大混雑。集中輸送のためLT停車。季節性ピークに対応するため、夏期にはSRを臨時停車。</td></tr>
-                    <tr class="resort-stop"><td>29</td><td>郷ノ山（ごうのやま）</td><td>●</td><td>●</td><td>｜</td><td>●</td><td>山あいの島咲温泉への玄関口。温泉観光客が中心。LT停車で温泉客を効率的に輸送。地元・観光客利便性向上のためSR停車。</td></tr>
+                    <tr class="resort-stop"><td>29</td><td>郷ノ山（ごうのやま）</td><td>●</td><td>●</td><td>｜</td><td>●</td><td>山あいの咲仲温泉への玄関口。温泉観光客が中心。LT停車で温泉客を効率的に輸送。地元・観光客利便性向上のためSR停車。</td></tr>
                     <tr class="key-stop resort-stop"><td>30</td><td>華湖畔（はなこはん）</td><td>●</td><td>●</td><td>｜</td><td>●</td><td>【終着駅・巨大リゾート拠点】巨大な湖畔リゾートの拠点。遊覧船乗り場や華湖ホテルに直結。LT終着点。SRは西部エリアの基幹快速として終点まで運行。</td></tr>
                 </tbody>
             </table>
 
-            <h2 id="路線規格">5 路線規格と施設</h2>
+            <h2 id="路線規格">6 路線規格と施設</h2>
             <p>
                 サンマル線は、都市高速鉄道の名称通り、都市部の高頻度運転と郊外部の高速運転を両立させるために、独自の規格で建設されている。
             </p>
             <ul>
-                <li>**軌間と電源**: 軌間は在来線標準の1,067 mmを採用し、都心部との相互乗り入れの可能性を確保。電源は直流 1,500 Vで、高加減速の通勤電車と高速特急車両の両方に対応できる。</li>
-                <li>**線路構造**: SML01からSML20（島咲都心タワー）までは複線区間であり、全区間で最高速度110km/hが許容されている。SML20からSML30（華湖畔）の西部区間は、山岳地帯のため単線区間が主体であり、最高速度120km/hが設定されているものの、運行上のボトルネック解消が課題となっている。</li>
-                <li>**信号システム**: 東部複線区間では最新のATO（自動列車運転装置）が導入されており、ピーク時25本/時の高頻度運行を支えている。</li>
+                <li>軌間と電源: 軌間は在来線標準の1,067 mmを採用し、都心部との相互乗り入れの可能性を確保。電源は直流 1,500 Vで、高加減速の通勤電車と高速特急車両の両方に対応できる。</li>
+                <li>線路構造: SML01からSML20（咲仲都心タワー）までは複線区間であり、全区間で最高速度110km/hが許容されている。SML20からSML30（華湖畔）の西部区間は、山岳地帯のため単線区間が主体であり、最高速度120km/hが設定されているものの、運行上のボトルネック解消が課題となっている。</li>
+                <li>信号システム: 東部複線区間では最新のATO（自動列車運転装置）が導入されており、ピーク時25本/時の高頻度運行を支えている。</li>
             </ul>
 
 
-            <h2 id="車両">6 車両</h2>
+            <h2 id="車両">7 車両</h2>
             <p>
                 現在、サンマル線で運用されている車両は主に以下の2系統である。
             </p>
@@ -659,7 +642,7 @@
                 <li>800系（特急型）：リゾート特急（LT）専用車両。リクライニングシート、大型窓、展望席を備え、観光客に快適な移動空間を提供する。</li>
             </ul>
 
-            <h2 id="乗降客数データ">7 乗降客数データ</h2>
+            <h2 id="乗降客数データ">8 乗降客数データ</h2>
             <p>
                 2024年度の主要駅における1日平均乗降客数（概算）を以下の棒グラフで示します。都心ターミナル駅の利用者数が突出していることが分かります。
             </p>
@@ -683,7 +666,7 @@
                     <div class="bar-item">
                         <div class="bar-value">30万</div>
                         <div class="bar" style="height: 100%;"></div>
-                        <div class="bar-label">SML20<br>(島咲都心タワー)</div>
+                        <div class="bar-label">SML20<br>(咲仲都心タワー)</div>
                     </div>
                     <div class="bar-item">
                         <div class="bar-value">15万</div>
@@ -704,9 +687,9 @@
                 <p style="text-align: center; font-size: 0.8em; margin-top: 5px;">1日平均乗降客数（概算）</p>
             </div>
 
-            <h2 id="運行本数の比較">8 運行本数の比較</h2>
+            <h2 id="運行本数の比較">9 運行本数の比較</h2>
             <p>
-                平日朝ラッシュ時（7:30-8:30）における、島咲都心タワー駅を通過する方面別・種別ごとの運行本数を示します。
+                平日朝ラッシュ時（7:30-8:30）における、咲仲都心タワー駅を通過する方面別・種別ごとの運行本数を示します。
             </p>
             <div class="chart-container">
                 <div class="stacked-bar-chart" aria-label="平日朝ラッシュ時 運行本数比較">
@@ -735,52 +718,55 @@
                 </div>
                 <p style="text-align: center; font-size: 0.8em; margin-top: 15px;">平日朝ラッシュ時（7:30-8:30）1時間あたりの運行本数</p>
             </div>
-            <h2 id="歴史と路線形成の背景">9 歴史と路線形成の背景</h2>
+
+            <h2 id="歴史と路線形成の背景">10 歴史と路線形成の背景</h2>
             <p>
                 サンマル線の計画は、高度成長期における「東部の労働力を都心へ供給し、都心の富を西部のリゾート開発に循環させる」という二極化政策を背景に推進された。この路線は、東部の住宅地開発と西部の観光資源開発を同時に実現するための重要なインフラとして位置づけられた。
             </p>
-            <h3 id="都心タワーと優遇措置">9.1 島咲都心タワーと運行の戦略性</h3>
-            <p>
-                都心タワー駅（SML20）は、巨大都市開発プロジェクトの核として建設され、その利便性を高めるため全列車停車が実現した経緯がある。特急列車の停車パターンは、観光客の利便性向上を重視する一方で、東部区間では郊外主要駅に停車するCRを導入することで、通勤需要と観光需要という路線の二面性を両立させる戦略的な運行が展開されている。
+            <h3 id="都心タワーと優遇措置">10.1 咲仲都心タワーと運行の戦略性</h3>
+<p>
+                咲仲都心タワー駅（SML20）は、巨大都市開発プロジェクトの核として建設され、その利便性を高めるため全列車停車が実現した経緯がある。特急列車の停車パターンは、観光客の利便性向上を重視する一方で、東部区間では郊外主要駅に停車するCRを導入することで、通勤需要と観光需要という路線の二面性を両立させる戦略的な運行が展開されている。
             </p>
-            <h3 id="東西エリアの輸送特性">9.2 東西エリアの輸送特性</h3>
+            <h3 id="東西エリアの輸送特性">10.2 東西エリアの輸送特性</h3>
             <p>
                 東部エリアの生活駅（SML02, SML03）は地域密着のL主体で運行される一方、西部エリアの観光拠点駅（SML24, SML29）はSR・LTが停車する。これは、東部が定時・高頻度の通勤輸送を、西部が高速・快適な観光輸送を担うという路線の明確な輸送特性に基づいた運行設定である。
             </p>
 
-            <h2 id="運行上の挑戦と対策">10 運行上の挑戦と対策</h2>
+            <h2 id="運行上の挑戦と対策">11 運行上の挑戦と対策</h2>
             <p>
                 路線が抱える主な課題と、それに対する対策や挑戦を示します。
             </p>
             <ul>
-                <li>**騒音問題への対応**: 東部区間の仲富車庫前（SML15）付近では、車両入換作業による騒音対策として、深夜作業時間帯の制限や、低騒音型入換車両の導入を進めている。</li>
-                <li>**環境負荷の軽減**: 西海工業団地（SML13）周辺の大気汚染については、SCT側は駅舎の空気清浄化システム導入を検討し、快適な利用環境の確保に努めている。</li>
-                <li>**季節性混雑の解消**: 浦鳴（SML28）や華湖畔（SML30）の観光トップシーズンには、臨時列車増発に加え、需要予測に基づく柔軟な車両運用を行い、輸送力の限界に挑戦している。</li>
+                <li>騒音問題への対応: 東部区間の仲富車庫前（SML15）付近では、車両入換作業による騒音対策として、深夜作業時間帯の制限や、低騒音型入換車両の導入を進めている。</li>
+                <li>環境負荷の軽減: 西海工業団地（SML13）周辺の大気汚染については、SCT側は駅舎の空気清浄化システム導入を検討し、快適な利用環境の確保に努めることで、地域住民からの批判を和らげたい。</li>
+                <li>季節性混雑の解消: 浦鳴（SML28）や華湖畔（SML30）の観光トップシーズンには、臨時列車増発に加え、需要予測に基づく柔軟な車両運用を行い、輸送力の限界に挑戦している。</li>
             </ul>
 
-            <h2 id="将来構想">11 将来構想</h2>
+            <h2 id="将来構想">12 将来構想</h2>
             <p>
                 SCTでは、路線の抱える諸問題を解決し、将来的な需要増に対応するため、以下の構想を検討している。
             </p>
             <ul>
-                <li>**東部区間の複々線化**: SML01（晋ヶ丘）からSML11（相古）までの区間を通勤線と優等線に分離する複々線化計画があり、これによりCRのさらなる高速化とLの定時性向上が期待される。</li>
-                <li>**西部区間の部分複線化**: SML24（七里）- SML29（郷ノ山）間に待避線機能を持つ部分複線区間を設けることで、LTとLの追い抜きを円滑にし、東西連鎖遅延のリスクを軽減する。</li>
-                <li>**東田駅（SML07）のSR停車**: 高層マンション開発に伴う新住民の増加に対応するため、東田駅をSR停車駅に格上げすることが有力視されている。</li>
+                <li>東部区間の複々線化: SML01（晋ヶ丘）からSML11（相古）までの区間を通勤線と優等線に分離する複々線化計画があり、これによりCRのさらなる高速化とLの定時性向上が期待される。（これこそ東西連鎖遅延の根本対策となるべきである）</li>
+                <li>西部区間の部分複線化: SML24（七里）- SML29（郷ノ山）間に待避線機能を持つ部分複線区間を設けることで、LTとLの追い抜きを円滑にし、東西連鎖遅延のリスクを軽減する。</li>
+                <li>東田駅（SML07）のSR停車: 高層マンション開発に伴う新住民の増加に対応するため、東田駅をSR停車駅に格上げすることが有力視されている。</li>
             </ul>
 
-            <h2 id="外部リンク">12 外部リンク</h2>
+            <h2 id="外部リンク">13 外部リンク</h2>
             <ul>
                 <li><a href="/7/index.html" target="_blank">Wikipedia: 首都圏交通公社 (SCT)</a></li>
                 <li><a href="/6/txt" target="_blank">サンマル線 公式運行情報</a></li>
             </ul>
 
-            <h2 id="出典">13 出典</h2>
+            <h2 id="出典">14 出典</h2>
             <p style="font-size: 0.8em;">
-                [1] サンマル線公式サイト, 『サンマル線と咲仲島』, 1995年.<br>
+                [1] 咲仲線公式サイト, 『サンマル線と咲仲島』, 1995年.<br>
                 [2] 咲仲日報, 『咲仲日報 サンマル線編』, 2023年.
             </p>
         </div>
     </div>
+        <button onclick="topFunction()" id="backToTop" title="トップに戻る">↑</button> 
+
         <script>
         // 上に戻るボタンの表示・非表示を制御するJS
         let mybutton = document.getElementById("backToTop");
@@ -804,79 +790,80 @@
                 behavior: 'smooth'
             });
         }
-    </script> 
+        </script> 
 
-    <style>
-    /* クッキー通知用のスタイル - 汎用性のためHTML内に記述 */
-    #genericCookieNotice {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        background-color: rgba(34, 34, 34, 0.95); /* 濃いグレー */
-        color: #fff;
-        padding: 15px 20px;
-        text-align: center;
-        font-size: 0.9em;
-        z-index: 9999;
-        box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
-        display: none; /* 初期状態ではJavaScriptで表示を制御 */
-    }
-    #genericCookieNotice a {
-        color: #add8e6;
-        text-decoration: underline;
-        margin: 0 5px;
-    }
-    #genericCookieNotice button {
-        background-color: #0645ad;
-        color: #fff;
-        border: none;
-        padding: 8px 20px;
-        cursor: pointer;
-        margin-left: 20px;
-        border-radius: 4px;
-        font-weight: bold;
-        transition: background-color 0.3s;
-    }
-    #genericCookieNotice button:hover {
-        background-color: #043685;
-    }
-    </style>
-
-    <div id="genericCookieNotice">
-        このサイトでは、サイトの利用状況を分析し、より良いサービスを提供するためにCookieを使用しています。
-        <a href="/ak/index.html" target="_blank">詳細はこちら</a>
-        <button onclick="acceptConsent()">同意する</button> 
-    </div>
-
-    <script>
-    // JavaScriptロジック: ローカルストレージの読み書きとバナーの表示/非表示を制御
-    const CONSENT_KEY = 'consent-local-storage'; // ローカルストレージのキー
-
-    function showConsentNotice() {
-        const notice = document.getElementById('genericCookieNotice');
-        if (notice) {
-            notice.style.display = 'block';
+        <style>
+        /* クッキー通知用のスタイル - 汎用性のためHTML内に記述 */
+        #genericCookieNotice {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(34, 34, 34, 0.95); /* 濃いグレー */
+            color: #fff;
+            padding: 15px 20px;
+            text-align: center;
+            font-size: 0.9em;
+            z-index: 9999;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+            display: none; /* 初期状態ではJavaScriptで表示を制御 */
         }
-    }
-
-    // 修正: Cookieではなくローカルストレージに同意状態を保存
-    function acceptConsent() {
-        // ローカルストレージに同意状態を保存 (期限なし)
-        localStorage.setItem(CONSENT_KEY, 'accepted'); 
-
-        const notice = document.getElementById('genericCookieNotice');
-        if (notice) {
-            notice.style.display = 'none';
+        #genericCookieNotice a {
+            color: #add8e6;
+            text-decoration: underline;
+            margin: 0 5px;
         }
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
-        // 修正: ローカルストレージから同意記録をチェック
-        if (localStorage.getItem(CONSENT_KEY) !== 'accepted') {
-            showConsentNotice();
+        #genericCookieNotice button {
+            background-color: #0645ad;
+            color: #fff;
+            border: none;
+            padding: 8px 20px;
+            cursor: pointer;
+            margin-left: 20px;
+            border-radius: 4px;
+            font-weight: bold;
+            transition: background-color 0.3s;
         }
-    });
-    </script>
-</body>
+        #genericCookieNotice button:hover {
+            background-color: #043685;
+        }
+        </style>
+
+        <div id="genericCookieNotice">
+            このサイトでは、サイトの利用状況を分析し、より良いサービスを提供するためにCookieを使用しています。
+            <a href="/ak/index.html" target="_blank">詳細はこちら</a>
+            <button onclick="acceptConsent()">同意する</button> 
+        </div>
+
+        <script>
+        // JavaScriptロジック: ローカルストレージの読み書きとバナーの表示/非表示を制御
+        const CONSENT_KEY = 'consent-local-storage'; // ローカルストレージのキー
+
+        function showConsentNotice() {
+            const notice = document.getElementById('genericCookieNotice');
+            if (notice) {
+                // レスポンシブ対応のため、display: flexで表示
+                notice.style.display = 'flex'; 
+            }
+        }
+
+        // Cookieではなくローカルストレージに同意状態を保存
+        function acceptConsent() {
+            // ローカルストレージに同意状態を保存 (期限なし)
+            localStorage.setItem(CONSENT_KEY, 'accepted'); 
+
+            const notice = document.getElementById('genericCookieNotice');
+            if (notice) {
+                notice.style.display = 'none';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // ローカルストレージから同意記録をチェック
+            if (localStorage.getItem(CONSENT_KEY) !== 'accepted') {
+                showConsentNotice();
+            }
+        });
+        </script>
+    </body>
 </html>
