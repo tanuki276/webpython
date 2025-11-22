@@ -133,7 +133,7 @@
             background-color: var(--wiki-link);
         }
 
-        /* クッキー通知用のスタイル */
+        /* クッキー通知用のスタイル - 初期表示を'block'にするためにdisplay: none;を削除 */
         #genericCookieNotice {
             position: fixed;
             bottom: 0;
@@ -146,7 +146,7 @@
             font-size: 0.9em;
             z-index: 9999;
             box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
-            display: none; 
+            /* display: none; を削除 */
         }
         #genericCookieNotice a {
             color: #add8e6;
@@ -172,8 +172,7 @@
 <body>
     <div class="container">
         <div class="main-content">
-             <p
-　　　style="text-align:right; 　　　　　　　font-size:0.7em;"><sup>[†]</sup>fuck 　　israel <sup>[‡]</sup>slava ukraine <sup>[§]</sup>taiwan independence</p>
+            <p style="text-align:right; font-size:0.7em;"><sup>[†]</sup>fuck isræl <sup>[‡]</sup>slava ukraine <sup>[§]</sup>taiwan independence</p>
 
             <h1>𣑥 (猫)</h1>
 
@@ -253,7 +252,7 @@
             });
         }
 
-        // --- 2. LocalStorageロジックのJS (修正済み) ---
+        // --- 2. LocalStorageロジックのJS (修正なし) ---
 
         function getLocalStorage(name) {
             // LocalStorageから値を取得
@@ -262,14 +261,15 @@
 
         function setLocalStorage(name, value) {
             // LocalStorageに値を設定
-            // LocalStorageは有効期限の設定が不要で永続的に保存されます。
             localStorage.setItem(name, value);
         }
 
         function showCookieNotice() {
             const notice = document.getElementById('genericCookieNotice');
             if (notice) {
-                notice.style.display = 'block';
+                // スタイルシートで display: block がデフォルトになったため、この関数は
+                // 必要に応じて display: block を設定する用途に使えるが、今回はDOMContentLoadedで制御する
+                notice.style.display = 'block'; 
             }
         }
 
@@ -286,9 +286,14 @@
 
         // ページ読み込み時に実行
         document.addEventListener('DOMContentLoaded', () => {
+            const notice = document.getElementById('genericCookieNotice');
             // LocalStorageから保存状態を確認
             if (getLocalStorage('cookie-consent') !== 'accepted') {
-                showCookieNotice();
+                // 同意していない場合、バナーを表示（CSSで初期表示されているが念のため）
+                notice.style.display = 'block';
+            } else {
+                // 同意済みの場合は、バナーを非表示
+                notice.style.display = 'none';
             }
         });
     </script>
