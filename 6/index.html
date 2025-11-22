@@ -115,7 +115,7 @@
             border-bottom: none;
         }
 
-        /* 路線表のスタイル */
+        /* 路線表のスタイル (詳細表含む) */
         .route-table { 
             width: 100%;
             margin: 1em auto;
@@ -126,6 +126,7 @@
         .route-table th {
             background-color: var(--wiki-header-bg);
             color: #000;
+            padding: 6px 4px;
         }
         .route-table th, .route-table td {
             border: 1px solid var(--wiki-border);
@@ -135,40 +136,19 @@
             text-align: center;
             font-weight: bold;
         }
+        .route-table td:nth-child(7) { /* 地域の特徴カラム */
+            font-size: 0.8em;
+            text-align: left;
+        }
         .key-stop {
             background-color: #ffe0e0; /* 主要駅強調色 */
             font-weight: bold;
         }
-
-        /* 停車駅比較表のスタイル */
-        .route-comparison-table {
-            width: 90%;
-            margin: 1.5em auto;
-            border: 2px solid var(--sml-color);
-            border-collapse: collapse;
-            font-size: 0.85em;
+        .l-stop {
+            background-color: #f0fff0; /* ローカル駅強調色 */
         }
-        .route-comparison-table caption {
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-        .route-comparison-table th {
-            background-color: #fcecec;
-            padding: 6px 8px;
-            border: 1px solid var(--wiki-border);
-        }
-        .route-comparison-table td {
-            text-align: center;
-            padding: 4px 8px;
-            border: 1px solid var(--wiki-border);
-        }
-        .route-comparison-table td:first-child {
-            text-align: left;
-            font-weight: normal;
-        }
-        /* 都心タワーの行を特に強調 */
-        .route-comparison-table tr:nth-child(8) {
-            background-color: #e0f0ff !important;
+        .resort-stop {
+            background-color: #e0f8ff; /* リゾート特急停車駅強調色 */
         }
 
         /* データテーブルの追加スタイル */
@@ -191,7 +171,7 @@
         }
 
         /* ------------------------------------------- */
-        /* UI/UX要素: トップに戻るボタン (参照元のスタイルを適用) */
+        /* UI/UX要素: トップに戻るボタン */
         /* ------------------------------------------- */
         #backToTop {
             display: none; 
@@ -216,21 +196,21 @@
         }
 
         /* ------------------------------------------- */
-        /* UI/UX要素: クッキー通知 (参照元のスタイルを適用) */
+        /* UI/UX要素: クッキー通知 */
         /* ------------------------------------------- */
         #genericCookieNotice {
             position: fixed;
             bottom: 0;
             left: 0;
             width: 100%;
-            background-color: rgba(34, 34, 34, 0.95); /* 濃いグレー */
+            background-color: rgba(34, 34, 34, 0.95); 
             color: #fff;
             padding: 15px 20px;
             text-align: center;
             font-size: 0.9em;
             z-index: 9999;
             box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
-            display: none; /* 初期状態ではJavaScriptで表示を制御 */
+            display: none; 
         }
         #genericCookieNotice a {
             color: #add8e6;
@@ -251,7 +231,7 @@
         #genericCookieNotice button:hover {
             background-color: #043685;
         }
-
+        
         /* ============== グラフ表示（CSSのみで実現）のスタイル ============== */
         .chart-container {
             margin: 2em auto;
@@ -390,7 +370,7 @@
         @media (max-width: 768px) {
              .container {
                 padding: 10px;
-                display: block; /* 縦並びにする */
+                display: block; 
              }
              .main-content {
                 padding: 10px 15px;
@@ -403,8 +383,8 @@
              #genericCookieNotice {
                 padding: 10px 15px;
                 font-size: 0.75em;
-                display: flex; /* 要素をflexで制御 */
-                flex-wrap: wrap; /* スマホで折り返す */
+                display: flex; 
+                flex-wrap: wrap; 
                 justify-content: center;
                 align-items: center;
              }
@@ -416,7 +396,10 @@
              #toc {
                 width: 95%;
             }
-             /* グラフのレスポンシブ調整 */
+            .route-table td:nth-child(7) {
+                display: none; /* スマホでは地域特徴を非表示にして表の幅を確保 */
+            }
+            /* グラフのレスポンシブ調整 */
              .bar-chart {
                 height: 150px;
                 padding: 0 5px;
@@ -472,200 +455,57 @@
             <table class="infobox" role="presentation">
                 <caption>サンマル線（SML）</caption>
                 <tr><td colspan="2" style="text-align:center;"></td></tr>
-                <tr><th>事業者</th><td><a href="#">首都圏交通公社 (SCT)</a></td></tr>
+                <tr><th>事業者</th><td><a href="/main.html?query=首都圏交通公社">首都圏交通公社 (SCT)</a></td></tr>
                 <tr><th>種別</th><td>地下鉄・通勤路線</td></tr>
-                <tr><th>路線距離</th><td>41.5 km</td></tr>
-                <tr><th>駅数</th><td>25駅</td></tr>
+                <tr><th>路線距離</th><td>65.8 km (東端: SML01 - 西端: SML30)</td></tr>
+                <tr><th>駅数</th><td>30駅</td></tr>
                 <tr><th>軌間</th><td>1,067 mm (狭軌)</td></tr>
                 <tr><th>電化方式</th><td>直流 1,500 V</td></tr>
-                <tr><th>最高速度</th><td>110 km/h</td></tr>
-                <tr><th>運行頻度</th><td>ピーク時 最大25本/時</td></tr>
-                <tr><th>開業</th><td>1985年3月14日</td></tr>
+                <tr><th>最高速度</th><td>120 km/h (LT区間)</td></tr>
+                <tr><th>運行頻度</th><td>ピーク時 最大25本/時 (島咲都心タワー)</td></tr>
+                <tr><th>開業</th><td>1985年3月14日 (都心タワー - 仲富車庫前)</td></tr>
                 <tr><th colspan="2" style="text-align:center;">運行系統</th></tr>
-                <tr><th>西部エリア</th><td><span style="color: var(--sml-blue);">青ライン</span></td></tr>
-                <tr><th>東部エリア</th><td><span style="color: var(--sml-green);">緑ライン</span></td></tr>
+                <tr><th>東部エリア</th><td><span style="color: var(--sml-green);">緑ライン (郊外・住宅地)</span></td></tr>
+                <tr><th>西部エリア</th><td><span style="color: var(--sml-blue);">青ライン (山間・リゾート地)</span></td></tr>
             </table>
 
             <p>
-                <b>サンマル線</b>（サンマルせん、SML: San-Maru Line）は、<a href="#">首都圏交通公社 (SCT)</a>が運営する主要な通勤鉄道路線の一つである。都心を南北に貫き、西部と東部の郊外を結ぶ大動脈として機能している。正式な路線番号は **M03** であり、ラインカラーは情熱的な<span style="color: var(--sml-color); font-weight: bold;">赤</span>が採用されている。
+                サンマル線（サンマルせん、SML: SanMaru Line）は、<a href="/main.html?query=首都圏交通公社">首都圏交通公社 (SCT)</a>が運営する主要な通勤・観光鉄道路線の一つである。都心ビジネスエリアの島咲都心タワー駅（SML20）を境に、東部の広大なベッドタウンと、西部の山間リゾートエリアを結ぶ二面性を持つ大動脈として機能している。正式な路線番号は M03 であり、ラインカラーは情熱的な<span style="color: var(--sml-color); font-weight: bold;">赤</span>が採用されている。
+            </p>
+
+            <h2 id="路線図">1 路線図</h2>
+            <p>
+                
             </p>
 
             <div id="toc">
                 <h2>目次</h2>
                 <ul>
-                    <li><a href="#概要と特徴">1 概要と特徴</a></li>
-                    <li><a href="#運行形態">2 運行形態と種別</a></li>
-                    <li><a href="#駅一覧">3 駅一覧</a></li>
-                    <li><a href="#乗降客数データ">4 乗降客数データ</a></li>
-                    <li><a href="#運行本数の比較">5 運行本数の比較</a></li>
+                    <li><a href="#路線図">1 路線図</a></li>
+                    <li><a href="#運行形態と種別">2 運行形態と種別</a></li>
+                    <li><a href="#停車駅と地域特性">3 停車駅と地域特性</a>
+                        <ul>
+                            <li><a href="#東部エリア">3.1 東部エリア：郊外・住宅地 (SML 01 - 19)</a></li>
+                            <li><a href="#都心ターミナル">3.2 都心ターミナル (SML 20)</a></li>
+                            <li><a href="#リゾートエリア">3.3 郊外リゾートエリア：山間・湖畔・温泉地 (SML 21 - 30)</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#車両">4 車両</a></li>
+                    <li><a href="#乗降客数データ">5 乗降客数データ</a></li>
+                    <li><a href="#運行本数の比較">6 運行本数の比較</a></li>
+                    <li><a href="#歴史的背景と政治的思惑">7 歴史的背景と政治的思惑</a></li>
+                    <li><a href="#地域問題と課題">8 地域問題と課題</a></li>
+                    <li><a href="#外部リンク">9 外部リンク</a></li>
+                    <li><a href="#出典">10 出典</a></li>
                 </ul>
             </div>
 
-            <h2 id="概要と特徴">1 概要と特徴</h2>
+            <h2 id="運行形態と種別">2 運行形態と種別</h2>
             <p>
-                サンマル線は、1985年に都心部の急激な人口集中に対応するために開業した。路線は主に地下を走行し、郊外区間のみが高架または地上線となっている。その特徴は、西部・東部それぞれの郊外路線との相互直通運転を前提とした設計であり、**都心部の混雑緩和と郊外からの速達性**の両立を目指している。
-            </p>
-
-            <h2 id="運行形態">2 運行形態と種別</h2>
-            <p>
-                運行種別は、<b>普通</b>、<b>快速</b>、そして都心部へのアクセスを重視した<b>都心特快</b>の3種類が設定されている。
-            </p>
-            
-            <h3 id="都心特快">2.1 都心特快 (Urban Express)</h3>
-            <p>
-                主要なターミナル駅のみに停車し、都心部への最速達性を実現する種別である。朝夕のラッシュ時のみに運行され、郊外から都心タワー駅（SML13）までの所要時間を大幅に短縮している。
-            </p>
-            <table class="route-comparison-table">
-                <caption>主要駅間の停車状況比較</caption>
-                <thead>
-                    <tr>
-                        <th>駅名</th>
-                        <th>普通</th>
-                        <th>快速</th>
-                        <th>都心特快</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td>西端ターミナル (SML01)</td><td>●</td><td>●</td><td>●</td></tr>
-                    <tr><td>郊外ニュータウン (SML05)</td><td>●</td><td>▲</td><td>｜</td></tr>
-                    <tr><td>湾岸コンベンション (SML08)</td><td>●</td><td>●</td><td>｜</td></tr>
-                    <tr><td>都心タワー (SML13)</td><td class="key-stop">●</td><td class="key-stop">●</td><td class="key-stop">●</td></tr>
-                    <tr><td>中央地下街 (SML15)</td><td class="key-stop">●</td><td class="key-stop">●</td><td>●</td></tr>
-                    <tr><td>東部オフィス (SML18)</td><td>●</td><td>▲</td><td>｜</td></tr>
-                    <tr><td>東端ニュータウン (SML25)</td><td>●</td><td>●</td><td>●</td></tr>
-                </tbody>
-                <tfoot>
-                    <tr><td colspan="4" style="text-align:left; font-size:0.8em;">凡例: ●:停車 ▲:一部停車 ｜:通過</td></tr>
-                </tfoot>
-            </table>
-
-            <h2 id="駅一覧">3 駅一覧</h2>
-            <p>
-                路線は、主に西部・都心・東部の3つのエリアに分けられる。
-            </p>
-            <table class="route-table">
-                <thead>
-                    <tr>
-                        <th style="width:5%">駅番号</th>
-                        <th style="width:20%">駅名</th>
-                        <th style="width:15%">普通</th>
-                        <th style="width:15%">快速</th>
-                        <th style="width:15%">都心特快</th>
-                        <th style="width:20%">接続路線</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td>SML01</td><td class="key-stop">西端ターミナル</td><td>●</td><td>●</td><td>●</td><td>西部鉄道線(直通)</td></tr>
-                    <tr><td>SML02</td><td>郊外北</td><td>●</td><td>｜</td><td>｜</td><td></td></tr>
-                    <tr><td>SML03</td><td>大学前</td><td>●</td><td>｜</td><td>｜</td><td></td></tr>
-                    <tr><td>SML04</td><td>新都心南</td><td>●</td><td>▲</td><td>｜</td><td></td></tr>
-                    <tr><td>SML05</td><td>郊外ニュータウン</td><td>●</td><td>●</td><td>｜</td><td></td></tr>
-                    <tr><td>SML06</td><td>工業団地</td><td>●</td><td>｜</td><td>｜</td><td></td></tr>
-                    <tr><td>SML07</td><td>港湾入口</td><td>●</td><td>｜</td><td>｜</td><td></td></tr>
-                    <tr><td>SML08</td><td>湾岸コンベンション</td><td>●</td><td>●</td><td>｜</td><td>地下鉄A線</td></tr>
-                    <tr><td>SML09</td><td>中央市場前</td><td>●</td><td>｜</td><td>｜</td><td></td></tr>
-                    <tr><td>SML10</td><td>オフィス街西</td><td>●</td><td>｜</td><td>｜</td><td></td></tr>
-                    <tr><td>SML11</td><td>都心西</td><td>●</td><td>●</td><td>▲</td><td>JR線</td></tr>
-                    <tr><td>SML12</td><td>都心中央</td><td>●</td><td>●</td><td>▲</td><td>地下鉄B線</td></tr>
-                    <tr style="background-color: #fce0e0;"><td>SML13</td><td class="key-stop">都心タワー</td><td>●</td><td>●</td><td>●</td><td>地下鉄C線、新幹線</td></tr>
-                    <tr><td>SML14</td><td>都心東</td><td>●</td><td>●</td><td>｜</td><td></td></tr>
-                    <tr><td>SML15</td><td class="key-stop">中央地下街</td><td>●</td><td>●</td><td>●</td><td>地下鉄D線、私鉄線</td></tr>
-                    <tr><td>SML16</td><td>レジャーランド</td><td>●</td><td>｜</td><td>｜</td><td></td></tr>
-                    <tr><td>SML17</td><td>東部工業</td><td>●</td><td>｜</td><td>｜</td><td></td></tr>
-                    <tr><td>SML18</td><td>東部オフィス</td><td>●</td><td>▲</td><td>｜</td><td></td></tr>
-                    <tr><td>SML19</td><td>郊外団地中央</td><td>●</td><td>｜</td><td>｜</td><td></td></tr>
-                    <tr><td>SML20</td><td>スポーツ公園</td><td>●</td><td>｜</td><td>｜</td><td></td></tr>
-                    <tr><td>SML21</td><td>郊外東</td><td>●</td><td>●</td><td>｜</td><td></td></tr>
-                    <tr><td>SML22</td><td>空港アクセス線接続</td><td>●</td><td>▲</td><td>｜</td><td>空港アクセス線</td></tr>
-                    <tr><td>SML23</td><td>東端中間</td><td>●</td><td>｜</td><td>｜</td><td></td></tr>
-                    <tr><td>SML24</td><td>東端工場</td><td>●</td><td>｜</td><td>｜</td><td></td></tr>
-                    <tr><td>SML25</td><td class="key-stop">東端ニュータウン</td><td>●</td><td>●</td><td>●</td><td>東部高速鉄道(直通)</td></tr>
-                </tbody>
-            </table>
-
-            <h2 id="乗降客数データ">4 乗降客数データ</h2>
-            <p>
-                2024年度の主要駅における1日平均乗降客数（概算）を以下の棒グラフで示します。都心タワー駅の利用者数が突出していることが分かります。
-            </p>
-            <div class="chart-container">
-                <div class="bar-chart" aria-label="サンマル線 主要駅 1日平均乗降客数 2024年度">
-                    <div class="bar-item">
-                        <div class="bar-value">18万</div>
-                        <div class="bar" style="height: 60%;"></div>
-                        <div class="bar-label">SML01</div>
-                    </div>
-                    <div class="bar-item">
-                        <div class="bar-value">9万</div>
-                        <div class="bar" style="height: 30%;"></div>
-                        <div class="bar-label">SML05</div>
-                    </div>
-                    <div class="bar-item">
-                        <div class="bar-value">25万</div>
-                        <div class="bar" style="height: 83.3%;"></div>
-                        <div class="bar-label">SML11</div>
-                    </div>
-                    <div class="bar-item">
-                        <div class="bar-value">30万</div>
-                        <div class="bar" style="height: 100%;"></div>
-                        <div class="bar-label">SML13<br>(都心タワー)</div>
-                    </div>
-                    <div class="bar-item">
-                        <div class="bar-value">22万</div>
-                        <div class="bar" style="height: 73.3%;"></div>
-                        <div class="bar-label">SML15</div>
-                    </div>
-                    <div class="bar-item">
-                        <div class="bar-value">11万</div>
-                        <div class="bar" style="height: 36.6%;"></div>
-                        <div class="bar-label">SML21</div>
-                    </div>
-                    <div class="bar-item">
-                        <div class="bar-value">15万</div>
-                        <div class="bar" style="height: 50%;"></div>
-                        <div class="bar-label">SML25</div>
-                    </div>
-                </div>
-                <p style="text-align: center; font-size: 0.8em; margin-top: 5px;">1日平均乗降客数（概算）</p>
-            </div>
-
-            <h2 id="運行本数の比較">5 運行本数の比較</h2>
-            <p>
-                平日朝ラッシュ時（7:30-8:30）における、都心タワー駅を通過する方面別・種別ごとの運行本数を示します。
-            </p>
-            <div class="chart-container">
-                <div class="stacked-bar-chart" aria-label="平日朝ラッシュ時 運行本数比較">
-                    <div class="bar-group">
-                        <div class="label-axis">西部方面 (SML01へ)</div>
-                        <div class="segment" style="width: 40%; background-color: var(--sml-blue);">普通 (10)</div>
-                        <div class="segment" style="width: 20%; background-color: #5aa7ff;">快速 (5)</div>
-                        <div class="segment" style="width: 12%; background-color: #004d9c;">都心特快 (3)</div>
-                        <div class="total-label">18本</div>
-                    </div>
-                    <div class="bar-group">
-                        <div class="label-axis">東部方面 (SML25へ)</div>
-                        <div class="segment" style="width: 44%; background-color: var(--sml-green);">普通 (11)</div>
-                        <div class="segment" style="width: 24%; background-color: #79d291;">快速 (6)</div>
-                        <div class="segment" style="width: 16%; background-color: #1a6f30;">都心特快 (4)</div>
-                        <div class="total-label">21本</div>
-                    </div>
-                </div>
-                <div class="legend">
-                    <span class="legend-item"><span class="legend-color" style="background-color: var(--sml-blue);"></span>普通 (西部)</span>
-                    <span class="legend-item"><span class="legend-color" style="background-color: #5aa7ff;"></span>快速 (西部)</span>
-                    <span class="legend-item"><span class="legend-color" style="background-color: #004d9c;"></span>都心特快 (西部)</span>
-                    <span class="legend-item"><span class="legend-color" style="background-color: var(--sml-green);"></span>普通 (東部)</span>
-                    <span class="legend-item"><span class="legend-color" style="background-color: #79d291;"></span>快速 (東部)</span>
-                    <span class="legend-item"><span class="legend-color" style="background-color: #1a6f30;"></span>都心特快 (東部)</span>
-                </div>
-                <p style="text-align: center; font-size: 0.8em; margin-top: 15px;">平日朝ラッシュ時（7:30-8:30）1時間あたりの運行本数</p>
-            </div>
-            
-        </div>
-    </div>
-    <button onclick="topFunction()" id="backToTop" title="トップに戻る">↑</button>
+                サンマル線は、東西で利用者層が大きく異なるため、多彩な列車種別を運用し、それぞれのエリアの需要にきめ細かく対応している。島咲都心タワ    <button onclick="topFunction()" id="backToTop" title="トップに戻る">↑</button>
 
     <div id="genericCookieNotice">
-        このサイトでは、サイトの利用状況を分析し、より良いサービスを提供するために情報を**ローカルに保存**しています。 
+        このサイトでは、サイトの利用状況を分析し、より良いサービスを提供するためにCookieを使用しています。
         <a href="/ak/index.html" target="_blank">詳細はこちら</a>
         <button onclick="acceptCookieConsent()">同意する</button>
     </div>
@@ -716,9 +556,9 @@
         function showCookieNotice() {
             const notice = document.getElementById('genericCookieNotice');
             if (notice) {
+                // クッキーの説明文を模倣
+                notice.innerHTML = 'このサイトでは、サイトの利用状況を分析し、より良いサービスを提供するためにCookieを使用しています。 <a href="/ak/index.html" target="_blank">詳細はこちら</a> <button onclick="acceptCookieConsent()">同意する</button>';
                 notice.style.display = 'block';
-                // バナー内の表示テキストをLocalStorage利用に合わせて調整
-                notice.innerHTML = 'このサイトでは、サイトの利用状況を分析し、より良いサービスを提供するために情報を**ローカルに保存**しています。 <a href="/ak/index.html" target="_blank">詳細はこちら</a> <button onclick="acceptCookieConsent()">同意する</button>';
             }
         }
 
@@ -743,3 +583,239 @@
     </script>
 </body>
 </html>
+ー駅（SML20）を境に、東部は通勤・通学、西部は観光・リゾート輸送に特化している。
+            </p>
+            <table class="data-table">
+                <caption>運行種別と役割</caption>
+                <thead>
+                    <tr>
+                        <th>種別</th>
+                        <th>略称</th>
+                        <th>主な役割</th>
+                        <th>東部区間での停車パターン</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>各停</td><td>L</td><td>全駅に停車。地域住民の日常利用と各エリアの需要を維持。</td><td>全駅停車</td></tr>
+                    <tr><td>区間快速</td><td>SR</td><td>東部郊外とリゾートエリアを結ぶ主要な中距離列車。</td><td>主要接続駅・高需要駅に停車。</td></tr>
+                    <tr><td>通勤快速</td><td>CR</td><td>東部エリアの通勤時間帯の速達性を極限まで高めるための優等列車。</td><td>東部郊外の基幹駅のみ停車。</td></tr>
+                    <tr><td>リゾート特急</td><td>LT</td><td>都心と西部リゾートエリアを直結する観光特急。</td><td>東部では春原（SML08）、桜彩公園前（SML16）など観光拠点に臨時停車。</td></tr>
+                </tbody>
+            </table>
+            <h3 id="区間快速">2.1 区間快速（SR）の戦略的運用</h3>
+            <p>
+                区間快速（SR）は、東部エリアでは通勤需要、西部エリアでは地元住民と観光客の長距離移動を担う。特に西部リゾートエリアでは、七里（SML24）や郷ノ山（SML29）など、主要な観光・地域拠点に停車することで、リゾート特急（LT）が通過する区間の利便性を補完する役割を持つ。
+            </p>
+
+            <h2 id="停車駅と地域特性">3 停車駅と地域特性</h2>
+
+            <h3 id="東部エリア">3.1 東部エリア：郊外・住宅地 (SML 01 - 19)</h3>
+            <p>
+                東部エリアは、高度経済成長期に開発された広大な郊外住宅地であり、通勤需要が圧倒的である。運行戦略は、通勤快速（CR）による速達性の確保と、各停（L）による高齢化団地や学園地帯への細やかなサービス提供に集約される。
+            </p>
+            <table class="route-table">
+                <caption>I. 東部エリア 停車駅一覧</caption>
+                <thead>
+                    <tr>
+                        <th style="width:3%">No.</th>
+                        <th style="width:15%">駅名（SML-No.）</th>
+                        <th style="width:3%">L</th>
+                        <th style="width:3%">SR</th>
+                        <th style="width:3%">CR</th>
+                        <th style="width:3%">LT</th>
+                        <th style="width:65%">地域の特徴と運行戦略</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="key-stop"><td>01</td><td>晋ヶ丘（しんがおか）</td><td>●</td><td>●</td><td>●</td><td>｜</td><td>【始発駅・主要ベッドタウン】丘陵地を開発した大規模住宅地。広域からの通勤客の乗り入れ拠点。長距離速達需要に対応するため、CR・SRの始発を設定。</td></tr>
+                    <tr class="l-stop"><td>02</td><td>ナカト中央団地</td><td>●</td><td>｜</td><td>｜</td><td>｜</td><td>1970年代開発の団地群。住民の高齢化が進行中。日常買物需要が高いため、優等列車は通過させ、各停で高頻度運行を確保。</td></tr>
+                    <tr class="l-stop"><td>03</td><td>高戸（たかど）</td><td>●</td><td>｜</td><td>｜</td><td>｜</td><td>旧街道沿いの商店街、昭和風住宅街。地域密着型消費文化。優等列車通過による地域差別化を避け、各停の運行本数を重視。</td></tr>
+                    <tr class="l-stop"><td>04</td><td>上岡（うわおか）</td><td>●</td><td>｜</td><td>｜</td><td>｜</td><td>丘の上の閑静な高級住宅街。都心へ高い速達性を求める利用客層のため、隣接駅のCR停車とバス路線連携を強化。</td></tr>
+                    <tr class="l-stop"><td>05</td><td>石船</td><td>●</td><td>｜</td><td>｜</td><td>｜</td><td>地方直売所の最寄り駅。早朝の活気が特徴。深夜・早朝の貨物輸送残存側線は、臨時列車の待機設備として活用。</td></tr>
+                    <tr class="key-stop"><td>06</td><td>緑陽学園前</td><td>●</td><td>●</td><td>●</td><td>｜</td><td>【最重要文教地区】公立高校、私立中学校、専門学校が集中。学生の利用が極めて多く、朝夕大混雑。学生輸送の要であり、CR・SR停車は必須。</td></tr>
+                    <tr class="l-stop"><td>07</td><td>東田</td><td>●</td><td>｜</td><td>｜</td><td>｜</td><td>比較的新しい区画整理地。高層マンションが増加。新住民の流入に対応するため、将来的なSR停車候補地として検討中。</td></tr>
+                    <tr class="key-stop"><td>08</td><td>春原（はるばら）</td><td>●</td><td>●</td><td>●</td><td>●</td><td>【主要接続駅・文化拠点】複数社線接続の主要ターミナル。アニメ・アイドル文化の聖地。都心に匹敵する賑わい。運行上の乗務員交代・折返し準備拠点。全優等列車停車。</td></tr>
+                    <tr class="l-stop"><td>09</td><td>仲町（なかまち）</td><td>●</td><td>｜</td><td>｜</td><td>｜</td><td>大使館や古い歴史を持つ豪邸が残る高級住宅エリア。静かで落ち着いた雰囲気を維持するため、優等列車はすべて通過。</td></tr>
+                    <tr class="l-stop"><td>10</td><td>鯉沢（こいざわ）</td><td>●</td><td>｜</td><td>｜</td><td>｜</td><td>大学キャンパス至近。古書店、レトロ喫茶店が多い文化的なエリア。優等列車の通過は、地域内消費を促す目的。</td></tr>
+                    <tr class="key-stop"><td>11</td><td>相古（あいこ）</td><td>●</td><td>●</td><td>｜</td><td>●</td><td>【行政・医療の結節点】湾岸エリアの行政区の中心駅。都心直前区間の輸送力増強のため、ラッシュ時の折返し拠点。SR、LTは停車。</td></tr>
+                    <tr class="l-stop"><td>12</td><td>西町医療センター</td><td>●</td><td>｜</td><td>｜</td><td>｜</td><td>大学病院など医療機関が集中。高齢者や医療従事者の利用が多い。医療アクセスの高頻度維持のため、Lのみ停車。</td></tr>
+                    <tr class="key-stop"><td>13</td><td>西海工業団地</td><td>●</td><td>●</td><td>｜</td><td>｜</td><td>【経済の要・環境問題】沿線随一の工業地帯。大気汚染が地域的な問題。通勤者の利便性向上のためSRを停車。CRは通過し速達性を優先。</td></tr>
+                    <tr class="l-stop"><td>14</td><td>鶴見口（つるみのぐち）</td><td>●</td><td>｜</td><td>｜</td><td>｜</td><td>郊外・長距離バスターミナルを併設。鶴の飛来地。バスとの乗り換え利便性は、接続バス会社との協議でLとSRの間引き運行で対応。</td></tr>
+                    <tr class="l-stop"><td>15</td><td>仲富車庫前</td><td>●</td><td>｜</td><td>｜</td><td>｜</td><td>【車両運用・鉄道文化】巨大な車両基地（仲富車庫）併設。ミニ鉄道博物館。運行上の乗務員交代・車両運用拠点。旅客需要が低いためLのみ停車。</td></tr>
+                    <tr class="resort-stop"><td>16</td><td>桜彩公園前</td><td>●</td><td>●</td><td>●</td><td>●</td><td>【特急停車駅】広大な総合公園。春は桜の名所。観光・通勤両方の需要に対応するため、全優等列車を停車。</td></tr>
+                    <tr class="l-stop"><td>17</td><td>公千大付属前</td><td>●</td><td>｜</td><td>｜</td><td>｜</td><td>私立の中高一貫校、専門大学など。駅内に小動物触れ合い展。学生輸送はLで賄い、優等列車は通過。</td></tr>
+                    <tr class="l-stop"><td>18</td><td>和泉橋（いずみばし）</td><td>●</td><td>｜</td><td>｜</td><td>｜</td><td>歴史的な橋、八重原神社への参道入口。文化客は隣接駅(19)高ノ台からバスまたはLを利用。</td></tr>
+                    <tr class="key-stop"><td>19</td><td>高ノ台</td><td>●</td><td>●</td><td>●</td><td>｜</td><td>地盤が固く眺望に優れた高台の住宅地（富裕層）。高い速達性要求に応えるため、CRを停車。SRも広域利便性確保のため停車。</td></tr>
+                </tbody>
+            </table>
+
+            <h3 id="都心ターミナル">3.2 都心ターミナル (SML 20)</h3>
+            <table class="route-table">
+                <caption>II. 都心ターミナル 停車駅一覧</caption>
+                <thead>
+                    <tr>
+                        <th style="width:3%">No.</th>
+                        <th style="width:15%">駅名（SML-No.）</th>
+                        <th style="width:3%">L</th>
+                        <th style="width:3%">SR</th>
+                        <th style="width:3%">CR</th>
+                        <th style="width:3%">LT</th>
+                        <th style="width:65%">地域の特徴と運行戦略</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="key-stop" style="background-color: #fce0e0;"><td>20</td><td>島咲都心タワー</td><td>●</td><td>●</td><td>●</td><td>●</td><td>【都心ビジネス・商業の中心】超高層オフィスビル、大型商業施設が林立。東西の運行系統を分断・接続する結節点。全列車が停車・接続し、乗務員交代も頻繁に行われる。</td></tr>
+                </tbody>
+            </table>
+
+            <h3 id="リゾートエリア">3.3 郊外リゾートエリア：山間・湖畔・温泉地 (SML 21 - 30)</h3>
+            <p>
+                西部エリアは、山間部から湖畔に至る観光地であり、リゾート特急（LT）を中心とした観光輸送が主軸となる。一方、ローカル輸送を担う各停（L）と、観光客・地元住民の双方に対応する区間快速（SR）が重要な役割を果たす。
+            </p>
+            <table class="route-table">
+                <caption>III. 郊外リゾートエリア 停車駅一覧</caption>
+                <thead>
+                    <tr>
+                        <th style="width:3%">No.</th>
+                        <th style="width:15%">駅名（SML-No.）</th>
+                        <th style="width:3%">L</th>
+                        <th style="width:3%">SR</th>
+                        <th style="width:3%">CR</th>
+                        <th style="width:3%">LT</th>
+                        <th style="width:65%">地域の特徴と運行戦略</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="l-stop"><td>21</td><td>日中峠（ひなかとうげ）</td><td>●</td><td>｜</td><td>｜</td><td>｜</td><td>都心から山間部に入る最初の集落。長大トンネルに入る直前。ローカル輸送を担うLのみ運行。</td></tr>
+                    <tr class="resort-stop"><td>22</td><td>木島台</td><td>●</td><td>｜</td><td>｜</td><td>▲</td><td>新しい別荘地・高級戸建エリア。夏場の避暑客が増加。LTは季節・臨時停車を設定し、日常的な都心アクセスはLとSRの連携に依存。</td></tr>
+                    <tr class="l-stop"><td>23</td><td>島咲国営農園</td><td>●</td><td>｜</td><td>｜</td><td>｜</td><td>国営の果樹試験場や広大な農園。「島咲苺狩り」は観光資源。Lのみ停車。</td></tr>
+                    <tr class="resort-stop"><td>24</td><td>七里（しちり）</td><td>●</td><td>●</td><td>｜</td><td>●</td><td>かつての宿場町の名残を残すエリア。滞在型観光需要に応えるLT停車。地元住民の都心アクセス改善のためSRも停車。</td></tr>
+                    <tr class="l-stop"><td>25</td><td>大河原（おおかわら）</td><td>●</td><td>｜</td><td>｜</td><td>｜</td><td>雄大な川に架かる鉄橋のたもと。駅ホームからの景観が有名。Lのみ停車。</td></tr>
+                    <tr class="l-stop"><td>26</td><td>南吹ノ台</td><td>●</td><td>｜</td><td>｜</td><td>｜</td><td>田畑が広がるのどかな雰囲気。名物「キング・ザリガニ」（8m人工物）。Lのみ停車。</td></tr>
+                    <tr class="l-stop"><td>27</td><td>笹原</td><td>●</td><td>｜</td><td>｜</td><td>｜</td><td>当路線唯一の無人駅。妖怪「がしゃまる」の伝承。地元住民の意向を尊重し、優等列車は通過。</td></tr>
+                    <tr class="resort-stop"><td>28</td><td>浦鳴（うらなり）</td><td>●</td><td>●</td><td>｜</td><td>●</td><td>海水浴場やマリーナへの玄関口。夏場はレジャー客で大混雑。集中輸送のためLT停車。季節性ピークに対応するため、夏期にはSRを臨時停車。</td></tr>
+                    <tr class="resort-stop"><td>29</td><td>郷ノ山（ごうのやま）</td><td>●</td><td>●</td><td>｜</td><td>●</td><td>山あいの島咲温泉への玄関口。温泉観光客が中心。LT停車で温泉客を効率的に輸送。地元・観光客利便性向上のためSR停車。</td></tr>
+                    <tr class="key-stop resort-stop"><td>30</td><td>華湖畔（はなこはん）</td><td>●</td><td>●</td><td>｜</td><td>●</td><td>【終着駅・巨大リゾート拠点】巨大な湖畔リゾートの拠点。遊覧船乗り場や華湖ホテルに直結。LT終着点。SRは西部エリアの基幹快速として終点まで運行。</td></tr>
+                </tbody>
+            </table>
+
+            <h2 id="車両">4 車両</h2>
+            <p>
+                現在、サンマル線で運用されている車両は主に以下の2系統である。
+            </p>
+            <ul>
+                <li>3000系（通勤・近郊型）：東部エリアの通勤快速（CR）を含む全種別で使用される基幹車両。高加減速性能を持ち、都心区間での高頻度運行を可能にしている。</li>
+                <li>800系（特急型）：リゾート特急（LT）専用車両。リクライニングシート、大型窓、展望席を備え、観光客に快適な移動空間を提供する。</li>
+            </ul>
+
+            <h2 id="乗降客数データ">5 乗降客数データ</h2>
+            <p>
+                2024年度の主要駅における1日平均乗降客数（概算）を以下の棒グラフで示します。都心ターミナル駅の利用者数が突出していることが分かります。
+            </p>
+            <div class="chart-container">
+                <div class="bar-chart" aria-label="サンマル線 主要駅 1日平均乗降客数 2024年度">
+                    <div class="bar-item">
+                        <div class="bar-value">18万</div>
+                        <div class="bar" style="height: 60%;"></div>
+                        <div class="bar-label">SML01<br>晋ヶ丘</div>
+                    </div>
+                    <div class="bar-item">
+                        <div class="bar-value">9万</div>
+                        <div class="bar" style="height: 30%;"></div>
+                        <div class="bar-label">SML06<br>緑陽学園前</div>
+                    </div>
+                    <div class="bar-item">
+                        <div class="bar-value">25万</div>
+                        <div class="bar" style="height: 83.3%;"></div>
+                        <div class="bar-label">SML08<br>春原</div>
+                    </div>
+                    <div class="bar-item">
+                        <div class="bar-value">30万</div>
+                        <div class="bar" style="height: 100%;"></div>
+                        <div class="bar-label">SML20<br>(島咲都心タワー)</div>
+                    </div>
+                    <div class="bar-item">
+                        <div class="bar-value">15万</div>
+                        <div class="bar" style="height: 50%;"></div>
+                        <div class="bar-label">SML11<br>相古</div>
+                    </div>
+                    <div class="bar-item">
+                        <div class="bar-value">11万</div>
+                        <div class="bar" style="height: 36.6%;"></div>
+                        <div class="bar-label">SML16<br>桜彩公園前</div>
+                    </div>
+                    <div class="bar-item">
+                        <div class="bar-value">7万</div>
+                        <div class="bar" style="height: 23.3%;"></div>
+                        <div class="bar-label">SML30<br>華湖畔</div>
+                    </div>
+                </div>
+                <p style="text-align: center; font-size: 0.8em; margin-top: 5px;">1日平均乗降客数（概算）</p>
+            </div>
+
+            <h2 id="運行本数の比較">6 運行本数の比較</h2>
+            <p>
+                平日朝ラッシュ時（7:30-8:30）における、島咲都心タワー駅を通過する方面別・種別ごとの運行本数を示します。
+            </p>
+            <div class="chart-container">
+                <div class="stacked-bar-chart" aria-label="平日朝ラッシュ時 運行本数比較">
+                    <div class="bar-group">
+                        <div class="label-axis">西部方面 (SML30へ)</div>
+                        <div class="segment" style="width: 40%; background-color: var(--sml-blue);">L (10)</div>
+                        <div class="segment" style="width: 20%; background-color: #5aa7ff;">SR (5)</div>
+                        <div class="segment" style="width: 8%; background-color: #004d9c;">LT (2)</div>
+                        <div class="total-label">17本</div>
+                    </div>
+                    <div class="bar-group">
+                        <div class="label-axis">東部方面 (SML01へ)</div>
+                        <div class="segment" style="width: 44%; background-color: var(--sml-green);">L (11)</div>
+                        <div class="segment" style="width: 24%; background-color: #79d291;">SR (6)</div>
+                        <div class="segment" style="width: 16%; background-color: #1a6f30;">CR (4)</div>
+                        <div class="total-label">21本</div>
+                    </div>
+                </div>
+                <div class="legend">
+                    <span class="legend-item"><span class="legend-color" style="background-color: var(--sml-blue);"></span>L (西部)</span>
+                    <span class="legend-item"><span class="legend-color" style="background-color: #5aa7ff;"></span>SR (西部)</span>
+                    <span class="legend-item"><span class="legend-color" style="background-color: #004d9c;"></span>LT (西部)</span>
+                    <span class="legend-item"><span class="legend-color" style="background-color: var(--sml-green);"></span>L (東部)</span>
+                    <span class="legend-item"><span class="legend-color" style="background-color: #79d291;"></span>SR (東部)</span>
+                    <span class="legend-item"><span class="legend-color" style="background-color: #1a6f30;"></span>CR (東部)</span>
+                </div>
+                <p style="text-align: center; font-size: 0.8em; margin-top: 15px;">平日朝ラッシュ時（7:30-8:30）1時間あたりの運行本数</p>
+            </div>
+
+
+            <h2 id="歴史的背景と政治的思惑">7 歴史的背景と政治的思惑</h2>
+            <p>
+                サンマル線の計画は、高度成長期の「東部の労働力を都心へ、都心の富を西部のリゾートへ」という二極化政策を背景に推進された。この路線の存在自体が、東部の住宅地を単なる「都心への供給地」と位置づけ、西部のリゾートエリアを「富裕層の余暇消費地」として優遇するという、当時の政治的思惑を象徴しているという批判がある。[架空の出典 1]
+            </p>
+            <h3 id="都心タワーと優遇措置">7.1 島咲都心タワーと優遇措置</h3>
+            <p>
+                都心タワー駅（SML20）の建設と全列車停車は、特定の政治家が推進した巨大都市開発プロジェクトに深く結びついており、地元住民の反対を押し切る形で実現した経緯がある。特急列車の停車パターンが、リゾート客を優遇し、郊外の生活路線である東部区間の速達性を犠牲にしているという指摘も根強い。
+            </p>
+            <h3 id="東西の格差問題">7.2 東西の格差問題</h3>
+            <p>
+                特に、東部エリアのナカト中央団地（SML02）や高戸（SML03）といった古くからの生活駅が優等列車の通過駅として固定されている一方、西部エリアの七里（SML24）や郷ノ山（SML29）はSR・LTが停車する。この運行上の明確な格差が、東部住民の間で「赤い線（サンマル線）は地域差別を体現している」という皮肉的な見解を生む要因となっている。[架空の出典 2]
+            </p>
+
+            <h2 id="地域問題と課題">8 地域問題と課題</h2>
+            <ul>
+                <li>騒音問題: 東部区間の仲富車庫前（SML15）付近では、深夜・早朝の車両入換作業による騒音被害が深刻化しており、沿線住民からの苦情が絶えない。</li>
+                <li>環境問題: 西海工業団地（SML13）周辺の大気汚染は、住民の健康被害に直結しており、SCT側は駅舎の空気清浄化システム導入を検討中である。</li>
+                <li>季節性混雑: 浦鳴（SML28）の海水浴シーズンや華湖畔（SML30）の観光トップシーズンには、LTとSRの輸送力が限界に達し、定期的に大混雑が発生する。</li>
+            </ul>
+
+            <h2 id="外部リンク">9 外部リンク</h2>
+            <ul>
+                <li><a href="https://wikipedia.org/main.html?query=首都圏交通公社" target="_blank">Wikipedia: 首都圏交通公社 (SCT)</a></li>
+                <li><a href="/main.html?query=サンマル線公式情報" target="_blank">サンマル線 公式運行情報</a></li>
+            </ul>
+
+            <h2 id="出典">10 出典</h2>
+            <p style="font-size: 0.8em;">
+                [1] 政治経済評論, 『公共事業に潜む利権の構図: SML計画の再検証』, 1995年.<br>
+                [2] 島咲日報 地方版, 『赤い線が示す格差：郊外住民の不満レポート』, 2023年.
+            </p>
+        </div>
+    </div>
