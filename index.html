@@ -25,7 +25,7 @@
         }
         .main-content {
             width: 90%;
-            max-width: 1000px;
+            max-width: 1000px; /* ここを1200pxにするなどの調整も推奨 */
             margin: 20px auto;
             padding: 30px;
             background-color: var(--wiki-content-bg);
@@ -48,7 +48,8 @@
             font-weight: normal;
             border-bottom: 1px solid var(--wiki-heading-border);
             padding: 0.5em 0 0.2em 0;
-            margin-top: 1.5em;
+            margin-top: 2em; /* 調整後の余白 */
+            margin-bottom: 0.8em; /* 調整後の余白 */
         }
         .infobox {
             float: right;
@@ -81,7 +82,7 @@
             padding-left: 20px;
         }
         .article-list li {
-            margin-bottom: 5px;
+            margin-bottom: 10px; /* 調整後の行間 */
         }
         .article-list a {
             color: var(--wiki-link);
@@ -92,6 +93,19 @@
             text-decoration: underline;
         }
 
+        /* 記事一覧リンクのための新しいスタイル */
+        .list-link-container {
+            margin-bottom: 1em;
+            border-bottom: 1px dashed #ccc;
+            padding-bottom: 5px;
+        }
+        .list-link-container a {
+            font-size: 1.1em;
+            font-weight: bold;
+            color: var(--wiki-link);
+            text-decoration: none;
+        }
+
         /* 復元されたフッターのためのスタイル */
         .footer-base {
             margin-top: 40px;
@@ -100,7 +114,7 @@
             font-size: 0.8em;
             color: #777;
             text-align: left;
-            display: flex; /* フッターリンクを横並びにするため */
+            display: flex;
             justify-content: space-between;
         }
         .footer-base a {
@@ -134,7 +148,7 @@
             font-size: 0.9em;
             z-index: 9999;
             box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
-            display: none; /* 初期は非表示 */
+            display: none; 
         }
         #genericCookieNotice a {
             color: #add8e6;
@@ -165,39 +179,36 @@
 
         <div class="infobox">
             <h3>Liefantidia（リーファンティディア）</h3>
-　　　<bidy>
+        </div>
         <div class="intro-explanation">
             <p>
                 Liefantidia（リーファンティディア）に記載されている全ての記事はフィクションであり、現実の歴史、地理、出来事とは一切関係ありません。
             </p>
             <p>
                Liefantidia は、現実の検証可能性に基づかない、個人的な夢想や架空の世界の設定を文書化することを目的とした、独自の知識の殿堂です。
-
             </p>
         </div>
-
-        <h2>現在の掲載記事</h2>
+        
+        <div class="list-link-container">
+            <a href="/list/index.html">記事一覧</a>
+        </div>
+        <h2>おすすめの記事</h2>
 
         <div class="article-list">
             <ul>
                 <li><a href="1/index.html">ノヴァハゼルブルク</a></li>
-                <li><a href="2/index.html">古裂漢族説</a></li>
                 <li><a href="3/index.html">ハレジア独立共和国</a></li>
-                <li><a href="4/index.html">𣑥(猫)</a></li>
-                <li><a href="5/index.html">KAR 21</a></li>
-            </ul>
-　　　　　　　　　　<li><a href="6/index.html">島咲都市高速鉄道(仮)</a></li>
             </ul>
         </div>
-        
+
         <div class="footer-base">
             <div>
                 <p>
                     <a href="/ak/index.html">プライバシーポリシー</a> | 
-※本サイトはフィクションです
+                    ※本サイトはフィクションです
                 </p>
             </div>
-            
+
             <div class="footer-links-restored">
                 <h4>当社の他のサイト</h4>
                 <ul>
