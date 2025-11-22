@@ -5,126 +5,165 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Liefantidia</title>
     <style>
-        /* 現代の標準的なウィキスタイル (CSSは前回から変更なし) */
+        /* 変数定義: 色味を少し深めにして安っぽさを軽減 */
         :root {
-            --wiki-bg: #f8f9fa;
+            --wiki-bg: #f4f5f7; /* 背景を少しグレー寄りに */
             --wiki-content-bg: #ffffff;
             --wiki-border: #a2a9b1;
-            --wiki-link: #0645ad;
-            --wiki-heading-border: #eaecf0;
+            --wiki-link: #0645ad; /* ウィキペディアブルー */
+            --wiki-link-hover: #0b0080;
+            --heading-border: #eaecf0;
+            --shadow: 0 2px 5px rgba(0,0,0,0.08); /* 浮き上がり感を出す影 */
         }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-            line-height: 1.6;
+            font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Yu Gothic", "YuGothic", Arial, sans-serif;
+            line-height: 1.7;
             background-color: var(--wiki-bg);
-            color: #202122;
+            color: #222;
             margin: 0;
             padding: 0;
             display: flex; 
             justify-content: center;
         }
+
         .main-content {
             width: 90%;
-            max-width: 1000px; /* ここを1200pxにするなどの調整も推奨 */
+            max-width: 800px; /* 読みやすさのため幅を少し絞る */
             margin: 20px auto;
-            padding: 30px;
+            padding: 40px;
             background-color: var(--wiki-content-bg);
-        }
-        #site-logo {
-            display: block;
-            margin: 0 0 10px 0;
-            max-width: 150px;
-            height: auto;
-        }
-        h1 {
-            font-size: 1.8em; 
-            font-weight: normal;
-            border-bottom: 1px solid var(--wiki-border);
-            padding-bottom: 4px;
-            margin-bottom: 0.5em;
-        }
-        h2 {
-            font-size: 1.4em;
-            font-weight: normal;
-            border-bottom: 1px solid var(--wiki-heading-border);
-            padding: 0.5em 0 0.2em 0;
-            margin-top: 2em; /* 調整後の余白 */
-            margin-bottom: 0.8em; /* 調整後の余白 */
-        }
-        .infobox {
-            float: right;
-            border: 1px solid var(--wiki-border);
-            background-color: #f9f9f9;
-            padding: 10px;
-            margin: 0 0 10px 15px;
-            width: 280px;
-            font-size: 0.9em;
-            clear: right;
-            line-height: 1.4;
-        }
-        .infobox h3 {
-            font-size: 1.1em;
-            text-align: center;
-            background-color: #ebf0f7;
-            margin: -10px -10px 10px -10px;
-            padding: 8px;
-            border-bottom: 1px solid var(--wiki-border);
-        }
-        .intro-explanation {
-            margin-bottom: 20px;
-            font-size: 1em;
-        }
-        .article-list {
-            clear: both; 
-        }
-        .article-list ul {
-            list-style-type: square;
-            padding-left: 20px;
-        }
-        .article-list li {
-            margin-bottom: 10px; /* 調整後の行間 */
-        }
-        .article-list a {
-            color: var(--wiki-link);
-            text-decoration: none;
-            font-size: 1.1em;
-        }
-        .article-list a:hover {
-            text-decoration: underline;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05); /* コンテンツ全体に影 */
+            border-radius: 4px; /* 角を少し丸める */
         }
 
-        /* 記事一覧リンクのための新しいスタイル */
-        .list-link-container {
-            margin-bottom: 1em;
-            border-bottom: 1px dashed #ccc;
-            padding-bottom: 5px;
+        /* ロゴ周りの調整 */
+        #site-logo {
+            display: block;
+            margin: 0 auto 20px auto; /* 中央寄せ */
+            max-width: 180px;
+            height: auto;
         }
-        .list-link-container a {
-            font-size: 1.1em;
+
+        h1 {
+            font-family: "Times New Roman", "Yu Mincho", serif; /* タイトルは明朝体で権威付け */
+            font-size: 2.2em; 
+            font-weight: normal;
+            border-bottom: 1px solid var(--wiki-border);
+            padding-bottom: 10px;
+            margin-bottom: 1em;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 1.5em;
+            font-weight: normal;
+            border-bottom: 1px solid var(--heading-border);
+            padding: 0.5em 0 0.2em 0;
+            margin-top: 2.5em;
+            margin-bottom: 1em;
+            color: #444;
+        }
+
+        .intro-explanation {
+            margin-bottom: 30px;
+            font-size: 0.95em;
+            color: #444;
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid var(--wiki-border); /* 左に線を入れて引用っぽく */
+        }
+
+        /* --- 新しい「記事一覧」リンクのスタイル --- */
+        .list-link-container {
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        .big-link-button {
+            display: block;
+            width: 100%;
+            padding: 15px 0;
+            font-size: 1.2em;
             font-weight: bold;
             color: var(--wiki-link);
             text-decoration: none;
+            border-bottom: 3px solid var(--wiki-link); /* ご要望の「線」を太いボーダーで表現 */
+            background-color: transparent;
+            transition: all 0.3s ease;
+            position: relative;
         }
 
-        /* 復元されたフッターのためのスタイル */
-        .footer-base {
-            margin-top: 40px;
-            padding-top: 15px;
-            border-top: 1px solid var(--wiki-heading-border);
+        /* マウスオーバー時の動き */
+        .big-link-button:hover {
+            background-color: #f0f5fa;
+            color: var(--wiki-link-hover);
+            border-bottom-color: var(--wiki-link-hover);
+            transform: translateY(-2px); /* 少し浮く */
+        }
+        
+        /* 矢印アイコンをCSSで擬似的に作る */
+        .big-link-button::after {
+            content: " ▼";
             font-size: 0.8em;
+            margin-left: 10px;
+        }
+
+        /* --- 記事カードのスタイル --- */
+        .article-card {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            background-color: #fff;
+            transition: box-shadow 0.3s, transform 0.2s;
+            border-left: 6px solid var(--wiki-link); /* 左にアクセントカラー */
+        }
+
+        .article-card:hover {
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transform: translateX(5px); /* 右に少し動く */
+        }
+
+        .article-card h3 {
+            margin: 0 0 10px 0;
+            color: var(--wiki-link);
+            font-size: 1.3em;
+        }
+
+        .article-card p {
+            margin: 0;
+            color: #555;
+            font-size: 0.95em;
+        }
+
+        /* フッター周り */
+        .footer-base {
+            margin-top: 60px;
+            padding-top: 20px;
+            border-top: 1px solid var(--heading-border);
+            font-size: 0.85em;
             color: #777;
-            text-align: left;
             display: flex;
+            flex-wrap: wrap;
             justify-content: space-between;
+            gap: 20px;
         }
         .footer-base a {
             color: var(--wiki-link);
+            text-decoration: none;
         }
+        .footer-base a:hover {
+            text-decoration: underline;
+        }
+
         .footer-links-restored h4 {
             font-size: 1em;
-            margin-top: 0;
-            margin-bottom: 5px;
-            color: #202122;
+            margin: 0 0 8px 0;
+            color: #333;
         }
         .footer-links-restored ul {
             list-style: none;
@@ -132,42 +171,55 @@
             margin: 0;
         }
         .footer-links-restored li {
-            margin-bottom: 2px;
+            margin-bottom: 5px;
         }
 
-        /* クッキー通知用のスタイル (オリジナルから復元) */
+        /* クッキー通知 */
         #genericCookieNotice {
             position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background-color: rgba(34, 34, 34, 0.95);
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%); /* 中央寄せ */
+            width: 90%;
+            max-width: 600px;
+            background-color: #222;
             color: #fff;
-            padding: 15px 20px;
+            padding: 15px 25px;
+            border-radius: 8px;
             text-align: center;
             font-size: 0.9em;
             z-index: 9999;
-            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
             display: none; 
         }
         #genericCookieNotice a {
-            color: #add8e6;
-            text-decoration: underline;
-            margin: 0 5px;
+            color: #8cb4ff;
         }
         #genericCookieNotice button {
-            background-color: var(--wiki-link);
-            color: #fff;
+            background-color: #fff;
+            color: #222;
             border: none;
-            padding: 8px 20px;
+            padding: 6px 16px;
             cursor: pointer;
-            margin-left: 20px;
+            margin-left: 15px;
             border-radius: 4px;
             font-weight: bold;
-            transition: background-color 0.3s;
         }
-        #genericCookieNotice button:hover {
-            background-color: #043685;
+
+        /* スマホ向けの調整 */
+        @media (max-width: 600px) {
+            .main-content {
+                width: 100%;
+                padding: 20px;
+                margin: 0;
+                box-shadow: none;
+            }
+            h1 {
+                font-size: 1.8em;
+            }
+            .footer-base {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
@@ -177,40 +229,38 @@
 
         <h1>Liefantidia</h1>
 
-        <div class="infobox">
-            <h3>Liefantidia（リーファンティディア）</h3>
-        </div>
         <div class="intro-explanation">
             <p>
                 Liefantidia（リーファンティディア）に記載されている全ての記事はフィクションであり、現実の歴史、地理、出来事とは一切関係ありません。
             </p>
             <p>
-               Liefantidia は、現実の検証可能性に基づかない、個人的な夢想や架空の世界の設定を文書化することを目的とした、独自の知識の殿堂です。
+               ここは現実の検証可能性に基づかない、個人的な夢想や架空の世界の設定を文書化することを目的とした、独自の知識の殿堂です。
             </p>
         </div>
         
         <div class="list-link-container">
-            <a href="/list/index.html">記事一覧はここをタップ</a>
+            <a href="/list/index.html" class="big-link-button">記事一覧はここから</a>
         </div>
+
         <h2>おすすめの記事</h2>
 
-        <div class="article-list">
-            <ul>
-                <li><a href="1/index.html">ノヴァハゼルブルク</a></li>
-                <li><a href="3/index.html">ハレジア独立共和国</a></li>
-            </ul>
+        <div class="featured-section">
+            <a href="1/index.html" class="article-card">
+                <h3>ノヴァハゼルブルク</h3>
+                <p>南部ドイツに位置する歴史ある都市。</p>
+            </a>
         </div>
 
         <div class="footer-base">
             <div>
                 <p>
-                    <a href="/ak/index.html">プライバシーポリシー</a> | 
-                    ※本サイトはフィクションです
+                    <a href="/ak/index.html">プライバシーポリシー</a><br>
+                    <span style="font-size: 0.9em; color: #999;">※本サイトはフィクションです</span>
                 </p>
             </div>
 
             <div class="footer-links-restored">
-                <h4>当社の他のサイト</h4>
+                <h4>他の制作物</h4>
                 <ul>
                     <li><a href="https://test-teas-projects-8736b808.vercel.app/" target="_blank">日本の戦闘歴史年表</a></li>
                     <li><a href="https://othello-five-sable.vercel.app/" target="_blank">オセロ</a></li>
@@ -221,13 +271,12 @@
     </div>
 
     <div id="genericCookieNotice">
-        このサイトでは、サイトの利用状況を分析し、より良いサービスを提供するためにクッキーを取得しています。。
-        <a href="/ak/index.html" target="_blank">詳細はこちら</a>
+        このサイトでは、利用状況の分析等のためにクッキーを使用します。
+        <a href="/ak/index.html" target="_blank">詳細</a>
         <button onclick="acceptConsent()">同意する</button>
     </div>
 
     <script>
-        // --- LocalStorage対応の同意ロジック (オリジナルから復元) ---
         const CONSENT_KEY = 'consent-local-storage';
 
         function showConsentNotice() {
