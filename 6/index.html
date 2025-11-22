@@ -770,29 +770,22 @@
 
             <h2 id="外部リンク">12 外部リンク</h2>
             <ul>
-                <li><a href="https://wikipedia.org/main.html?query=首都圏交通公社" target="_blank">Wikipedia: 首都圏交通公社 (SCT)</a></li>
-                <li><a href="/main.html?query=サンマル線公式情報" target="_blank">サンマル線 公式運行情報</a></li>
+                <li><a href="/7/index.html" target="_blank">Wikipedia: 首都圏交通公社 (SCT)</a></li>
+                <li><a href="/6/txt" target="_blank">サンマル線 公式運行情報</a></li>
             </ul>
 
             <h2 id="出典">13 出典</h2>
             <p style="font-size: 0.8em;">
-                [架空の出典 1] 政治経済評論, 『公共事業に潜む利権の構図: SML計画の再検証』, 1995年.<br>
-                [架空の出典 2] 島咲日報 地方版, 『赤い線が示す格差：郊外住民の不満レポート』, 2023年.
+                [1] サンマル線公式サイト, 『サンマル線と咲仲島』, 1995年.<br>
+                [2] 咲仲日報, 『咲仲日報 サンマル線編』, 2023年.
             </p>
         </div>
     </div>
-    <button onclick="topFunction()" id="backToTop" title="トップに戻る">↑</button>
-
-    <div id="genericCookieNotice">
-        このサイトでは、サイトの利用状況を分析し、より良いサービスを提供するためにCookieを使用しています。
-        <a href="/ak/index.html" target="_blank">詳細はこちら</a>
-        <button onclick="acceptCookieConsent()">同意する</button>
-    </div>
-
-    <script>
-        // --- 1. トップに戻るボタンのJS ---
+        <script>
+        // 上に戻るボタンの表示・非表示を制御するJS
         let mybutton = document.getElementById("backToTop");
 
+        // ページをスクロールするたびにこの関数が実行される
         window.onscroll = function() {scrollFunction()};
 
         function scrollFunction() {
@@ -811,65 +804,79 @@
                 behavior: 'smooth'
             });
         }
+    </script> 
 
-        // --- 2. LocalStorageロジックのJS (同意バナー) ---
+    <style>
+    /* クッキー通知用のスタイル - 汎用性のためHTML内に記述 */
+    #genericCookieNotice {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-color: rgba(34, 34, 34, 0.95); /* 濃いグレー */
+        color: #fff;
+        padding: 15px 20px;
+        text-align: center;
+        font-size: 0.9em;
+        z-index: 9999;
+        box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+        display: none; /* 初期状態ではJavaScriptで表示を制御 */
+    }
+    #genericCookieNotice a {
+        color: #add8e6;
+        text-decoration: underline;
+        margin: 0 5px;
+    }
+    #genericCookieNotice button {
+        background-color: #0645ad;
+        color: #fff;
+        border: none;
+        padding: 8px 20px;
+        cursor: pointer;
+        margin-left: 20px;
+        border-radius: 4px;
+        font-weight: bold;
+        transition: background-color 0.3s;
+    }
+    #genericCookieNotice button:hover {
+        background-color: #043685;
+    }
+    </style>
 
-        /**
-         * LocalStorageから指定されたキーの値を取得する
-         * @param {string} name - 取得したいキーの名前
-         * @returns {string | null} キーの値。存在しない場合はnull
-         */
-        function getLocalStorage(name) {
-            try {
-                return localStorage.getItem(name);
-            } catch (e) {
-                // LocalStorageが利用できない環境（例: file://プロトコル）の場合
-                console.error("LocalStorageの読み込みに失敗しました。ファイルプロトコルでの実行が原因の可能性があります:", e);
-                return null;
-            }
+    <div id="genericCookieNotice">
+        このサイトでは、サイトの利用状況を分析し、より良いサービスを提供するためにCookieを使用しています。
+        <a href="/ak/index.html" target="_blank">詳細はこちら</a>
+        <button onclick="acceptConsent()">同意する</button> 
+    </div>
+
+    <script>
+    // JavaScriptロジック: ローカルストレージの読み書きとバナーの表示/非表示を制御
+    const CONSENT_KEY = 'consent-local-storage'; // ローカルストレージのキー
+
+    function showConsentNotice() {
+        const notice = document.getElementById('genericCookieNotice');
+        if (notice) {
+            notice.style.display = 'block';
         }
+    }
 
-        /**
-         * LocalStorageにキーと値を設定する
-         * @param {string} name - 設定したいキーの名前
-         * @param {string} value - 設定したい値
-         */
-        function setLocalStorage(name, value) {
-            try {
-                localStorage.setItem(name, value);
-            } catch (e) {
-                console.error("LocalStorageへの書き込みに失敗しました:", e);
-            }
+    // 修正: Cookieではなくローカルストレージに同意状態を保存
+    function acceptConsent() {
+        // ローカルストレージに同意状態を保存 (期限なし)
+        localStorage.setItem(CONSENT_KEY, 'accepted'); 
+
+        const notice = document.getElementById('genericCookieNotice');
+        if (notice) {
+            notice.style.display = 'none';
         }
+    }
 
-        // 同意がない場合にバナーを表示する関数
-        function showCookieNotice() {
-            const notice = document.getElementById('genericCookieNotice');
-            if (notice) {
-                notice.style.display = 'block';
-            }
+    document.addEventListener('DOMContentLoaded', () => {
+        // 修正: ローカルストレージから同意記録をチェック
+        if (localStorage.getItem(CONSENT_KEY) !== 'accepted') {
+            showConsentNotice();
         }
-
-        // 同意ボタンクリック時の処理
-        function acceptCookieConsent() {
-            // LocalStorageに同意状態を保存し、次回以降の表示を抑制する
-            setLocalStorage('cookie-consent', 'accepted'); 
-
-            // バナーを非表示にする
-            const notice = document.getElementById('genericCookieNotice');
-            if (notice) {
-                notice.style.display = 'none';
-            }
-        }
-
-        // ページ読み込み時に実行（同意確認ロジック）
-        document.addEventListener('DOMContentLoaded', () => {
-            // LocalStorageから保存状態を確認し、同意がなければ表示する
-            if (getLocalStorage('cookie-consent') !== 'accepted') {
-                showCookieNotice();
-            }
-            // 同意済みであれば、初期CSS (display: none) のままなので、何もしない。
-        });
+    });
     </script>
 </body>
 </html>
