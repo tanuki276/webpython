@@ -1,1 +1,289 @@
-a
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>記事一覧 - Liefantidia</title>
+    <style>
+        /* 現代の標準的なウィキスタイル (従来のCSS) */
+        :root {
+            --wiki-bg: #f8f9fa;
+            --wiki-content-bg: #ffffff;
+            --wiki-border: #a2a9b1;
+            --wiki-link: #0645ad;
+            --wiki-heading-border: #eaecf0;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            line-height: 1.6;
+            background-color: var(--wiki-bg);
+            color: #202122;
+            margin: 0;
+            padding: 0;
+            display: flex; 
+            justify-content: center;
+        }
+        .main-content {
+            width: 90%;
+            max-width: 1200px; /* トップページに合わせて調整しても良い */
+            margin: 20px auto;
+            padding: 30px;
+            background-color: var(--wiki-content-bg);
+        }
+        #site-logo {
+            display: block;
+            margin: 0 0 10px 0;
+            max-width: 150px;
+            height: auto;
+        }
+        h1 {
+            font-size: 1.8em; 
+            font-weight: normal;
+            border-bottom: 1px solid var(--wiki-border);
+            padding-bottom: 4px;
+            margin-bottom: 0.5em;
+        }
+        h2 {
+            font-size: 1.4em;
+            font-weight: normal;
+            border-bottom: 1px solid var(--wiki-heading-border);
+            padding: 0.5em 0 0.2em 0;
+            margin-top: 1.5em;
+            margin-bottom: 0.8em; 
+        }
+        .intro-explanation {
+            margin-bottom: 20px;
+            font-size: 1em;
+        }
+        /* 記事リストスタイル */
+        .article-list ul {
+            list-style-type: none; /* リスト記号を非表示にする */
+            padding-left: 0;
+        }
+        .article-list li {
+            margin-bottom: 12px;
+            padding: 5px 0;
+            border-bottom: 1px dotted var(--wiki-heading-border);
+        }
+        .article-list li:last-child {
+            border-bottom: none;
+        }
+        .article-list a {
+            color: var(--wiki-link);
+            text-decoration: none;
+            font-size: 1.1em;
+            font-weight: 500;
+        }
+        .article-list a:hover {
+            text-decoration: underline;
+        }
+        .home-link {
+            display: block;
+            margin-bottom: 20px;
+            font-size: 1.1em;
+        }
+
+        /* 検索機能のスタイル */
+        .search-container {
+            margin: 20px 0 30px 0;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border: 1px solid var(--wiki-heading-border);
+            border-radius: 4px;
+        }
+        .search-container input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 1em;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            box-sizing: border-box;
+        }
+        .search-container label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        
+        /* フッターとクッキー通知は省略（トップページと同じものをコピーしてください） */
+        .footer-base {
+            margin-top: 40px;
+            padding-top: 15px;
+            border-top: 1px solid var(--wiki-heading-border);
+            font-size: 0.8em;
+            color: #777;
+            text-align: left;
+            display: flex;
+            justify-content: space-between;
+        }
+        .footer-base a {
+            color: var(--wiki-link);
+        }
+        .footer-links-restored h4 {
+            font-size: 1em;
+            margin-top: 0;
+            margin-bottom: 5px;
+            color: #202122;
+        }
+        .footer-links-restored ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .footer-links-restored li {
+            margin-bottom: 2px;
+        }
+        #genericCookieNotice {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(34, 34, 34, 0.95);
+            color: #fff;
+            padding: 15px 20px;
+            text-align: center;
+            font-size: 0.9em;
+            z-index: 9999;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+            display: none;
+        }
+        #genericCookieNotice a {
+            color: #add8e6;
+            text-decoration: underline;
+            margin: 0 5px;
+        }
+        #genericCookieNotice button {
+            background-color: var(--wiki-link);
+            color: #fff;
+            border: none;
+            padding: 8px 20px;
+            cursor: pointer;
+            margin-left: 20px;
+            border-radius: 4px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        #genericCookieNotice button:hover {
+            background-color: #043685;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-content">
+        <img src="/logo.jpg" alt="Liefantidia ロゴ" id="site-logo">
+
+        <h1>記事一覧</h1>
+        
+        <p class="home-link">
+            <a href="/">← Liefantidia トップへ戻る</a>
+        </p>
+
+        <div class="intro-explanation">
+            <p>
+                Liefantidiaに現在掲載されている全てのフィクション記事の一覧です。
+            </p>
+        </div>
+
+        <div class="search-container">
+            <label for="article-search">記事を検索</label>
+            <input type="text" id="article-search" placeholder="キーワードを入力して絞り込み...">
+        </div>
+        <h2>全記事リスト</h2>
+
+        <div class="article-list">
+            <ul id="article-list-ul">
+                <li><a href="1/index.html">ノヴァハゼルブルク</a></li>
+                <li><a href="2/index.html">古裂漢族説</a></li>
+                <li><a href="3/index.html">ハレジア独立共和国</a></li>
+                <li><a href="4/index.html">𣑥(猫)</a></li>
+                <li><a href="5/index.html">KAR 21</a></li>
+                <li><a href="6/index.html">島咲都市高速鉄道(仮)</a></li>
+                </ul>
+            <p id="no-results" style="display:none; color: #cc0000; font-weight: bold;">
+                検索条件に一致する記事は見つかりませんでした。
+            </p>
+        </div>
+
+        <div class="footer-base">
+            <div>
+                <p>
+                    <a href="/ak/index.html">プライバシーポリシー</a> | 
+                    ※本サイトはフィクションです
+                </p>
+            </div>
+
+            <div class="footer-links-restored">
+                <h4>当社の他のサイト</h4>
+                <ul>
+                    <li><a href="https://test-teas-projects-8736b808.vercel.app/" target="_blank">日本の戦闘歴史年表</a></li>
+                    <li><a href="https://othello-five-sable.vercel.app/" target="_blank">オセロ</a></li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="genericCookieNotice">
+        このサイトでは、サイトの利用状況を分析し、より良いサービスを提供するためにクッキーを取得しています。。
+        <a href="/ak/index.html" target="_blank">詳細はこちら</a>
+        <button onclick="acceptConsent()">同意する</button>
+    </div>
+
+    <script>
+        // --- クッキー処理ロジック ---
+        const CONSENT_KEY = 'consent-local-storage';
+
+        function showConsentNotice() {
+            const notice = document.getElementById('genericCookieNotice');
+            if (notice) {
+                notice.style.display = 'block'; 
+            }
+        }
+
+        function acceptConsent() {
+            localStorage.setItem(CONSENT_KEY, 'accepted');
+            const notice = document.getElementById('genericCookieNotice');
+            if (notice) {
+                notice.style.display = 'none';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            if (localStorage.getItem(CONSENT_KEY) !== 'accepted') {
+                showConsentNotice();
+            }
+        });
+        
+        // --- 記事検索機能ロジック ---
+        const searchInput = document.getElementById('article-search');
+        const articleList = document.getElementById('article-list-ul');
+        const listItems = articleList.getElementsByTagName('li');
+        const noResultsMessage = document.getElementById('no-results');
+
+        searchInput.addEventListener('input', function() {
+            const filter = this.value.toLowerCase();
+            let foundCount = 0;
+
+            for (let i = 0; i < listItems.length; i++) {
+                const link = listItems[i].getElementsByTagName('a')[0];
+                const textValue = link.textContent || link.innerText;
+                
+                if (textValue.toLowerCase().indexOf(filter) > -1) {
+                    listItems[i].style.display = ""; // 表示
+                    foundCount++;
+                } else {
+                    listItems[i].style.display = "none"; // 非表示
+                }
+            }
+
+            // 検索結果がない場合のメッセージ表示
+            if (foundCount === 0) {
+                noResultsMessage.style.display = 'block';
+            } else {
+                noResultsMessage.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
+
