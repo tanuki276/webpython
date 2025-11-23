@@ -3,404 +3,548 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>サンマル線 - SML (咲仲都市高速鉄道)</title>
+    <meta name="robots" content="noindex, nofollow">
+    <title>サンマル線 - Liefantidia Encyclopedia</title>
     <style>
-        /* --- Base & Typography --- */
+        /* --- MediaWiki Vector Skin Reproduction --- */
         :root {
-            --bg-color: #f4f5f7;
-            --text-color: #202124;
-            --link-color: #3366cc;
-            --border-color: #dfe1e5;
-            --header-bg: #f0f2f5;
-            --sml-red: #d93025; /* Google系レッドに近いモダンな赤 */
-            --sml-blue: #1a73e8;
-            --sml-green: #188038;
-            --accent-bg: #fff;
+            --wiki-bg: #ffffff;
+            --wiki-panel: #f6f6f6;
+            --wiki-text: #202122;
+            --wiki-link: #3366cc;
+            --wiki-link-visited: #795cb2; /* 紫色 */
+            --wiki-border: #a2a9b1;
+            --wiki-header-bg: #eaecf0;
+            --wiki-toc-bg: #f8f9fa;
+            --sml-red: #d33; /* ラインカラー：少し落ち着いた赤 */
         }
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            line-height: 1.6;
-            background-color: var(--bg-color);
-            color: var(--text-color);
+            background-color: var(--wiki-panel);
+            color: var(--wiki-text);
             margin: 0;
             padding: 0;
-            font-size: 15px;
-        }
-        .container {
-            max-width: 1024px;
-            margin: 0 auto;
-            background-color: #fff;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-        .main-content {
-            padding: 40px;
+            font-size: 14px;
+            line-height: 1.6;
         }
 
-        /* --- Headings --- */
+        .container {
+            max-width: 1080px; /* 少し広めに */
+            margin: 0 auto;
+            background-color: var(--wiki-bg);
+            min-height: 100vh;
+            border-left: 1px solid #ddd;
+            border-right: 1px solid #ddd;
+            display: flex;
+            flex-direction: row;
+        }
+
+        /* サイドバー（Wikiらしさの演出用・装飾） */
+        .sidebar {
+            width: 160px;
+            padding: 20px 10px;
+            display: none; /* スマホでは非表示 */
+        }
+        .sidebar-logo {
+            width: 100px; height: 100px;
+            background: #ddd; margin: 0 auto 20px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: #777; font-weight: bold; font-family: serif;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 1.5em 2.5em;
+            border-left: 1px solid #eee;
+        }
+
+        /* --- Typography --- */
         h1 {
-            font-family: 'Linux Libertine', 'Georgia', serif; /* タイトルだけあえてセリフ体を残しWikiっぽさを演出 */
-            font-size: 2em;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 10px;
-            margin-bottom: 20px;
+            font-family: 'Linux Libertine', 'Georgia', serif;
+            font-size: 2.2em;
+            font-weight: normal;
+            border-bottom: 1px solid var(--wiki-border);
+            padding-bottom: 0.2em;
+            margin-bottom: 0.5em;
         }
         h2 {
-            font-size: 1.5em;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 5px;
+            font-family: 'Linux Libertine', 'Georgia', serif;
+            font-size: 1.7em;
+            font-weight: normal;
+            border-bottom: 1px solid var(--wiki-border);
+            padding-bottom: 0.2em;
             margin-top: 2em;
-            margin-bottom: 1em;
+            margin-bottom: 0.8em;
         }
         h3 {
-            font-size: 1.2em;
+            font-size: 1.3em;
             font-weight: bold;
             margin-top: 1.5em;
-            border-left: 5px solid var(--sml-red);
-            padding-left: 10px;
+            margin-bottom: 0.5em;
         }
-        a { color: var(--link-color); text-decoration: none; }
+        h4 {
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-top: 1em;
+        }
+        p { margin-bottom: 1em; text-align: justify; }
+        a { color: var(--wiki-link); text-decoration: none; }
+        a:visited { color: var(--wiki-link-visited); }
         a:hover { text-decoration: underline; }
-
-        /* --- Infobox (右側の表) --- */
+        
+        /* --- Infobox (右側の概要表) --- */
         .infobox {
-            width: 300px;
+            border: 1px solid var(--wiki-border);
+            background-color: #f8f9fa;
             float: right;
             clear: right;
-            margin: 0 0 20px 20px;
-            border: 1px solid var(--border-color);
-            background-color: #fff;
-            font-size: 0.9em;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            margin: 0 0 1em 1em;
+            width: 300px;
+            font-size: 90%;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
         }
         .infobox caption {
-            background-color: var(--sml-red);
-            color: white;
-            font-weight: bold;
-            padding: 8px;
-            font-size: 1.1em;
-        }
-        .infobox th, .infobox td {
-            padding: 6px 10px;
-            border-bottom: 1px solid var(--border-color);
+            font-weight: bold; padding: 5px; font-size: 1.2em;
+            text-align: center; background: #f8f9fa;
         }
         .infobox th {
-            background-color: var(--header-bg);
-            width: 35%;
+            background-color: var(--wiki-header-bg);
+            text-align: left; padding: 5px;
+        }
+        .infobox td { padding: 5px; }
+        .infobox-image {
+            background: #ccc; height: 150px;
+            display: flex; align-items: center; justify-content: center;
+            color: #555; margin-bottom: 5px;
         }
 
-        /* --- Tables (Station List & Data) --- */
-        .wikitable {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 1em 0;
-            font-size: 0.9em;
+        /* --- Table of Contents (TOC) --- */
+        #toc {
+            background-color: var(--wiki-toc-bg);
+            border: 1px solid var(--wiki-border);
+            padding: 10px 20px;
+            display: table;
+            margin: 20px 0;
+            border-radius: 2px;
         }
-        .wikitable th, .wikitable td {
-            border: 1px solid var(--border-color);
-            padding: 8px 12px;
+        #toc h2 {
+            font-family: sans-serif; font-size: 100%; font-weight: bold;
+            border: none; margin: 0; text-align: center;
+        }
+        #toc ul { list-style: none; padding: 0; margin: 5px 0; }
+        #toc ul ul { margin-left: 20px; }
+        .tocnumber { color: var(--wiki-text); margin-right: 5px; }
+
+        /* --- Wikitable (駅一覧などの表) --- */
+        .wikitable {
+            background-color: #fff;
+            border: 1px solid var(--wiki-border);
+            border-collapse: collapse;
+            color: black;
+            margin: 1em 0;
+            width: 100%;
+            font-size: 95%;
         }
         .wikitable th {
-            background-color: var(--header-bg);
+            background-color: var(--wiki-header-bg);
+            border: 1px solid var(--wiki-border);
+            padding: 0.5em;
             text-align: center;
             font-weight: bold;
         }
-        /* 種別ごとの強調表示 */
-        .type-l { color: #555; }
-        .type-sr { color: var(--sml-green); font-weight: bold; }
-        .type-cr { color: var(--sml-blue); font-weight: bold; }
-        .type-lt { color: var(--sml-red); font-weight: bold; }
-        
-        /* 停車記号のセンタリング */
-        .stop-mark { text-align: center; }
+        .wikitable td {
+            border: 1px solid var(--wiki-border);
+            padding: 0.5em;
+            vertical-align: top;
+        }
+        /* 記号の色分け */
+        .mark-stop { font-weight: bold; color: #000; } /* ● */
+        .mark-part { font-style: italic; color: #555; } /* ▲ */
+        .mark-pass { color: #ccc; } /* ｜ */
 
-        /* --- TOC (目次) --- */
-        #toc {
-            background-color: var(--header-bg);
-            border: 1px solid var(--border-color);
-            padding: 15px 20px;
-            margin: 20px 0;
-            display: inline-block;
-            min-width: 200px;
+        /* --- Urban Legend Box --- */
+        .urban-legend {
+            border: 2px solid #333;
+            background-color: #111;
+            color: #ddd;
+            padding: 20px;
+            margin-top: 20px;
+            font-family: "Courier New", monospace;
             border-radius: 4px;
         }
-        #toc h2 {
-            font-size: 1.1em;
-            margin: 0 0 10px 0;
-            border: none;
-            text-align: center;
-        }
-        #toc ul { list-style: none; padding-left: 0; margin: 0; }
-        #toc li { margin-bottom: 5px; }
-        #toc ul ul { padding-left: 20px; margin-top: 5px; }
-
-        /* --- Charts (CSS Graphs) --- */
-        .chart-wrapper {
-            border: 1px solid var(--border-color);
-            padding: 20px;
-            background: #fff;
-            margin: 20px 0;
-            border-radius: 8px;
-        }
-        .bar-chart {
-            display: flex;
-            align-items: flex-end;
-            height: 200px;
-            justify-content: space-around;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #666;
-        }
-        .bar-item {
-            flex: 1;
-            margin: 0 5px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            position: relative;
-        }
-        .bar {
-            width: 80%;
-            background-color: var(--sml-red);
-            border-radius: 4px 4px 0 0;
-            transition: height 0.6s ease;
-            min-height: 1px;
-        }
-        .bar-value { font-size: 0.75em; font-weight: bold; margin-bottom: 5px; }
-        .bar-label { font-size: 0.75em; margin-top: 8px; text-align: center; line-height: 1.2; }
 
         /* --- Responsive --- */
         @media (max-width: 768px) {
-            .main-content { padding: 20px; }
+            .container { flex-direction: column; border: none; }
+            .sidebar { display: none; }
+            .main-content { padding: 15px; }
             .infobox { float: none; width: 100%; margin: 0 0 20px 0; }
             .wikitable { display: block; overflow-x: auto; white-space: nowrap; }
-            .bar-label { font-size: 0.6em; transform: rotate(-45deg); margin-top: 15px; }
         }
 
-        /* --- Components (Back to Top & Cookie) --- */
+        /* --- Back to Top & Cookie --- */
         #backToTop {
-            display: none;
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
+            display: none; position: fixed; bottom: 30px; right: 30px;
+            width: 50px; height: 50px; background: var(--wiki-link);
+            color: white; border: none; border-radius: 50%;
+            font-size: 24px; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.3);
             z-index: 999;
-            background-color: var(--sml-red);
-            color: white;
-            border: none;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            font-size: 20px;
-            cursor: pointer;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-            transition: transform 0.2s, background-color 0.2s;
         }
-        #backToTop:hover { background-color: #b02015; transform: translateY(-2px); }
-
         #genericCookieNotice {
             position: fixed; bottom: 0; left: 0; width: 100%;
-            background: rgba(32,33,36,0.95); color: #fff;
-            padding: 15px; text-align: center; font-size: 0.9em;
-            z-index: 10000; display: none;
-            justify-content: center; align-items: center; flex-wrap: wrap;
-        }
-        #genericCookieNotice button {
-            background: var(--link-color); color: #fff; border: none;
-            padding: 8px 20px; margin-left: 15px; border-radius: 4px; cursor: pointer;
+            background: #222; color: white; padding: 15px;
+            text-align: center; z-index: 1000; display: none;
         }
     </style>
 </head>
 <body>
     <div class="container">
+        <div class="sidebar">
+            <div class="sidebar-logo">Wiki</div>
+            <ul style="list-style:none; padding:0; font-size:0.9em; color:var(--wiki-link);">
+                <li>メインページ</li>
+                <li>コミュニティ</li>
+                <li>最近の更新</li>
+                <li>おまかせ表示</li>
+            </ul>
+        </div>
+
         <div class="main-content">
             <h1>サンマル線</h1>
-
+            
             <table class="infobox">
                 <caption>サンマル線 (SML)</caption>
-                <tr><th>正式名称</th><td>咲仲都市高速鉄道</td></tr> 
-                <tr><th>運営</th><td><a href="/main.html?query=首都圏交通公社">首都圏交通公社 (SCT)</a></td></tr>
+                <tr><td colspan="2" style="padding:0;">
+                    <div class="infobox-image">[路線図イメージ]</div>
+                    <div style="text-align:center; font-size:0.8em; padding-bottom:5px;">東部通勤区間と西部山岳区間</div>
+                </td></tr>
+                <tr><th>管轄・運営</th><td><a href="#">首都圏交通公社 (SCT)</a></td></tr>
                 <tr><th>区間</th><td>晋ヶ丘 (SML01) - 華湖畔 (SML30)</td></tr>
-                <tr><th>距離</th><td>65.8 km</td></tr>
-                <tr><th>駅数</th><td>30駅</td></tr>
-                <tr><th>軌間 / 電化</th><td>1,067mm / 直流1,500V</td></tr>
-                <tr><th>最高速度</th><td>120 km/h (西部区間)</td></tr>
-                <tr><th>ラインカラー</th><td><span style="color:var(--sml-red); font-weight:bold;">■ 赤 (Red)</span></td></tr>
+                <tr><th>起点</th><td>晋ヶ丘駅</td></tr>
+                <tr><th>終点</th><td>華湖畔駅</td></tr>
+                <tr><th>駅数</th><td>30駅（未供用駅を除く）</td></tr>
+                <tr><th>路線距離</th><td>65.8 km</td></tr>
+                <tr><th>軌間</th><td>1,067 mm</td></tr>
+                <tr><th>電化方式</th><td>直流 1,500 V</td></tr>
+                <tr><th>閉塞方式</th><td>車内信号閉塞式 (ATC/ATO)</td></tr>
+                <tr><th>最高速度</th><td>120 km/h (LT/西部区間)</td></tr>
+                <tr><th>ラインカラー</th><td><span style="color:var(--sml-red); font-weight:bold;">■</span> 赤 (SanMaru Red)</td></tr>
             </table>
 
             <p>
-                <b>サンマル線</b>（SML: SanMaru Line）は、<a href="/main.html?query=首都圏交通公社">首都圏交通公社 (SCT)</a>が運営する、咲仲島を東西に貫く主要鉄道路線である。正式名称は<b>咲仲都市高速鉄道</b>。
+                <b>サンマル線</b>（サンマルせん、英語: <b>SML</b>: SanMaru Line）は、<a href="#">首都圏交通公社</a>（SCT）が運営する鉄道路線（幹線）である。正式名称は<b>咲仲都市高速鉄道</b>（さくなかとしこうそくてつどう）。
             </p>
             <p>
-                都心ビジネス街である「咲仲都心タワー駅」を境に、東側は大規模なベッドタウンを抱える通勤路線、西側は山岳・湖畔リゾートへ向かう観光路線という、全く異なる二つの顔を持つ。通勤時の過密ダイヤと、行楽シーズンの観光輸送を両立させる複雑な運行管理は「SCTの腕の見せ所」と評される一方、片方の遅延が全線に波及しやすい脆弱性も抱えている。
+                島咲（さくなか）地域の東西を貫く大動脈であり、東部の広大なベッドタウン群と、西部の山岳・湖畔リゾート地帯を結ぶ。路線の中心に位置するビジネス街「島咲都心タワー駅」を境に、通勤路線としての東部と、観光路線としての西部という極端に異なる性格を併せ持つ点が最大の特徴である。
             </p>
 
             <div id="toc">
                 <h2>目次</h2>
                 <ul>
-                    <li><a href="#section-outline">1 運行形態と種別</a></li>
-                    <li><a href="#section-stations">2 駅一覧・地域特性</a></li>
-                    <li><a href="#section-tourism">3 沿線文化と観光</a> </li>
-                    <li><a href="#section-data">4 データで見るサンマル線</a></li>
-                    <li><a href="#section-future">5 課題と将来構想</a></li>
-                    <li><a href="#section-links">6 外部リンク・出典</a></li>
+                    <li><span class="tocnumber">1</span> <a href="#歴史と背景">歴史と背景</a></li>
+                    <li><span class="tocnumber">2</span> <a href="#運行形態">運行形態</a></li>
+                    <li><span class="tocnumber">3</span> <a href="#駅一覧">駅一覧</a></li>
+                    <li><span class="tocnumber">4</span> <a href="#沿線概況">沿線概況と文化的特性</a></li>
+                    <li><span class="tocnumber">5</span> <a href="#抱える問題">抱える問題</a></li>
+                    <li><span class="tocnumber">6</span> <a href="#都市伝説">都市伝説</a></li>
+                    <li><span class="tocnumber">7</span> <a href="#脚注">脚注</a></li>
                 </ul>
             </div>
 
-            <h2 id="section-outline">1 運行形態と種別</h2>
+            <h2 id="歴史と背景">歴史と背景</h2>
             <p>
-                4つの運行種別が設定されており、地域特性に合わせて使い分けられている。
+                1985年（昭和60年）、高度経済成長期における都心部への人口集中と、それに伴う住宅不足を解消するために計画された「島咲ニュータウン計画」の交通軸として、まずは東部区間（晋ヶ丘 - 島咲都心タワー）が開業した。
+            </p>
+            <p>
+                その後、バブル経済期の観光ブームを受け、西部の温泉地および湖畔リゾートへのアクセス改善が急務となり、1990年代初頭に西部区間（島咲都心タワー - 華湖畔）が延伸開業した。この歴史的経緯の違いが、複線高架主体の東部と、単線トンネル主体の西部という路線規格の不一致を生み、後述する運行上の課題の原因となっている。
+            </p>
+
+            <h2 id="運行形態">運行形態</h2>
+            <p>
+                通勤需要と観光需要の両立を図るため、以下の4種別が設定されている。
+            </p>
+            <dl>
+                <dt>■ 各駅停車 (Local)</dt>
+                <dd>
+                    略称は<b>L</b>。全区間で運転されるが、特に東部エリア（SML01-19）では地域住民の主要な移動手段として、日中でも毎時6本以上の高頻度運転が行われている。使用車両は3000系ロングシート車が主体。
+                </dd>
+                
+                <dt><span style="color:green; font-weight:bold;">■</span> 区間快速 (Section Rapid)</dt>
+                <dd>
+                    略称は<b>SR</b>。東部の主要駅（緑陽学園前、春原など）に停車しつつ、西部の観光拠点（七里、浦鳴、郷ノ山）をこまめに拾う「バランス型」の種別。通勤客と一般観光客の双方をターゲットとしており、東西を直通する列車の主力である。
+                </dd>
+
+                <dt><span style="color:blue; font-weight:bold;">■</span> 通勤快速 (Commuter Rapid)</dt>
+                <dd>
+                    略称は<b>CR</b>。<b>東部エリア（SML01 - SML20）限定</b>で運行される種別。朝ラッシュ時の上り方面において、郊外から都心への速達性を最優先するために設定されている。停車駅は晋ヶ丘、緑陽学園前、春原、桜彩公園前、高ノ台に厳選されており、混雑率が最も高い種別でもある。
+                </dd>
+
+                <dt><span style="color:var(--sml-red); font-weight:bold;">■</span> リゾート特急 (Limited Express)</dt>
+                <dd>
+                    略称は<b>LT</b>。都心と西部のリゾート地を直結する全車指定席の特急列車。専用の800系車両（クロスシート車）が使用される。停車駅は観光拠点に絞られており、東部区間では春原や桜彩公園前など、レジャー需要の高い駅のみに停車する。
+                </dd>
+            </dl>
+            <h2 id="駅一覧">駅一覧</h2>
+            <p>
+                凡例：<br>
+                ●：停車、▲：一部停車（臨時・季節停車）、｜：通過<br>
+                駅番号の背景色は、■東部エリア（緑）、■西部エリア（青）を示す。
+            </p>
+
+            <h3>I. 東部エリア：郊外・住宅地 (SML01 - 19)</h3>
+            <p>
+                大規模なニュータウン開発が行われたエリアであり、朝夕の通勤通学需要が極めて高い。複線区間であり、高密度のダイヤが組まれている。
             </p>
             <table class="wikitable">
                 <tr>
-                    <th style="width:15%">種別</th>
-                    <th style="width:10%">略称</th>
-                    <th>運行概要</th>
+                    <th width="5%">No.</th>
+                    <th width="15%">駅名</th>
+                    <th width="4%">L</th>
+                    <th width="4%">SR</th>
+                    <th width="4%">CR</th>
+                    <th width="4%">LT</th>
+                    <th>地域特性・運行戦略</th>
                 </tr>
                 <tr>
-                    <td class="type-l"><b>各駅停車</b></td>
-                    <td><b>L</b></td>
-                    <td>全駅に停車。地域住民の足を支える基本種別。</td>
+                    <td style="background:#eefcf0;">01</td><td><b>晋ヶ丘</b></td>
+                    <td class="mark-stop">●</td><td class="mark-stop">●</td><td class="mark-stop">●</td><td class="mark-pass">｜</td>
+                    <td>【始発駅】丘陵地を切り開いた大規模ベッドタウン。広域バス網の拠点でCR・SRの始発設定あり。</td>
                 </tr>
                 <tr>
-                    <td class="type-sr"><b>区間快速</b></td>
-                    <td><b>SR</b></td>
-                    <td>通勤と観光のバランス型。東部の主要駅と西部の観光地を結ぶ。</td>
+                    <td style="background:#eefcf0;">02</td><td>ナカト中央団地</td>
+                    <td class="mark-stop">●</td><td class="mark-pass">｜</td><td class="mark-pass">｜</td><td class="mark-pass">｜</td>
+                    <td>70年代開発の団地群。高齢化が進行中。日常の買物需要が高く、各停の頻度維持が課題。</td>
                 </tr>
                 <tr>
-                    <td class="type-cr"><b>通勤快速</b></td>
-                    <td><b>CR</b></td>
-                    <td><b>東部エリア専用。</b>朝夕のラッシュ時に特化し、都心への速達性を最優先する。</td>
+                    <td style="background:#eefcf0;">03</td><td>高戸</td>
+                    <td class="mark-stop">●</td><td class="mark-pass">｜</td><td class="mark-pass">｜</td><td class="mark-pass">｜</td>
+                    <td>旧街道沿いの商店街。昭和の面影を残す地域密着型エリア。</td>
                 </tr>
                 <tr>
-                    <td class="type-lt"><b>リゾート特急</b></td>
-                    <td><b>LT</b></td>
-                    <td><b>西部エリア直通。</b>クロスシート車両（800系）を使用し、都心とリゾート地をノンストップで結ぶ。</td>
+                    <td style="background:#eefcf0;">04</td><td>上岡</td>
+                    <td class="mark-stop">●</td><td class="mark-pass">｜</td><td class="mark-pass">｜</td><td class="mark-pass">｜</td>
+                    <td>緩やかな丘の上の高級住宅街。CR通過駅だが隣接駅とのバス連携強化中。</td>
+                </tr>
+                <tr>
+                    <td style="background:#eefcf0;">05</td><td>石船</td>
+                    <td class="mark-stop">●</td><td class="mark-pass">｜</td><td class="mark-pass">｜</td><td class="mark-pass">｜</td>
+                    <td>地方直売所の最寄り。早朝は活気がある。貨物側線跡を臨時列車の待避に使用。</td>
+                </tr>
+                <tr>
+                    <td style="background:#eefcf0;">06</td><td><b>緑陽学園前</b></td>
+                    <td class="mark-stop">●</td><td class="mark-stop">●</td><td class="mark-stop">●</td><td class="mark-pass">｜</td>
+                    <td>【文教地区】高校・大学が集中し、学生輸送の要。CR・SR停車必須の重要駅。</td>
+                </tr>
+                <tr>
+                    <td style="background:#eefcf0;">07</td><td>東田</td>
+                    <td class="mark-stop">●</td><td class="mark-pass">｜</td><td class="mark-pass">｜</td><td class="mark-pass">｜</td>
+                    <td>新規区画整理地。高層マンション増加に伴い、SR停車の要望が出ている。</td>
+                </tr>
+                <tr>
+                    <td style="background:#eefcf0;">08</td><td><b>春原</b></td>
+                    <td class="mark-stop">●</td><td class="mark-stop">●</td><td class="mark-stop">●</td><td class="mark-stop">●</td>
+                    <td>【副都心】アニメ・サブカルチャーの聖地。全列車停車。乗務員交代拠点でもある。</td>
+                </tr>
+                <tr>
+                    <td style="background:#eefcf0;">09</td><td>仲町</td>
+                    <td class="mark-stop">●</td><td class="mark-pass">｜</td><td class="mark-pass">｜</td><td class="mark-pass">｜</td>
+                    <td>大使館や豪邸が並ぶ静寂なエリア。環境維持のため優等列車は通過する。</td>
+                </tr>
+                <tr>
+                    <td style="background:#eefcf0;">10</td><td>鯉沢</td>
+                    <td class="mark-stop">●</td><td class="mark-pass">｜</td><td class="mark-pass">｜</td><td class="mark-pass">｜</td>
+                    <td>古書店街・レトロ喫茶。文化的な学生街だが、地域内回遊を促すため優等は通過。</td>
+                </tr>
+                <tr>
+                    <td style="background:#eefcf0;">11</td><td><b>相古</b></td>
+                    <td class="mark-stop">●</td><td class="mark-stop">●</td><td class="mark-pass">｜</td><td class="mark-stop">●</td>
+                    <td>湾岸エリア行政中心地。大型病院・区役所あり。ラッシュ時の折返し拠点機能を持つ。</td>
+                </tr>
+                <tr>
+                    <td style="background:#eefcf0;">12</td><td>西町医療センター</td>
+                    <td class="mark-stop">●</td><td class="mark-pass">｜</td><td class="mark-pass">｜</td><td class="mark-pass">｜</td>
+                    <td>大学病院直結。高齢者・通院客への配慮から各停のみ停車。</td>
+                </tr>
+                <tr>
+                    <td style="background:#eefcf0;">13</td><td>西海工業団地</td>
+                    <td class="mark-stop">●</td><td class="mark-stop">●</td><td class="mark-pass">｜</td><td class="mark-pass">｜</td>
+                    <td>沿線最大の工業地帯。大気汚染問題あり。通勤利便性のためSR停車。</td>
+                </tr>
+                <tr>
+                    <td style="background:#eefcf0;">14</td><td>鶴見口</td>
+                    <td class="mark-stop">●</td><td class="mark-pass">｜</td><td class="mark-pass">｜</td><td class="mark-pass">｜</td>
+                    <td>長距離バスターミナル併設。バス接続を考慮したダイヤ設定。</td>
+                </tr>
+                <tr>
+                    <td style="background:#eefcf0;">15</td><td>仲富車庫前</td>
+                    <td class="mark-stop">●</td><td class="mark-pass">｜</td><td class="mark-pass">｜</td><td class="mark-pass">｜</td>
+                    <td>巨大な車両基地と鉄道博物館を併設。旅客需要は限定的。</td>
+                </tr>
+                <tr>
+                    <td style="background:#eefcf0;">16</td><td><b>桜彩公園前</b></td>
+                    <td class="mark-stop">●</td><td class="mark-stop">●</td><td class="mark-stop">●</td><td class="mark-stop">●</td>
+                    <td>【観光・通勤】広大な総合公園。春は桜の名所となり、観光・通勤両面で全優等が停車。</td>
+                </tr>
+                <tr>
+                    <td style="background:#eefcf0;">17</td><td>公千大付属前</td>
+                    <td class="mark-stop">●</td><td class="mark-pass">｜</td><td class="mark-pass">｜</td><td class="mark-pass">｜</td>
+                    <td>中高一貫校あり。駅構内の小動物園が地味に人気。学生輸送は各停で対応。</td>
+                </tr>
+                <tr>
+                    <td style="background:#eefcf0;">18</td><td>和泉橋</td>
+                    <td class="mark-stop">●</td><td class="mark-pass">｜</td><td class="mark-pass">｜</td><td class="mark-pass">｜</td>
+                    <td>歴史的建造物への入口だが、観光客はバス利用が多いため優等は通過。</td>
+                </tr>
+                <tr>
+                    <td style="background:#eefcf0;">19</td><td>高ノ台</td>
+                    <td class="mark-stop">●</td><td class="mark-stop">●</td><td class="mark-stop">●</td><td class="mark-pass">｜</td>
+                    <td>地盤強固な高台の富裕層エリア。CR・SR停車で都心への速達性を担保。</td>
                 </tr>
             </table>
 
-            <h2 id="section-stations">2 駅一覧・地域特性</h2>
-            <p>凡例：●停車、▲一部停車、｜通過</p>
-            
-            <h3>東部エリア：郊外・ベッドタウン (SML01 - 19)</h3>
+            <h3>II. 都心ターミナル (SML20)</h3>
             <table class="wikitable">
                 <tr>
-                    <th>No.</th>
-                    <th>駅名</th>
-                    <th>L</th><th>SR</th><th>CR</th><th>LT</th>
-                    <th>特徴・接続</th>
+                    <th width="5%">No.</th>
+                    <th width="15%">駅名</th>
+                    <th width="4%">L</th>
+                    <th width="4%">SR</th>
+                    <th width="4%">CR</th>
+                    <th width="4%">LT</th>
+                    <th>地域特性・運行戦略</th>
                 </tr>
-                <tr>
-                    <td>01</td><td><b>晋ヶ丘</b></td>
-                    <td class="stop-mark">●</td><td class="stop-mark">●</td><td class="stop-mark">●</td><td class="stop-mark">｜</td>
-                    <td>始発駅。大規模ニュータウンの中心地。</td>
-                </tr>
-                <tr>
-                    <td>06</td><td><b>緑陽学園前</b></td>
-                    <td class="stop-mark">●</td><td class="stop-mark">●</td><td class="stop-mark">●</td><td class="stop-mark">｜</td>
-                    <td>文教地区。朝夕は学生でごった返す。</td>
-                </tr>
-                <tr>
-                    <td>08</td><td><b>春原</b></td>
-                    <td class="stop-mark">●</td><td class="stop-mark">●</td><td class="stop-mark">●</td><td class="stop-mark">●</td>
-                    <td><b>副都心。</b>サブカルチャーの聖地として知られ、全列車が停車。</td>
-                </tr>
-                <tr>
-                    <td>13</td><td><b>西海工業団地</b></td>
-                    <td class="stop-mark">●</td><td class="stop-mark">●</td><td class="stop-mark">｜</td><td class="stop-mark">｜</td>
-                    <td>沿線最大の産業拠点。通勤需要が高い。</td>
-                </tr>
-                <tr>
-                    <td>16</td><td><b>桜彩公園前</b></td>
-                    <td class="stop-mark">●</td><td class="stop-mark">●</td><td class="stop-mark">●</td><td class="stop-mark">●</td>
-                    <td>広大な公園への最寄り駅。休日は行楽客で賑わう。</td>
+                <tr style="border:2px solid #d33;">
+                    <td style="background:#ffe6e6;">20</td><td><b>島咲都心タワー</b></td>
+                    <td class="mark-stop">●</td><td class="mark-stop">●</td><td class="mark-stop">●</td><td class="mark-stop">●</td>
+                    <td>【最大拠点】超高層ビル群・商業施設直結。東西運行系統の分断・接続点。</td>
                 </tr>
             </table>
-            <p style="font-size:0.8em; text-align:right;">※主要駅のみ抜粋して掲載</p>
 
-            <h3>都心・西部エリア：リゾート・観光 (SML20 - 30)</h3>
-            <table class="wikitable">
-                <tr>
-                    <th>No.</th>
-                    <th>駅名</th>
-                    <th>L</th><th>SR</th><th>CR</th><th>LT</th>
-                    <th>特徴・接続</th>
-                </tr>
-                <tr style="background-color:#fff0f0;">
-                    <td>20</td><td><b>咲仲都心タワー</b></td>
-                    <td class="stop-mark">●</td><td class="stop-mark">●</td><td class="stop-mark">●</td><td class="stop-mark">●</td>
-                    <td><b>最大ターミナル。</b>全機能が集約される路線の心臓部。</td>
-                </tr>
-                <tr>
-                    <td>22</td><td><b>木島台</b></td>
-                    <td class="stop-mark">●</td><td class="stop-mark">｜</td><td class="stop-mark">-</td><td class="stop-mark">▲</td>
-                    <td>高級別荘地。シーズン時のみ特急が臨時停車。</td>
-                </tr>
-                <tr>
-                    <td>29</td><td><b>郷ノ山</b></td>
-                    <td class="stop-mark">●</td><td class="stop-mark">●</td><td class="stop-mark">-</td><td class="stop-mark">●</td>
-                    <td><a href="/main.html?query=咲仲温泉">咲仲温泉</a>への玄関口。</td>
-                </tr>
-                <tr>
-                    <td>30</td><td><b>華湖畔</b></td>
-                    <td class="stop-mark">●</td><td class="stop-mark">●</td><td class="stop-mark">-</td><td class="stop-mark">●</td>
-                    <td>終点。湖畔リゾートホテルと直結する観光拠点。</td>
-                </tr>
-            </table>
-            <h2 id="section-tourism">3 沿線文化と観光</h2>
+            <h3>III. 西部エリア：郊外・リゾート (SML21 - 30)</h3>
             <p>
-                サンマル線は「日常」と「非日常」を一本で結ぶ路線であり、エリアごとに全く異なる文化圏が形成されている。
+                山間部を抜けて湖畔へと至る観光路線。単線区間が多く、特急列車の待避待ちなどダイヤ上の制約が大きい。
             </p>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
-                <div style="border: 1px solid var(--border-color); padding: 15px; border-radius: 8px; background: #fff;">
-                    <h4 style="margin-top:0; color:var(--sml-blue);">湖畔と温泉の「西部リゾート」</h4>
-                    <p>終点の<b>華湖畔 (SML30)</b> は、県内有数の高級リゾート地。リゾート特急「LT」に乗れば、都心から約50分で喧騒を離れた別世界へアクセスできる。手前の<b>郷ノ山 (SML29)</b> にある温泉街は、冬場の湯治客に人気が高い。</p>
-                </div>
-                <div style="border: 1px solid var(--border-color); padding: 15px; border-radius: 8px; background: #fff;">
-                    <h4 style="margin-top:0; color:var(--sml-red);">サブカルチャーの聖地「春原」</h4>
-                    <p>東部の<b>春原 (SML08)</b> 周辺は、アニメショップやライブハウスが密集する「咲仲の秋葉原」。隣接する<b>鯉沢 (SML10)</b> の古書店街と共に、独特の文化的深度を持つエリアとして、若者や外国人観光客の支持を集める。</p>
-                </div>
-                <div style="border: 1px solid var(--border-color); padding: 15px; border-radius: 8px; background: #fff;">
-                    <h4 style="margin-top:0; color:var(--sml-green);">食と自然の東部エリア</h4>
-                    <p><b>石船 (SML05)</b> の駅前直売所では、近郊農家から届く新鮮な野菜が毎朝並ぶ。また、<b>桜彩公園前 (SML16)</b> はその名の通り、春には沿線随一の桜のトンネルが出現し、車窓からもその美しさを堪能できる。</p>
-                </div>
+            <table class="wikitable">
+                <tr>
+                    <th width="5%">No.</th>
+                    <th width="15%">駅名</th>
+                    <th width="4%">L</th>
+                    <th width="4%">SR</th>
+                    <th width="4%">CR</th>
+                    <th width="4%">LT</th>
+                    <th>地域特性・運行戦略</th>
+                </tr>
+                <tr>
+                    <td style="background:#e6f2ff;">21</td><td>日中峠</td>
+                    <td class="mark-stop">●</td><td class="mark-pass">｜</td><td class="mark-pass">-</td><td class="mark-pass">｜</td>
+                    <td>山岳区間入口。長大トンネル直前の集落。各停のみ停車。</td>
+                </tr>
+                <tr>
+                    <td style="background:#e6f2ff;">22</td><td>木島台</td>
+                    <td class="mark-stop">●</td><td class="mark-pass">｜</td><td class="mark-pass">-</td><td class="mark-part">▲</td>
+                    <td>高級別荘地。避暑シーズンのみLTが臨時停車。SRは速達性重視で通過。</td>
+                </tr>
+                <tr>
+                    <td style="background:#e6f2ff;">23</td><td>島咲国営農園</td>
+                    <td class="mark-stop">●</td><td class="mark-pass">｜</td><td class="mark-pass">-</td><td class="mark-pass">｜</td>
+                    <td>国営果樹園・試験場。「島咲苺」狩りが人気。</td>
+                </tr>
+                <tr>
+                    <td style="background:#e6f2ff;">24</td><td><b>七里</b></td>
+                    <td class="mark-stop">●</td><td class="mark-stop">●</td><td class="mark-pass">-</td><td class="mark-stop">●</td>
+                    <td>旧宿場町。「七里飴」が名物。滞在型観光需要に応えLT・SR停車。</td>
+                </tr>
+                <tr>
+                    <td style="background:#e6f2ff;">25</td><td>大河原</td>
+                    <td class="mark-stop">●</td><td class="mark-pass">｜</td><td class="mark-pass">-</td><td class="mark-pass">｜</td>
+                    <td>鉄橋のたもとの絶景駅。撮り鉄スポットとしても有名。</td>
+                </tr>
+                <tr>
+                    <td style="background:#e6f2ff;">26</td><td>南吹ノ台</td>
+                    <td class="mark-stop">●</td><td class="mark-pass">｜</td><td class="mark-pass">-</td><td class="mark-pass">｜</td>
+                    <td>田園地帯。名物「巨大キング・ザリガニ」オブジェあり。</td>
+                </tr>
+                <tr>
+                    <td style="background:#e6f2ff;">27</td><td>笹原</td>
+                    <td class="mark-stop">●</td><td class="mark-pass">｜</td><td class="mark-pass">-</td><td class="mark-pass">｜</td>
+                    <td><b>無人駅</b>。妖怪「がしゃまる」伝説の地。自然保護のため優等通過。</td>
+                </tr>
+                <tr>
+                    <td style="background:#e6f2ff;">28</td><td><b>浦鳴</b></td>
+                    <td class="mark-stop">●</td><td class="mark-stop">●</td><td class="mark-pass">-</td><td class="mark-stop">●</td>
+                    <td>海水浴場・マリーナ。夏期は極めて混雑。ブランド梨「浦鳴梨」の産地。</td>
+                </tr>
+                <tr>
+                    <td style="background:#e6f2ff;">29</td><td><b>郷ノ山</b></td>
+                    <td class="mark-stop">●</td><td class="mark-stop">●</td><td class="mark-pass">-</td><td class="mark-stop">●</td>
+                    <td>日本有数の規模を誇る「島咲温泉」への玄関口。LTの主要停車駅。</td>
+                </tr>
+                <tr>
+                    <td style="background:#e6f2ff;">30</td><td><b>華湖畔</b></td>
+                    <td class="mark-stop">●</td><td class="mark-stop">●</td><td class="mark-pass">-</td><td class="mark-stop">●</td>
+                    <td>【終着駅】巨大湖畔リゾート・ホテル直結。遊覧船乗り場あり。</td>
+                </tr>
+            </table>
+            <h2 id="沿線概況">沿線概況と文化的特性</h2>
+            <p>
+                サンマル線沿線は、いくつかの明確な文化圏に分かれている。
+            </p>
+            <h4>サブカルチャーと学生街（東部）</h4>
+            <p>
+                <b>春原（SML08）</b>周辺は「島咲の秋葉原」と称され、アニメショップやライブハウスが林立する。週末にはコスプレイヤーやアイドルファンが集結し、独特の熱気を帯びる。隣接する<b>鯉沢（SML10）</b>には古書店街やレトロな喫茶店が多く、学生や文化人の溜まり場となっており、この2駅だけで一日を過ごせるほどの文化的密度を持つ。
+            </p>
+            <h4>究極のリトリート（西部）</h4>
+            <p>
+                都心の喧騒からわずか50分でアクセスできる<b>華湖畔（SML30）</b>および<b>郷ノ山（SML29）</b>は、県内屈指の高級リゾートエリアである。特に郷ノ山の温泉街は、冬場の湯治客や、LT（リゾート特急）を利用して週末を過ごす富裕層に人気が高い。また、<b>浦鳴（SML28）</b>のマリーナエリアは、夏場の若者文化の発信地となっている。
+            </p>
+
+            <h2 id="抱える問題">抱える問題</h2>
+            <h4>東西連鎖遅延 (East-West Chain Delay)</h4>
+            <p>
+                サンマル線最大の運行上の課題。西部の単線区間（SML21以西）で発生した軽微な遅延（野生動物との接触や、観光客の乗降遅れなど）が、島咲都心タワー駅（SML20）での接続待ちを通じて、東部の過密な通勤ダイヤに波及する現象。SCTは対策として、七里駅（SML24）付近への待避線増設を計画しているが、用地買収が難航している。
+            </p>
+            <h4>西海工業団地の大気汚染</h4>
+            <p>
+                西海工業団地（SML13）周辺は、沿線経済を支える重要なエリアであるが、工場からの排煙による大気汚染や異臭騒ぎが度々問題視されている。SCT側は駅舎への空気清浄システム導入や、密閉性の高い車両（新型3000系）の優先投入を行っている。
+            </p>
+
+            <h2 id="都市伝説">都市伝説</h2>
+            <div class="urban-legend">
+                <h4>SML00: 篷聾（ほうろう）</h4>
+                <p>
+                    インターネット掲示板やSNSで語られる、サンマル線最大の怪談。
+                    <br><br>
+                    「22時30分ちょうどに、無人駅である<b>笹原駅（SML27）</b>のホームに行くと、全身が黒い制服を着た駅員が立っている」というもの。
+                    <br><br>
+                    その駅員に近づくと<b>「篷聾（ほうろう）へ行くか？」</b>と低い声で尋ねられる。ここで「はい」と答えてしまうと、視界が暗転し、気がつくと見知らぬ駅「篷聾駅」のホームに立っているとされる。
+                    <br><br>
+                    駅の構造自体は笹原駅に酷似しているが、駅の外からは不規則な太鼓の音が響き続け、改札の向こうではひょっとこの仮面をつけた集団が奇妙な踊りを踊っているため、駅の外に出ることはできない。また、次の電車が来る保証もなく、現世への帰還は困難を極めると言われている。
+                    <br><br>
+                    <i>※SCT広報課は「そのような駅は存在せず、夜間の無人駅への用もない立ち入りは危険である」と公式にコメントしている。</i>
+                </p>
             </div>
 
-            <h2 id="section-data">4 データで見るサンマル線</h2>
-            <h3>1日平均乗降客数 (2024年概算)</h3>
-            <div class="chart-wrapper">
-                <div class="bar-chart">
-                    <div class="bar-item"><div class="bar-value">18万</div><div class="bar" style="height: 60%;"></div><div class="bar-label">晋ヶ丘</div></div>
-                    <div class="bar-item"><div class="bar-value">25万</div><div class="bar" style="height: 83%;"></div><div class="bar-label">春原</div></div>
-                    <div class="bar-item"><div class="bar-value">30万</div><div class="bar" style="height: 100%;"></div><div class="bar-label">咲仲都心<br>タワー</div></div>
-                    <div class="bar-item"><div class="bar-value">15万</div><div class="bar" style="height: 50%;"></div><div class="bar-label">相古</div></div>
-                    <div class="bar-item"><div class="bar-value">7万</div><div class="bar" style="height: 23%;"></div><div class="bar-label">華湖畔</div></div>
-                </div>
+            <h2 id="脚注">脚注</h2>
+            <div style="font-size:0.8em;">
+                <ol>
+                    <li>『首都圏交通公社 20年史』SCT広報部, 2005年, p.45.</li>
+                    <li>「島咲エリアの鉄道文化と都市伝説」『月刊鉄道オカルト』2023年8月号.</li>
+                </ol>
             </div>
-
-            <h2 id="section-future">5 課題と将来構想</h2>
-            <ul>
-                <li><b>東西連鎖遅延:</b> 西部の単線区間で発生した遅延が、都心タワー駅を経由して東部の通勤ダイヤを破壊する現象。SCTは待避線の増設を急いでいる。</li>
-                <li><b>東部複々線化計画:</b> 晋ヶ丘～相古間において、通勤線と優等線を分離する構想。用地買収の難航により、実現は2040年代以降と見られる。</li>
-            </ul>
-
-            <h2 id="section-links">6 外部リンク・出典</h2>
-            <ul>
-                <li><a href="/7/index.html" target="_blank">Wikipedia: 首都圏交通公社 (SCT)</a></li>
-                <li>[1] 咲仲線公式サイト, 『サンマル線と咲仲島』, 1995年.</li>
-            </ul>
         </div>
     </div>
 
     <button onclick="topFunction()" id="backToTop" title="トップへ戻る">↑</button>
 
     <div id="genericCookieNotice">
-        <span>当サイトではユーザー体験向上のためにCookieを使用しています。<a href="/ak/index.html" style="color:#8ab4f8;">詳細はこちら</a></span>
+        当サイトではユーザー体験向上のためにCookieを使用しています。
         <button onclick="acceptConsent()">同意する</button> 
     </div>
 
     <script>
-        // Back to Top Button
+        // --- Back to Top Button Logic ---
         const mybutton = document.getElementById("backToTop");
         window.onscroll = function() {
             if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
@@ -409,16 +553,21 @@
                 mybutton.style.display = "none";
             }
         };
+
         function topFunction() {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
         }
 
-        // Cookie Consent
-        const CONSENT_KEY = 'consent-local-storage';
+        // --- Cookie Notice Logic ---
+        const CONSENT_KEY = 'sml_wiki_consent';
         const notice = document.getElementById('genericCookieNotice');
         
+        // Check local storage on load
         if (localStorage.getItem(CONSENT_KEY) !== 'accepted') {
-            notice.style.display = 'flex';
+            notice.style.display = 'block';
         }
 
         function acceptConsent() {
