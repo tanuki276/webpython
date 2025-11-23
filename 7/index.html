@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>マルコ・ロレンツォ症候群 - Liefantidia</title>
+    <style>
+        /* --- Base & Layout (Wikipedia Vector Skin Style) --- */
+        :root {
+            --wiki-bg: #ffffff;
+            --wiki-text: #202122;
+            --wiki-link: #3366cc;
+            --wiki-link-visited: #795cb2;
+            --wiki-border: #a2a9b1;
+            --wiki-header-bg: #eaecf0;
+            --wiki-toc-bg: #f8f9fa;
+            --warning-bg: #fef6f6;
+            --warning-border: #d33;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+            line-height: 1.6;
+            background-color: #f6f6f6;
+            color: var(--wiki-text);
+            margin: 0;
+            font-size: 0.938em;
+        }
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            background-color: var(--wiki-bg);
+            min-height: 100vh;
+            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+            display: flex;
+            position: relative; /* ボタン配置のため */
+        }
+        .main-content {
+            width: 100%;
+            padding: 1.5em 2em;
+            box-sizing: border-box;
+        }
+
+        /* --- Typography --- */
+        h1 {
+            font-family: 'Linux Libertine', 'Georgia', 'Times', serif;
+            font-size: 1.8em;
+            font-weight: normal;
+            border-bottom: 1px solid var(--wiki-border);
+            padding-bottom: 0.2em;
+            margin-bottom: 0.5em;
+            margin-top: 0;
+        }
+        h2 {
+            font-family: 'Linux Libertine', 'Georgia', 'Times', serif;
+            font-size: 1.5em;
+            font-weight: normal;
+            border-bottom: 1px solid var(--wiki-border);
+            padding-bottom: 0.2em;
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+        }
+        h3 {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-top: 1em;
+            margin-bottom: 0.3em;
+        }
+        p {
+            margin: 0.5em 0 1em 0;
+            text-align: justify;
+        }
+        a {
+            color: var(--wiki-link);
+            text-decoration: none;
+        }
+        a:visited {
+            color: var(--wiki-link-visited);
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        ul, ol {
+            margin: 0.3em 0 1em 1.6em;
+            padding: 0;
+        }
+
+        /* --- Infobox --- */
+        .infobox {
+            border: 1px solid var(--wiki-border);
+            background-color: #f8f9fa;
+            color: black;
+            margin: 0.5em 0 1em 1em;
+            padding: 0.2em;
+            float: right;
+            clear: right;
+            width: 22em;
+            font-size: 88%;
+            line-height: 1.5em;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
+        }
+        .infobox caption {
+            font-size: 125%;
+            font-weight: bold;
+            padding: 0.2em;
+            text-align: center;
+        }
+        .infobox th {
+            background-color: var(--wiki-header-bg);
+            text-align: left;
+            vertical-align: top;
+            padding: 0.2em 0.4em;
+        }
+        .infobox td {
+            padding: 0.2em 0.4em;
+            vertical-align: top;
+        }
+
+        /* --- TOC --- */
+        #toc {
+            background-color: var(--wiki-toc-bg);
+            border: 1px solid var(--wiki-border);
+            padding: 10px;
+            display: table;
+            margin: 1em 0;
+            font-size: 95%;
+        }
+        #toc h2 {
+            font-family: sans-serif;
+            font-size: 100%;
+            font-weight: bold;
+            border: none;
+            margin: 0;
+            text-align: center;
+        }
+        #toc ul { list-style: none; margin: 0.5em 0 0 0; padding-left: 0; }
+        .tocnumber { color: var(--wiki-text); padding-right: 0.3em; }
+
+        /* --- Warning Box --- */
+        .warning-box {
+            border: 1px solid var(--warning-border);
+            border-left: 10px solid var(--warning-border);
+            background-color: var(--warning-bg);
+            padding: 15px;
+            margin: 0 0 20px 0;
+            color: #000;
+            font-size: 0.9em;
+        }
+        .warning-title {
+            color: #cc0000;
+            font-weight: bold;
+            font-size: 1.1em;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        /* --- Back To Top Button (User Style) --- */
+        #backToTop {
+            display: none;
+            position: fixed;
+            bottom: 60px; /* Cookieバナーと被らないよう調整 */
+            right: 30px;
+            z-index: 99;
+            border: none;
+            outline: none;
+            background-color: rgba(6, 69, 173, 0.8);
+            color: white;
+            cursor: pointer;
+            padding: 10px 15px;
+            border-radius: 4px;
+            font-size: 18px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+            transition: background-color 0.3s;
+        }
+        #backToTop:hover {
+            background-color: #002bb8;
+        }
+
+        /* --- Cookie Banner --- */
+        #genericCookieNotice {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #222;
+            color: #fff;
+            padding: 15px;
+            text-align: center;
+            font-size: 0.85em;
+            z-index: 1000;
+            display: none;
+        }
+        #genericCookieNotice button {
+            background-color: var(--wiki-link);
+            color: #fff;
+            border: none;
+            padding: 5px 15px;
+            margin-left: 15px;
+            border-radius: 2px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .container { width: 100%; box-shadow: none; }
+            .main-content { padding: 1em; }
+            .infobox { float: none; width: 100%; margin: 1em 0; display: table; }
+            #backToTop { right: 15px; bottom: 70px; }
+        }
+    </style>
+</head>
+<body>
+
+    <button onclick="topFunction()" id="backToTop" title="トップに戻る">↑</button>
+
+    <div class="container">
+        <div class="main-content">
+            
+            <div class="warning-box">
+                <span class="warning-title">【※この記事はフィクションです】</span>
+                この記事で解説されている「マルコ・ロレンツォ症候群」は、架空の疾患です。<br>
+                記載されている症状（倦怠感、麻痺など）が実際にある場合は、この記事を参考にせず、必ず<strong>現実の医療機関</strong>を受診してください。
+            </div>
+
+            <h1>マルコ・ロレンツォ症候群</h1>
+            
+            <table class="infobox">
+                <caption>マルコ・ロレンツォ症候群</caption>
+                <tr>
+                    <td colspan="2" style="text-align:center; font-size:0.9em;">
+                        <div style="background:#ddd; width:100%; height:150px; display:flex; align-items:center; justify-content:center; color:#555;">
+                            [No Image Available]
+                        </div>
+                        <div style="padding-top:0.4em;">過剰なストレスによる<a href="/main.html?query=HPA軸">HPA軸</a>の興奮と<br>末梢への影響を示した概念図</div>
+                    </td>
+                </tr>
+                <tr><th scope="row">別名</th><td>中枢性警告徴候 (Central Warning Sign, CWS)<br>二次性神経疲労症候群</td></tr>
+                <tr><th scope="row">診療科</th><td><a href="/main.html?query=心療内科">心療内科</a>、<a href="/main.html?query=神経内科">神経内科</a></td></tr>
+                <tr><th scope="row">ICD-11</th><td>なし (Liefantidia分類: F-99.8)</td></tr>
+                <tr><th scope="row">主要症状</th><td>持続的<a href="/main.html?query=倦怠感">倦怠感</a>、遊走性筋肉痛、末梢性知覚鈍麻</td></tr>
+                <tr><th scope="row">発症要因</th><td>慢性的な心理社会的ストレス、<a href="/main.html?query=過労">過労</a></td></tr>
+                <tr><th scope="row">合併症</th><td>早期<a href="/main.html?query=心血管イベント">心血管イベント</a>、<a href="/main.html?query=うつ病">うつ病</a></td></tr>
+            </table>
+
+            <p>
+                <strong>マルコ・ロレンツォ症候群</strong>（英: Marco Lorenzo Syndrome, <strong>MLS</strong>）は、慢性的な心理社会的ストレスに対する<a href="/main.html?query=中枢神経系">中枢神経系</a>の適応不全によって引き起こされる、一連の<a href="/main.html?query=身体表現性障害">身体表現性障害</a>の総称である。1968年にイタリアの神経学者マルコ・ロレンツォによって提唱された。
+            </p>
+            <p>
+                <a href="/main.html?query=自律神経系">自律神経系</a>、特に<a href="/main.html?query=交感神経">交感神経</a>の持続的な過緊張状態が背景にあり、脳が身体活動を強制的に抑制しようとする防御反応（通称：<strong>CWSシグナル</strong>）として理解されている。現代医学においては、<a href="/main.html?query=機能性身体症候群">機能性身体症候群</a>（FSS）の一種として分類されることが多いが、放置した場合の循環器系リスクが特異的に高い点が特徴である。
+            </p>
+
+            <div id="toc">
+                <h2>目次</h2>
+                <ul>
+                    <li><span class="tocnumber">1</span> <a href="#概要と歴史">概要と歴史</a></li>
+                    <li><span class="tocnumber">2</span> <a href="#疫学">疫学</a></li>
+                    <li><span class="tocnumber">3</span> <a href="#病態生理">病態生理</a></li>
+                    <li><span class="tocnumber">4</span> <a href="#症状">症状</a></li>
+                    <li><span class="tocnumber">5</span> <a href="#診断基準">診断基準</a></li>
+                    <li><span class="tocnumber">6</span> <a href="#治療と予後">治療と予後</a></li>
+                    <li><span class="tocnumber">7</span> <a href="#脚注">脚注</a></li>
+                </ul>
+            </div>
+
+            <h2 id="概要と歴史">概要と歴史</h2>
+            <p>
+                1960年代後半、イタリアの<a href="/main.html?query=高度経済成長期">高度経済成長期</a>において、ミラノのビジネスマンを中心に原因不明の脱力感や筋肉痛を訴える患者が急増した。当時の医学では単なる「過労」として片付けられていたが、マルコ・ロレンツォ博士は、これらの患者群に共通して<strong><a href="/main.html?query=腱反射">腱反射</a>の異常な亢進</strong>と<strong>末梢体温の低下</strong>が見られることに着目した。
+            </p>
+            <p>
+                ロレンツォは1968年の論文『脳のSOS信号』において、これが局所的な筋疲労ではなく、<a href="/main.html?query=脳幹">脳幹</a>部および<a href="/main.html?query=視床下部">視床下部</a>の機能不全による全身性の疾患であると定義した<sup class="reference"><a href="#cite1">[1]</a></sup>。当初は懐疑的な見方も強かったが、その後の追跡調査により、MLSと診断された患者群の10年以内の<a href="/main.html?query=心血管イベント">心血管イベント</a>発生率が対照群と比較して有意に高い（約3.5倍）ことが判明し<sup class="reference"><a href="#cite2">[2]</a></sup>、予防医学の観点から注目されるようになった。
+            </p>
+
+            <h2 id="疫学">疫学</h2>
+            <p>
+                好発年齢は30代から50代の労働人口層であり、性差はほとんど見られないが、几帳面で責任感が強い性格傾向（<a href="/main.html?query=メランコリー親和型性格">メランコリー親和型性格</a>）を持つ者に多く発症する傾向がある。先進国における有病率は人口の約0.5%〜1.2%と推計されている。
+            </p>
+
+            <h2 id="病態生理">病態生理</h2>
+            <p>
+                MLSの本質は、<a href="/main.html?query=HPA軸">視床下部-下垂体-副腎系（HPA軸）</a>の調節障害にあると考えられている。
+            </p>
+            <ul>
+                <li><strong>交感神経の暴走:</strong> ストレスにより交感神経が常時興奮状態となり、血管収縮が持続する。これが末梢の血流不全（<a href="/main.html?query=虚血">虚血</a>）を引き起こし、しびれや冷感の原因となる。</li>
+                <li><strong>疼痛抑制系の破綻:</strong> 脳内で痛みを抑制する<a href="/main.html?query=セロトニン">セロトニン</a>やノルアドレナリンの枯渇により、軽微な刺激でも強い痛みとして感じるようになる（<a href="/main.html?query=痛覚変調性疼痛">痛覚変調性疼痛</a>）。</li>
+                <li><strong>強制停止シグナル:</strong> 脳がエネルギー枯渇を検知すると、身体活動を制限するために強力な倦怠感を生じさせる。これをロレンツォは「中枢性警告徴候（CWS）」と呼んだ。</li>
+            </ul>
+
+            <h2 id="症状">症状</h2>
+            <p>以下の三徴候が特徴的である。</p>
+            <h3>身体的症状</h3>
+            <ul>
+                <li><strong>鉛様倦怠感:</strong> 四肢に鉛が入ったように重く感じる疲労感。休息しても回復せず、特に起床時に顕著である。</li>
+                <li><strong>遊走性筋肉痛:</strong> 特定の部位ではなく、日によって痛む場所が変わる筋肉痛。運動直後ではなく、ストレス負荷がかかった数時間後に発生することが多い。</li>
+                <li><strong>感覚解離:</strong> 手足の指先に「薄い手袋をしているような」感覚の鈍麻やしびれが生じる。</li>
+            </ul>
+            <h3>精神的症状</h3>
+            <p>
+                集中力の低下、<a href="/main.html?query=健忘">健忘</a>、入眠困難などが頻発する。<a href="/main.html?query=うつ病">うつ病</a>と誤診されやすいが、MLS患者は「活動したいという意欲はあるが、体が動かない」と訴える点が特徴的である。
+            </p>
+
+            <h2 id="診断基準">診断基準</h2>
+            <p>
+                確定診断には、他の器質的疾患（<a href="/main.html?query=甲状腺機能低下症">甲状腺機能低下症</a>、<a href="/main.html?query=膠原病">膠原病</a>など）の除外が必要である。Liefantidia医学会のガイドライン(2019)では、以下の基準が用いられる。
+            </p>
+            <ol>
+                <li>原因不明の倦怠感が3ヶ月以上持続している。</li>
+                <li>安静時の四肢末端体温が健常時より平均1.5℃以上低い（冷感）。</li>
+                <li>血液検査において、<a href="/main.html?query=CK">CK（クレアチンキナーゼ）</a>値は正常範囲内であるにもかかわらず、強い筋肉痛を訴える。</li>
+            </ol>
+
+            <h2 id="治療と予後">治療と予後</h2>
+            <p>
+                特効薬は存在せず、生活習慣への介入（<a href="/main.html?query=ライフスタイル・インターベンション">ライフスタイル・インターベンション</a>）が治療の柱となる。
+            </p>
+            <ul>
+                <li><strong>休養療法:</strong> 最も重要であり、ストレス源からの物理的な隔離（<a href="/main.html?query=休職">休職</a>など）が推奨される。</li>
+                <li><strong>薬物療法:</strong> <a href="/main.html?query=筋弛緩薬">筋弛緩薬</a>や微量の<a href="/main.html?query=抗不安薬">抗不安薬</a>が対症療法として用いられることがある。</li>
+                <li><strong>理学療法:</strong> 過緊張状態の筋肉をほぐすための<a href="/main.html?query=温熱療法">温熱療法</a>やストレッチが有効である。</li>
+            </ul>
+            <p>
+                早期に適切な介入が行われれば、6ヶ月から1年で症状は寛解する。しかし、症状を無視して過労を続けた場合、不可逆的な<a href="/main.html?query=血管内皮障害">血管内皮障害</a>へと進行し、<a href="/main.html?query=心筋梗塞">心筋梗塞</a>や<a href="/main.html?query=脳血管障害">脳血管障害</a>のリスクが極めて高くなるため、医学的な監視下での療養が強く推奨される。
+            </p>
+
+            <h2 id="出典">出典</h2>
+            <div class="references">
+                <ol>
+                    <li id="cite1">Lorenzo, M. et al. (1968). <em>"Il Segnale di SOS Cerebrale: Una Nuova Sindrome Psicosomatica"</em>. Rivista di Neurologia Italiana, 12(3), 150-165.</li>
+                    <li id="cite2">Bianchi, L. (1995). <em>"Long-term cardiovascular risks in patients with Marco Lorenzo Syndrome"</em>. European Journal of Epidemiology, 22(4), 410-418.</li>
+                    <li id="cite3">Kaufman, A. & Sato, T. (2019). <em>Clinical Guidelines for Functional Somatic Syndromes</em>. Liefantidia Medical Press.</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <div id="genericCookieNotice">
+        当サイトではユーザー体験向上のためにCookieを使用しています。
+        <button onclick="acceptConsent()">同意する</button>
+    </div>
+
+    <script>
+        // Cookie通知機能
+        const CONSENT_KEY = 'consent-local-storage';
+        function showConsentNotice() {
+            const notice = document.getElementById('genericCookieNotice');
+            if (notice) notice.style.display = 'block';
+        }
+        function acceptConsent() {
+            localStorage.setItem(CONSENT_KEY, 'accepted'); 
+            document.getElementById('genericCookieNotice').style.display = 'none';
+        }
+        document.addEventListener('DOMContentLoaded', () => {
+            if (localStorage.getItem(CONSENT_KEY) !== 'accepted') {
+                showConsentNotice();
+            }
+        });
+
+        // トップに戻るボタン機能
+        let mybutton = document.getElementById("backToTop");
+        window.onscroll = function() {scrollFunction()};
+
+        function scrollFunction() {
+            // スクロール量が200pxを超えたら表示
+            if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+                mybutton.style.display = "block";
+            } else {
+                mybutton.style.display = "none";
+            }
+        }
+        function topFunction() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+    </script>
+</body>
+</html>
