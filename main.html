@@ -3,143 +3,310 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="pageTitle">読み込み中...</title>
+    <title>liefantidia | 歴史的旗・紋章検索</title> 
+    
     <style>
-        :root {
-            --wiki-main: #f8f9fa;
-            --wiki-border: #a2a9b1;
-            --wiki-link: #0645ad;
-            --wiki-header-bg: #eaecf0;
-        }
-        body {
-            font-family: 'Times New Roman', Times, serif;
-            line-height: 1.5;
-            background-color: var(--wiki-main);
-            color: #000;
-            padding: 0;
-            margin: 0;
-            font-size: 0.9em;
-        }
-        .container {
-            max-width: 1000px;
-            margin: 20px auto;
-            padding: 10px 30px;
-            background-color: white;
-            border: 1px solid var(--wiki-border);
-            min-height: 80vh;
-        }
-        h1 {
-            font-size: 1.8em;
-            font-weight: normal;
-            border-bottom: 1px solid var(--wiki-border);
-            padding-bottom: 5px;
-            margin-bottom: 5px;
-        }
-        p {
-            margin-bottom: 1em;
-        }
-        a {
-            color: var(--wiki-link);
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-        .error-message {
-            color: #cc0000;
-            font-weight: bold;
-            padding: 10px;
-            border: 1px solid #ffdddd;
-            background-color: #ffeeee;
-        }
-        .loading-message {
-            text-align: center;
-            padding: 50px;
-            font-size: 1.2em;
-            color: #555;
-        }
+        /* (前回の回答で提示されたCSSをここに貼り付けてください) */
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1 id="articleTitle">記事を読み込んでいます...</h1>
-        
-        <div id="articleContent">
-            <p class="loading-message">情報を取得中です。しばらくお待ちください。</p>
-        </div>
 
-        <p style="margin-top: 30px;"><a href="index.html">記事に戻る</a></p>
-    </div>
+    <header>
+        <h1>liefantidia | 歴史的旗・紋章検索</h1> 
+        <p>国名、政体名、または旗の種類を入力してください。年号指定は現在非対応です。</p>
+    </header>
+
+    <main>
+        <section class="search-controls">
+            <input type="text" id="keyword-input" placeholder="国名やキーワード (例: 清朝, ドイツ)" aria-label="キーワード検索">
+            
+            <input type="number" id="year-input" placeholder="年号 (非対応)" min="1" max="2025" aria-label="年号指定" style="display: none;">
+            
+            <select id="flag-type-select" aria-label="旗の種類選択">
+                <option value="">全ての種類 (旗と紋章)</option>
+                <option value="国旗">国旗</option>
+                <option value="軍旗">軍旗</option>
+                <option value="商船旗">商船旗</option>
+                <option value="政党旗">政党旗</option>
+                <option value="国章">国章</option>
+                <option value="軍艦旗">軍艦旗</option>
+            </select>
+
+            <button id="search-button">検索</button>
+        </section>
+
+        <section class="results-area">
+            <h2>検索結果 (<span id="result-count">0</span>件)</h2>
+            <p id="loading-message" class="hidden">検索中... (Wikidata Query Serviceに直接問い合わせています)</p>
+            <p id="error-message" class="hidden error">エラーが発生しました。入力内容を確認し、時間をおいて再度お試しください。</p>
+            
+            <div id="flags-container" class="flags-grid">
+            </div>
+
+            <h2 style="margin-top: 40px;">Wikipedia Summary (代表的な記事)</h2>
+            <div id="summary-container" style="padding: 20px; background-color: #fff; border-radius: 8px;">
+                <p id="summary-title">記事情報はありません。</p>
+                <div id="summary-content"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>データは**Wikidata**および**Wikimedia Commons**から取得されています。</p>
+        <p>自由なライセンスに基づき表示していますが、**必ず各カードの出典をご確認ください。**</p>
+    </footer>
 
     <script>
-        /**
-         * Wikipedia APIから情報を取得し、ページに表示するロジック (script.jsの機能)
-         */
+        const WIKIDATA_ENDPOINT = 'https://query.wikidata.org/sparql';
 
-        document.addEventListener('DOMContentLoaded', function() {
-            // URLからクエリパラメータ（開かれた文字）を取得
-            const urlParams = new URLSearchParams(window.location.search);
-            const query = urlParams.get('query');
-
-            const titleElement = document.getElementById('articleTitle');
-            const contentElement = document.getElementById('articleContent');
-            const pageTitleElement = document.getElementById('pageTitle');
-
-            if (!query) {
-                // クエリがない場合
-                pageTitleElement.textContent = 'エラー';
-                titleElement.textContent = 'エラー: 検索クエリがありません';
-                contentElement.innerHTML = '<p class="error-message">index.htmlから正しくリンクが渡されていません。</p>';
-                return;
-            }
-
-            // ページタイトルと記事タイトルをクエリで更新
-            titleElement.textContent = query;
-            pageTitleElement.textContent = `${query} - Ikipedia参照`;
+        // =======================================================
+        // 🛠️ Wikidata SPARQLクエリ (複数の旗を取得)
+        // =======================================================
+        
+        function generateSparqlQuery(keyword, year, type) {
+            if (!keyword) return null;
             
-            // Wikipedia APIのURLを構築 (日本語Wikipediaのサマリー取得API)
+            const sparqlQuery = `
+                SELECT DISTINCT 
+                    ?item ?itemLabel ?image ?licenseLabel ?authorLabel
+                    (SAMPLE(?startDate) AS ?start)
+                    (SAMPLE(?endDate) AS ?end)
+                    (SAMPLE(?type) AS ?typeLabel)
+                WHERE {
+                    { ?item wdt:P31/wdt:P279* wd:Q1197825. }
+                    UNION
+                    { ?item wdt:P31/wdt:P279* wd:Q1529158. }
+                    
+                    { ?item wdt:P41 ?image. }
+                    UNION
+                    { ?item wdt:P94 ?image. }
+                    
+                    SERVICE wikibase:mwapi {
+                        bd:serviceParam wikibase:endpoint "www.wikidata.org".
+                        bd:serviceParam wikibase:api "Generator".
+                        bd:serviceParam mwapi:generator "search".
+                        bd:serviceParam mwapi:gensprop "none".
+                        bd:serviceParam mwapi:gensearch "${keyword}".
+                        ?item wikibase:apiOutputItem mwapi:title.
+                    }
+                    
+                    OPTIONAL { ?item wdt:P170 ?author. } 
+                    OPTIONAL { ?item wdt:P6216 ?license. } 
+                    OPTIONAL { ?item wdt:P580 ?startDate. } 
+                    OPTIONAL { ?item wdt:P582 ?endDate. } 
+                    
+                    SERVICE wikibase:label { 
+                        bd:serviceParam wikibase:language "[AUTO_LANGUAGE],ja,en".
+                        ?item rdfs:label ?itemLabel.
+                        OPTIONAL { ?item wdt:P31 ?typeQID. ?typeQID rdfs:label ?type. }
+                        OPTIONAL { ?license rdfs:label ?licenseLabel. }
+                        OPTIONAL { ?author rdfs:label ?authorLabel. }
+                    }
+                }
+                GROUP BY ?item ?itemLabel ?image ?licenseLabel ?authorLabel
+                LIMIT 50
+            `;
+            return sparqlQuery;
+        }
+
+        function transformWikidataResponse(data) {
+            // ... (省略: 前の回答のtransformWikidataResponse関数をそのまま利用)
+            if (!data.results || !data.results.bindings) return [];
+            
+            const flags = data.results.bindings.map(binding => {
+                let licenseName = binding.licenseLabel?.value || '不明なライセンス';
+                let licenseUrl = '';
+                if (licenseName.includes('Creative Commons')) {
+                    licenseUrl = 'https://creativecommons.org/licenses/by-sa/4.0/deed.ja';
+                } else if (licenseName.includes('Public Domain')) {
+                    licenseUrl = 'https://ja.wikipedia.org/wiki/%E3%83%91%E3%83%96%E3%83%AA%E3%83%83%E3%82%AF%E3%83%89%E3%83%A1%E3%82%A4%E3%83%B3';
+                }
+                let startDate = binding.start?.value ? new Date(binding.start.value).getFullYear() : '不明';
+                let endDate = binding.end?.value ? new Date(binding.end.value).getFullYear() : null;
+                let typeLabel = binding.typeLabel?.value || '旗/紋章';
+                let simpleType = typeLabel.includes('紋章') || typeLabel.includes('Coat of arms') ? '国章' : '旗';
+                const id = binding.itemLabel?.value + '_' + startDate; 
+                
+                return {
+                    id: id,
+                    name: binding.itemLabel?.value || '名称不明',
+                    type: simpleType,
+                    start_year: startDate,
+                    end_year: endDate,
+                    image_url: binding.image?.value,
+                    license_name: licenseName,
+                    license_url: licenseUrl,
+                    author: binding.authorLabel?.value || '不明',
+                    source: 'Wikidata'
+                };
+            });
+            return flags;
+        }
+
+
+        // =======================================================
+        // 🎨 表示処理関数 (DOWNLOAD LINK対応済み)
+        // =======================================================
+
+        function renderFlags(flags, container) {
+            // ... (省略: 前の回答のrenderFlags関数をそのまま利用)
+            container.innerHTML = '';
+            flags.forEach(flag => {
+                const card = document.createElement('div');
+                card.className = 'flag-card';
+                
+                const imageUrl = flag.image_url || 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="10" fill="#cc0000">画像欠落</text><rect x="0" y="0" width="100" height="100" fill="none" stroke="#ccc" stroke-width="2"/></svg>';
+                
+                const safeFileName = `${flag.name.replace(/[^a-zA-Z0-9\u3040-\u309F\u30A0-\u30FF\u4E00-\u9FAF]/g, '_')}_${flag.start_year}`;
+
+                const downloadSection = `
+                    <a href="${imageUrl}" download="${safeFileName}.svg" title="${flag.name}をダウンロード">
+                        <img src="${imageUrl}" alt="${flag.name}">
+                    </a>
+                    <button onclick="window.open('${imageUrl}', '_blank')">画像を別タブで開く</button>
+                `;
+
+                card.innerHTML = `
+                    ${downloadSection}
+                    <h3>${flag.name}</h3>
+                    <p>種類: ${flag.type || '不明'}</p>
+                    <p>期間: ${flag.start_year || '不明'} - ${flag.end_year || '現行'}</p>
+                    <p style="font-size: 0.8em; color: #004d99;">データ元: ${flag.source}</p>
+                `;
+                
+                const licenseInfo = document.createElement('p');
+                licenseInfo.className = 'license-info';
+                
+                let licenseText = '出典: ';
+                licenseText += flag.author ? `作者: ${flag.author}` : `情報源`;
+                
+                if (flag.license_name && flag.license_url) {
+                    licenseText += `, <a href="${flag.license_url}" target="_blank">${flag.license_name}</a>`;
+                } else if (flag.license_name) {
+                    licenseText += `, ${flag.license_name}`;
+                }
+
+                licenseInfo.innerHTML = licenseText;
+                card.appendChild(licenseInfo);
+                
+                container.appendChild(card);
+            });
+        }
+        
+        // =======================================================
+        // 3. Wikipedia Summary API (単一記事/旗の要約を取得)
+        // =======================================================
+
+        async function fetchWikipediaSummary(query) {
+            const summaryTitleElement = document.getElementById('summary-title');
+            const summaryContentElement = document.getElementById('summary-content');
+            
+            summaryTitleElement.textContent = `${query} の記事概要...`;
+            summaryContentElement.innerHTML = '';
+            
             const apiUrl = `https://ja.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(query)}`;
 
-            // APIからデータを取得
-            fetch(apiUrl)
-                .then(response => {
-                    if (!response.ok) {
-                        // 404 Not Found など、HTTPエラーの場合
-                        throw new Error('APIからの応答エラー: ' + response.status);
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    if (data.type === 'disambiguation' || data.type === 'redirect' || !data.extract) {
-                        // 曖昧さ回避ページ、リダイレクト、または要約がない場合
-                        throw new Error('指定された記事の要約が見つからないか、曖昧さ回避ページです。');
-                    }
+            try {
+                const response = await fetch(apiUrl);
+                if (!response.ok) {
+                    throw new Error('記事が見つからないか、API応答エラーが発生しました。');
+                }
+                const data = await response.json();
+                
+                if (data.type === 'disambiguation' || data.type === 'redirect' || !data.extract) {
+                    throw new Error('指定された記事の要約が見つからないか、曖昧さ回避ページです。');
+                }
 
-                    // 成功：要約テキストを表示
-                    contentElement.innerHTML = `
-                        ${data.thumbnail ? `<img src="${data.thumbnail.source}" style="float:right; margin: 0 0 10px 20px; max-width: 300px; height: auto; border: 1px solid var(--wiki-border);">` : ''}
-                        <p>${data.extract_html.replace(/<\/?a[^>]*>/g, "")}</p> 
-                        <p style="clear: both; margin-top: 20px;">
-                            <a href="${data.content_urls.desktop.page}" target="_blank">→ 詳細を見る</a>
-                        </p>
-                    `;
-                    
-                    // リンクを元のWikipedia URLに張り替えて表示することも可能だが、
-                    // この例では要約のみを取得し、リンクは元の記事への外部リンクとしています。
+                summaryTitleElement.textContent = `Wikipedia: ${data.title}`;
+                
+                // リンクを絶対URLに変換し、新しいタブで開くようにする
+                let safeExtract = data.extract_html.replace(/href="\/wiki\//g, `href="https://ja.wikipedia.org/wiki/`).replace(/href="([^"]*)"/g, `href="$1" target="_blank"`);
 
-                })
-                .catch(error => {
-                    // 取得失敗時のエラー表示
-                    console.error('API Error:', error);
-                    titleElement.textContent = `${query} (記事が見つかりません)`;
-                    contentElement.innerHTML = `
-                        <p class="error-message">
-                            <strong>エラーが発生しました。</strong><br>
-                        </p>
-                        <p>検索語句を確認するか、元のページに戻ってください。</p>
-                    `;
+                summaryContentElement.innerHTML = `
+                    ${data.thumbnail ? `<img src="${data.thumbnail.source}" style="float:right; margin: 0 0 10px 20px; max-width: 250px; height: auto; border: 1px solid #ccc;">` : ''}
+                    <p>${safeExtract}</p> 
+                    <p style="clear: both; margin-top: 20px;">
+                        <a href="${data.content_urls.desktop.page}" target="_blank">→ 詳細を見る</a>
+                    </p>
+                `;
+
+            } catch (error) {
+                summaryTitleElement.textContent = `Wikipedia: ${query} (記事が見つかりません)`;
+                summaryContentElement.innerHTML = `<p class="error-message" style="color:red;">${error.message}</p>`;
+            }
+        }
+
+        // =======================================================
+        // 🖱️ イベントリスナー (検索実行部)
+        // =======================================================
+
+        document.getElementById('search-button').addEventListener('click', async () => {
+            const keyword = document.getElementById('keyword-input').value.trim();
+            const type = document.getElementById('flag-type-select').value;
+
+            const flagsContainer = document.getElementById('flags-container');
+            const resultCount = document.getElementById('result-count');
+            const loadingMessage = document.getElementById('loading-message');
+            const errorMessage = document.getElementById('error-message');
+
+            // 表示をリセット
+            flagsContainer.innerHTML = '';
+            resultCount.textContent = '0';
+            errorMessage.classList.add('hidden');
+            loadingMessage.classList.remove('hidden');
+
+            const sparqlQuery = generateSparqlQuery(keyword, null, type);
+
+            if (!sparqlQuery) {
+                loadingMessage.classList.add('hidden');
+                errorMessage.textContent = "検索キーワードを入力してください。";
+                errorMessage.classList.remove('hidden');
+                return;
+            }
+            
+            let finalFlags = [];
+
+            try {
+                // 1. Wikidata検索 (複数の旗を取得)
+                const response = await fetch(WIKIDATA_ENDPOINT, {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/sparql-results+json',
+                        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+                    },
+                    body: `query=${encodeURIComponent(sparqlQuery)}`
                 });
+
+                if (!response.ok) throw new Error(`Wikidata接続エラー (HTTP ${response.status})`); 
+
+                const data = await response.json();
+                finalFlags = transformWikidataResponse(data); 
+
+            } catch (error) {
+                console.error('Wikidata検索に失敗:", error);
+                loadingMessage.classList.add('hidden');
+                errorMessage.textContent = "重大なエラーが発生しました。外部APIが応答していません。時間をおいて再度お試しください。";
+                errorMessage.classList.remove('hidden');
+                // Wikidataが失敗した場合でも、Summary APIは実行する
+            }
+
+            // 2. Wikipedia Summary APIの実行 (代表的な記事と旗を取得)
+            await fetchWikipediaSummary(keyword);
+
+            // 3. 表示
+            loadingMessage.classList.add('hidden');
+            
+            const uniqueFlags = Array.from(new Map(finalFlags.map(item => [item.id, item])).values());
+
+            resultCount.textContent = uniqueFlags.length;
+            renderFlags(uniqueFlags, flagsContainer);
+            
+            if (uniqueFlags.length === 0) {
+                errorMessage.textContent = '該当する旗・紋章は見つかりませんでした。';
+                errorMessage.classList.remove('hidden');
+            }
         });
+
     </script>
 </body>
 </html>
