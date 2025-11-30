@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>五カ国寧道書 - liefantidia</title>
+    <style>
+        /* Base & Layout */
+        :root {
+            --wiki-main: #f8f9fa;
+            --wiki-border: #a2a9b1;
+            --wiki-link: #0645ad;
+            --wiki-header-bg: #eaecf0;
+            --map-bg: #e6e6e6; 
+            --old-town-border: #dc3545;
+        }
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            line-height: 1.5;
+            background-color: var(--wiki-main);
+            color: #000;
+            padding: 0;
+            margin: 0;
+            font-size: 0.9em;
+        }
+        .container {
+            max-width: 1280px;
+            display: flex;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .main-content {
+            flex-grow: 1;
+            background-color: white;
+            padding: 10px 30px;
+            border: 1px solid var(--wiki-border);
+            border-top: none;
+            min-height: 100vh;
+        }
+        /* Headers & Links */
+        h1 {
+            font-size: 1.8em;
+            font-weight: normal;
+            border-bottom: 1px solid var(--wiki-border);
+            padding-bottom: 5px;
+            margin-bottom: 5px;
+        }
+        h2 {
+            font-size: 1.4em;
+            border-bottom: 1px solid var(--wiki-border);
+            padding-bottom: 2px;
+            margin-top: 1.5em;
+        }
+        h3 {
+            font-size: 1.1em;
+            margin-top: 1em;
+        }
+        a {
+            color: var(--wiki-link);
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Infobox (右側の表) */
+        .infobox {
+            width: 300px;
+            margin-left: 20px;
+            padding: 0;
+            border: 1px solid var(--wiki-border);
+            background-color: #f9f9f9;
+            font-size: 0.9em;
+            flex-shrink: 0;
+            float: right;
+            margin: 0 0 1em 1em;
+            clear: right;
+            border-collapse: collapse;
+        }
+        .infobox caption {
+            background-color: var(--wiki-header-bg);
+            font-size: 1.1em;
+            font-weight: bold;
+            padding: 5px;
+            text-align: center;
+        }
+        .infobox table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .infobox th, .infobox td {
+            padding: 4px 8px;
+            border-top: 1px solid var(--wiki-border);
+            text-align: left;
+        }
+        .infobox th {
+            width: 40%;
+            background-color: var(--wiki-header-bg);
+        }
+
+        /* TOC (目次) */
+        #toc {
+            border: 1px solid var(--wiki-border);
+            background-color: #f9f9f9;
+            padding: 10px;
+            margin: 1em 0;
+            width: fit-content;
+        }
+        #toc h2 {
+            font-size: 1.1em;
+            margin: 0;
+            border-bottom: none;
+        }
+
+        /* 統計表 */
+        .wikitable { 
+            width: 95%;
+            margin: 1em auto;
+            border: 1px solid var(--wiki-border);
+            border-collapse: collapse;
+        }
+        .wikitable th {
+            background-color: var(--wiki-header-bg);
+        }
+        .wikitable th, .wikitable td {
+            border: 1px solid var(--wiki-border);
+            padding: 5px;
+            text-align: center;
+        }
+
+        /* 気候表の追加スタイル */
+        .climate-table {
+            width: 100%;
+            border: 1px solid var(--wiki-border);
+            border-collapse: collapse;
+            font-size: 0.8em;
+            margin: 1em 0;
+        }
+        .climate-table thead th {
+            background-color: var(--wiki-header-bg);
+        }
+        /* 地図 */
+        .map-api {
+            margin: 1em 0;
+            height: 500px;
+            position: relative;
+            overflow: hidden;
+            background-color: var(--map-bg);
+        }
+
+        /* グラフコンテナのスタイル (青線・赤線バグ修正) */
+        .chart-container {
+            position: relative; 
+            width: 95%;
+            height: 200px; 
+            margin: 1em auto;
+            border-left: 1px solid #000;
+            border-bottom: 1px solid #000;
+        }
+
+        /* 上に戻るボタンのスタイル (新規追加) */
+        #backToTop {
+            display: none; 
+            position: fixed;
+            bottom: 20px;
+            right: 30px;
+            z-index: 99;
+            border: none;
+            outline: none;
+            background-color: rgba(6, 69, 173, 0.7); 
+            color: white;
+            cursor: pointer;
+            padding: 12px 18px;
+            border-radius: 5px;
+            font-size: 20px;
+            line-height: 1;
+            font-family: Arial, sans-serif; 
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        #backToTop:hover {
+            background-color: var(--wiki-link);
+        }
+
+
+        /* ============== レスポンシブ対応の修正 (モバイル) ============= */
+        @media (max-width: 600px) {
+            .container {
+                padding: 10px;
+            }
+            .main-content {
+                padding: 10px 15px;
+            }
+            /* Infoboxを画面幅いっぱいに広げ、floatを解除 */
+            .infobox {
+                width: 100%;
+                margin: 0.5em 0;
+                float: none;
+            }
+            /* 気候表のフォントをさらに縮小して横スクロールを避ける */
+            .climate-table {
+                font-size: 0.7em;
+                table-layout: fixed; 
+                width: 100%;
+            }
+            /* TOCは幅いっぱいに */
+             #toc {
+                width: 95%;
+            }
+        }
+        /* クッキー通知用のスタイル */
+        #genericCookieNotice {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(34, 34, 34, 0.95); /* 濃いグレー */
+            color: #fff;
+            padding: 15px 20px;
+            text-align: center;
+            font-size: 0.9em;
+            z-index: 9999;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+            display: none; 
+        }
+        #genericCookieNotice a {
+            color: #add8e6;
+            text-decoration: underline;
+            margin: 0 5px;
+        }
+        #genericCookieNotice button {
+            background-color: #0645ad;
+            color: #fff;
+            border: none;
+            padding: 8px 20px;
+            cursor: pointer;
+            margin-left: 20px;
+            border-radius: 4px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        #genericCookieNotice button:hover {
+            background-color: #043685;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="main-content">
+            <p style="text-align:right; font-size:0.7em;"><sup>[†]</sup>fuck israel <sup>[‡]</sup>slava ukraine <sup>[§]</sup>taiwan independence</p>
+            <h1>五カ国寧道書</h1>
+
+            <table class="infobox" role="presentation">
+                <caption>五カ国寧道書 (ごかこくねいどうしょ)</caption>
+                <tr><td colspan="2" style="text-align:center;">
+                    <p style="font-size:0.8em; margin:5px 0;">東アジアにおける唐を中心とする通交秩序の構想</p>
+                </td></tr>
+                <tr><th>文書の種類</th><td>外交儀礼・通交規定の草案</td></tr>
+                <tr><th colspan="2" style="text-align:center;">基礎データ</th></tr>
+                <tr><th>成立構想年</th><td>唐 <a href="/main.html?query=玄宗">玄宗</a>皇帝 開元20年頃（732年）</td></tr>
+                <tr><th>主導機関</th><td>礼部（外交・儀礼を司る省庁）</td></tr>
+                <tr><th>対象国</th><td>唐、日本、新羅、渤海、吐蕃</td></tr>
+                <tr><th>文書の目的</th><td>東アジアにおける「寧道」（安寧なる道）の確立と通商摩擦の解消</td></tr>
+                <tr><th>歴史的評価</th><td>冊封体制の理想と実態の乖離を示す過渡期の文書</td></tr>
+            </table>
+
+            <p>
+                五カ国寧道書（ごかこくねいどうしょ）は、唐の<a href="/main.html?query=玄宗">玄宗</a>皇帝の時代（開元年間、8世紀前半）に、<a href="/main.html?query=唐">唐</a>を中心とする東アジアの五カ国（唐・<a href="/main.html?query=日本">日本</a>・<a href="/main.html?query=新羅">新羅</a>・<a href="/main.html?query=渤海">渤海</a>・<a href="/main.html?query=吐蕃">吐蕃</a>）間の通交秩序を体系化するために礼部が構想した草案の総称である。唐の国力が頂点に達していた時期の、野心的な外交規範の試みであったが、各国の思惑の不一致や現実の外交実態との乖離、そして唐国内の動乱により、その効力を持つ期間は短かったとされる。現在、正史には全文が掲載されておらず、<a href="/main.html?query=敦煌文書">敦煌文書</a>の断片などからその存在が推測されるに留まっている<span class="reference">[1]</span>。
+            </p>
+            <div id="toc">
+                <h2>目次</h2>
+                <ul>
+                    <li><a href="#成立の背景">1 成立の背景：開元の治と理念</a></li>
+                    <li><a href="#文書の概要と各国の反応">2 文書の概要と各国の反応</a>
+                        <ul>
+                            <li><a href="#日本への規定">2.1 日本（倭）：航海技術の限界と規定の黙殺</a></li>
+                            <li><a href="#新羅と渤海への規定">2.2 新羅・渤海：相互不信による枠組みの空洞化</a></li>
+                            <li><a href="#吐蕃への規定">2.3 吐蕃：対等意識と軍事対立による破綻</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#機能停止と歴史的終焉">3 機能停止と歴史的終焉</a>
+                        <ul>
+                            <li><a href="#文書の機能不全">3.1 文書の機能不全と官僚主義</a></li>
+                            <li><a href="#安史の乱の影響">3.2 安史の乱による秩序の崩壊</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#歴史学的評価">4 歴史学的評価</a></li>
+                    <li><a href="#外部リンク">5 外部リンク</a></li>
+                    <li><a href="#出典">6 出典</a></li>
+                </ul>
+            </div>
+            <h2 id="成立の背景">1 成立の背景：開元の治と理念</h2>
+            <p>
+                文書の構想は、唐の国力が絶頂期にあった開元20年（732年）頃に、儀礼的な側面を担当する<a href="/main.html?query=礼部">礼部</a>の主導で進められた。当時、東アジアでは<a href="/main.html?query=遣唐使">遣唐使</a>や朝貢使節を通じた国際交易が活発化する一方で、統一的なルールが存在しなかったため、通交秩序に関する摩擦が頻発していた。具体的には、海難事故や漂流民の送還問題（日本・新羅間）、朝貢品の横流しや私貿易の拡大（渤海・唐間）、そして唐と<a href="/main.html?query=吐蕃">吐蕃</a>の国境地帯での小規模な武力衝突などである。寧道書は、これらの具体的な問題を、唐を中心とする一つの「寧道」（安寧なる平和な道）という理念の下で一元管理し、解決しようとする理想主義的な試みであった<span class="reference">[2]</span>。
+            </p>
+            
+            <h2 id="文書の概要と各国の反応">2 文書の概要と各国の反応</h2>
+            <p>
+                寧道書には、五カ国間の使節の儀礼規定、通交ルート、朝貢頻度、そして国境の平和維持に関する詳細な条項が記されていた。しかし、その多くは唐の官僚による願望が反映されたものであり、各国が抱える現実的な問題や外交実態を無視した内容であったため、発効後すぐに機能不全に陥った。
+            </p>
+            <h3 id="日本への規定">2.1 日本（倭）：航海技術の限界と規定の黙殺</h3>
+            <p>
+                日本（倭）に関する規定は、「三年に一度の定期的朝貢」と「明州（現在の寧波付近）への入港厳守」を命じるものであった。しかし、当時の日本の航海技術では、東シナ海を渡る遣唐使船の航行は極めて危険であり、三年ごとの定期派遣は物理的に不可能であった。日本側はこの規定を事実上黙殺し、十数年〜数十年単位の派遣を継続した。唐側も日本が極めて遠い「遠国」であることを理由に、この規定違反を黙認せざるを得ず、寧道書の権威を低下させる一因となった<span class="reference">[3]</span>。
+            </p>
+            <h3 id="新羅と渤海への規定">2.2 新羅・渤海：相互不信による枠組みの空洞化</h3>
+            <p>
+                <a href="/main.html?query=新羅">新羅</a>と<a href="/main.html?query=渤海">渤海</a>に関する規定は、両国が相互の使節を礼遇し、海上の安全を保障することで、唐を中心とする緩衝地帯を確立することを目的としていた。しかし、当時、両国は領土問題や外交的主導権を巡って激しく対立しており、唐の仲介や一方的な規定に対して協力する意思はなかった。特に渤海は、唐の秩序から半ば独立し、新羅を牽制するために日本への独自の使節派遣を強化しており、「唐を中心とした秩序」という寧道書の枠組み自体が、両国の相互不信によって形骸化していた<span class="reference">[4]</span>。
+            </p>
+            <h3 id="吐蕃への規定">2.3 吐蕃：対等意識と軍事対立による破綻</h3>
+            <p>
+                <a href="/main.html?query=吐蕃">吐蕃</a>に関する条項は、西域（<a href="/main.html?query=シルクロード">シルクロード</a>）における平和的通商と国境の不可侵を定めていた。しかし、吐蕃は唐と対等の帝国としての地位を自負しており、唐が一方的に策定した外交文書を受け入れる道理がなかった。文書が構想された時期においても、唐と吐蕃の国境紛争は続いており、この条項は唐の官僚が「願望」を書き連ねたに過ぎず、実効性を持つことはなかった。結果として、文書の定める軍事的な安定は得られず、寧道書の条項で最も早く破綻したとされる<span class="reference">[5]</span>。
+            </p>
+
+            <h2 id="機能停止と歴史的終焉">3 機能停止と歴史的終焉</h2>
+            <h3 id="文書の機能不全">3.1 文書の機能不全と官僚主義</h3>
+            <p>
+                五カ国寧道書は、その理念の壮大さとは裏腹に、文書の成立過程において各国から十分な意見聴取を行わず、唐の国内官僚機構の論理のみで作成された。この官僚的な硬直性が、現場の実情との乖離を生み、各国の独自の実利に基づく外交（日本と渤海の交易強化など）を加速させた。文書が効力を持ったのは、唐の中央政府が積極的に周辺国を指導できる、ごく短期間に留まった。
+            </p>
+            <h3 id="安史の乱の影響">3.2 安史の乱による秩序の崩壊</h3>
+            <p>
+                この外交文書が歴史の表舞台から完全に姿を消す決定打となったのは、755年に発生した<a href="/main.html?query=安史の乱">安史の乱</a>である。唐の中央政府が内乱により機能不全に陥り、周辺諸国に対する統制力や安全保障の提供能力を完全に失ったことで、「寧道」（安寧）の前提そのものが崩壊した。各国は、唐の承認を待たず、独自の実利に基づいた二国間外交へと本格的に回帰し、寧道書の理想とする「唐を中心とした多国間秩序」は完全に終焉を迎えた<span class="reference">[6]</span>。
+            </p>
+
+            <h2 id="歴史学的評価">4 歴史学的評価</h2>
+            <p>
+                現在の東アジア国際関係史の学界において、五カ国寧道書は、唐の<a href="/main.html?query=冊封体制">冊封体制</a>が、形式上の理念を追及しつつも、実態としての拘束力を失い始めた「過渡期の象徴」として位置づけられている。文書の全容を伝える史料は発見されていないものの、唐の史官たちが「失敗策」として正史への記録を意図的に控えたためではないかという説が有力視されている<span class="reference">[7]</span>。寧道書は、理想主義的な外交構想がいかに現実の勢力均衡と各国の利害の前で無力であるかを示す、貴重な事例として研究の対象となっている。
+            </p>
+
+            <h2 id="外部リンク">5 外部リンク</h2>
+            <ul>
+                <li><a href="https://www.tung-archive.gov/doc/ndsb-fragment" target="_blank">唐代中央文書館：「寧道書」断簡のデジタルアーカイブ</a></li>
+                <li><a href="https://www.eastasia-studies.edu/article/732-diplomacy-idealism" target="_blank">東アジア通交史学会：732年の外交理念に関する研究論文</a></li>
+                <li><a href="https://www.jinja-net.jp/koutai/kenkyu/kentoushi-real" target="_blank">日本古文書研究会：遣唐使の実態と唐の規定</a></li>
+            </ul>
+
+　　　　　　　　<h2 id="出典">6 出典</h2>
+            <p style="font-size: 0.8em;">
+                [1] 周 陽、*唐代儀礼文書の再検討：敦煌文献に見る寧道書断片*、東アジア国際史論集 第4巻、2015年。<br>
+                [2] 王 黎明、*開元の治における理想主義的政策の系譜*、長安大学 歴史学部紀要 第32号、2008年。<br>
+                [3] 黒川 雅人、*遣唐使船の航路と難易度：唐の「三年規定」はなぜ不可能であったか*、日本古文書研究、2019年。<br>
+                [4] 朴 貞淑、*渤海・新羅対立の深層：唐の仲介無効化の構造*、韓国古代史研究 第12巻、2011年。<br>
+                [5] 趙 志強、*吐蕃帝国の対等意識と唐の冊封体制の限界*、シルクロード歴史学会報告書、2020年。<br>
+                [6] 柳 康夫、*安史の乱と唐の国際秩序の崩壊：寧道書の終焉*、中央アジア史研究、2001年。<br>
+                [7] 魏 公平、*史官はなぜ失敗を隠したのか：正史から消された外交文書*、唐代史研究 第5巻、2018年。
+            </p>
+        </div>
+    </div>
+
+    <button onclick="topFunction()" id="backToTop" title="トップに戻る">↑</button>
+
+    <script>
+        // 上に戻るボタンの表示・非表示を制御するJS
+        let mybutton = document.getElementById("backToTop");
+
+        // ページをスクロールするたびにこの関数が実行される
+        window.onscroll = function() {scrollFunction()};
+
+        function scrollFunction() {
+            // スクロール量が200pxを超えたらボタンを表示する
+            if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+                mybutton.style.display = "block";
+            } else {
+                mybutton.style.display = "none";
+            }
+        }
+
+        // クリック時にページの最上部へスムーズにスクロールする
+        function topFunction() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+    </script> 
+
+    <div id="genericCookieNotice">
+        このサイトでは、サイトの利用状況を分析し、より良いサービスを提供するためにCookieを使用しています。
+        <a href="/ak/index.html" target="_blank">詳細はこちら</a>
+        <button onclick="acceptConsent()">同意する</button> 
+    </div>
+
+    <script>
+    // JavaScriptロジック: ローカルストレージの読み書きとバナーの表示/非表示を制御
+    const CONSENT_KEY = 'consent-local-storage'; // ローカルストレージのキー
+
+    function showConsentNotice() {
+        const notice = document.getElementById('genericCookieNotice');
+        if (notice) {
+            notice.style.display = 'block';
+        }
+    }
+
+    // ローカルストレージに同意状態を保存
+    function acceptConsent() {
+        // ローカルストレージに同意状態を保存 (期限なし)
+        localStorage.setItem(CONSENT_KEY, 'accepted'); 
+
+        const notice = document.getElementById('genericCookieNotice');
+        if (notice) {
+            notice.style.display = 'none';
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        // ローカルストレージから同意記録をチェック
+        if (localStorage.getItem(CONSENT_KEY) !== 'accepted') {
+            showConsentNotice();
+        }
+    });
+    </script>
+</body>
+</html>
