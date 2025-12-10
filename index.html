@@ -101,7 +101,7 @@
             border-bottom-color: var(--wiki-link-hover);
             transform: translateY(-2px); /* 少し浮く */
         }
-        
+
         /* 矢印アイコンをCSSで擬似的に作る */
         .big-link-button::after {
             content: " ▼";
@@ -237,7 +237,7 @@
                ここは現実の検証可能性に基づかない、個人的な夢想や架空の世界の設定を文書化することを目的とした、独自の知識の殿堂です。
             </p>
         </div>
-        
+
         <div class="list-link-container">
             <a href="/list/index.html" class="big-link-button">記事一覧はここから</a>
         </div>
@@ -282,6 +282,7 @@
         function showConsentNotice() {
             const notice = document.getElementById('genericCookieNotice');
             if (notice) {
+                // クッキー通知を表示
                 notice.style.display = 'block'; 
             }
         }
@@ -290,6 +291,7 @@
             localStorage.setItem(CONSENT_KEY, 'accepted');
             const notice = document.getElementById('genericCookieNotice');
             if (notice) {
+                // クッキー通知を非表示
                 notice.style.display = 'none';
             }
         }
@@ -299,14 +301,15 @@
                 showConsentNotice();
             }
         });
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-VVMTX5L0KL"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-VVMTX5L0KL');
-</script>
+    </script> 
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VVMTX5L0KL"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      gtag('config', 'G-VVMTX5L0KL');
+    </script>
 </body>
 </html>
