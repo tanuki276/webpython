@@ -3,7 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Liefantidia</title>
+    
+    <title>Liefantidia | 架空記事と架空史の殿堂 | フィクション・創作設定Wiki</title>
+    
+    <meta name="description" content="Liefantidia（リーファンティディア）は、個人的な夢想と架空の世界の設定を文書化するWikiです。">
+    
     <style>
         /* 変数定義: 色味を少し深めにして安っぽさを軽減 */
         :root {
@@ -205,6 +209,19 @@
             border-radius: 4px;
             font-weight: bold;
         }
+        
+        /* 【重要】検索エンジン用キーワードを非表示にするためのCSSクラス */
+        .visually-hidden {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
 
         /* スマホ向けの調整 */
         @media (max-width: 600px) {
@@ -238,6 +255,11 @@
             </p>
         </div>
 
+        <div class="visually-hidden">
+            <h1>架空記事</h1>
+            <p>Liefantidiaは、架空史、架空地理、および個人的な創作設定（フィクション）に関する専門のWiki記事を掲載しています。</p>
+        </div>
+        
         <div class="list-link-container">
             <a href="/list/index.html" class="big-link-button">記事一覧はここから</a>
         </div>
@@ -262,7 +284,7 @@
             <div class="footer-links-restored">
                 <h4>他の制作物</h4>
                 <ul>
-                    <li><a href="https://test-teas-projects-8736b808.vercel.app/" target="_blank">日本の戦闘歴史年表</a></li>
+                    <li><a href="https://test-teas-projects-8736b808.vercel.app/" target="_blank">歴史上の国一覧</a></li>
                     <li><a href="https://othello-five-sable.vercel.app/" target="_blank">オセロ</a></li>
                 </ul>
             </div>
@@ -302,13 +324,13 @@
             }
         });
     </script> 
-    
+
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-VVMTX5L0KL"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-    
+
       gtag('config', 'G-VVMTX5L0KL');
     </script>
 </body>
