@@ -19,3 +19,4 @@ jobs:
             let text = Buffer.from(r.data.content, 'base64').toString('utf8');
             text = text.replace('<tr><th>建都年</th><td>1871年</td>', '<tr><th>市制施行</th><td>1871年</td>');
             await github.rest.repos.createOrUpdateFileContents({owner, repo, path, message: 'Fix article chronology wording', content: Buffer.from(text).toString('base64'), sha: r.data.sha});
+# trigger
